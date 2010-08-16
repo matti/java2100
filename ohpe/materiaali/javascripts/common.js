@@ -6,8 +6,9 @@ var LatteX = {
 		var topics = $('h2');
 		var ol_element = $('<ol/>');
 		
-		$.each(topics, function(i, n) {					
-			var item = $('<li><a href="#'+i+'">'+n.textContent+'</a></li>');
+		$.each(topics, function(i, n) {
+			var chapter = i + 1;
+			var item = $('<li><a href="#'+chapter+'">'+n.textContent+'</a></li>');
 			ol_element.append(item);
 		});
 	
