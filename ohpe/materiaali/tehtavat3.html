@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fi" lang="fi">
+	<head>
+		<link rel="stylesheet" href="stylesheets/common.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="javascripts/common.js"></script>
+		
+		<link rel="stylesheet" href="stylesheets/shjs/sh_style.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/shjs/sh_main.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_java.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_ruby.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_scala.min.js"></script>
+		
+		<link rel="stylesheet" href="stylesheets/exercises.css" type="text/css" media="screen, print" />		
+		<script type="text/javascript" src="javascripts/exercises.js"></script>		
+	</head>
+
+	<body>
+		<h1>Tehtävät viikolle 3</h1>
+		
+		<p>Tehtävät tehdään harjoitussaleissa.</p>
+		
+		<p>Pakolliset tehtävät on merkitty harmalla taustavärillä.</p>
+		
+		<ul>
+			<li>Pakollisia tehtäviä on: <span id="required_exercises_count">-1</span> kpl</li>
+			<li>Lisätehtäviä on: <span id="additional_exercises_count">-1</span> kpl</li>
+			<li>Bonustehtäviä on: <span id="bonus_exercises_count">-1</span> kpl</li>
+		</ul>
+		
+		
+		<p><strong>HUOM:</strong> nimeä tiedostot otsikossa olevan sanan mukaan</p>
+		
+		<p><strong>HUOM2:</strong> kaikki ohjelmat tehdään tästä lähtien NetBeans-ohjelmalla. Jokaiselle tehtävällä kannattaa tehdä oma projekti, paitsi ne tehtävät jotka liittyvät toisiinsa voidaan tehdän saman projektin alle. Kurssimateriaalissa on lyhyt ohje NetBeansin käyttöön. Lue ohje ja toimi sen mukaan. Opimme vähitellen käyttämään ohjelmaa paremmin.</p>
+		
+		<h2>Tulostus</h2>
+
+		<h3 class="req">Kuusi.java</h3>
+
+		<p>Tee metodi <code>public static void kuusi()</code>, joka tulostaa kuusen.</p> 
+		
+		<p>Tarvitset myös "pääohjelman", eli main-metodin, josta kutsut kuusi-metodia. Pääohjelma sijoitetaan aina sopivasti nimetyn ohjelmarungon (eli luokan) sisään kuten materiaalin luvun 2 alussa tapahtuu. Käytä ohjelmarungon nimenä tehtävien otsikoita. </p>
+		
+<pre>
+    *
+   ***
+  *****
+ *******
+*********
+    *
+</pre>
+		<p>Vaikka tehtävässä pyydettäisiin vain metodin tekemistä, tulee tästä lähtien kaikissa tehtävissä olla vastauksena toimiva ohjelma, eli "pääohjelma" eli main-metodi ja ohjelmarunko (eli luokka) on oltava mukana.</p>
+
+		<h3 class="req">Kuusimetsä eli Kuusi.java laajennettuna</h3>
+		
+		<p>Käytä edellisessä tehtyä metodia siten, että tulostat allekkain useamman kuusen.</p>
+<pre>
+    *
+   ***
+  *****
+ *******
+*********
+    *
+
+    *
+   ***
+  *****
+ *******
+*********
+    *
+</pre>
+
+
+
+		<h2>Laskentaa ja syötteen lukemista</h2>
+		
+
+		
+		<h3 class="req">Matematiikkaa.java</h3>
+
+		<p>Tee metodi <code>jakaja</code>, joka tulostaa jakolaskun esimerkin mukaisesti.</p>
+		<p><strong>Huom:</strong> metodi saa jaettavat luvut parametreina.</p>
+
+<pre>
+128 jaettuna 8 on 16
+5 jaettuna 3 on 1.66666666666667
+</pre>
+
+
+
+
+
+		<h3 class="req">Matematiikkaa.java jatkuu</h3>
+		
+		<p>Tee metodi, joka palauttaa ympyrän kehän (piirin) pituuden <code>double</code>-arvona. Pi:n arvon saat seuraavasti: <code>Math.PI</code> (double). </p>
+
+<pre>
+Anna ympyrän säde: 20
+
+Ympyrän kehä on: 125.663706143592
+</pre>
+
+
+
+
+
+		
+		<h3>IkaTervehdys.java</h3>
+		
+		<p>Tee ohjelma, joka kysyy käyttäjältä nimen ja tämän jälkeen iän.  Tämän jälkeen ohjelma tervehtii käyttäjää ja kertoo samalla tämän iän. Nimen ja iän kysyminen tapahtuu pääohjelmassa eli mainissa. Tervehtiminen hoidetaan omassa metodissa.</p>
+<p>Kuten luentomateriaalissa todettiin, on lukija:ssa sellainen ikävä piirre, että se ei toimi kunnolla jos luetaan ensin käyttäjältä luku ja sen jälkeen merkkinono. Eli jos luet iän ensin ja nimen sen jälkeen, hyppää ohjelma nimen yli kokonaan.</p>
+		
+<pre>
+Kerro nimesi: Matti
+Mikä on ikäsi: 14
+
+Hei Matti, olet siis 14!
+</pre>		
+
+
+		<h3 class="req">Nelilaskin.java</h3>
+	
+		<p>Tee viisi metodia, jotka suorittavat laskuoperaatiot ja palauttavat lopputuloksen.</p>
+		
+<pre>
+Anna ensimmäinen luku: 3
+Anna toinen luku: 2
+
+Summa: 3 + 2 = 5
+Erotus: 3 - 2 = 1
+Jako: 3 / 2 = 1.5
+Jakojäännös: 3 % 2 = 1
+Kerto: 3 * 2 = 6 
+</pre>
+
+
+
+
+
+
+
+
+		<h2>Valintaa</h2>				
+
+
+		<h3 class="req">Arvosanat.java</h3>
+		<p>Tee ohjelma, joka kertoo minkä arvosanan kurssista saa.</p>
+		
+		<p>Ohjelma käyttää metodia, jolle annetaan pisteet ja joka palauttaa pisteitä vastaavan arvosanan.</p>
+		
+		<p>pisteet muuttuvat arvosanaksi seuraavan mukaan: 30-34 pistettä: 1, 35-39: 2, 40-44: 3, 45-49: 4, 50-60 : 5 ja alle 30 pistettä on hylätty.</p>
+		
+<pre>
+Anna pisteet [0-60]: 30
+
+Arvosanaksi 30 pisteellä tulee 1	
+</pre>
+
+
+
+
+
+			
+			
+			
+			
+					
+			
+		<h2>Toistoa</h2>
+		
+		<h3>JokaToinen.java</h3>
+		
+		<p>Listaa joka toinen luku väliltä 0-100 laskevassa järjestyksessä. <b>Toteuta sama sekä while- että for-lausee avulla!</b></p>
+<pre>
+100
+98
+96
+94
+...
+</pre>
+
+
+		<h3>LueSumma.java</h3>
+			
+		<p>Lue ja summaa n kappaletta lukuja.</p>
+
+<pre>
+Kuinka monta lukua syötät: 3
+2
+4
+1
+
+Lukujen summa on: 7
+</pre>
+
+		
+		<h3 class="req">NegPos.java</h3>
+
+		<p>Kuinka monta negatiivista ja positiivista?</p>
+		
+<pre>
+Anna 0 lopettaaksesi.
+
+Anna luku: 3
+Anna luku: -3
+Anna luku: 8
+Anna luku: 2
+Anna luku: 0
+
+Positiivisia 3
+Negatiivisia 1
+</pre>
+
+
+		<h3>MinMax.java</h3>
+		
+<p>Selvitä käyttäjän syötteistä pienin ja suurin. Älä laske nollaa kummaksikaan.</p>
+<pre>
+Anna lukuja, 0 lopettaa:
+8
+92
+2
+32
+0
+
+Suurin luku oli 92, pienin luku oli 2.
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<h2>Taulukkoon lisääminen</h2>
+		
+		
+		<h3 class="req">LueLuvut.java</h3>
+		
+		<p>Alusta taulukko seuraavasti: <code>int[] luvut = {-1, -1, -1, -1, -1, -1, -1};</code> ja lue siihen taulukon pituuden verran lukuja. Taulukon tulostus tapahtuu omassa metodissa.</p> 
+		
+		<p><b>Huom:</b> Ohjelman tulee toimia taulukon pituudesta riippumatta. Tässä esimerkissä taulukon pituus on 7, mutta se voi olla muutakin. Joudut siis käyttämään while- tai for-komentoa taulukon käsittelyyn. Taulukon pituuden kertoo <code>luvut.length</code>, älä siis kirjoita koodiisi taulukon pituudeksi mitään numeroarvoa.</p>
+		
+<pre>
+Syötä 7 numeroa:
+1
+32
+6
+8
+12
+17
+22
+
+Syötit numerot: 1,32,6,8,12,17,22
+</pre>
+
+
+		
+
+
+		<h3>ArvaaLuku.java</h3>
+		
+		<p>Yhdistä edellä olevat tehtävät ja pelaa.</p>
+		
+		<p>Lukujen arvuuttelun tulee tapahtua omassa metodissa. Metodi saa parametrinaan taulukon, jossa alussa syötetyt luvut ovat. Vihje: metodista voi poistua milloin tahansa komennolla return.</p>
+<pre>
+Syötä 7 numeroa:
+1
+32
+6
+8
+12
+17
+22
+
+Kiitos, Aloitetaan peli..
+
+Arvaa luku: 4
+Ei löydy!
+
+Arvaa luku: 101
+Ei löydy!
+
+Arvaa luku: 6
+Löytyi!
+</pre>
+
+
+		<h2>Loppuhuipennus</h2>
+
+
+			
+		<h3 class="req">Arvosanajakauma.java</h3>
+		
+		<p>Tulosta arvosanajakauma siten, että teet metodin, joka piirtää tarvittavan määrän tähtiä. Älä siis toista tähtien tulostusta koodissasi kuuteen kertaan vaan hoida jokaisen tähtimäärän tulostus saman metodin avulla. Lue arvosanat myös taulukkoon, jonka koko on 6. Voit alustaa taulukon komennolla <code>int[] arvosanat = {-1, -1, -1, -1, -1, -1}</code>.</p>
+<pre>
+Anna seuraavat luvut,
+
+Hylättyjä: 3
+1: 3
+2: 7
+3: 2
+4: 7
+5: 10
+
+Kurssin Agile Entwicklung mit Ruby über Gleis arvosanajakauma
+
+5: **********
+4: *******
+3: **
+2: *******
+1: ***
+0: ***
+
+Hyväksyttyjä 87% osallistujista
+</pre>
+		
+		<h3>Arvosanajakauma.java, jatkuu</h3>
+	
+<p>Muutetaan edellistä tehtävää siten, että opettaja syöttää aluksi opiskelijoiden koepistemäärät. Syötetty koepistemäärä muutetaan vastaavaksi arvosanaksi tehtävän 3.1 metodilla. Näin selvitetyt arvosanat talletetaan taulukkoon joka täytyy nyt alustaa seuraavasti <code>int[] arvosanat = {0, 0, 0, 0, 0, 0}</code>.</p>
+
+<p>Kurssin nimen ja arvosanataulukon parametrina saava metodi tulostaa kurssin arvosanajakauman.</p>
+	
+<pre>
+Syötä kurssin nimi: 
+Ohjelmoinnin perusteet
+
+Syötä opiskelijoiden koepistemäärät. Lopetus -1:llä.
+
+44
+35
+17
+56
+7
+...
+54
+-1
+
+Kiitos.
+
+Kurssin Ohjelmoinnin perusteet arvosanajakauma
+
+5: **********
+4: *******
+3: **
+2: *******
+1: ***
+0: ***
+
+Hyväksyttyjä 87% osallistujista
+</pre>		
+		
+		
+		<h3>KorkeaKuusi.java</h3>
+		
+		<p>Tee vuorovaikutteinen ohjelma KorkeaKuusi, joka pyytää kolmion korkeuden ja tulostaa "*"-merkeistä muodostuvan kolmion seuraavan esimerkin tapaan. Kuusen tulostus tapahtuu sitä varten tehdyn metodin avulla. Jos korkeus on vaikkapa kuusi, ohjelma tulostaa:</p>
+		
+<pre>
+Anna korkeus: 6
+
+     *
+    ***
+   *****
+  *******
+ *********
+***********
+     *
+ </pre>
+
+ <pre>
+ Anna korkeus: 3
+
+  *
+ ***
+*****
+  *
+ 
+  </pre>
+<p>Tehtävä ei ole helppo. Mieti ongelmaa ensin kynän ja paperin kanssa. Kuusen tulostava metodi kannattanee toteuttaa siten, että se kutsuu erillistä apumetodia, joka tulostaa yhden kuusen "tason", eli ensin *, sitten ***, jne. sekä tasoon liittyvät sisennykset.</p>
+		
+		<p>Saat olettaa, että käyttäjä todellakin syöttää tiedon oikean tyyppisenä - kuten saat olettaa kurssin kaikissa tehtävissä, ellei muuta pyydetä. Mutta varaudu kuitenkin siihen että luku on arvoltaan sopimaton: negatiivinen luku ei kelpaa leveydeksi. Virhetilanteessa ohjelman pitää antaa virheilmoitus ja pyytää uutta lukua kunnes saa kelvollisen.</p>
+		
+
+	
+
+		
+
+	</body>
+</html>

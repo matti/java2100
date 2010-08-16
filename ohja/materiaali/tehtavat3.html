@@ -1,0 +1,701 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fi" lang="fi">
+	<head>
+		<link rel="stylesheet" href="stylesheets/common.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="javascripts/common.js"></script>
+		
+		<link rel="stylesheet" href="stylesheets/shjs/sh_style.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/shjs/sh_main.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_java.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_ruby.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_scala.min.js"></script>
+		
+		<link rel="stylesheet" href="stylesheets/exercises.css" type="text/css" media="screen, print" />		
+		<script type="text/javascript" src="javascripts/exercises.js"></script>		
+	</head>
+
+	<body>
+		<h1>Tehtävät viikolle 3</h1>
+				
+		<p>Pakolliset tehtävät on merkitty harmalla taustavärillä. Punaisella taustavärillä merkatut ovat kontrollitehtäviä, jotka näytetään ohjaajalle harjoitustilaisuudessa!</p>
+		
+		<ul>
+			<li>Pakollisia tehtäviä on: <span id="required_exercises_count">-1</span> kpl</li>
+			<li>Lisätehtäviä on: <span id="additional_exercises_count">-1</span> kpl</li>
+			<li>Bonustehtäviä on: <span id="bonus_exercises_count">-1</span> kpl</li>
+		</ul>
+		
+		
+		<p><strong>HUOM:</strong> nimeä tiedostot otsikossa olevan sanan mukaan</p>
+    
+	<h2>Aakkoset</h2>
+
+	<h3>A</h3>
+	
+	<p>Toteuta luokka <code>A</code>, joka tulostaa konstruktorissaan tekstin <code>Luokan A konstruktori!</code>.  Lisäksi luokalla on metodi <code>String a()</code>, joka palauttaa tekstin "a".</p>
+
+<pre class="sh_java">
+public class Aakkoset {
+
+   public static void main(String[] args) {
+
+       A a = new A();
+       System.out.println("---");
+
+       System.out.println(a.a());
+
+   }
+
+}	
+</pre>
+
+	<p>Ohjelma tulostaa:</p>
+	
+<pre>
+Luokan A konstruktori!
+---
+a
+</pre>	
+
+	<h3>Ab</h3>
+	
+	<p>Toteuta luokka <code>Ab</code>, joka tulostaa konstruktorissaan tekstin <code>Luokan Ab konstruktori!</code>.  Lisäksi luokalla on metodi <code>String b()</code>, joka palauttaa tekstin "b".</p>
+	
+	<p>Luokka <code>Ab</code> perii luokan <code>A</code>.  Toteuta konstuktori siten, että ensin kutsutaan yläluokan konstuktoria ja sitten vasta tulostetaan oma teksti.</p>
+
+<pre class="sh_java">
+public class Aakkoset {
+
+    public static void main(String[] args) {
+
+        A a = new A();
+        System.out.println("---");
+
+        Ab ab = new Ab();
+        System.out.println("---");
+
+
+        System.out.println(a.a());
+
+        System.out.print(ab.a());
+        System.out.println(ab.b());
+
+    }
+
+}	
+</pre>
+
+<pre>
+Luokan A konstruktori!
+---
+Luokan A konstruktori!
+Luokan Ab konstruktori!
+---
+a
+ab
+</pre>
+
+	<h3>Abc</h3>
+	
+	<p>Toteuta luokka <code>Abc</code> samalla tavalla.  Käytä oheista testiohjelmaa ja varmista, että tulostus on oikein.</p>
+		
+		
+<pre class="sh_java">
+public class Aakkoset {
+
+    public static void main(String[] args) {
+
+        A a = new A();
+        System.out.println("---");
+
+        Ab ab = new Ab();
+        System.out.println("---");
+
+        Abc abc = new Abc();
+        System.out.println("---");
+
+
+
+        System.out.println(a.a());
+
+        System.out.print(ab.a());
+        System.out.println(ab.b());
+
+        System.out.print(abc.a());
+        System.out.print(abc.b());
+        System.out.println(abc.c());
+
+    }
+
+}
+</pre>
+
+<pre>
+Luokan A konstruktori!
+---
+Luokan A konstruktori!
+Luokan Ab konstuktori!
+---
+Luokan A konstruktori!
+Luokan Ab konstuktori!
+Luokan Abc konstruktori!
+---
+a
+ab
+abc
+</pre>
+
+	<h2>Sillanrakentaja</h2>
+	
+
+	<h3 class="req">Rajapinta Laskuri</h3>
+	
+	<p>Lisää projektiin rajapinta <code>Laskuri</code>.</p>
+<pre class="sh_java">
+public interface Laskuri {
+	public void kasvataArvoa();
+	public void vahennaArvoa();
+	public int getArvo();
+}
+</pre>
+
+
+	<h3 class="req">Silta ja Testaaja</h3>
+
+	<p>Toteuta luokka <code>Silta</code>, joka tietää pituutensa kokonaislukuna.  Lisäksi lisää projektiin luokka <a href="tuki/Testaaja.java">Testaaja</a>.</p>
+
+	<p>Seuraavat testit käyttävät luokkaa Testaaja.  Tehtävää tehdessä varmista, että <code>Testaaja.onkoValmis();</code> on aina pääohjelman viimeinen rivi.</p>
+	
+<pre class="sh_java">
+Silta s = new Silta(10);
+
+if (s.getPituus() != 10)
+    Testaaja.virhe("Pituus ei ole 10");
+
+Testaaja.vaadiRajapinta(Silta.class, Laskuri.class);
+Testaaja.tarkistaAttribuutit(Silta.class);
+
+if (s.getArvo() != 0)
+    Testaaja.virhe("Sillan arvo ei ole 0");
+
+// Viimeinen rivi ohjelmassa
+Testaaja.onkoValmis();
+</pre>
+
+	<p>Onnistunut toteutus tuottaa seuraavan tulosteen:</p>
+	
+<pre>
+--[ Testaaja ]---------------------------------
+Ei virheitä, tehtävä valmis!
+</pre>
+
+
+
+	<h3 class="req">Rautatiesilta</h3>
+	
+	<p>Toteuta luokka <code>Rautatiesilta</code>, joka periytyy luokasta <code>Silta</code>.</p>
+
+<pre class="sh_java">
+Rautatiesilta rs = new Rautatiesilta(100);
+
+if (rs.getPituus() != 100 )
+    Testaaja.virhe("Pituus ei ole 100");
+
+if (rs.getArvo() != 0)
+    Testaaja.virhe("Laskuri ei palauta 0");
+
+Testaaja.vaadiPerinta(rs, Silta.class);
+Testaaja.tarkistaAttribuutit(Rautatiesilta.class);
+</pre>
+
+
+	<h3 class="req">Juna</h3>
+
+	<p>Toteuta luokka <code>Juna</code>, joka tietää vaunujen määränsä kokonaislukuna</p>
+	
+<pre class="sh_java">
+Juna pitkaJuna = new Juna(28);
+Juna lyhytJuna = new Juna(10);
+
+if (pitkaJuna.getVaunut() != 28)
+    Testaaja.virhe("Pitkän junan vaunujen lukumäärä ei ole 28");
+
+if (lyhytJuna.getVaunut() != 10)
+    Testaaja.virhe("Lyhyen junan vaunujen lukumäärä ei ole 10");
+
+Testaaja.tarkistaAttribuutit(Juna.class);
+</pre>
+
+
+	<h3 class="req">Juna ylittää sillan</h3>
+	
+	<p>Kun juna ylittää sillan, kasvaa sillan laskurin arvo ylittäneen junan vaunujen mukaan.</p>
+	
+<pre class="sh_java">
+if (!pitkaJuna.ylita(rs))
+    Testaaja.virhe("Pitkä juna ei ylita siltaa");
+
+if (!lyhytJuna.ylita(rs))
+    Testaaja.virhe("Lyhyt juna ei ylitä siltaa");
+
+if (rs.getArvo() != 38 )
+    Testaaja.virhe("Rautatiesillan ylittäneiden vaunujen määrä on: "+rs.getArvo()+", eikä ole 38, vaikka kaksi junaa (28 ja 10 vaunua) ylittivät sillan");
+</pre>
+
+
+	<h3 class="req">Maantiesilta</h3>
+
+	<p>Toteuta luokka <code>Maantiesilta</code>, joka periytyy luokasta <code>Silta</code>.</p>
+	
+<pre class="sh_java">
+Maantiesilta ms = new Maantiesilta(50);
+
+if (ms.getPituus() != 50)
+    Testaaja.virhe("Pituus ei ole 50");
+
+Testaaja.vaadiPerinta(ms, Silta.class);
+Testaaja.tarkistaAttribuutit(Maantiesilta.class);
+</pre>
+	
+
+	<h3 class="req">Matti</h3>
+	
+	<p>Toteuta luokka <code>Matti</code>, joka tietää painonsa sukunimen <code>char</code>-arvon perusteella</p>
+	
+<pre class="sh_java">
+Matti mattiP = new Matti('P');
+Matti mattiV = new Matti('V');
+
+if (mattiP.getPaino() != 80)
+    Testaaja.virhe("Matti P:n paino ei ole 80");
+
+if (mattiV.getPaino() != 86)
+    Testaaja.virhe("Matti V:n paino ei ole 86");
+
+Testaaja.tarkistaAttribuutit(Matti.class);
+</pre>
+
+
+	<h3 class="req">Matti ylittää sillan</h3>
+
+	<p>Kun Matti ylittää maantiesillan, kasvaa sillan laskurin arvo kasvaa Matin painon mukaan.</p>
+	
+<pre class="sh_java">	
+if (!mattiP.ylita(ms) )
+    Testaaja.virhe("Matti P. ei ylitä siltaa!");
+
+if (!mattiV.ylita(ms) )
+    Testaaja.virhe("Matti V. ei ylitä siltaa!");
+
+if (ms.getArvo() != 166)
+    Testaaja.virhe("Maantiesillan ylittänyt paino on: "+ms.getArvo()+", eikä 166");
+</pre>
+
+
+	<h3 class="req">Auto ja ylitys</h3>
+	
+	<p>Toteuta luokka <code>Auto</code>, joka ylittäessään siltaa kasvattaa arvoa aina tuhannella.</p>
+	
+<pre class="sh_java">
+Auto audi = new Auto();
+
+if (!audi.ylita(ms))
+    Testaaja.virhe("Audi ei ylitä maantiesiltaa");
+
+if (ms.getArvo() != 1166)
+    Testaaja.virhe("Maantiesillan ylittänyt paino on: "+ms.getArvo()+", eikä 1166");	
+</pre>	
+	
+<h2>Tilastot kuntoon</h2>
+
+<h3 class="req">Pelaajalistan tulostus</h3>
+
+<p>Tee luokka <code>Pelaaja</code>, johon voidaan tallettaa pelaajan nimi, joukkue, maalimäärä, syöttömäärä ja plusmiinustieto.</p> 
+
+<p>Talleta seuraavat pelaajat ArrayList:iin</p>
+
+<pre class="sh_java">
+pisteporssi.add(new Pelaaja("Nicklas Backstrom", "WAS", 29, 60, 33));
+pisteporssi.add(new Pelaaja("Marian Gaborik", "NYR", 37, 39, 8));
+pisteporssi.add(new Pelaaja("Henrik Sedin", "VAN", 28, 71, 35));
+pisteporssi.add(new Pelaaja("Sidney Crosby", "PIT", 45, 44, 8));
+pisteporssi.add(new Pelaaja("Martn St.Louis", "TBL", 27, 60, -4));
+pisteporssi.add(new Pelaaja("Steven Stamkos", "TBL", 43, 40, 0));
+pisteporssi.add(new Pelaaja("Joe Thorton", "SJS", 19, 66, 16));
+pisteporssi.add(new Pelaaja("Alexander Ovechkin", "WSH", 45, 53, 44));
+pisteporssi.add(new Pelaaja("Patrick Kane", "NJD", 28, 54, 18));
+pisteporssi.add(new Pelaaja("Brad Richards", "DAL", 21, 61, -13));
+</pre>
+	
+<p>Tulosta pelaajalistan sisältö. Huomaa, että tulostukseen tulee mukaan myös kokonaispistemäärä eli maalien ja syöttöjen summa:</p>
+
+<pre>	
+Nicklas Backstrom WAS 29+60 = 89 33
+Marian Gaborik NYR 37+39 = 76 8
+Henrik Sedin VAN 28+71 = 99 35
+Sidney Crosby PIT 45+44 = 89 8
+Martn St.Louis TBL 27+60 = 87 -4
+Steven Stamkos TBL 43+40 = 83 0
+Joe Thorton SJS 19+66 = 85 16
+Alexander Ovechkin WSH 45+53 = 98 44
+Patrick Kane NJD 28+54 = 82 18
+Brad Richards DAL 21+61 = 82 -13
+</pre>
+	
+<h3 class="req">Pistepörssin tulostus</h3>
+
+<p>Lisää luokalle Pelaaja rajapinta <code>Comparable&lt;Pelaaja&gt;</code>, jonka avulla pelaajat voidaan järjestää kokonaispistemäärän mukaiseen järjestykseen. Järjestä pelaajat Collections-luokan avulla  ja tulosta pistepörssi:</p>
+
+<pre>
+NHL pistepörssi
+1. Henrik Sedin VAN 28+71 = 99 35
+2. Alexander Ovechkin WSH 45+53 = 98 44
+3. Nicklas Backstrom WAS 29+60 = 89 33
+4. Sidney Crosby PIT 45+44 = 89 8
+5. Martn St.Louis TBL 27+60 = 87 -4
+6. Joe Thorton SJS 19+66 = 85 16
+7. Steven Stamkos TBL 43+40 = 83 0
+8. Patrick Kane NJD 28+54 = 82 18
+9. Brad Richards DAL 21+61 = 82 -13
+10. Marian Gaborik NYR 37+39 = 76 8
+</pre>
+
+<p>Ohjeita tähän tehtävään viime viikon materiaalissa.</p>
+
+<h3 class="req">Maali ja syöttöpörssi, plusmiinustilasto</h3>
+
+<p>Haluamme tulostaa myös maalintekijäpörssin eli pelaajien tiedot maalimäärän mukaan järjestettynä sekä syöttöpörssin ja plusmiinustilaston.
+<a href="http://www.nhl.com/ice/app?component=completePointLeadersList&page=statshome&service=direct">NHL:n</a> kotisivu tarjoaa tämänkaltaisen toiminnallisuuden, eli selaimessa näytettävä lista on mahdollista saada järjestettyä halutun kriteerin mukaan.
+</p>
+
+<p>Edellinen tehtävä määritteli pelaajien suuruusjärjestyksen perustuvan kokonaispistemäärään. Luokalla voi olla vain yksi compareTo-metodi, joten joudumme muunlaisia järjestyksiä saadaksemme turvautumaan muihin keinoihin.</p>
+
+<p>Vaihtoehtoiset järjestämistavat toteutetaan erillisten luokkien avulla. Pelaajien vaihtoehtoisten järjestyksen määräävän luokkien tulee toteuttaa <code>Comparator&lt;Pelaaja&gt;</code>-rajapinta. Järjestyksen määräävällä luokalla on ainoastaan yksi metodi <code>compareTo(Pelaaja p1, Pelaaja p2)</code>, jonka tulee palauttaa negatiivinen arvo, jos p1 on järjestyksessä ennen p2:sta, positiivinen arvo jos p2 on järjestyksessä ennen p1:stä ja 0 muuten.</p>
+
+<p>Periaatteena on luoda jokaista järjestämistapaa varten oma vertailuluokka, esim. maalipörssin järjestyksen määrittelevä luokka:</p>
+
+<pre class="sh_java">
+import java.util.Comparator;
+ 
+public class Maali implements Comparator&lt;Pelaaja&gt; {
+  public int compare(Pelaaja p1, Pelaaja p2) {
+    // koodi tänne
+  }
+}
+</pre>
+
+<p>Järjestäminen tapahtuu edelleen luokan <code>Collections</code> metodin <code>sort</code> avulla. Metodi saa nyt toiseksi parametrikseen järjestyksen määräävän luokan olion:</p>
+
+<pre class="sh_java">
+Maali maalintekijat = new Maali();
+Collections.sort(pisteporssi, maalintekijat);
+System.out.println("\nNHL parhaat maalintekijät");
+tulosta(pisteporssi);
+</pre>
+
+<p>Järjestyksen määrittelevä olio voidaan luoda suoraan sort-kutsun yhteydessä:</p>
+
+<pre class="sh_java">
+Collections.sort(pisteporssi, new Maali());
+System.out.println("\nNHL parhaat maalintekijät");
+tulosta(pisteporssi);
+</pre>
+
+<p>Kun sort-metodi saa järjestyksen määrittelevän olion parametrina, se käyttää olion <code>compareTo()</code>-metodia pelaajia järjestäessään.</p>
+
+<p>Tarkempia ohjeita vertailuluokkien tekemiseen <a href="http://leepoint.net/notes-java/data/collections/comparators.html">täällä</a></p>
+
+<p>Tee seuraaviin tilanteisiin sopivat vertailufunktiot ja tulosta tilastot ohjelmassasi:</p>
+<pre>
+NHL parhaat maalintekijät
+1. Alexander Ovechkin WSH 45+53 = 98 44
+2. Sidney Crosby PIT 45+44 = 89 8
+3. Steven Stamkos TBL 43+40 = 83 0
+4. Marian Gaborik NYR 37+39 = 76 8
+5. Nicklas Backstrom WAS 29+60 = 89 33
+6. Henrik Sedin VAN 28+71 = 99 35
+7. Patrick Kane NJD 28+54 = 82 18
+8. Martn St.Louis TBL 27+60 = 87 -4
+9. Brad Richards DAL 21+61 = 82 -13
+10. Joe Thorton SJS 19+66 = 85 16
+
+NHL eniten syöttöjä
+1. Alexander Ovechkin WSH 45+53 = 98 44
+2. Sidney Crosby PIT 45+44 = 89 8
+3. Steven Stamkos TBL 43+40 = 83 0
+4. Marian Gaborik NYR 37+39 = 76 8
+5. Nicklas Backstrom WAS 29+60 = 89 33
+6. Henrik Sedin VAN 28+71 = 99 35
+7. Patrick Kane NJD 28+54 = 82 18
+8. Martn St.Louis TBL 27+60 = 87 -4
+9. Brad Richards DAL 21+61 = 82 -13
+10. Joe Thorton SJS 19+66 = 85 16
+
+NHL plusmiinustilasto
+1. Alexander Ovechkin WSH 45+53 = 98 44
+2. Henrik Sedin VAN 28+71 = 99 35
+3. Nicklas Backstrom WAS 29+60 = 89 33
+4. Patrick Kane NJD 28+54 = 82 18
+5. Joe Thorton SJS 19+66 = 85 16
+6. Sidney Crosby PIT 45+44 = 89 8
+7. Marian Gaborik NYR 37+39 = 76 8
+8. Steven Stamkos TBL 43+40 = 83 0
+9. Martn St.Louis TBL 27+60 = 87 -4
+10. Brad Richards DAL 21+61 = 82 -13
+</pre>
+
+<h3>Pelaajatietojen lukeminen tiedostosta</h3>
+
+<p>Haluamme ohjelmaamme seuraavien pelaajien tiedot:</p>
+<pre>
+ Henrik Sedin       VAN 74 28 71 99  35
+ Alex Ovetshkin     WSH 64 45 53 98  44
+ Sidney Crosby      PIT 73 45 44 89   8
+ Nicklas Backstrom  WSH 74 29 60 89  33
+ Martin St.Louis    TBL 74 27 60 87  -4
+ Steven Stamkos     TBL 74 45 41 86   0
+ Joe Thornton       SJS 74 19 66 85  16
+ Patrick Kane       CHI 73 28 54 82  18
+ Brad Richards      DAL 72 21 61 82 -13
+ Marian Gaborik     NYR 68 39 40 79  10
+ Patrick Marleau    SJS 74 41 35 76  18
+ Dany Heatley       SJS 74 38 37 75  13
+ Anze Kopitar       LAK 73 33 42 75   4
+ Ilja Kovaltshuk    NJD 67 38 37 75   6
+ Daniel Sedin       VAN 56 22 52 74  34
+ Aleksander Semin   WSH 65 35 38 73  29
+ Zach Parise        NJD 72 35 38 73  21
+ Paul Stastny       COL 73 18 55 73   8
+ Mike Green         WSH 69 17 54 71  33
+ Corey Perry        ANA 74 26 44 70   0
+ </pre>
+ 
+<p>Tietojen syöttäminen käsin on hankalaa. Luo tiedosto, johon copypastaat pelaajalistan.
+Lue tiedosto ohjelmassasi ja luo jokaiselle pelaajalle oma olio. 
+Listalla ensimmäinen luku on pelaajan ottelumäärä. Sitä, eikä toiseksi viimeistä (kokonaispistemäärä) ei oteta mukaan pelaajaolioita luotaessa. </p>
+
+<p>Tiedoston lukeminen kannattaa hoitaa kahden eri metodin avulla. Metodilla <code>next()</code> voidaan lukea tiedoston seuraava merkkijono joka rajoittuu välilyöntiin, tabulaattoriin tai enteriin. Metodilla <code>nextInt()</code> voidaan lukea tiedostossa olevat kokonaisluvut.</p>
+ 
+<p>Tiedoston jokainen rivi on samanlainen: <code>String String String int int int int int</code>, joten 
+ kutsumalla metodeita <code>next()</code> ja <code>nextInt()</code> riviltä on helppo lukea oikeat tiedot. Metodilla <code>hasNext()</code> voidaan testata pitääkö tiedoston lukemista vielä jatkaa:</p>
+ 
+<pre class="sh_java">
+Scanner lukija = lukija = new Scanner(new File("pelaajat.txt"));
+while ( lukija.hasNext() ){ // vieläkö jatketaan
+    String nimi = lukija.next()+" "+lukija.next();
+    String joukkue = lukija.next();
+    lukija.nextInt();   // hypätään ottelumäärän yli
+    int maalit = lukija.nextInt();
+    int syotot = lukija.nextInt();
+    lukija.nextInt();   // hypätään kokonaispistemäärän yli yli
+    int plusMinus = lukija.nextInt();
+    pisteporssi.add(new Pelaaja(nimi, joukkue, maalit, syotot, plusMinus));
+}
+</pre>
+
+<p>Lue tiedostosta pelaajatiedot ja tulosta pistepörssi, maalipörssi, syöttöpörssi ja plusmiinustilasto.</p>
+ 
+ 
+  <h2>Olutmuistioiden lukeminen tiedostosta</h2>
+  
+  <p>Olemme viime viikkoina toteuttaneet olutmuistiot, jotka syötetään käsin. Lisätään tässä tehtävässä olutmuistioihin toiminnallisuutta, joka mahdollistaa niiden lukemisen tiedostosta.</p>
+  
+  <p>Olutmuistiot on tallennettu seuraavassa muodossa tiedostoon. Voit copy-pasteta seuraavan tekstin omaan tiedostoon.</p>
+
+<pre>
+Matti L
+Stone Brewery: Arrogant Bastard Ale
+Ballast Point: Panzer Imperial Pils
+
+Matti P
+Celebration Ale
+
+Matti V
+Franzis Kristal Weissbier
+Paderborner Pilsener
+</pre>
+
+  <p>Toteuta seuraavat tehtävät <em>lisänä</em> ensimmäisellä viikolla olleeseen olutmuistioon. Kun olutmuistiot on luettu, voidaan uusia vielä luoda.</p>
+  
+  <h3 class="req">Olutmuistioiden omistajat</h3>
+  
+  <p>Luo olutmuistioiden omistajat tiedostoa lukemalla. Ylläolevalla tiedostolla luodaan kolme olutmuistiota, joiden omistajat ovat "Matti L", "Matti P" ja "Matti V". Olutmuistioiden tulostuksen pitäisi näyttää tässä vaiheessa seuraavalta:</p>
+
+<pre>
+Alkuperäiset muistiot:
+Olutmuistion omistaja: Matti L
+Oluita yhteensa 0 kpl
+
+Olutmuistion omistaja: Matti P
+Oluita yhteensa 0 kpl
+
+Olutmuistion omistaja: Matti V
+Oluita yhteensa 0 kpl
+
+Lisätään muistioita
+Anna muistion omistaja: 
+...
+</pre>
+  
+  <h3 class="req">Oluet olutmuistioihin</h3>
+  
+  <p>Muokkaa edellistä toteutusta siten, että olutmuistioihin luetaan myös juodut oluet. Tulostuksen tulee olla muutoksen jälkeen seuraavanlainen:</p> 
+
+<pre>
+Alkuperäiset muistiot:
+Olutmuistion omistaja: Matti L
+Oluita yhteensa 2 kpl
+  Stone Brewery: Arrogant Bastard Ale
+  Ballast Point: Panzer Imperial Pils
+
+Olutmuistion omistaja: Matti P
+Oluita yhteensa 1 kpl
+  Celebration Ale
+
+Olutmuistion omistaja: Matti V
+Oluita yhteensa 2 kpl
+  Franzis Kristal Weissbier
+  Paderborner Pilsener
+  
+Lisätään muistioita
+Anna muistion omistaja: 
+...
+</pre> 
+ 
+
+
+	<h2>MunString</h2>
+	
+	<h3 class="req">MunString</h3>
+	
+	<p>Toteutaan oma yksinkertainen <code>String</code>-luokka: <code>MunString</code>
+
+	<ul>
+		<li>Tee luokalle vakio luokkamuuttuja MAXPITUUS, joka on MunStringin maksimikoko ja aseta se arvoon <code>100</code></li>
+		<li>Talleta merkkijono <code>char</code>-taulukkoon.</li>
+		<li>Jos konstruktorilla yritetään luoda pidempää MunString-oliota, kuin MAXPITUUS, konstruktori luo vain MAXPITUUS pituisen muuttujan.</li>
+		<li>Toteutus kannattanee tehdä siten, että oliolla on tieto talletetun merkkijonon pituudesta.  Tällöin mm. tarkistusten tekeminen on helppoa.</li>
+		<li>Rajaa <code>toString()</code>-metodin palauttamaa Stringiä siten, että se ei ole MAXPITUUS pitkä (vaan ylempänä mainitun pituuden verran).  Tutustu <code>String</code>-luokan <code>substring</code>-metodiin.</li>
+		<li>Jos <code>lisaa()</code>-metodilla yritetään kasvattaa merkkijono pidemmäksi kuin MAXPITUUS, metodi ei tee mitään (katso testiohjelma).</li>
+	</ul>
+	
+	<p>Vinkki <code>toString()</code>-metodiin: Stringin voi luoda char-taulukosta <code>new String(chartaulukko)</code>.</p>
+	
+	<p>Testiohjelma:</p>
+	
+<pre class="sh_java">
+MunString tervehdys = new MunString("Kokeillaan MunStringia");
+MunString lisays = new MunString(", lisäkokeilu.");
+
+MunString kymmenen = new MunString("0123456789");
+
+System.out.println("tervehdys: " + tervehdys);
+System.out.println("   pituus: " + tervehdys.length());
+System.out.println("   kolmas: " + tervehdys.charAt(2));
+
+tervehdys.lisaa(lisays);
+                                
+System.out.println("tervehdys: " + tervehdys);
+
+tervehdys.lisaa(kymmenen);
+tervehdys.lisaa(kymmenen);
+tervehdys.lisaa(kymmenen);
+tervehdys.lisaa(kymmenen);
+tervehdys.lisaa(kymmenen);
+tervehdys.lisaa(kymmenen);
+tervehdys.lisaa(kymmenen);
+tervehdys.lisaa(kymmenen);
+tervehdys.lisaa(kymmenen);
+tervehdys.lisaa(kymmenen);
+tervehdys.lisaa(kymmenen);
+tervehdys.lisaa(kymmenen);
+tervehdys.lisaa(kymmenen);
+
+
+System.out.println("tervehdys: " + tervehdys);
+System.out.println("   pituus: " + tervehdys.length());
+</pre>
+
+<p>Tulostus</p>
+
+<pre>
+tervehdys: Kokeillaan MunStringia
+   pituus: 22
+   kolmas: k
+tervehdys: Kokeillaan MunStringia, lisäkokeilu.
+tervehdys: Kokeillaan MunStringia, lisäkokeilu.012345678901234567890123456789012345678901234567890123456789
+   pituus: 96
+</pre>
+
+  <h2>Sokkelo jatkuu</h2>
+  
+  <p>Muokataan olemassaolevaa toteutustamme. Jos et ole tehnyt Sokkelo-tehtäviä tähän mennessä, tutustu viimeisen viikon mallivastauksiin!</p>
+  
+  <h3 class="bonus">Esine</h3>
+  
+  <p>Luokalla <code>Esine</code> on sijainti, ja se toteuttaa viime viikolla nähdyn Sijaitseva-rajapinnan. Muuta viime viikon Sijaitseva-rajapintaa siten, että se toteuttaa tällä viikolla nähdyt get- ja set-nimeämissäännöt. Toteuta luokka <code>Esine</code>. Peri myös luokka <code>Aarre</code> luokasta <code>Esine</code>.</p>
+  
+
+  <h3 class="bonus">Hahmo</h3>
+  
+  <p>Luokka <code>Hahmo</code> perii luokan <code>Esine</code>, ja lisää sinne liikkumistoiminnallisuuden. Luokalla <code>Hahmo</code> on siis metodi <code>liiku()</code>, jolla hahmoa voi liikuttaa. Toteuta luokka <code>Hahmo</code>. Peri luokat <code>Morko</code> ja <code>Pelaaja</code> luokasta <code>Hahmo</code>.</p>
+  
+  
+  <h3 class="bonus">Reitti pelaajan luo</h3>
+  
+  <p>Mörkömme on tähän asti vain kävellyt sokkelossa satunnaisesti. Muutetaan mörön liikkumistoimintoa siten, että se pyrkii pelaajaa kohti. Mörkö tietää pelaajan sijainnin <code>Sokkelo</code>-olion avulla.</p>
+  
+  <p>Muuta mörön <code>liiku()</code>-metodia siten, että se pyrkii aina pelaajaa kohti. Jos mörön ja pelaajan etäisyys toisistaan on suurempi y-akselilla kuin x-akselilla, pyri liikkumaan y-akselilla, muulloin x-akselilla. Alla olevissa tilanteissa ensimmäisessä mörön kannattaa liikkua vasemmalle, kun taas toisessa ylös.</p>
+ 
+<pre>
+O
+
+
+  M
+</pre> 
+  
+<pre>
+O
+
+     M
+</pre> 
+  
+  <p><em>Kannattaa tutkia haluttua liikkumissuuntaa mörön ja pelaajan x- ja y-koordinaattien erotuksena.</em></p>
+  
+  
+  <h3 class="bonus">Portaali</h3>
+  
+  <p>Lisätään kartalle vielä portaali, mihin kävelemällä pelaaja päätyy toisen portaalin sijaintiin. Portaali merkitään numerolla 4 kartalle.</p>
+
+<pre class="sh_java">
+int[][] taulukko = {
+  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+  {1, 2, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 4, 1, 0, 1, 0, 0, 1, 1},
+  {1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1},
+  {1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1},
+  {1, 0, 1, 3, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1},
+  {1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1},
+  {1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, -1},
+  {1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1},
+  {1, 4, 1, 0, 0, 99, 1, 0, 1, 3, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
+  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+};
+</pre>
+
+  <p>Toteuta portaali-toiminnallisuus. Jos portaaleja on enemmän kuin kaksi, portaali mihin päädytään arvotaan portaalien joukosta.</p>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-13136847-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>	
+	</body>
+</html>

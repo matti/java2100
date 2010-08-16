@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fi" lang="fi">
+	<head>
+		<link rel="stylesheet" href="stylesheets/common.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="javascripts/common.js"></script>
+		
+		<link rel="stylesheet" href="stylesheets/shjs/sh_style.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/shjs/sh_main.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_java.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_ruby.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_scala.min.js"></script>
+		
+		<link rel="stylesheet" href="stylesheets/exercises.css" type="text/css" media="screen, print" />		
+		<script type="text/javascript" src="javascripts/exercises.js"></script>		
+	</head>
+
+	<body>
+		<h1>Tehtävät viikolle 4</h1>
+				
+		<p>Pakolliset tehtävät on merkitty harmalla taustavärillä.</p>
+		
+		<ul>
+			<li>Pakollisia tehtäviä on: <span id="required_exercises_count">-1</span> kpl</li>
+			<li>Lisätehtäviä on: <span id="additional_exercises_count">-1</span> kpl</li>
+			<li>Bonustehtäviä on: <span id="bonus_exercises_count">-1</span> kpl</li>
+		</ul>
+		
+		
+		<p><strong>HUOM:</strong> nimeä tiedostot otsikossa olevan sanan mukaan</p>
+		
+		
+		
+		<h2>Lämmittely</h2>
+		
+		<h3 class="req">Sisennä oikein ja korjaa</h3>
+<p>Tämän viikon luentomateriaalissa on kappale lähdekoodin sisentämisestä. Lue se, ja sisennä seuraava lähdekoodi oikein. Korjaa myös ohjelmassa oleva <em>virhe</em>.</p>		
+<pre>
+public class Laskin {
+	public static void main(String[] komentoriviParametrit) {
+	int i = 0;
+    Laskuri omaLaskuri = new Laskuri(0);
+    System.out.println("omaLaskurin arvo on " + omaLaskuri.annaArvo());
+		omaLaskuri.kasvataArvoa();omaLaskuri.kasvataArvoa();
+		omaLaskuri.kasvataArvoa();omaLaskuri.kasvataArvoa(); omaLaskuri.kasvataArvoa(); omaLaskuri.kasvataArvoa();	
+if (i == 0 ); { System.out.println("i on 0");
+System.out.println("ja pysyy"); }
+else { System.out.println("i oli jotain muuta"); i=0; System.out.println("mutta nyt se on 0"); }
+int arvo = omaLaskuri.annaArvo();
+	System.out.println("omaLaskurin arvo on " + arvo);
+    }
+}
+</pre>
+
+
+
+		<h2>Laskuri</h2>
+
+		<h3 class="req">KahviJaTee</h3>		
+
+		<p>Toteuta luentomateriaalissa olevaan <code>Laskuri</code>-luokkaan tarvittava toiminnallisuus jotta seuraava ohjelma toimisi oikein. Varmista ohjelman toimivuus!</p> 
+
+<pre class="sh_java">
+public class KahviJaTee {
+
+  public static void main(String[] komentoriviParametrit) {
+
+    Laskuri kahvitMattiL = new Laskuri(2);
+    Laskuri teeMattiL = new Laskuri(4);
+
+    System.out.println("Matti L. on juonut " + kahvitMattiL.annaArvo() + " kahvia.");
+    System.out.println("Matti L. on juonut " + teeMattiL.annaArvo() + " teetä.");
+
+    System.out.println("Juodaan kahvia.");
+
+    kahvitMattiL.kasvataArvoa();
+    kahvitMattiL.kasvataArvoa();
+
+    System.out.println("Maksetaan pois velkoja.");
+
+    kahvitMattiL.vahennaArvoa();
+    teeMattiL.vahennaArvoa();
+
+    System.out.println("Matti L. on juonut " + kahvitMattiL.annaArvo() + " kahvia.");
+    System.out.println("Matti L. on juonut " + teeMattiL.annaArvo() + " teetä.");
+    }
+}
+</pre>
+		
+		
+		<h3 class="req">Moottori</h3>
+		
+		<p>Tee ohjelma moottori, joka käyttää <code>Laskuri</code>-luokkaa.  Tee ohjelmassa olio <code>moottori</code>, jonka alkuarvo on <code>0</code>.  Tämän jälkeen kasvata laskurin <code>kasvataArvoa()</code>-metodilla moottorin kierrosluku arvoon <code>4200</code> ja tulosta tilanne.  Tämän jälkeen vähennä kierroksia <code>vahennaArvoa()</code>-metodilla siten, että kierroksia on <code>3200</code>.  Lopuksi vähennä kierrokset arvoon <code>0</code>.</p>
+		
+		<p>Lisäksi tee <code>toString()</code>-metodi, joka palauttaa muotoillun tekstin.</p>
+			
+<pre>
+Moottorin kierrosluku on nyt 0
+Moottorin kierrosluku on nyt 4200
+Moottorin kierrosluku on nyt 3200
+Moottorin kierrosluku on nyt 0
+</pre>
+
+
+
+
+		<h3>MoottoriMaksimi</h3>
+		
+		<p>Laajenna Laskuria siten, että luokan konstruktori ottaa parametrikseen myös maksimiarvon.</p>
+		<p>Toteuta <code>kasvataMaksimiin()</code>-metodi, joka asettaa moottorin kierrosluvun maksimiarvoonsa.</p>
+		<p>Tee <code>kasvataArvoa()</code>-metodiin tarkastus, että arvo ei asetu maksimiarvon yli.  Testaa seuraavasti:</p>
+		
+<pre class="sh_java">
+moottori.asetaMaksimiin();
+System.out.println(moottori) // tulostaa 4200 (tai muun maksimiarvon)
+
+moottori.kasvataArvoa();
+System.out.println(moottori) // tulostaa saman kuin edellinen, eli arvo ei ole muuttunut.
+</pre>
+	
+
+
+
+
+
+
+
+		<h3>Kuulaskuri</h3>
+
+		<p>Tee ohjelma käyttäen materiaalin pohjana materiaalin kuulaskurin oliototeutusta.  Muokkaa toteutusta siten, että ohjelma pitää kirjaa myös vuodesta.</p>
+<pre>
+Anna vuosi: 2010
+Anna kuukausi: 8
+
+Seuraavat 24 kuukautta:
+2010 - 9
+2010 - 10
+2010 - 11
+2010 - 12
+2011 - 1
+2011 - 2
+2011 - 3
+2011 - 4
+2011 - 5
+2011 - 6
+2011 - 7
+2011 - 8
+2011 - 9
+2011 - 10
+2011 - 11
+2011 - 12
+2012 - 1
+2012 - 2
+2012 - 3
+2012 - 4
+2012 - 5
+2012 - 6
+2012 - 7
+2012 - 8
+2012 - 9
+2012 - 10
+2012 - 11
+2012 - 12
+2013 - 1
+2013 - 2
+2013 - 3
+2013 - 4
+2013 - 5
+</pre>
+
+
+
+
+
+
+		<h3 class="req">NeliLaskija</h3>
+		
+		<p>Toteuta nelilaskin olioversiona.  Tee uusi projekti, johon laitat alla olevan pääohjelman.  Toteuta samaan projektiin luokka <code>NeliLaskin</code>.</p>
+
+
+<pre class="sh_java">
+import java.util.Scanner;
+
+public class NeliLaskija {
+  public static Scanner lukija = new Scanner(System.in);
+
+  public static void main(String[] komentoriviParametrit) {
+
+    NeliLaskin laskin = new NeliLaskin();
+
+    System.out.print("Anna ensimmäinen luku: ");
+    int eka = lukija.nextInt();
+
+    System.out.print("Anna toinen luku: ");
+    int toka = lukija.nextInt();
+
+    System.out.println("Summa: " + laskin.summa(eka, toka));
+    System.out.println("Erotus: " + laskin.erotus(eka, toka));
+    System.out.println("Jako: " + laskin.jako(eka, toka));
+    System.out.println("Kerto: " + laskin.kerto(eka, toka));
+
+  }
+}
+</pre>
+
+
+		<h3 class="req">NeliLaskija2</h3>
+		
+		<p>Tee kuten edellisessäkin tehtävässä, mutta nyt käyttäen olion sisäisiä attribuutteja (kaksi kokonaislukua).  Tässä versiossa laskin siis tietää kaksi lukuaan, joille se osaa suorittaa operaatioita. Mieti kahden eri toteutustavan (NeliLaskija ja NeliLaskija2) eroja.</p>
+
+<pre class="sh_java">
+import java.util.Scanner;
+
+public class NeliLaskija {
+  public static Scanner lukija = new Scanner(System.in);
+
+  public static void main(String[] komentoriviParametrit) {
+
+    System.out.print("Anna ensimmäinen luku: ");
+    int eka = lukija.nextInt();
+
+    System.out.print("Anna toinen luku: ");
+    int toka = lukija.nextInt();
+
+    NeliLaskin laskin = new NeliLaskin(eka,toka);
+
+    System.out.println("Summa: " + laskin.summa());
+    System.out.println("Erotus: " + laskin.erotus());
+    System.out.println("Jako: " + laskin.jako());
+    System.out.println("Kerto: " + laskin.kerto());
+
+  }
+}
+</pre>
+
+		<h2>Opintopistelaskuri</h2>		
+
+		<h3 class="req">OpintopisteetTunneiksi</h3>
+
+		<p>Tee ohjelma, jolla voi laskea opintopisteiden laskennallisen työmäärän.  1 opintopiste on 27 tuntia.</p>
+		
+		<p>Toteuta <code>TyomaaraMuunnin</code> luokka, josta teet oliot esimerkin mukaisesti.  Oliolla tulee olla <code>toString()</code> -metodi, joka palauttaa valmiiksi muotoillun tekstin.</p>
+		
+<pre class="sh_java">
+import java.util.Scanner;
+
+public class OpintopisteetTunneiksi {
+
+    public static Scanner lukija = new Scanner(System.in);
+
+    public static void main(String[] komentoriviParametrit) {
+
+        TyomaaraMuunnin ohpe = new TyomaaraMuunnin("Ohjelmoinnin perusteet", 5.0, 6);
+        TyomaaraMuunnin ohja = new TyomaaraMuunnin("Ohjelmoinnin jatkokurssi", 4.0, 6);
+
+        System.out.println(ohpe);
+        System.out.println("---");
+        System.out.println(ohja);
+
+    }
+}
+</pre>
+
+<pre>
+Kurssin Ohjelmoinnin perusteet (5.0op) laskennallinen työmäärä
+Yhteensä 135.0h
+Viikossa 22.5h
+---
+Kurssin Ohjelmoinnin jatkokurssi (4.0op) laskennallinen työmäärä
+Yhteensä 108.0h
+Viikossa 18.0h
+</pre>
+    
+		<h3>OpintopisteetTunneiksi2</h3>
+		
+		<p>Tee luokkaa käyttäen ohjelma, joka kysyy kurssin nimeä, opintopisteitä ja työmäärää.  Tämän jälkeen ohjelma tulostaa olion tiedot kuten edellisessä tehtävässä.</p>
+		
+<pre>
+Kurssin nimi: Agile Entwicklung mit Ruby über Gleis
+Opintopisteitä: 5.0
+Kesto viikkoina: 6
+
+Kurssin Agile Entwicklung mit Ruby über Gleis (5.5op) laskennallinen työmäärä
+Yhteensä 148.5h
+Viikossa 24.75h
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<h2>Varasto</h2>
+
+
+		<h3 class="req">KahvikassaVarasto</h3>
+		
+		<p>Toteuta materiaalin luokan <code>Varasto</code> avulla ohjelma, joka pitää kirjaa jäljellä olevan kahvin määrästä.</p>
+		
+		<p>Älä muuta luokan <code>Varasto</code> valmiina olevia metodeja, mutta voit lisätä omia metodeja entisten rinnalle.  Varaston tilan muuttamisen tulee kuitenkin tapahtua valmiiden <code>otaVarastosta()</code> ja <code>lisaaVarastoon()</code> -metodien avulla.</p>
+		
+		<p>Hoida tilan tulostaminen <code>toString()</code>-metodin avulla.</p>
+		
+		
+		<p>Aloita ohjelman tekeminen tämän avulla:</p>
+		
+<pre class="sh_java">
+import java.util.Scanner;
+
+public class KahvikassaVarasto {
+
+    public static Scanner lukija = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        Varasto kahvi = new Varasto(3, 2);
+
+        System.out.println("Kahvikassa");
+        System.out.println("1\tJuo kahvi");
+        System.out.println("0\tPoistu\n");
+
+    }
+
+
+}
+	
+</pre>
+		<p>Ohjelman suoritus näyttää seuraavalta:</p>
+<pre>
+Kahvikassa
+1   Juo kahvi
+0   Poistu
+
+Kahvia on jäljellä 2.0/3.0 kuppia
+Valitse toiminto: 1
+
+Kahvia on jäljellä 1.0/3.0 kuppia
+Valitse toiminto: 1
+
+Kahvia on jäljellä 0.0/3.0 kuppia
+Valitse toiminto: 1
+
+Kahvi on loppu!
+
+Kahvia on jäljellä 0.0/3.0 kuppia
+Valitse toiminto: 0
+</pre>
+
+
+
+		<h3>KahvikassaVarasto2</h3>
+
+		<p>Laajenna toteutusta siten, että ohjelmaan tulee uusi toiminto: <em>kahvin keittäminen</em>.  Kahvin keittäminen on mahdollista kaikissa ohjelman vaiheissa, mutta kahvia ei voi keittää enempää kuin tilaa on jäljellä. </p>
+
+<pre>
+Kahvikassa
+1   Juo kahvi
+2   Keitä kahvia
+0   Poistu
+
+Kahvia on jäljellä 2.0/3.0 kuppia
+Valitse toiminto: 2
+Kuinka monta kuppia keitetään: 2
+
+Ei ole tilaa!
+
+Kahvia on jäljellä 2.0/3.0 kuppia
+Valitse toiminto: 2
+Kuinka monta kuppia keitetään: 1
+
+Kahvia on jäljellä 3.0/3.0 kuppia
+Valitse toiminto: 0
+</pre>
+
+<h2>Arvauspeli</h2>
+<p>Tehdään arvaajapeli, jossa tietokone yrittää arvata annatko syötteeksi 0 vai 1 edellisten arvaustesi perusteella.</p>
+  
+  <h3 class="bonus">Arvaaja</h3>
+  <p>Luokka <code>Arvaaja</code> pitää yllä arvausten määrää, ja yrittää arvata seuraavan luvun. Arvaajalla on metodit <code>syotaArvaus</code>, jolle annetaan parametriksi pelaajan viimeksi arvaama luku. Metodi <code>annaArvaus</code> palauttaa arvaajan arvaaman luvun. Voit käyttää alla olevaa runkoa arvaajan toteutukseen.</p>
+<pre class="sh_java">
+public class Arvaaja {
+  // ..
+  
+  public Arvaaja() {
+    // ..
+  }
+  
+  public void syotaArvaus(int luku) {
+    // .. 
+  }
+  
+  public int annaArvaus() {
+    // ..
+  }
+}
+</pre>
+  <p>Tee toteutuksesta sellainen, mikä pitää kirjaa arvattujen nollien ja ykkösten määristä. Jos nollia on enemmän kuin ykkösiä, arvataan aina nolla. Muulloin arvataan aina yksi.</p>
+
+  <h3 class="bonus">ArvaajaPeli</h3>
+  <p>Itse pääohjelma sijaitsee luokassa <code>ArvaajaPeli</code>. ArvaajaPeli lukee käyttäjältä syötteitä numero kerrallaan. Kun käyttäjä syöttää luvun, arvaajalta kysytään lukua. Jos luku on sama, saa tietokone pisteen, muutoin käyttäjä saa pisteen. Pelin loputtua tulostetaan pelitulos.</p>
+  <p>Voit käyttää seuraavaa runkoa ohjelman alkuun. Tarvitset ohjelmaan toiston lukemiseen.</p>
+  <pre class="sh_java">
+import java.util.Scanner;
+
+public class ArvaajaPeli {
+    public static Scanner lukija = new Scanner(System.in);
+
+    public static void main(String[] komentoriviParametrit) {
+        Arvaaja arvaaja = new Arvaaja();
+        int tietokoneenPisteet = 0;
+        int pelaajanPisteet = 0;
+        int pelaajanSyote;
+        int arvaajanArvaus;
+
+        System.out.println("--Arvaaja--");
+        System.out.println("1\tKone arvaa yksi.");
+        System.out.println("0\tKone arvaa nolla.\n");
+        System.out.println("Muut luvut lopettavat\n");
+        
+        pelaajanSyote = lukija.nextInt();
+        
+        // toista kunnes?
+        arvaajanArvaus = arvaaja.annaArvaus();
+        arvaaja.syotaArvaus(pelaajanSyote);
+              
+        if(pelaajanSyote == arvaajanArvaus)
+          tietokoneenPisteet = tietokoneenPisteet + 1;
+        else
+          pelaajanPisteet = pelaajanPisteet + 1;
+          
+        // tulosta pistetilanne
+          
+        pelaajanSyote = lukija.nextInt();
+        
+        
+        // kun toisto loppuu, tulosta lopputilanne
+    }
+}
+</pre>
+<p>Ohjelman tulostus voi olla esimerkiksi seuraavanlaista:</p>
+<pre>
+--Arvaaja--
+1   Kone arvaa yksi.
+0   Kone arvaa nolla.
+Muut luvut lopettavat.
+
+Syöte: 0
+Kone arvasi: 1
+Tilanne: Pelaaja 1, Kone 0
+
+Syöte: 0
+Kone arvasi: 0
+Tilanne: Pelaaja 1, Kone 1
+
+Arvaus: 1
+Kone arvasi: 0
+Tilanne: Pelaaja 2, Kone 1
+
+Arvaus: 42
+Kiitos pelistä!
+Lopputilanne: Pelaaja 2, Kone 1
+</pre>
+
+
+	</body>
+</html>

@@ -1,0 +1,734 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fi" lang="fi">
+	<head>
+		<link rel="stylesheet" href="stylesheets/common.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="javascripts/common.js"></script>
+		
+		<link rel="stylesheet" href="stylesheets/shjs/sh_style.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/shjs/sh_main.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_java.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_ruby.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_scala.min.js"></script>
+		
+		<link rel="stylesheet" href="stylesheets/exercises.css" type="text/css" media="screen, print" />		
+		<script type="text/javascript" src="javascripts/exercises.js"></script>		
+	</head>
+
+	<body>
+		<h1>Tehtävät viikolle 6</h1>
+				
+		<p>Pakolliset tehtävät on merkitty harmalla taustavärillä. Punaisella taustavärillä merkatut ovat kontrollitehtäviä, jotka näytetään ohjaajalle harjoitustilaisuudessa!</p>
+		
+		<ul>
+			<li>Pakollisia tehtäviä on: <span id="required_exercises_count">-1</span> kpl</li>
+			<li>Lisätehtäviä on: <span id="additional_exercises_count">-1</span> kpl</li>
+			<li>Bonustehtäviä on: <span id="bonus_exercises_count">-1</span> kpl</li>
+		</ul>
+		
+		
+		<p><strong>HUOM:</strong> nimeä tiedostot otsikossa olevan sanan mukaan</p>
+    
+		<h2>Lämmittely</h2>
+
+		<h3 class="req show">Nimeä oikein</h3>
+		
+		<p>Korjaa seuraava koodi käyttämään materiaalissa olevia nimeämissääntöjä.</p>
+		
+<pre class="sh_java">
+public class laskin {
+
+    public static void main(String[] KomentoriviParametrit) {
+
+        int i = 0;
+        Laskuri OmaLaskuri = new laskuri(0);
+
+        System.out.println("omaLaskurin arvo on " + OmaLaskuri.annaArvo());
+
+        OmaLaskuri.KasvataArvoa();
+        OmaLaskuri.KasvataArvoa();
+        OmaLaskuri.KasvataArvoa();
+        OmaLaskuri.KasvataArvoa();
+        OmaLaskuri.KasvataArvoa();
+        OmaLaskuri.KasvataArvoa();
+
+        if (i == 0) {
+            System.out.println("i on 0");
+            System.out.println("ja pysyy");
+        } else {
+            System.out.println("i oli jotain muuta");
+            i = 0;
+            System.out.println("mutta nyt se on 0");
+        }
+
+        int Arvo = OmaLaskuri.annaArvo();
+
+        System.out.println("omaLaskurin arvo on " + Arvo);
+    }
+}
+</pre>
+
+
+		<h2>Metrorata</h2>
+
+		<p>Tämä tehtävä on kokonaisuus, voit tehdä sen yhteen projektiin.</p>
+		
+		<h3 class="req">Asema</h3>
+
+		<p>Tee luokka <code>Asema</code>.  Aseman nimi ilmaistaan <a href="http://www.raitio.org/metro/picts/kartat/m_kaavio_08.gif" title="">kahdella kirjaimella</a>.</p>
+		
+<pre class="sh_java">
+Asema rl = new Asema("RL");
+Asema kp = new Asema("KP");
+Asema rt = new Asema("RT");
+Asema kn = new Asema("KN");
+Asema ht = new Asema("HT");
+Asema sn = new Asema("SN");
+Asema ka = new Asema("KA");
+Asema ks = new Asema("KS");
+Asema hn = new Asema("HN");
+Asema st = new Asema("ST");
+Asema ik = new Asema("IK");
+Asema pt = new Asema("PT");
+Asema rs = new Asema("RS");
+Asema vs = new Asema("VS");
+Asema mp = new Asema("MP");
+Asema kl = new Asema("KL");
+Asema mm = new Asema("MM");
+
+
+System.out.println(rt);  // Tulostaa "RT"
+</pre>
+		
+		<h3 class="req">Rata</h3>
+		
+		<p>Tee luokka <code>Rata</code> ja testaa seuraavalla ohjelmalla.</p>
+		
+<pre class="sh_java">
+Asema[] linja1983 = {kp, rt, ht, ks, hn, st, ik};
+Rata metroRata1983 = new Rata("Helsingin Metro", 1983, linja1983);
+
+System.out.println(metroRata1983);
+</pre>
+
+		<p>Ohjelma tulostaa seuraavaa.</p>
+<pre>
+Helsingin Metro: 1983
+
+-KP--RT--HT--KS--HN--ST--IK-
+</pre>
+
+		<h3>Haarat</h3>
+		
+		<p>Seuraava ohjelma tulostaa kaksi versiota metroradasta, vuosien 1983 ja 2010 tilanteen.</p>
+		
+		<p>Tulostuksessa voit ottaa eri tilanteet huomioon vertaamalla mahdollisten haarojen olemassaoloa tyhjään viitearvoon <code>null</code>.</p>
+		
+		<p>Muista, että välillä saattaa käydä vesivahinko ja jokin asema otetaan kokonaan pois kartasta.  Ohjelman tulee toimia myös tällöin oikein (katso seuraava tehtävä).</p>
+		
+<pre class="sh_java">
+Asema[] linja1983 = {kp, rt, ht, ks, hn, st, ik};
+
+Asema[] linja2010 = {rl, kp, rt, kn, ht, sn, ka, ks, hn, st, ik};
+Asema[] haaraVs = {pt, rs, vs};
+Asema[] haaraMm = {mp, kl, mm};
+
+Rata metroRata1983 = new Rata("Helsingin Metro", 1983, linja1983);
+Rata metroRata2010 = new Rata("Helsingin Metro", 2010, linja2010, haaraMm, haaraVs);
+
+System.out.println(metroRata1983);
+System.out.println(metroRata2010);
+</pre>
+
+	<p>Ohjelman tuloste</p>
+	
+<pre>
+Helsingin Metro: 1983
+
+-KP--RT--HT--KS--HN--ST--IK-
+
+Helsingin Metro: 2010
+
+                                        -MP--KL--MM-
+-RL--KP--KN--HT--SN--KA--KS--HN--ST--IK-
+                                        -PT--RS--VS-	
+</pre>
+
+		<h3 class="req show">Vesivahinko</h3>
+		
+		<p>Mikä tahansa asema tulee voida poistaa käytöstä.  Haarojen tulostuksen pitää silti toimia oikein (haarat ovat kiinni metrolinjan itäisessä päässä)</p>
+
+<pre class="sh_java">
+Asema[] linja1983 = {kp, rt, ht, ks, hn, st, ik};
+Asema[] linja2010 = {rl, kp, rt, kn, ht, sn, ka, ks, hn, st, ik};
+Asema[] vesivahinko2010 = {rl, kp, kn, ht, sn, ka, ks, hn, st, ik};
+
+Asema[] haaraVs = {pt, rs, vs};
+Asema[] haaraMm = {mp, kl, mm};
+
+
+Rata metroRata1983 = new Rata("Helsingin Metro", 1983, linja1983);
+Rata metroRata2010 = new Rata("Helsingin Metro", 2010, linja2010, haaraMm, haaraVs);
+Rata vesivahinkoRata2010 = new Rata("Helsingin Vesivahinkometro", 2010, vesivahinko2010, haaraMm, haaraVs);
+
+System.out.println(metroRata1983);
+System.out.println(metroRata2010);
+System.out.println(vesivahinkoRata2010);
+</pre>
+
+		<p>Ohjelman tuloste</p>
+
+<pre>
+Helsingin Metro: 1983
+
+-KP--RT--HT--KS--HN--ST--IK-
+
+Helsingin Metro: 2010
+
+                                            -MP--KL--MM-
+-RL--KP--RT--KN--HT--SN--KA--KS--HN--ST--IK-
+                                            -PT--RS--VS-
+
+Helsingin Vesivahinkometro: 2010
+
+                                        -MP--KL--MM-
+-RL--KP--KN--HT--SN--KA--KS--HN--ST--IK-
+                                        -PT--RS--VS-	
+</pre>
+
+
+
+
+		<h2>Järjestäminen ja hakeminen</h2>
+		
+		<p>Tämä tehtävä on kokonaisuus, voit tehdä sen yhteen projektiin.</p>
+		
+		
+		<h3 class="req">taulukonPienin</h3>
+		
+		<p>Tee staattinen metodi <code>public static int taulukonPienin(int[] taulukko)</code> joka palautaa taulukon pienimmän alkion.</p>
+
+<pre class="sh_java">
+int[] luvut = {8, 3, 7, 12, -3, 2, 4};	
+
+System.out.println("Pienin on: " + taulukonPienin(luvut));
+</pre>
+
+<pre>
+Pienin on: -3
+</pre>
+
+
+		<h3 class="req">taulukonPieninIndeksi</h3>
+		
+		<p>Tee staattinen metodi <code>public static int taulukonPieninIndeksi(int[] taulukko)</code> joka palautaa taulukon pienimmän alkion indeksin, eli sen lokeronumeron jossa taulukon pienin alkio on.</p>
+
+<pre class="sh_java">
+int[] luvut = {8, 3, 7, 12, -3, 2, 4};	
+
+System.out.println("Pienin on indeksissä: " + taulukonPieninIndeksi(luvut));
+</pre>
+<pre>
+Pienin indeksi on: 4
+</pre>
+		
+		<h3 class="req">taulukkoTekstiksi</h3>
+		
+		<p>Tee staattinen metodi <code>public static String taulukkoTekstiksi(int[] taulukko)</code>, joka palauttaa taulukon sisällön tekstinä.</p>
+
+<pre class="sh_java">
+int[] luvut = {8, 3, 7, 12, -3, 2, 4};	
+
+System.out.println(taulukkoTekstiksi(luvut));
+</pre>
+<pre>
+8,3,7,12,-3,2,4
+</pre>
+
+		<h3 class="req">vaihda</h3>
+		
+		<p>Tee staattinen metodi <code>public static void vaihda(int[] taulukko, int vaihdettava1, int vaihdettava2)</code>, joka vaihtaa taulukon kahden alkion paikkaa annettujen indeksien <code>vaihdettava1</code> ja <code>vaihdettava2</code> perusteella.</p>
+
+<pre class="sh_java">
+int[] luvut = {8, 3, 7, 12, -3, 2, 4};	
+
+System.out.println(taulukkoTekstiksi(luvut));
+
+vaihda(luvut, 1, 0);
+System.out.println(taulukkoTekstiksi(luvut));
+
+vaihda(luvut, 0, 3);
+System.out.println(taulukkoTekstiksi(luvut));
+</pre>
+<pre>
+8,3,7,12,-3,2,4
+3,8,7,12,-3,2,4
+12,8,7,3,-3,2,4
+</pre>		
+		
+		<h3 class="req">pieninIndeksiAlkaen</h3>
+		
+		<p>Tee staattinen metodi <code>public static int pieninIndeksiAlkaen(int[] taulukko, int alkaen)</code>, joka palauttaa taulukon pienimmän arvon sisältävän indeksin indeksistä <code>alkaen</code> taulukon loppuun asti tutkittaessa.</p>
+		
+<pre class="sh_java">
+int[] luvut = {8, 3, 7, 12, -3, 2, 4};
+
+System.out.println(pieninIndeksiAlkaen(luvut, 1));
+System.out.println(pieninIndeksiAlkaen(luvut, 5));
+System.out.println(pieninIndeksiAlkaen(luvut, 6));
+</pre>
+<pre>
+4
+5
+6	
+</pre>
+
+
+
+		<h3 class="req show">Järjestäminen</h3>
+		
+		<div style="float: left; margin-left: 1.3em; margin-right: 2em; height: 27em;">
+			<img src="http://upload.wikimedia.org/wikipedia/commons/9/94/Selection-Sort-Animation.gif" />
+		</div>
+		
+		<div>
+		<p>Tee staattinen metodi <code>public static void jarjesta(int[] taulukko)</code>, joka järjestää minkä tahansa <code>int[]</code>-taulukon.  Käytä toteutuksessa edellä tehtyjä staattisia metodeja.</p>
+		
+		<p>Toteuta järjestäminen seuraavasti</p>
+		
+		<ol style="padding-left: 12em">
+      <li>Tulosta taulukon tämänhetkinen tilanne.</li>
+			<li>Hae taulukon pienin alkio.</li>
+			<li>Vaihda pienin alkio taulukon ensimmäisen alkion kanssa.
+				<ul>
+					<li>Ensimmäinen alkio siirtyy taulukon pienimmän tilalle ja pienin taulukon alkuun.</li>
+				</ul>
+			</li>
+      <li>Tulosta taulukon tämänhetkinen tilanne.</li>
+			<li>Vaihda taulukon alun kohtaa yhdellä eteenpäin ja mene kohtaan 1
+				<ul>
+					<li>Taulukon "kasvava" alkuosa on siis aina järjestyksessä</li>
+				</ul>
+			</li>
+		</ol>
+
+<p>Testaa metodin toimintaa seuraavalla esimerkillä:</p>
+<pre class="sh_java">
+int[] luvut = {8, 3, 7, 12, -3, 2, 4};
+jarjesta(luvut);
+</pre>
+</div>
+<div style="clear:both;"></div>
+<p>Ohjelman tulosteen tulisi olla seuraavanlainen</p>		
+<pre>
+8,3,7,12,-3,2,4
+-3,3,7,12,8,2,4
+
+-3,3,7,12,8,2,4
+-3,2,7,12,8,3,4
+
+-3,2,7,12,8,3,4
+-3,2,3,12,8,7,4
+
+-3,2,3,12,8,7,4
+-3,2,3,4,8,7,12
+
+-3,2,3,4,8,7,12
+-3,2,3,4,7,8,12
+
+-3,2,3,4,7,8,12
+-3,2,3,4,7,8,12
+
+-3,2,3,4,7,8,12
+-3,2,3,4,7,8,12
+</pre>
+
+
+		<h3 class="req">Binäärihaku</h3>
+		
+		<p>Tee staattinen metodi <code>public static void jarjestaJaHae(int[] taulukko)</code>, joka järjestää luvut, kysyy käyttäjältä haettavaa lukua ja hakee <em>suuruusjärjestyksessä</em> olevasta taulukosta alkion käyttäen <em>binäärihakua</em> (eli <em>puolitushakua</em>).</p>
+
+		<p>Ohjelman suoritus näyttää seuraavalta:</p>
+
+<pre>
+Taulukon luvut ovat: -3,2,3,4,7,8,12
+
+Anna haettava luku: 8
+
+Luku 8 on taulukossa
+</pre>
+
+<pre>
+Taulukon luvut ovat: -3,2,3,4,7,8,12
+
+Anna haettava luku: 99
+
+Luku 99 ei ole taulukossa
+</pre>
+
+
+
+
+
+
+
+
+    
+<h2>Opintopisteen VIP-lista</h2>
+<p>Opintopiste-nimiseen ravintolassa on joka viikko uusiutuva VIP lista. VIP-listalle pääsee soittamalla ravintolaan. Jos listalla tilaa, lisätään nimi listalle. Perjantaisin nimet annetaan portsarille, joka järjestää nimet ja varmistaa VIP-ihmisten oikeinkohtelun.</p>
+<p>Tee kaikki tehtävät saman projektin sisään.</p>
+  <h3>Ravintola</h3>
+<p>Tee luokka <em>Ravintola</em>, jonka konstruktorille annetaan parametrina VIP-listan koko. Ravintola tarjoaa metodit <code>lisaaListalle(String nimi)</code>, joka palauttaa totuusarvon riippuen siitä mahtuiko listalle, <code>annaLista()</code> joka palauttaa tämän hetkisen VIP-listan, sekä <code>tyhjennaLista()</code>, joka tyhjentaa VIP-listan.</p>
+<p>Metodin <code>annaLista()</code> tulee palauttaa taulukko, jossa on vain tämän hetkiset VIP-listalla olijat, eikä yhtään tyhjää viitettä. Testaa luokan <em>Ravintola</em> toteutusta seuraavalla pääohjelmalla.</p>
+<pre class="sh_java">
+public class Opintopiste {
+  public static void main(String[] komentoriviParametrit) {
+    Ravintola op = new Ravintola(2);
+    tulostaVipit(op.annaLista());
+    
+    op.lisaaListalle("Matti L.");
+    tulostaVipit(op.annaLista());
+    
+
+    op.lisaaListalle("Matti P.");
+    tulostaVipit(op.annaLista());
+    
+    if(op.lisaaListalle("Matti V.")) {
+      System.out.println("Matti V. mahtui listalle.");
+    } 
+    else {
+      System.out.println("Matti V. ei mahtunut listalle.");
+    }
+    tulostaVipit(op.annaLista());
+    
+    // tyhjennetään VIP-lista
+    op.tyhjennaLista();
+    if(op.lisaaListalle("Matti V.")) {
+      System.out.println("Matti V. mahtui listalle.");
+    } 
+    else {
+      System.out.println("Matti V. ei mahtunut listalle.");
+    }
+    tulostaVipit(op.annaLista());
+  }
+  
+  private static void tulostaVipit(String[] lista) {
+    if(lista.length == 0) {
+      System.out.println("VIP-lista on tyhjä.");
+    } else {
+      System.out.println("VIP-lista:");
+      for(String nimi: lista) {
+        System.out.println(nimi);
+      }      
+    }
+    System.out.println();
+  }
+}
+</pre>
+<p>Opintopiste-ohjelman tulosteen tulee olla seuraavanlainen</p>
+<pre>
+VIP-lista on tyhjä.
+
+VIP-lista:
+Matti L.
+
+VIP-lista:
+Matti L.
+Matti P.
+
+Matti V. ei mahtunut listalle.
+VIP-lista:
+Matti L.
+Matti P.
+
+Matti V. mahtui listalle.
+VIP-lista:
+Matti V.
+</pre>
+
+<h3>Portsari</h3>
+<p>Opintopiste-ravintolan portsari on hyvin käytännöllinen. Heti saatuaan VIP-listan hän järjestää sen nopeampaa tutkimista varten. Toteuta luokka <em>Portsari</em>, joka saa konstruktorinsa parametrina String[] - taulukon. Portsarilla on julkinen metodi <code>annaLista()</code>, joka palauttaa <em>jo</em> järjestetyn listan.</p>
+<p>Toteuta portsarille myös metodi <code>private void jarjestaLista()</code>, jota käytetään Portsari-luokan konstruktorissa taulukon saamisen jälkeen. Toteuta myös apumetodit <code>private int pieninIndeksiAlkaen(int alkaen)</code> ja <code>private void vaihda(int indeksiEka, int indeksiToka)</code>, joita <code>jarjestaLista()</code> käyttää. Voit käyttää <em>Järjestäminen ja hakeminen</em>-tehtävässä luotua järjestysalgoritmia lähtökohtana!</p>
+<p>Testaa ohjelman toimintaa seuraavalla Opintopiste-ohjelmalla.</p>
+<pre class="sh_java">
+public class Opintopiste {
+  public static void main(String[] komentoriviParametrit) {
+    Ravintola op = new Ravintola(3);
+
+    op.lisaaListalle("Matti V.");
+    op.lisaaListalle("Matti L.");
+    op.lisaaListalle("Matti P.");
+    tulostaVipit(op.annaLista());
+    
+    Portsari portsari = new Portsari(op.annaLista());
+    tulostaVipit(portsari.annaLista());
+  }
+  
+  private static void tulostaVipit(String[] lista) {
+    if(lista.length == 0) {
+      System.out.println("VIP-lista on tyhjä.");
+    } else {
+      System.out.println("VIP-lista:");
+      for(String nimi: lista) {
+        System.out.println(nimi);
+      }      
+    }
+    System.out.println();
+  }
+}
+</pre>
+<p>Ohjelman tulosteen tulee olla seuraavanlainen</p>
+<pre>
+VIP-lista:
+Matti V.
+Matti L.
+Matti P.
+
+VIP-lista:
+Matti L.
+Matti P.
+Matti V.
+</pre>
+
+<h3>VIP-listalla olon tarkistaminen</h3>
+<p>Lisää Portsari-luokkaan metodi <code>public boolean onkoListalla(String nimi)</code>, joka palauttaa arvon <code>true</code> jos nimi on listalla, muulloin false. Toteuta hakeminen puolitushaun, eli binäärihaun, avulla.</p>
+<p>Testaa ohjelman toimintaa seuraavalla Opintopiste-ohjelmalla.</p>
+<pre class="sh_java">
+public class Opintopiste {
+  public static void main(String[] komentoriviParametrit) {
+    Ravintola op = new Ravintola(3);
+
+    op.lisaaListalle("Matti V.");
+    op.lisaaListalle("Matti L.");
+    op.lisaaListalle("Matti P.");
+    
+    Portsari portsari = new Portsari(op.annaLista());
+    
+    if(portsari.onkoListalla("Arto V.")) {
+      System.out.println("Arto V. on listalla");
+    }
+    else {
+      System.out.println("Arto V. ei ole listalla");
+    }
+    
+    if(portsari.onkoListalla("Matti V.")) {
+      System.out.println("Matti V. on listalla");
+    }
+    else {
+      System.out.println("Matti V. ei ole listalla");
+    }
+    
+    if(portsari.onkoListalla("Matti L.")) {
+      System.out.println("Matti L. on listalla");
+    }
+    else {
+      System.out.println("Matti L. ei ole listalla");
+    }    
+  }
+}
+</pre>
+<p>Ohjelman tulostuksen tulee olla seuraavanlainen</p>
+<pre>
+Arto V. ei ole listalla
+Matti V. on listalla
+Matti L. on listalla
+</pre>
+
+<h3>Listalle liittyminen ja pääohjelma</h3>
+<p>Muuta opintopiste-ohjelman toteutusta siten, että listalle lisätään ihmisiä kunnes annetaan tyhjä syöte. Sovitaan että opintopiste-ravintolan VIP-listalle mahtuu maksimissaan 50 ihmistä. Kun tyhjä syöte on annettu, lista annetaan portsarille, joka alkaa tarkastamaan ihmisten sisäänpääsyä. Seuraava tyhjä syöte lopettaa ohjelman.</p>
+<p>Ohjelman tulostus voi olla esimerkiksi seuraavanlainen</p>
+<pre>
+Tervetuloa opintopiste-ravintolan VIP-palveluun.
+
+Anna nimi: Matti V.
+Matti V. mahtui listalle
+
+Anna nimi: Matti P.
+Matti P. mahtui listalle
+
+Anna nimi: Matti L.
+Matti L. mahtui listalle
+
+Anna nimi:
+Tyhjä syöte annettu, annetaan lista portsarille.
+
+VIP-lista:
+Matti L.
+Matti P.
+Matti V.
+
+Ilta alkaa, tarkastetaan VIP-listalla olijoita.
+Anna nimi: Arto V.
+Arto V. ei ole VIP-listalla
+
+Anna nimi: Matti P.
+Matti P. on VIP-listalla
+
+Anna nimi:
+Tyhjä syöte annettu, ilta on ohi.
+Kiitos!
+</pre>
+
+
+
+
+
+
+
+
+
+<h2>Kivi-Paperi-Sakset</h2>
+<p>Tehdään kivi-paperi-sakset -peli. Kivi-paperi-sakset pelissä on tarkoitus arvata minkä kolmesta vaihtoehdosta (<em>kivi</em>, <em>paperi</em> tai <em>sakset</em>) vastustaja valitsee, ja valita itse vaihtoehto joka voittaa vastustajan valinnan. <br/><br/>Kivi voittaa sakset, sakset voittaa paperin ja paperi kiven.</p>
+
+<h3>Tuomari</h3>
+<p>Tuomari pitää kirjaa ensimmäisen ja toisen pelaajan pisteistä sekä tasapelien määrästä. Toteuta <em>Tuomari</em>-luokka, jolla on metodi <code>kirjaaSiirto(String ekanSiirto, String tokanSiirto)</code>, joka kirjaa siirron. Siirrot ovat "k" kivelle, "p" paperille, sekä "s" saksille. Lisää luokalle myös <code>toString()</code>-metodi olion tilanteen tulostamista varten. Testaa <em>Tuomari</em>-luokan toteutusta seuraavalla <em>Kps</em>-ohjelmalla.</p>
+<pre class="sh_java">
+public class Kps {
+
+  public static void main(String[] args) {
+    Tuomari tuomari = new Tuomari();
+    System.out.println(tuomari);
+    System.out.println();
+    
+    tuomari.kirjaaSiirto("k", "p");
+    System.out.println(tuomari);
+    System.out.println();
+    
+    tuomari.kirjaaSiirto("k", "k");
+    System.out.println(tuomari);
+    System.out.println();
+  }
+}
+</pre>
+<p>Ohjelman Kps tulostus on seuraavanlainen:</p>
+<pre>
+Pelitilanne 0-0
+Tasapelejä 0
+
+Pelitilanne 0-1
+Tasapelejä 0
+
+Pelitilanne 0-1
+Tasapelejä 1
+</pre>
+
+
+<h3>Kahden pelaajan Kivi-Paperi-Sakset</h3>
+<p>Laajenna pääohjelmaa Kps siten, että se kysyy syötteitä kahdelta pelaajalta. Peli jatkuu niin pitkään kunnes jompikumpi pelaajista antaa syötteeksi muun syötteen kuin ("k", "p" tai "s"). Käytä tuomari-luokkaa tulostamaan pelitilanteen jokaisen kierroksen jälkeen.</p>
+<p>Pääohjelman tulostuksen tulee olla seuraavanlainen:</p>
+<pre>
+Ensimmäisen pelaajan siirto: p
+Toisen pelaajan siirto: p
+Pelitilanne 0-0
+Tasapelejä 1
+
+Ensimmäisen pelaajan siirto: s 
+Toisen pelaajan siirto: p
+Pelitilanne 1-0
+Tasapelejä 1
+
+Ensimmäisen pelaajan siirto: s 
+Toisen pelaajan siirto: k
+Pelitilanne 1-1
+Tasapelejä 1
+
+Ensimmäisen pelaajan siirto: s
+Toisen pelaajan siirto: riitti!
+
+Kiitos!
+Pelitilanne 1-1
+Tasapelejä 1
+</pre> 
+
+
+<h3>Tietokone vastustajana</h3>
+<p>Tee luokka Tekoaly, jolla on metodi <code>annaSiirto()</code>. Voit itse päättää millä perusteella siirto annetaan.</p>
+<p>Laajenna luokkaa <code>Kps</code> siten, että peli kysyy aluksi pelataanko tietokonetta vastaan. Jos pelaaja vastaa "k" tai "kyllä", peli on tietokonetta vastaan. Muuten pelataan toista pelaajaa vastaan.</p>
+<p>Pääohjelman tulostus on seuraavanlainen jos valitaan pelaaja pelaajaa vastaan</p>
+<pre>
+Pelataanko tietokonetta vastaan: ei!
+
+Ensimmäisen pelaajan siirto: p
+Toisen pelaajan siirto: p
+Pelitilanne 0-0
+Tasapelejä 1
+
+Ensimmäisen pelaajan siirto: s
+Toisen pelaajan siirto: riitti!
+
+Kiitos!
+Pelitilanne 0-0
+Tasapelejä 1
+</pre>
+<p>Jos valitaan vastustajaksi tietokone, tietokoneen valinnat tulostetaan myös.</p>
+<pre>
+Pelataanko tietokonetta vastaan: k
+
+Ensimmäisen pelaajan siirto: p
+Tietokone valitsi: k
+Pelitilanne 1-0
+Tasapelejä 0
+
+Ensimmäisen pelaajan siirto: k
+Tietokone valitsi: p
+Pelitilanne 1-1
+Tasapelejä 0
+
+Ensimmäisen pelaajan siirto: riitti!
+
+Kiitos!
+Pelitilanne 1-1
+Tasapelejä 0
+</pre>
+
+<h3 class="bonus">Muistava tekoäly</h3>
+<p>Laajenna <em>Tekoaly</em>-luokkaa siten, että se pitää kirjaa vastustajan tekemistä siirroista. Metodi <code>asetaSiirto(String siirto)</code> asettaa vastustajan siirron tekoälyn muistiin. Toteuta tekoälyn muisti String - taulukkona, jonka koko voidaan määritellä <em>Tekoaly</em>-luokan konstruktorissa. Muistin täyttyessä tekoäly unohtaa aina vanhimman siirron.</p>
+<p>Muuta myös <em>Tekoaly</em>-luokan <code>annaSiirto</code>-metodia siten, että se käyttää muistissa olevaa taulukkoa seuraavan siirron tekemiseen. Kannattaa verrata vastustajan viimeistä siirtoa aikaisempiin siirtoihin ja pohtia minkä verran mitäkin siirtoa on tehty aikaisemman siirron jälkeen.</p>
+<p><em>Esimerkiksi, jos vastustajan viimeisin nähty siirto on <code>k</code>, ja muistissa on <code>ppkspkkspk</code>, on vastustaja pelannut kiven jälkeen kerran kiven ja kaksi kertaa sakset. Tällöin tekoälyn kannattaa pelata kivi.</em></p>
+
+
+<h2>Fibonacci</h2>
+
+<h3 class="bonus">Fibonacci</h3>
+
+<p>Fibonaccin lukujonon ensimmäiset kolme arvoa ovat 0, 1 ja 1. Tämän jälkeen seuraavat Fibonaccin luvut saadaan laskemalla kaksi edellistä lukua yhteen. Neljäs Fibonaccin luku on 1+1 eli 2, viides Fibonaccin luku on kolmas plus neljäs eli 1+2 eli 3. Kuudes Fibonaccin luku on jälleen kahden edellisen, eli viidennen ja neljännen summa, sen arvo on 2+3 eli 5, jne...</p>
+
+<p>Tee stattinen metodi <code>public static int fibo(int monesko)</code>, joka palauttaa parametrin <code>monesko</code> määrittelemän Fibonaccin luvun.</p>
+<p>Ennen kuin rupeat ohjelmoimaan, mieti kynällä ja paperilla millä strategialla ratkaiset ongelman.</p>
+
+<p>Testaa metodin toimintaa seuraavalla ohjelmalla.</p>
+<pre class="sh_java">
+public class Fibonacci {
+  public static void main(String[] args) {
+    System.out.println("Seitsemäs fibonaccin luku on: " + fibo(7));
+    System.out.println("Yhdestoista fibonaccin luku on: " + fibo(11));
+    System.out.println("Kolmaskymmeneskolmas fibonaccin luku on: " + fibo(33));
+  }
+
+  .. metodi fibonaccin luvun laskemiseen
+}
+</pre>
+<p>Ohjelman tulosteen tulisi olla seuraavanlainen</p>
+<pre>
+Seitsemäs fibonaccin luku on: 8
+Yhdestoista fibonaccin luku on: 55
+Kolmaskymmeneskolmas fibonaccin luku on: 2178309
+</pre>
+
+
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-13136847-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>	
+	</body>
+</html>

@@ -1,0 +1,60 @@
+
+/* BEGIN marginaalit */
+body {
+	width: 60em;
+}
+#toc {
+	margin-bottom: 5em;
+}
+
+h2 {
+	margin-top: 3em;
+}
+
+h3 {
+	margin-top: 1.7em;
+}
+
+h3 {
+	margin-left: 1em;
+}
+
+p {
+	margin-left: 1.3em;
+}
+
+h4 {
+	margin-left: 3em;
+}
+
+h4+pre {
+	margin-top: -1em;
+	margin-left: 3.6em;
+	margin-bottom: 2em;
+}
+
+h4+ul {
+	margin-top: -0.5em;
+	margin-left: 1.4em;
+	margin-bottom: 2em;
+}
+
+pre {
+	margin-left: 1.6em;
+}
+/* END marginaalit */
+
+
+pre {
+	border: 1px #000 solid;
+	padding: 1em 50em 1em 1em;
+}
+
+span.tab {
+	width: 2em; float: left;
+}
+
+
+span.gray {
+	color: gray;
+}

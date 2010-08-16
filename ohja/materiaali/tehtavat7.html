@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fi" lang="fi">
+	<head>
+		<link rel="stylesheet" href="stylesheets/common.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="javascripts/common.js"></script>
+		
+		<link rel="stylesheet" href="stylesheets/shjs/sh_style.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/shjs/sh_main.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_java.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_ruby.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_scala.min.js"></script>
+		
+		<link rel="stylesheet" href="stylesheets/exercises.css" type="text/css" media="screen, print" />		
+		<script type="text/javascript" src="javascripts/exercises.js"></script>		
+	</head>
+
+  <body>
+    <h1>Tehtävät viikolle 5</h1>
+        
+    <p>Pakolliset tehtävät on merkitty harmalla taustavärillä. Punaisella taustavärillä merkatut ovat kontrollitehtäviä, jotka näytetään ohjaajalle harjoitustilaisuudessa!</p>
+    
+    <ul>
+      <li>Pakollisia tehtäviä on: <span id="required_exercises_count">-1</span> kpl</li>
+      <li>Lisätehtäviä on: <span id="additional_exercises_count">-1</span> kpl</li>
+      <li>Bonustehtäviä on: <span id="bonus_exercises_count">-1</span> kpl</li>
+    </ul>
+    
+    
+    <p><strong>HUOM:</strong> nimeä tiedostot otsikossa olevan sanan mukaan</p>
+    
+    <h2>Lukija</h2>
+    
+    <p>Luokka lukija joka lukee rivin, numeron ym, ja hanskaa poikkeukset.</p>
+    
+  <h2>Ilmojärjestelmä</h2>
+  
+  <p>Tehtävässä käytetään pakkausnäkyvyyttä, eli luo projekti "Ilmo" ja aikaisemmasta poiketen älä laita projektin "Create main class" -kenttään nimeä ilmo, vaan jätä ehdotus <code>ilmo.Main</code>.</p>
+  
+  <p>Selaile tehtävä ensin loppuun asti, niin saat paremman kuvan tehtävän osista.</p>
+  
+  <p>Projektin luokat ovat tehtävän lopussa seuraavat:</p>
+  
+  <ul>
+    <li>Main - pääohjelma</li>
+    <li>Ilmo - huolehtii kurssien hallinnasta</li>
+    <li>TekstiKayttoliittyma - tarjoaa käyttöliittymän näkymät</li>
+    <li>KayttajaTietokanta - Pitää yllä käyttäjiä ja <em>autentikoi</em> käyttäjät, eli tarkistaa onko salasana oikein.</li>
+    <li>Kurssi - Kuvaa yhtä kurssia</li>
+  </ul>
+  
+  
+  
+  <h3 class="req">Main</h3>
+  
+  <p>Luokka luodaan automaattisesti projektin alussa. Ohjelman käyttäytymistä ohjataan tästä luokasta.</p>
+
+  <p>Laita seuraavat kommentit luokkaan, toiminnot lisätään kommenttien osoittamassa järjestyksessä.</p>
+  
+<pre class="sh_java">
+
+package ilmo;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+
+        // TODO: Olioiden luonti
+
+        // TODO: kayttajien lisäys
+
+        // TODO: kurssien lisäys
+
+        // TODO: kirjautuminen
+
+        // TODO: päävalikko
+
+    }
+}
+
+</pre>
+
+
+  <h3 class="req">Ilmo</h3>
+  
+  <p>Toteuta luokka <code>Ilmo</code>.   Luo pääohjelmassa ilmentymä <code>ilmo</code> luokasta.</p>
+
+
+
+  <h3 class="req">Tekstikayttöliittyma</h3>
+  
+  <p>Toteuta luokka <code>Tekstikayttoliittyma</code>.  Tekstikäyttöliittymä saa konstruktorin parametrinaan ilmentymän luokasta <code>Ilmo</code>.  Luo pääohjelmassa ilmentymä luokasta nimellä <code>tk</code>.</p>
+  
+      
+  <h3 class="req">Kayttajatietokanta</h3>
+
+  <p>Toteuta luokka <code>Kayttajatietokanta</code>.  Luo pääohjelmassa ilmentymä <code>kayttajat</code>.
+
+  <p>Käyttäjätietokanta tallentaa käyttäjien käyttäjätunnuksia ja salasanoja.  <code>HashMap&lt;String, String&gt;</code> soveltunee loistavasti näiden tallentamiseen.</p>
+  
+  <p>Lisää käyttäjiä tietokantaan seuraavasti:</p>
+  
+<pre class="sh_java">
+// TODO: kayttajien lisäys
+kayttajat.lisaaKayttaja("matti", "m");
+kayttajat.lisaaKayttaja("arto", "a"); 
+</pre>
+  
+  
+  <h3 class="req">Kirjautuminen</h3>
+  
+  <p>Käyttäjätietokanta tarjoaa metodin <code>boolean kirjaudu(String nimi, String salasana)</code>.</p>
+  
+  <p>Toteuta kirjautuminen järjestelmään.  Tekstikäyttöliittmä tarjoaa metodin, joka kysyy käyttäjältä käyttäjänimen ja salasanan.  Tiedot palautetaan taulukossa.  Taulukon tiedot annetaan käyttäjätietokannan metodille <code>kirjaudu</code>, joka palauttaa vertailee tietoja talletettuun ja palauttaa boolean arvon.  Jos kirjautuminen onnistuu, talletetaan ilmoon tieto nykyisestä käyttäjästä (käyttäjät ovat siis vain Stringejä).</p>
+      
+  <p>Komento <code>break</code> poistuu loopista.</p>
+  
+<pre class="sh_java">
+// TODO: kirjautuminen
+while (true) {
+    String[] kirjautuminen = tk.sisaankirjautuminen();
+
+    if (kayttajat.kirjaudu(kirjautuminen[0], kirjautuminen[1])) {
+        ilmo.kayttajaKirjautui(kirjautuminen[0]);
+        break;
+    }
+}
+</pre>
+
+  <p>Tulostus kirjautumisesta on seuraava:</p>
+<pre>
+ Ilmojärjestelmä
+-----------------------------------------------
+Kirjaudu sisään
+    nimi: arto
+salasana: eioikein
+
+
+
+
+ Ilmojärjestelmä
+-----------------------------------------------
+Kirjaudu sisään
+    nimi: arto
+salasana: a
+</pre>
+
+  <h3 class="req">Päävalikko</h3>
+  
+  <p>Päävalikko on ikuinen silmukka, jossa tekstikäyttöliittymä näyttää valikon ja lukee käyttäjän valinnan.  Tämän jälkeen toimitaan valinnan mukaisesti.</p>
+  
+  <p>Kuten tähänkin asti, toteutetaan ominaisuudet yksi kerrallaan.  Toteutetaan aluksi poistuminen ohjelmasta (tärkein!)</p>
+  
+<pre class="sh_java">
+// TODO: päävalikko
+while (true) {
+    int valinta = tk.paavalikko();
+
+    if (valinta == 0) {
+        break;
+    } 
+}
+</pre>
+  
+  <p>Tuloste näyttää seuraavalta:</p>
+
+<pre>
+ Ilmojärjestelmä
+-----------------------------------------------
+Nykyinen käyttäjä: arto
+
+Päävalikko
+ 1. Listaa kurssit
+ 2. Ilmoittaudu kurssille
+ 3. Omat ilmoittautumiset
+ 4. Näytä kurssien osallistujat
+ 0. Poistu
+
+
+Valitse: 0
+</pre>
+
+  <h3 class="req">Listataan kurssit</h3>
+  
+<pre>
+ Ilmojärjestelmä
+-----------------------------------------------
+Nykyinen käyttäjä: arto
+
+Päävalikko
+ 1. Listaa kurssit
+ 2. Ilmoittaudu kurssille
+ 3. Omat ilmoittautumiset
+ 4. Näytä kurssien osallistujat
+ 0. Poistu
+
+
+Valitse: 1
+
+
+
+
+ Ilmojärjestelmä
+-----------------------------------------------
+1. Ohjelmoinnin perusteet
+2. Ohjelmoinnin jatkokurssi
+
+Paina enter jatkaaksesi
+
+
+
+
+ Ilmojärjestelmä
+-----------------------------------------------
+Nykyinen käyttäjä: arto
+
+Päävalikko
+ 1. Listaa kurssit
+ 2. Ilmoittaudu kurssille
+ 3. Omat ilmoittautumiset
+ 4. Näytä kurssien osallistujat
+ 0. Poistu
+
+
+Valitse:
+</pre>
+
+  <p>Koska kurssit ovat järjestetyssä listassa, saamme numeroinnin kätevästi suoraan järjestyksestä!</p>
+  
+  <p>Valinta päävalikkoon tehdään seuraavasti:</p>
+
+<pre>
+if (valinta == 1) {
+    tk.listaaKurssit();
+    tk.odotaEnter();
+}
+</pre>
+
+  <p>Jotta kursseja olisi listattavana, täytyy toteuttaa myös luokka <code>Kurssi</code>.</p>
+
+  <p>Toteuta luokka ja lisää kurssit ilmon kautta, sillä ilmon tulee tietää kaikki kurssinsa.  Kurssilla on kaksi kenttää: nimi ja maksimiosallistujamäärä.  Lisää kurssit pääohjelman alkuun.  Ilmoon kannattanee toteuttaa <code>ArrayList&lt;Kurssi&gt;</code>, jotta kursseja voidaan lisätä/listata/poistaa/jne helposti.</p>
+  
+<pre class="sh_java">
+// TODO: kurssien lisäys
+ilmo.lisaaKurssi("Ohjelmoinnin perusteet", 2);
+ilmo.lisaaKurssi("Ohjelmoinnin jatkokurssi", 3);
+</pre>
+
+
+  <h3 class="req">Ilmoittautuminen</h3>
+
+  <p>Ilmoittautuminen toimii seuraavasti:</p>
+  
+<pre>
+ Ilmojärjestelmä
+-----------------------------------------------
+Nykyinen käyttäjä: arto
+
+Päävalikko
+ 1. Listaa kurssit
+ 2. Ilmoittaudu kurssille
+ 3. Omat ilmoittautumiset
+ 4. Näytä kurssien osallistujat
+ 0. Poistu
+
+
+Valitse: 2
+
+
+
+
+ Ilmojärjestelmä
+-----------------------------------------------
+1. Ohjelmoinnin perusteet
+2. Ohjelmoinnin jatkokurssi
+
+Valitse kurssi, jolle ilmoittaudut: 2
+
+
+
+
+ Ilmojärjestelmä
+-----------------------------------------------
+Nykyinen käyttäjä: arto
+
+Päävalikko
+ 1. Listaa kurssit
+ 2. Ilmoittaudu kurssille
+ 3. Omat ilmoittautumiset
+ 4. Näytä kurssien osallistujat
+ 0. Poistu
+
+
+Valitse:
+</pre>
+
+  <p>Eli valinnan jälkeen palataan takaisin päävalikkoon.</p>
+  
+  <p>Toteuta päävalikkoon ilmoittautuminen seuraavasti:</p>
+  
+<pre class="sh_java">
+if (valinta == 2) {
+    tk.listaaKurssit();
+    int kurssinnumero = tk.ilmoittauduKurssille();
+    ilmo.ilmoittaudu(kurssinnumero);
+} 
+</pre>
+  
+  <p>Ilmo ohjaa ilmoittautumisen oikealle kurssille.  Toteuta ilmoittauminen siis siten, että ilmo hakee listasta kurssin numeron perusteella oikean kurssin ja kutsuu <em>kurssin</em> metodia <code>ilmoittaudu(String käyttäjänimi)</code>.</p>
+  
+  
+  
+  
+  <h3 class="req">Käyttäjän kurssit</h3>
+  
+  <p>Toteuta käyttäjän kurssien listaus.</p>
+  
+<pre sh_java="sh_java">
+ Ilmojärjestelmä
+-----------------------------------------------
+Nykyinen käyttäjä: arto
+
+Päävalikko
+ 1. Listaa kurssit
+ 2. Ilmoittaudu kurssille
+ 3. Omat ilmoittautumiset
+ 4. Näytä kurssien osallistujat
+ 0. Poistu
+
+
+Valitse: 2
+
+
+
+
+ Ilmojärjestelmä
+-----------------------------------------------
+1. Ohjelmoinnin perusteet
+2. Ohjelmoinnin jatkokurssi
+
+Valitse kurssi, jolle ilmoittaudut: 1
+
+
+
+
+ Ilmojärjestelmä
+-----------------------------------------------
+Nykyinen käyttäjä: arto
+
+Päävalikko
+ 1. Listaa kurssit
+ 2. Ilmoittaudu kurssille
+ 3. Omat ilmoittautumiset
+ 4. Näytä kurssien osallistujat
+ 0. Poistu
+
+
+Valitse: 3
+
+
+
+
+ Ilmojärjestelmä
+-----------------------------------------------
+Käyttäjän arto kurssit
+
+Ohjelmoinnin perusteet
+
+Paina enter jatkaaksesi
+</pre>
+
+  <p>Toteuta päävalikon valinta seuraavasti:</p>
+  
+<pre sh_java="sh_java">
+if (valinta == 3) {
+    tk.kayttajanKurssit();
+    tk.odotaEnter();
+}
+</pre>
+
+  <p>Koska Tekstikäyttöliittymä tietää ilmon ja ilmo puolestaan tietää nykyisen kirjautuneen käyttäjän ja kurssit, voidaan käydä kurssit ja niiden ilmoittautuneet läpi.</p>
+  
+  
+  <h3 class="req">Listaa kurssin osallistujat</h3>
+
+  <p>Toteuta listaus, joka toimii kuten edellinen, mutta ei katso kuka on osallistuja on kyseessä.</p>
+  
+  <p>Pääohjelmassa toteutus on seuraava:</p>
+  
+<pre class="sh_java">
+if (valinta == 4) {
+    tk.listaaOsallistujat();
+    tk.odotaEnter();
+}
+</pre>
+  
+  
+  <h3 class="req">Talletus</h3>
+  
+  <p>Lisää ohjelman poistumiseen metodikutsu <code>ilmo.talleta()</code>, joka tallettaa kaikkien kurssien tämänhetkiset osallistujat.</p>
+  
+  <p>Toteuta toiminnallisuus niin, että ilmo kutsuu kurssin metodia talleta(), joka luo kurssin nimisen tiedoston, johon talletetaan vain osallistujat (new File(this.nimi));.  Tiedostossa jokaisella rivillä on yksi osallistuja.</p>
+  
+  
+  
+  <h3 class="req">Lataus</h3>
+  
+  <p>Lisää ilmon metodiin <code>lisaaKurssi(String nimi, int koko)</code> toiminto, jossa kurssi-ilmentymä luodaan ja ilmentymän osallistujat ladataan edellä talletetusta tiedostosta.</p>
+  
+  
+  
+  <h3 class="req">Tarkistukset</h3>
+  
+  <p>Lisätään ohjelmaan vähän tarkistuksia.</p>
+  
+  <ul>
+    <li>Käyttäjä ei voi ilmoittautua kuin kerran kurssille</li>
+    <li>Kurssille ei voi ilmoittautua enempää kuin konstruktorissa määritelty maksimikoko osoittaa</li>
+    <li>Jos järjestelmässä on viisi kurssia, niin käyttäjä ei voi ilmoittautua kurssille numero 6 tai -1.</li>
+  </ul>
+  
+  
+  <h2>Terraario</h2>
+  
+  <h2>Dokumentin kirjoitus</h2>
+  
+  <p>Dokumentti sisältää kaiken dokumentissa olevan tiedon. Yllä olevan dokumentin kuvaus ohjelmakoodina voisi olla esimerkiksi seuraavanlainen:</p>
+
+<pre class="sh_java">
+Dokumentti dokumentti = new Dokumentti("Dokumentin nimi");
+dokumentti.setTiivistelma("Dokumentin tiivistelmä");
+
+TekstiElementti elementti = new TekstiElementti();
+elementti.setTeksti("Teksti 1");
+dokumentti.lisaaElementti(elementti);
+
+ListaElementti lista = new ListaElementti();
+elementti = new TekstiElementti();
+elementti.setTeksti("Teksti 2");
+lista.lisaaElementti(elementti);
+
+elementti = new TekstiElementti();
+elementti.setTeksti("Teksti 3");
+lista.lisaaElementti(elementti);
+
+dokumentti.lisaaElementti(lista);    
+dokumentti.tallenna("dokumentti.txt");
+</pre>
+  
+  <p>Luo luokkaan <code>Dokumentti</code> metodi <code>tallenna()</code>, joka saa parametrikseen tiedoston nimen. Luo metodille toiminnallisuus, jolla saadaan dokumentti tallennettua aluksi seuraavaan muotoon, eli ei oteta elementtejä vielä huomioon. Metodi myös heittää poikkeuksen!</p>
+  
+<pre>
+&lt;dokumentti&gt;
+&lt;nimi&gt;Dokumentin nimi&lt;/nimi&gt;
+&lt;tiivistelma&gt;Dokumentin tiivistelmä&lt;/tiivistelma&gt;
+&lt;/dokumentti&gt;
+</pre>
+
+
+  <h3>Elementtien <code>toString()</code>-metodit</h3>
+  
+  <p>Käytetään elementtien nimiä hyödyksi tallentamisessa. Lisää tekstielementille ja listaelementille metodi <code>toString()</code>, joka palauttaa elementin XML-muotoisena. TekstiElementin <code>toString()</code>-metodi palauttaa seuraavanlaisen tekstin.</p>
+  
+<pre>
+&lt;teksti&gt;Tekstielementin sisältö..&lt;/teksti&gt;
+</pre>
+  
+  <p>ListaElementti palauttaa seuraavanlaisen tulostuksen. Käytä listalla olevien tekstielementtien tulostamiseen tekstielementtien omaa <code>toString()</code>-metodia!</p>
+
+<pre>
+&lt;lista&gt;
+&lt;teksti&gt;Listalla olevan tekstielementin sisältö..&lt;/teksti&gt;
+&lt;teksti&gt;Toisen listalla olevan tekstielementin sisältö..&lt;/teksti&gt;
+&lt;/lista&gt;
+</pre>
+
+  <h3>Koko dokumentin tallentaminen</h3>
+  
+  <p>Muuta dokumentin <code>tallenna()</code>-metodia siten, että se tallentaa koko dokumentin. Lopputuloksen pitäisi olla seuraavanlainen.</p>
+
+<pre class="sh_java">
+Dokumentti dokumentti = new Dokumentti("Dokumentin nimi");
+dokumentti.setTiivistelma("Dokumentin tiivistelmä");
+
+TekstiElementti elementti = new TekstiElementti();
+elementti.setTeksti("Teksti 1");
+dokumentti.lisaaElementti(elementti);
+
+ListaElementti lista = new ListaElementti();
+elementti = new TekstiElementti();
+elementti.setTeksti("Teksti 2");
+lista.lisaaElementti(elementti);
+
+elementti = new TekstiElementti();
+elementti.setTeksti("Teksti 3");
+lista.lisaaElementti(elementti);
+
+dokumentti.lisaaElementti(lista);    
+dokumentti.tallenna("dokumentti.txt");  
+</pre>
+
+<pre>
+&lt;dokumentti&gt;
+&lt;nimi&gt;Dokumentin nimi&lt;/nimi&gt;
+&lt;tiivistelma&gt;Dokumentin tiivistelmä&lt;/tiivistelma&gt;
+&lt;teksti&gt;Teksti 1&lt;/teksti&gt;
+&lt;lista&gt;
+&lt;teksti&gt;Teksti 2&lt;/teksti&gt;
+&lt;teksti&gt;Teksti 3&lt;/teksti&gt;
+&lt;/lista&gt;  
+&lt;/dokumentti&gt;
+</pre>
+
+
+  <h3>Yksittäisen elementin lukeminen</h3>
+  
+  <p>Jotta voisimme lukea koko dokumentin, luemme ensin yksittäisen elementin. Tee <code>Dokumentti</code>-luokkaan staattinen metodi <code>lueElementti()</code>, jolle annetaan parametriksi rivi ja elementin nimi, ja se palauttaa elementin sisällön. Esimerkiksi kutsu </p>
+
+<pre class="sh_java">
+String sisalto = lueElementti("&lt;teksti&gt;Teksti 3&lt;/teksti&gt;", "teksti");
+System.out.println(sisalto);
+</pre>
+
+  <p>Tulostaisi merkkijonon <code>Teksti 3</code>. Javan <code>String</code>-luokan metodit <code>indexOf()</code> ja <code>substring()</code> tulevat tässä tehtävässä hyvin hyödyllisiksi.</p>
+  
+  <h3>Dokumentin lukeminen</h3>
+  <p>Lisää luokalle <code>Dokumentti</code> staattinen metodi <code>lue()</code>, joka ottaa parametrikseen luettavan tiedoston nimen ja palauttaa <code>Dokumentti</code>-olion. Kannattaa lähteä helposta liikkeelle, lue ensin vain dokumentin nimi. Kun saat dokumentin nimen luettua, lue myös tiivistelma. Tämän jälkeen toteuta elementtien lukemista. Käytä yllä toteutettua <code>lueElementti()</code>-metodia tekstiä sisältävien elementtien lukemiseen!</p>
+
+<pre class="sh_java">
+Dokumentti dokumentti = Dokumentti.lue("dokumentti.txt");
+dokumentti.tulosta();
+</pre>
+
+<pre>
+  Dokumentin nimi
+
+Dokumentin tiivistelmä
+
+Teksti 1
+ - Teksti 2
+ - Teksti 3
+</pre>
+
+
+    <h3>Tiedostoon kirjoittaminen</h3>
+    
+    <p>Koska mikään dokumentti ei ole hyödyllinen ilman kirjoitus- ja lukutoiminnallisuutta, lisätään tiedostollemme tallennustoiminnallisuus. Eräs tapa tallentaa ja jäsentää tietoa on <a href="http://fi.wikipedia.org/wiki/XML">XML</a>. Luodaan oma <em>lähes</em> XML:n kaltainen formaatti. </p>
+  
+  <pre>
+  &lt;dokumentti&gt;
+  &lt;nimi&gt;Dokumentin nimi&lt;/nimi&gt;
+  &lt;tiivistelma&gt;Dokumentin tiivistelmä&lt;/tiivistelma&gt;
+  &lt;teksti&gt;Teksti 1&lt;/teksti&gt;
+  &lt;lista&gt;
+  &lt;teksti&gt;Teksti 2&lt;/teksti&gt;
+  &lt;teksti&gt;Teksti 3&lt;/teksti&gt;
+  &lt;/lista&gt;  
+  &lt;/dokumentti&gt;
+  </pre>
+
+
+
+
+  <h2>Sanojen lukeminen - Filedialog</h2>
+  
+  <h2>"Riko itse" - Pizza enrique</h2>
+
+</body></html>

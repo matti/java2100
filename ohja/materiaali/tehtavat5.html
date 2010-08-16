@@ -1,0 +1,964 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fi" lang="fi">
+	<head>
+		<link rel="stylesheet" href="stylesheets/common.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="javascripts/common.js"></script>
+		
+		<link rel="stylesheet" href="stylesheets/shjs/sh_style.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/shjs/sh_main.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_java.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_ruby.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_scala.min.js"></script>
+		
+		<link rel="stylesheet" href="stylesheets/exercises.css" type="text/css" media="screen, print" />		
+		<script type="text/javascript" src="javascripts/exercises.js"></script>		
+	</head>
+
+	<body>
+		<h1>Tehtävät viikolle 5</h1>
+				
+		<p>Pakolliset tehtävät on merkitty harmalla taustavärillä. Punaisella taustavärillä merkatut ovat kontrollitehtäviä, jotka näytetään ohjaajalle harjoitustilaisuudessa!</p>
+		
+		<ul>
+			<li>Pakollisia tehtäviä on: <span id="required_exercises_count">-1</span> kpl</li>
+			<li>Lisätehtäviä on: <span id="additional_exercises_count">-1</span> kpl</li>
+			<li>Bonustehtäviä on: <span id="bonus_exercises_count">-1</span> kpl</li>
+		</ul>
+		
+		
+		<p><strong>HUOM:</strong> nimeä tiedostot otsikossa olevan sanan mukaan</p>
+
+		
+	<h2>MunLukija</h2>
+  
+  <p>Toteutetaan oma luokka käyttäjän syötteen lukemiseen. Luokka toimii luokkakirjastona, eli määrittele kaikki metodit staattisiksi. Metodit eivät myöskään saa heittää poikkeuksia, eli käsittele poikkeukset metodien sisällä!</p>
+
+  <p>Käytä scannerin <code>nextLine()</code>-metodia</p>
+  
+  <h3 class="req">Luvun lukeminen</h3>
+  
+  <p>Toteuta luokalle metodi <code>lueLuku()</code>, joka pyytää käyttäjältä numeroa. Metodi ottaa parametrikseen käyttäjälle näytettävän kysymyksen. Jos käyttäjä syöttää arvon, joka ei ole numero, esitetään kysymys uudestaan kunnes käyttäjä syöttää numeron.</p>
+  
+<pre class="sh_java">
+int luku = MunLukija.lueLuku("Syötä luku: ");
+System.out.println("Käyttäjä syötti luvun " + luku);
+</pre>  
+  
+<pre>
+Syötä luku: mikä?
+Syötä luku: kissa
+Syötä luku: 4
+Käyttäjä syötti luvun 4
+</pre>
+
+
+  <h3 class="req">Merkkijonon lukeminen</h3>
+  
+  <p>Toteuta luokalle metodi <code>lueSyote()</code>, joka palauttaa merkkijonon. Metodi saa parametrikseen käyttäjälle näytettävän kysymyksen, sekä <code>boolean</code>-arvon, jolla määritellään saako syöte olla tyhjä.</p>
+
+ 
+<pre class="sh_java">
+String nimi = MunLukija.lueSyote("Anna nimesi: ", false);
+System.out.println("Käyttäjä syötti nimen " + nimi);
+System.out.println();
+
+String komento = MunLukija.lueSyote("Syötä komento, tyhjä lopettaa: ", true);
+if("".equals(komento)) {
+  System.out.println("Lopetetaan...");
+} else {
+  System.out.println("Käyttäjä syötti komennon " + komento);
+}
+</pre>  
+  
+<pre>
+Anna nimesi: 
+Anna nimesi: Matti
+Käyttäjä syötti nimen Matti
+
+Syötä komento, tyhjä lopettaa:
+Lopetetaan...
+</pre>
+
+
+  <h3 class="req">Rajoitetun luvun lukeminen</h3>
+  
+  <p>Kuormita metodia <code>lueLuku()</code>, luomalla toinen metodi <code>lueLuku()</code>. Uusi <code>lueLuku()</code> saa parametrikseen merkkijonon ja kaksi kokonaislukua. Merkkijono on kysymys, mikä kysytään käyttäjältä. Numerot määrittelevät arvovälin, millä luetun numeron täytyy olla.</p>
+
+<pre class="sh_java">
+int luku = MunLukija.lueLuku("Syötä luku väliltä 1 ja 4: ", 1, 4);
+System.out.println("Käyttäjä syötti luvun " + luku);
+</pre>  
+  
+<pre>
+Syötä luku väliltä 1 ja 4: mikä?
+Syötä luku väliltä 1 ja 4: kissa
+Syötä luku väliltä 1 ja 4: 5
+Syötä luku väliltä 1 ja 4: 0
+Syötä luku väliltä 1 ja 4: 4
+Käyttäjä syötti luvun 4
+</pre>
+		
+		
+		
+		
+  <h2>Ilmojärjestelmä</h2>
+  
+	<p>Tehtävässä käytetään pakkausnäkyvyyttä, eli luo projekti "Ilmo" ja aikaisemmasta poiketen älä laita projektin "Create main class" -kenttään nimeä ilmo, vaan jätä ehdotus <code>ilmo.Main</code>.</p>
+	
+	<p>Selaile tehtävä ensin loppuun asti, niin saat paremman kuvan tehtävän osista.</p>
+	
+	<p>Projektin luokat ovat tehtävän lopussa seuraavat:</p>
+	
+	<ul>
+		<li>Main - pääohjelma</li>
+		<li>Ilmo - huolehtii kurssien hallinnasta</li>
+		<li>TekstiKayttoliittyma - tarjoaa käyttöliittymän näkymät</li>
+		<li>KayttajaTietokanta - Pitää yllä käyttäjiä ja <em>autentikoi</em> käyttäjät, eli tarkistaa onko salasana oikein.</li>
+		<li>Kurssi - Kuvaa yhtä kurssia</li>
+	</ul>
+
+	<p><strong>HUOM:</strong> käytä tehtävässä <code>MunLukija</code>-luokkaa.</p>
+	
+	
+	<h3 class="req">Main</h3>
+	
+	<p>Luokka luodaan automaattisesti projektin alussa. Ohjelman käyttäytymistä ohjataan tästä luokasta.</p>
+
+	<p>Laita seuraavat kommentit luokkaan, toiminnot lisätään kommenttien osoittamassa järjestyksessä.</p>
+	
+<pre class="sh_java">
+
+package ilmo;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+
+        // TODO: Olioiden luonti
+
+        // TODO: kayttajien lisäys
+
+        // TODO: kurssien lisäys
+
+        // TODO: kirjautuminen
+
+        // TODO: päävalikko
+
+    }
+}
+
+</pre>
+
+
+	<h3 class="req">Ilmo</h3>
+	
+	<p>Toteuta luokka <code>Ilmo</code>.   Luo pääohjelmassa ilmentymä <code>ilmo</code> luokasta.</p>
+
+
+
+	<h3 class="req">Tekstikayttöliittyma</h3>
+	
+	<p>Toteuta luokka <code>Tekstikayttoliittyma</code>.  Tekstikäyttöliittymä saa konstruktorin parametrinaan ilmentymän luokasta <code>Ilmo</code>.  Luo pääohjelmassa ilmentymä luokasta nimellä <code>tk</code>.</p>
+	
+			
+	<h3 class="req">Kayttajatietokanta</h3>
+
+	<p>Toteuta luokka <code>Kayttajatietokanta</code>.  Luo pääohjelmassa ilmentymä <code>kayttajat</code>.</p>
+
+	<p>Käyttäjätietokanta tallentaa käyttäjien käyttäjätunnuksia ja salasanoja.  <code>HashMap&lt;String, String&gt;</code> soveltunee loistavasti näiden tallentamiseen.</p>
+	
+	<p>Lisää käyttäjiä tietokantaan seuraavasti:</p>
+	
+<pre class="sh_java">
+// TODO: kayttajien lisäys
+kayttajat.lisaaKayttaja("matti", "m");
+kayttajat.lisaaKayttaja("arto", "a");	
+</pre>
+	
+	
+	<h3 class="req">Kirjautuminen</h3>
+	
+	<p>Käyttäjätietokanta tarjoaa metodin <code>boolean kirjaudu(String nimi, String salasana)</code>.</p>
+	
+	<p>Toteuta kirjautuminen järjestelmään.  Tekstikäyttöliittmä tarjoaa metodin, joka kysyy käyttäjältä käyttäjänimen ja salasanan.  Tiedot palautetaan taulukossa.  Taulukon tiedot annetaan käyttäjätietokannan metodille <code>kirjaudu</code>, joka palauttaa vertailee tietoja talletettuun ja palauttaa boolean arvon.  Jos kirjautuminen onnistuu, talletetaan ilmoon tieto nykyisestä käyttäjästä (käyttäjät ovat siis vain Stringejä).</p>
+	 		
+	<p>Komento <code>break</code> poistuu loopista.</p>
+	
+<pre class="sh_java">
+// TODO: kirjautuminen
+while (true) {
+    String[] kirjautuminen = tk.sisaankirjautuminen();
+
+    if (kayttajat.kirjaudu(kirjautuminen[0], kirjautuminen[1])) {
+        ilmo.kayttajaKirjautui(kirjautuminen[0]);
+        break;
+    }
+}
+</pre>
+
+	<p>Tulostus kirjautumisesta on seuraava:</p>
+<pre>
+ Ilmojärjestelmä
+-----------------------------------------------
+Kirjaudu sisään
+    nimi: arto
+salasana: eioikein
+
+
+
+
+ Ilmojärjestelmä
+-----------------------------------------------
+Kirjaudu sisään
+    nimi: arto
+salasana: a
+</pre>
+
+	<h3 class="req">Päävalikko</h3>
+	
+	<p>Päävalikko on ikuinen silmukka, jossa tekstikäyttöliittymä näyttää valikon ja lukee käyttäjän valinnan.  Tämän jälkeen toimitaan valinnan mukaisesti.</p>
+	
+	<p>Kuten tähänkin asti, toteutetaan ominaisuudet yksi kerrallaan.  Toteutetaan aluksi poistuminen ohjelmasta (tärkein!)</p>
+	
+<pre class="sh_java">
+// TODO: päävalikko
+while (true) {
+    int valinta = tk.paavalikko();
+
+    if (valinta == 0) {
+        break;
+    }	
+}
+</pre>
+	
+	<p>Tuloste näyttää seuraavalta:</p>
+
+<pre>
+ Ilmojärjestelmä
+-----------------------------------------------
+Nykyinen käyttäjä: arto
+
+Päävalikko
+ 1. Listaa kurssit
+ 2. Ilmoittaudu kurssille
+ 3. Omat ilmoittautumiset
+ 4. Näytä kurssien osallistujat
+ 0. Poistu
+
+
+Valitse: 0
+</pre>
+
+	<h3 class="req">Listataan kurssit</h3>
+	
+<pre>
+ Ilmojärjestelmä
+-----------------------------------------------
+Nykyinen käyttäjä: arto
+
+Päävalikko
+ 1. Listaa kurssit
+ 2. Ilmoittaudu kurssille
+ 3. Omat ilmoittautumiset
+ 4. Näytä kurssien osallistujat
+ 0. Poistu
+
+
+Valitse: 1
+
+
+
+
+ Ilmojärjestelmä
+-----------------------------------------------
+1. Ohjelmoinnin perusteet
+2. Ohjelmoinnin jatkokurssi
+
+Paina enter jatkaaksesi
+
+
+
+
+ Ilmojärjestelmä
+-----------------------------------------------
+Nykyinen käyttäjä: arto
+
+Päävalikko
+ 1. Listaa kurssit
+ 2. Ilmoittaudu kurssille
+ 3. Omat ilmoittautumiset
+ 4. Näytä kurssien osallistujat
+ 0. Poistu
+
+
+Valitse:
+</pre>
+
+	<p>Koska kurssit ovat järjestetyssä listassa, saamme numeroinnin kätevästi suoraan järjestyksestä!</p>
+	
+	<p>Valinta päävalikkoon tehdään seuraavasti:</p>
+
+<pre>
+if (valinta == 1) {
+    tk.listaaKurssit();
+    tk.odotaEnter();
+}
+</pre>
+
+	<p>Jotta kursseja olisi listattavana, täytyy toteuttaa myös luokka <code>Kurssi</code>.</p>
+
+	<p>Toteuta luokka ja lisää kurssit ilmon kautta, sillä ilmon tulee tietää kaikki kurssinsa.  Kurssilla on kaksi kenttää: nimi ja maksimiosallistujamäärä.  Lisää kurssit pääohjelman alkuun.  Ilmoon kannattanee toteuttaa <code>ArrayList&lt;Kurssi&gt;</code>, jotta kursseja voidaan lisätä/listata/poistaa/jne helposti.</p>
+	
+<pre class="sh_java">
+// TODO: kurssien lisäys
+ilmo.lisaaKurssi("Ohjelmoinnin perusteet", 2);
+ilmo.lisaaKurssi("Ohjelmoinnin jatkokurssi", 3);
+</pre>
+
+
+	<h3 class="req">Ilmoittautuminen</h3>
+
+	<p>Ilmoittautuminen toimii seuraavasti:</p>
+	
+<pre>
+ Ilmojärjestelmä
+-----------------------------------------------
+Nykyinen käyttäjä: arto
+
+Päävalikko
+ 1. Listaa kurssit
+ 2. Ilmoittaudu kurssille
+ 3. Omat ilmoittautumiset
+ 4. Näytä kurssien osallistujat
+ 0. Poistu
+
+
+Valitse: 2
+
+
+
+
+ Ilmojärjestelmä
+-----------------------------------------------
+1. Ohjelmoinnin perusteet
+2. Ohjelmoinnin jatkokurssi
+
+Valitse kurssi, jolle ilmoittaudut: 2
+
+
+
+
+ Ilmojärjestelmä
+-----------------------------------------------
+Nykyinen käyttäjä: arto
+
+Päävalikko
+ 1. Listaa kurssit
+ 2. Ilmoittaudu kurssille
+ 3. Omat ilmoittautumiset
+ 4. Näytä kurssien osallistujat
+ 0. Poistu
+
+
+Valitse:
+</pre>
+
+	<p>Eli valinnan jälkeen palataan takaisin päävalikkoon.</p>
+	
+	<p>Toteuta päävalikkoon ilmoittautuminen seuraavasti:</p>
+	
+<pre class="sh_java">
+if (valinta == 2) {
+    tk.listaaKurssit();
+    int kurssinnumero = tk.ilmoittauduKurssille();
+    ilmo.ilmoittaudu(kurssinnumero);
+}	
+</pre>
+	
+	<p>Ilmo ohjaa ilmoittautumisen oikealle kurssille.  Toteuta ilmoittauminen siis siten, että ilmo hakee listasta kurssin numeron perusteella oikean kurssin ja kutsuu <em>kurssin</em> metodia <code>ilmoittaudu(String käyttäjänimi)</code>.</p>
+	
+	
+	
+	
+	<h3 class="req">Käyttäjän kurssit</h3>
+	
+	<p>Toteuta käyttäjän kurssien listaus.</p>
+	
+<pre>
+ Ilmojärjestelmä
+-----------------------------------------------
+Nykyinen käyttäjä: arto
+
+Päävalikko
+ 1. Listaa kurssit
+ 2. Ilmoittaudu kurssille
+ 3. Omat ilmoittautumiset
+ 4. Näytä kurssien osallistujat
+ 0. Poistu
+
+
+Valitse: 2
+
+
+
+
+ Ilmojärjestelmä
+-----------------------------------------------
+1. Ohjelmoinnin perusteet
+2. Ohjelmoinnin jatkokurssi
+
+Valitse kurssi, jolle ilmoittaudut: 1
+
+
+
+
+ Ilmojärjestelmä
+-----------------------------------------------
+Nykyinen käyttäjä: arto
+
+Päävalikko
+ 1. Listaa kurssit
+ 2. Ilmoittaudu kurssille
+ 3. Omat ilmoittautumiset
+ 4. Näytä kurssien osallistujat
+ 0. Poistu
+
+
+Valitse: 3
+
+
+
+
+ Ilmojärjestelmä
+-----------------------------------------------
+Käyttäjän arto kurssit
+
+Ohjelmoinnin perusteet
+
+Paina enter jatkaaksesi
+</pre>
+
+	<p>Toteuta päävalikon valinta seuraavasti:</p>
+	
+<pre class="sh_java">
+if (valinta == 3) {
+    tk.kayttajanKurssit();
+    tk.odotaEnter();
+}
+</pre>
+
+	<p>Koska Tekstikäyttöliittymä tietää ilmon ja ilmo puolestaan tietää nykyisen kirjautuneen käyttäjän ja kurssit, voidaan käydä kurssit ja niiden ilmoittautuneet läpi.</p>
+	
+	
+	<h3 class="req">Listaa kurssin osallistujat</h3>
+
+	<p>Toteuta listaus, joka toimii kuten edellinen, mutta ei katso kuka on osallistuja on kyseessä.</p>
+	
+	<p>Pääohjelmassa toteutus on seuraava:</p>
+	
+<pre class="sh_java">
+if (valinta == 4) {
+    tk.listaaOsallistujat();
+    tk.odotaEnter();
+}
+</pre>
+	
+	
+	<h3 class="req">Talletus</h3>
+	
+	<p>Lisää ohjelman poistumiseen metodikutsu <code>ilmo.talleta()</code>, joka tallettaa kaikkien kurssien tämänhetkiset osallistujat.</p>
+	
+	<p>Toteuta toiminnallisuus niin, että ilmo kutsuu kurssin metodia talleta(), joka luo kurssin nimisen tiedoston, johon talletetaan vain osallistujat (new File(this.nimi));.  Tiedostossa jokaisella rivillä on yksi osallistuja.</p>
+	
+	
+	
+	<h3 class="req">Lataus</h3>
+	
+	<p>Lisää ilmon metodiin <code>lisaaKurssi(String nimi, int koko)</code> toiminto, jossa kurssi-ilmentymä luodaan ja ilmentymän osallistujat ladataan edellä talletetusta tiedostosta.</p>
+	
+	
+	
+	<h3 class="req">Tarkistukset</h3>
+	
+	<p>Lisätään ohjelmaan vähän tarkistuksia.</p>
+	
+	<ul>
+		<li>Käyttäjä ei voi ilmoittautua kuin kerran kurssille</li>
+		<li>Kurssille ei voi ilmoittautua enempää kuin konstruktorissa määritelty maksimikoko osoittaa</li>
+		<li>Jos järjestelmässä on viisi kurssia, niin käyttäjä ei voi ilmoittautua kurssille numero 6 tai -1.</li>
+	</ul>
+
+
+  <h2>A** Click Effect</h2>
+  
+  <p>Eräs deodoranttiyritys lähestyi Matteja jokunen vuosi sitten ehdottaen eräänlaisen laskurin toteuttamista. Laskurin ideana oli kasvattaa numeroa aina yhdellä siten, että luvussa 9999 palataan nollaan.</p>
+  
+  <p>Deodoranttiyritykselle tehtiin kaksi erilaista käyttöliittymää, tekstipohjainen käyttöliittymä ja graafinen käyttöliittymä. Itse ohjelmalogiikka on kummassakin sama. Luo tehtävä projektiin <code>clickeffect</code>, ja jätä pääohjelman nimeksi ehdotus <code>clickeffect.Main</code></p>
+
+<pre class="sh_java">
+// pakkaus ja importit
+
+public class Main {
+  private static final Scanner scanner = new Scanner(System.in);
+
+  public static void main(String[] args) {
+    Laskuri aLaskuri = // TODO: Laskuri-rajapinnan toteuttava luokka
+    System.out.println("Käyttöliittymät: ");
+    System.out.println("1: teksti");
+    System.out.println("2: graafinen");
+  
+    int valinta = MunLukija.lueLuku("Anna valinta: ", 1, 2);
+  
+    if (valinta == 1) {
+      // TODO: tekstikäyttöliittymä
+    } else if (valinta == 2) {
+      // TODO: graafinen käyttöliittymä
+    }
+  }
+}
+
+</pre>
+  
+  <h3>Laskuri</h3>
+  
+  <p>Laskurille suunniteltiin tutun näköinen rajapinta. Toteuta luokka joka toteuttaa rajapinnan Laskuri. Valitse itse luokalle sopiva nimi. Määrittele luokalle myös sopiva <code>toString()</code>-metodi!</p>
+  
+<pre class="sh_java">
+package clickeffect;
+
+public interface Laskuri {
+  public int getArvo();
+  public void kasvataArvoa();
+}
+</pre>
+  
+  <h3>Tekstikäyttöliittymä</h3>
+  
+  <p>Tekstikäyttöliittymä saa konstruktorin parametrina <code>Laskuri</code>-rajapinnan toteuttavan olion. Tekstikäyttöliittymällä on metodi <code>suorita()</code>, joka käynnistää tekstikäyttöliittymän suorituksen. Kun Tekstikäyttöliittymä on luotu, ja metodia <code>suorita()</code> kutsutaan, saadaan seuraavanlainen tulostus. </p>
+  
+<pre>
+Toteutetun luokan toString()-metodin palauttama tuloste, esimerkiksi "[ 0 ]"
+Paina enter, muut lopettaa:
+
+Toteutetun luokan toString()-metodin palauttama tuloste, esimerkiksi "[ 1 ]"
+Paina enter, muut lopettaa:
+
+Toteutetun luokan toString()-metodin palauttama tuloste, esimerkiksi "[ 2 ]"
+Paina enter, muut lopettaa: Moi!
+</pre>
+
+  <p>Luo tekstikäyttöliittymä ja lisää se <code>Main</code>-luokkaan.</p>
+  
+
+  <h3>Graafinen käyttöliittymä</h3>
+  
+  <p>Luo luokka <code>GraafinenKayttoliittyma</code>, joka perii luokan <code><a href="http://java.sun.com/javase/6/docs/api/javax/swing/JDialog.html">JDialog</a></code>. Luokka <code>GraafinenKayttoliittyma</code> saa konstruktorin parametrina Laskuri-rajapinnan toteuttavan luokan. Lisää Graafisen käyttöliittymän konstruktorikutsu pääohjelmaan.</p>
+    
+  <p>Aseta myös seuraavat neljä metodikutsua käyttöliittymän konstruktorin loppuun.</p>
+  
+<pre class="sh_java">
+setSize(300, 200); // asetetaan ikkunan koko
+setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE); // jos ikkuna suljetaan, tuhoa ikkuna
+pack(); // jos ikkunassa on komponentteja, mukauta ikkunan koko niihin
+setVisible(true); // aseta ikkuna näkyväksi
+</pre>
+
+  <p>Ikkunan pitäisi olla tyhjä ja näyttää (ainakin hieman) seuraavanlaiselta.</p>
+  
+  <p><img src="img/t5-tyhja.png"/></p>
+  
+
+  <h3>Teksti</h3>
+  
+  <p>Lisää ikkunaan tekstielementti. Luokka <code><a href="http://java.sun.com/javase/6/docs/api/javax/swing/JLabel.html">JLabel</a></code> on tekstielementti, minkä voi lisätä käyttöliittymään. Saat Dialog-luokalta paneelin mihin voi lisätä komponentteja (esimerkiksi JLabel!) metodikutsulla <code>getContentPane()</code>. Aseta luokalle <code>JLabel</code> arvoksi laskurin <code>toString()</code>-metodin palauttama arvo. Alla olevassa kuvassa palautus on "<code>[ 0 ]</code>". Ikkunan pitäisi nyt näyttää hieman seuraavanlaiselta.</p>
+  <p><img src="img/t5-label.png"/></p>
+  <p>Voit venyttää ikkunaa kulmasta (kuten normaaleja ikkunoitakin), tarvitset tätä ikkunan sulkemiseen.</p>
+  
+
+  <h3>Nappi</h3>
+  
+  <p>Lisätään ikkunaan nappi. Luokka <code><a href="http://java.sun.com/javase/6/docs/api/javax/swing/JButton.html">JButton</a></code> käy hyvin napista. Ei vielä toteuteta tapahtumankuuntelijaa napille, tärkeintä on saada se käyttöliittymään. Huomaa, että yrittäessäsi asettaa nappia <code>getContentPane()</code>-kutsulla saatuun paneeliin, joudut määrittelemään napille lisäksi sijainnin. Esimerkiksi <code>add(<i>nappi</i>, BorderLayout.SOUTH)</code>. Ikkunan ulkoasun pitäisi nyt olla seuraavankaltainen.</p>
+  
+  <p><img src="img/t5-button.png"/></p>
+  
+  <p>Yllä olevassa kuvassa napin tekstiksi on määritelty <code>Click</code>.</p>
+
+  
+	<h3>Tapahtumankuuntelija</h3>
+  
+  <p>Javan valmis rajapinta <code><a href="http://java.sun.com/javase/6/docs/api/java/awt/event/ActionListener.html">ActionListener</a></code> määrittelee tapahtumankuuntelijan toiminnallisuudet, mitä esimerkiksi nappi käyttää. Lisää luokalle <code>GraafinenKayttoliittyma</code> rajapinta <code>ActionListener</code>. Lisää rajapinnan <code>ActionListener</code> vaatimaan metodiin laskurin kasvatus ja tekstielementin sisällön muuntaminen uudeksi laskurin arvoksi. Lisää myös <code>JButton</code>-oliolle tapahtumankuuntelija metodilla <code>addActionListener()</code> (anna sille parametrina <i>tämä</i> käyttöliittymä). Nyt tekstin pitäisi muuttua nappia painamalla.</p>
+  
+  <p><img src="img/t5-action.png"/></p>
+  
+  
+  <h2>Piirtelyä</h2>
+  
+  <p>Javan luokka <code><a href="http://java.sun.com/javase/6/docs/api/javax/swing/JPanel.html">JPanel</a></code> tarjoaa oivat välineet piirtelyyn. Luo uusi projekti piirtelya, jonka sisalle tulee oletusohjelma <code>Main</code>.</p>
+  
+  <h3>Main</h3>
+  
+  <p>Kopioi seuraava ohjelmapätkä <code>Main</code>-luokan <code>main()</code>-metodiin. Emme tässä tehtävässä välitä juurikaan ikkunointiin käytettävästä <code><a href="http://java.sun.com/javase/6/docs/api/javax/swing/JFrame.html">JFrame</a></code>-luokasta, piirrämme vain sen sisään.</p>
+  
+<pre class="sh_java">
+// TODO: luo luokka Piirtoalusta
+// Piirtoalusta alusta = new Piirtoalusta();
+
+JDialog ikkuna = new JDialog();
+ikkuna.setSize(640, 480); // asetetaan leveydeksi 640 pikseliä, korkeudeksi 480 pikseliä
+// TODO: lisää piirtoalusta kun alusta on luotu 
+// ikkuna.getContentPane().add(alusta);
+ikkuna.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE); // suljetaan ohjelma ikkunan sulkeutuessa
+ikkuna.setVisible(true); // näytä ikkuna
+</pre>
+
+  <p>Käynnistä projekti, näet seuraavanlaisen ikkunan (ilman hymiötä).</p>
+  
+  <p><img src="img/t5-ikkuna.png"/></p>
+  
+  <h3>Piirtoalusta</h3>
+  
+  <p>Luo luokka <code>Piirtoalusta</code>. Peri se Javan luokasta <code>JPanel</code>. Poista kommentit <code>Main</code>-luokan <code>main()</code>-metodista, siten, että luokkaa <code>Piirtoalusta</code> käytetään ikkunassa.</p>
+  
+  <p>Projektin ajaminen näyttää samanlaisen ikkunan kuin aiemminkin.</p>
+  
+  
+  <h3>Neliö</h3>
+  
+  <p>Ylikirjoita luokan <code>JPanel</code>-metodi <code>paint()</code>. Metodi <code>paint()</code> piirtää paneelin sisällön. Muista kutsu <code>super.paint()</code> ylikirjoituksen alussa.</p>
+  
+  <p>Lisää <code>paint()</code>-metodiin kutsu <code>g.drawRect(20, 20, 50, 40)</code>, missä olio <code>g</code> on metodin <code>paint()</code> parametrina saava <code>Graphics</code> olio.</p>
+  
+  <p>Aja projekti, ikkunan pitäisi nyt näyttää seuraavanlaiselta.</p>
+  
+  <p><img src="img/t5-rect.png"/></p>
+  
+  
+  <h3>Ympyrä</h3>
+  
+  <p>Metodin <code>paint()</code> parametrina saavalla <code>Graphics</code>-oliolla on paljon erilaisia metodeja. Etsi ympyrän piirtämiseen soveltuva metodi, ja piirrä ympyrä siten, että sen vasen yläkulma on kohdassa <code>(320, 180)</code>, ja sen halkaisija on 100.</p>
+  
+  <p>Aja projekti, ikkunan pitäisi nyt näyttää seuraavanlaiselta.</p>
+  
+  <p><img src="img/t5-ympyra.png"/></p>
+  
+  
+  <h3>Tekstiä</h3>
+  
+  <p>Lisää piirrettävään ikkunaan myös teksti "Moikka!" sopivaan sijaintiin. Tulostuksen tulee näyttää esimerkiksi seuraavanlaiselta.</p>
+  
+  <p><img src="img/t5-moikka.png"/></p>
+  
+  
+  
+  <h3>Pisteitä</h3>
+  
+  <p>Lisää piirtoalustalle attribuutiksi <code>ArrayList</code>-olio nimeltä <code>pisteet</code>, joka sisältää Javan <code>Point</code>-olioita. Luo <code>Piirtoalusta</code>-luokalle konstruktori, joka saa parametrikseen <code>ArrayList</code>-olion pisteitä. Muuta metodia <code>paint()</code> siten, että <code>ArrayList</code>-olion sisältö piirretään myös piirrettäessä. Aseta jokaisen pisteen leveydeksi ja korkeudeksi 3.</p>
+  
+<pre class="sh_java">
+ArrayList&lt;Point&gt; pisteet = new ArrayList&lt;Point&gt;();
+pisteet.add(new Point(50, 200));
+pisteet.add(new Point(175, 200));
+pisteet.add(new Point(335, 350));
+Piirtoalusta alusta = new Piirtoalusta(pisteet);
+
+// luodaan uusi ikkuna
+JDialog ikkuna = new JDialog();
+ikkuna.setSize(640, 480); // asetetaan leveydeksi 640 pikseliä, korkeudeksi 480 pikseliä
+ikkuna.getContentPane().add(alusta);
+ikkuna.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE); // suljetaan ohjelma ikkunan sulkeutuessa
+ikkuna.setVisible(true); // näytä ikkuna
+</pre>
+
+  <p>Tulostuksen pitäisi näyttää nyt seuraavalta.</p>
+  
+  <p><img src="img/t5-pisteet.png"/></p>
+  
+  
+  <h3>Lisää pisteitä!</h3>
+  
+  <p>Lisää luokalle <code>Piirtoalusta</code> Javan valmis rajapinta <code><a href="http://java.sun.com/javase/6/docs/api/java/awt/event/MouseListener.html">MouseListener</a></code>, joka tarjoaa pääsyn hiiren tapahtumiin. Muista lisätä myös <code>Piirtoalusta</code>-luokan konstruktoriin kutsu <code>addMouseListener()</code>, jolle annetaan <i>kyseinen</i> piirtoalusta.</p>
+  
+  <p>Rajapinta <code>MouseListener</code> vaatii 5 erilaista metodia. Toteuta niistä vain <code>mousePressed()</code>, ja jätä muut tyhjiksi. Lisää <code>mousePressed()</code>-metodissa hiiren sijainti <code>pisteet</code>-listaan. Saat hiiren sijainnin parametrina <code>mousePressed()</code>-metodille tulevan <code>MouseEvent</code>-olion kautta. Lisää myös metodin loppuun kutsu <code>repaint()</code> yläluokalle <code>JPanel</code>. Repaint pyytää ikkunan uudelleenpiirtoa.</p>
+  
+  <p>Aja ohjelma, sinun pitäisi pystyä lisäämään pisteitä hiirenpainalluksella. Tulostus voi olla esimerkiksi seuraavanlainen.</p>
+  
+  <p><img src="img/t5-lisaapisteita.png"/></p>
+  
+  
+  <h2>Bonus</h2>
+  
+  <p>Luodaan pieni terraario-simulaattori. Terraariossamme on kasveja, kasvissyöjiä ja lihansyöjiä. Kasvit elelevät rauhakseen, kasvissyöjät liikkuvat ja etsivät kasveja, lihansyöjät taas pyrkivät syömään kasvissyöjiä.</p>
+  
+  <p>Lue ensin tehtävä läpi kokonaisuudessaan, jotta saat kuvan toteutettavasta ohjelmasta. Huomaa että toteutuksesta on myös paljon jo annettu valmiina.</p>
+
+  <p>Luodessasi projektia luo sille myös ehdotettu <code>Main</code>-luokka. Käytä seuraavaa koodinpätkää <code>Main</code>-luokan <code>main()</code>-metodille.</p>
+
+<pre class="sh_java">
+Piirtoalusta alusta = new Piirtoalusta();
+Terraario terraario = new Terraario(alusta);
+alusta.setTerraario(terraario);
+
+// luodaan uusi ikkuna
+JDialog ikkuna = new JDialog();
+ikkuna.setSize(640, 480); // asetetaan leveydeksi 640 pikseliä, korkeudeksi 480 pikseliä
+ikkuna.getContentPane().add(alusta);
+
+// suljetaan koko ohjelma ikkunaa suljettaessa.
+ikkuna.addWindowListener(new WindowAdapter() {
+    public void windowClosing(WindowEvent e) {
+        System.exit(0);
+    }
+});
+
+ikkuna.setVisible(true); // näytä ikkuna
+</pre> 
+  
+  
+  <h3 class="bonus">Terraario</h3>
+  
+  <p>Käytetään seuraavaa luokkaa pohjana Terraario-toteutukselle.</p>
+
+<pre class="sh_java">
+public class Terraario {
+  private static final Random random = new Random();
+  // TODO: toteuta Elio-luokka
+  
+  // HashSet on tietorakenne, jossa ei voi olla montaa viitettä
+  // samaan olioon. Käytetään HashSet-tietorakennetta tässä tehtävässä.
+  // private HashSet&lt;Elio&gt; eliot;
+
+  // private Piirtoalusta piirtoalusta;
+
+  public Terraario(Piirtoalusta piirtoalusta) {
+    // this.piirtoalusta = piirtoalusta;
+    // this.eliot = new HashSet&lt;Elio&gt;();
+    
+    // luodaan 50 kasvia
+    for (int i = 0; i &lt; 50; i++) {
+        // TODO: toteuta luokka Kasvi 
+        // eliot.add(new Kasvi(random.nextInt(640), random.nextInt(480)));
+    }
+
+    // luodaan 10 kasvissyöjää
+    for (int i = 0; i &lt; 10; i++) {
+        // TODO: toteuta luokka Kasvissyoja
+        // eliot.add(new Kasvissyoja(this, random.nextInt(640), random.nextInt(480)));
+    }
+
+    // luodaan 3 lihansyöjää
+    for (int i = 0; i &lt; 3; i++) {
+        // TODO: toteuta luokka Lihansyoja
+        // eliot.add(new Lihansyoja(this, random.nextInt(640), random.nextInt(480)));
+    }
+  }
+
+  // HashSet toteuttaa rajapinnan Set, palautetaan vain rajapinta.
+  // public Set&lt;Elio&gt; getEliot() {
+  //   return eliot;
+  // }
+
+  public void simuloi() {
+    // for (Elio elio : eliot) {
+    //   if (elio.getElossa()) {
+    //       elio.ela();
+    //   }
+    // }
+
+    poistaKuolleet();
+    lisaanny();
+    
+    // TODO: luo Kasvi-luokka
+    // eliot.add(new Kasvi(random.nextInt(640), random.nextInt(480)));
+  }
+  
+  private void poistaKuolleet() {
+    // TODO: luokan sisäinen metodi poistaKuolleet();
+  }
+  
+  private void lisaanny() {
+    // TODO: luokan sisäinen metodi lisaanny();
+  }    
+  
+  // avainsana synchronized kertoo metodin olevan synkronoitu,
+  // eli sitä voidaan kutsua vain yhdestä kohdasta kerrallaan.
+  // tämä sen takia että terraario käyttää samaa eliöt-listaa
+  // mitä käyttöliittymä piirtää.
+  public synchronized void piirra(Graphics g) {
+    // for (Elio elio : eliot) {
+    //   elio.piirra(g);
+    // }
+  }
+}
+</pre>
+  
+  
+  <h3 class="bonus">Elio</h3>
+  
+  <p>Luodaan kasveille, kasvissyöjille ja lihansyöjille yhteinen <em>abstrakti</em> yläluokka <code>Elio</code>. Peri <code>Elio</code> Javan valmiista luokasta <code><a href="http://java.sun.com/javase/6/docs/api/java/awt/Point.html">Point</a></code>, josta saamme tiedot sijainnin ilmaisemiseen. Eliöllä on attribuuttina <code>int</code>-tyyppinen <code>koko</code>, joka kertoo eliön koon, sekä <code>boolean</code> tyyppinen muuttuja <code>elossa</code>, joka kertoo onko eliö-olio elossa. Luokalla <code>Elio</code> on lisäksi seuraavat abstraktit metodit.</p>
+  
+<pre class="sh_java">
+public abstract void piirra(Graphics g);
+public abstract void ela();
+public abstract Elio lisaanny();
+public abstract boolean onLihaisa();
+public abstract boolean onVihertava();
+</pre>
+  
+  <p>Luo luokka <code>Elio</code>.</p>
+  
+  
+  <h3 class="bonus">Kasvi</h3>
+  
+  <p>Luokka <code>Kasvi</code> perii luokan <code>Elio</code>. Kasvin alkukoko on 5, ja sen eläminen on lähinnä paikallaan olemista. Kasvin elellessä sen <code>koko</code> kasvaa yhdellä hyvin pienellä todennäköisyydellä (alle 1%).</p>
+  
+  <p>Kasvi ei ole lihaisa, mutta se on vihertävä. Esitetään se vihreänä ympyränä, toteuta siis sen metodi <code>piirra()</code> siten, että piirtämisessä käytetään vihreää väriä. (<i>Vinkki</i>: <code>Graphics</code>-luokalla on metodi <code>setColor()</code>, jolla voidaan asettaa tyyppiä <code>Color</code> oleva piirtoväri.) </p>
+  
+  <p>Luokan <code>Kasvi</code> konstruktori saa parametrina sen sijainnin x- ja y-koordinaatteina.</p>
+
+  
+  <h3 class="bonus">Piirtoalusta</h3>
+  
+  <p>Käytetään viime tehtävässä luotua <code>Piirtoalusta</code>-luokkaa pohjana toteutukselle. Poista piirtoalustalta <code>MouseListener</code>-rajapinta, ja muuta sen toteutusta siten, että se sisältää <code>Terraario</code>-tyyppisen olion <code>ArrayList</code>-olion sijaan. Muuta myös <code>paint()</code>-metodia siten, että se kutsuu terraarion <code>piirra()</code>-metodia. Terraarion asetus piirtoalustalle kannattanee tehdä setterin avulla.</p>
+ 
+
+  <p>Ajaessasi ohjelman ikkunan pitäisi näyttää seuraavanlaiselta (kasvien sijainnit ovat satunnaisia!).</p>
+
+  <p><img src="img/t5-kasvit.png"/></p>
+
+  <h3 class="bonus">Eloa terraarioon</h3>
+  
+  <p>Tällä hetkellä terraariossamme ei ole juurikaan elämää. Lisätään mahdollisuus terraarion simulointiin. Javan valmis rajapinta <code>Runnable</code> mahdollistaa ohjelman käynnistämisen tietyllä hetkellä. Toteuta rajapinta <code>Runnable</code> luokalle <code>Terraario</code>.</p>
+  
+  <p>Lisää rajapinnan vaatimaan metodiin <code>run()</code> kutsut <code>simuloi()</code> ja pyyntö uudelleenpiirrosta piirtoalustalle. Lisää <code>run()</code>-metodin loppuun seuraava lähdekoodipätkä, joka käskee ohjelmaa odottamaan 20 millisekuntia ennen jatkoa.</p>
+
+<pre class="sh_java">
+try {
+    Thread.sleep(20);
+} catch (InterruptedException ex) {}
+</pre>
+
+  <p>Lisää <code>Main</code>-luokan <code>main()</code>-metodin loppuun seuraava kutsu, joka aloittaa oman säikeen terraariolle.</p>
+  
+<pre class="sh_java">
+new Thread(terraario).start();
+</pre>
+
+  <p>Jos saat tästä eteenpäin poikkeuksen <code>java.util.ConcurrentModificationException</code>, älä välitä siitä. Emme ota tässä tehtävässä kantaa tietorakenteiden synkronointiin.</p>
+
+  <p><img src="img/t5-eloa-terraariossa.png"/></p>
+  
+  <h3 class="bonus">Kasvissyöjä</h3>
+
+  <p>Peri luokka Kasvissyoja seuraavasta luokasta <code>LiikkuvaElio</code>.</p>
+
+<pre class="sh_java">
+public abstract class LiikkuvaElio extends Elio {
+  protected static final int ALKUKOKO = 8;
+
+  private int ika;
+  protected Elio kohde;
+  protected Terraario terraario;
+
+  public LiikkuvaElio(Terraario terraario) {
+    this.terraario = terraario;
+    this.ika = 0;
+    this.koko = ALKUKOKO;
+  }
+
+  public void ela() {
+    ika++;
+
+    if (ika &gt; 500) {
+      this.koko--;
+      if(this.koko &lt;= 1) {
+        setElossa(false);
+        return;
+      }
+    }
+
+    valitseKohde();
+    liiku();
+    syo();
+  }
+
+  protected abstract void valitseKohde();
+
+  protected void liiku() {
+    if (kohde == null) {
+      return;
+    }
+
+    if (kohde.x &lt; this.x) {
+      this.x--;
+    } else if (kohde.x &gt; this.x) {
+      this.x++;
+    }
+
+    if (kohde.y &lt; this.y) {
+      this.y--;
+    } else if (kohde.y &gt; this.y) {
+      this.y++;
+    }
+  }
+
+  private void syo() {
+    if (kohde == null || this.distance(kohde) > 5) {
+      return;
+    }
+
+    if (kohde.getElossa()) {
+      kohde.koko--;
+      this.koko++;
+      
+      if(kohde.koko &lt;= 1) {
+        kohde.setElossa(false);
+      }
+    }
+  }
+  
+  public boolean onLihaisa() {
+    return true;
+  }
+
+  public boolean onVihertava() {
+    return false;
+  }
+}
+</pre>
+
+  <p>Toteuta luokalle Kasvissyoja metodit <code>valitseKohde()</code>, <code>piirra()</code> ja <code>lisaanny()</code>.</p>
+  
+  <p>Valitse jahdattava kohde siten, että se on lähin vihertävä elossa oleva eliö. Kasvissyojä saa konstruktorissaan <code>Terraario</code>-olion, sekä sijainnin x- ja y-koordinaatteina. Piirrä kasvissyöjä punaisena ympyränä.</p>
+  
+  <p>Kasvissyoja lisääntyy jos sen koko on yli kaksinkertainen alkuperäisestä koosta. Tällöin sen koko puolittuu, ja luodaan uusi <code>Kasvissyoja</code>-olio.</p>
+
+  <p>Toteuta myös terraarion <code>lisaanny()</code>-metodi.</p>
+  
+  <p>Ohjelma kasvissyöjien kanssa näyttää kutakuinkin seuraavanlaiselta.</p>
+  
+  <p><img src="img/t5-kasvissyojia.png"/></p>
+  
+  
+  <h3 class="bonus">Lihansyöjä</h3>
+  
+  <p>Luodaan vielä lihansyöjä suojelemaan kasvien oikeuksia. Lihansyöjät jahtaavat kasvissyöjiä, ja jättävät viherkasvit rauhaan. Peri luokka <code>Lihansyoja</code> myös ylläolevasta luokasta <code>LiikkuvaElio</code>.</p>
+
+  <p>Toteuta luokalle metodit <code>valitseKohde()</code>, <code>piirra()</code> ja <code>lisaanny()</code>.</p>
+
+  <p>Valitse jahdattava kohde siten, että se on lähin <i>lihaisa</i> elossa oleva eliö. Lihansyoja saa konstruktorissaan <code>Terraario</code>-olion, sekä sijainnin x- ja y-koordinaatteina. Piirrä lihansyöjä sinisenä ympyränä. Lihansyöjä ei näe yli 200 pikselin päähän. Voit käyttää <code>Point</code>-luokan metodia <code>distanceTo()</code> etäisyyksien määrittelemiseen.</p>
+ 
+  <p>Lihansyöjä lisääntyy kuten kasvissyöjä, eli jos sen koko on yli kaksinkertainen alkuperäisestä koosta. Tällöin sen koko puolittuu, ja luodaan uusi <code>Lihansyoja</code>-olio.</p>
+  
+  <p>Ylikirjoita lopuksi vielä metodi <code>onLihaisa()</code> siten, että se palautta aina false. Muutoin lihansyöjät eivät keskity kasvissyöjiin!</p>
+  
+  <p>Ohjelma lihansyöjien kanssa näyttää kutakuinkin seuraavanlaiselta.</p>
+  
+  <p><img src="img/t5-lihansyojat.png"/></p>
+    
+  
+</body>
+</html>

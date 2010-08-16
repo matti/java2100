@@ -1,0 +1,4670 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fi" lang="fi">
+	<head>
+		<link rel="stylesheet" href="stylesheets/common.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="javascripts/common.js"></script>
+		
+		<link rel="stylesheet" href="stylesheets/shjs/sh_style.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/shjs/sh_main.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_java.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_ruby.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_scala.min.js"></script>
+	</head>
+
+	<body>
+    <h1>Ohjelmoinnin jatkokurssi</h1>
+    
+    <p>Matti Paksula, Arto Vihavainen, Matti Luukkainen</p>
+    
+    <div id="toc"></div>
+    
+
+    <h2 id="alk_ja_viit">Alkeistyyppi ja viittaustyyppi</h2>
+
+    <p>Javassa on kaksi erilaista muuttujatyyppiä, alkeistyyppiset muuttujat ja viittaustyyppiset muuttujat. Alkeistyyppisillä muuttujilla tallennetaan tietoa yksittäisiin <em>lokeroihin</em>, kun taas viittaustyyppiset muuttujat sisältävät viitteen, joka osoittaa tietoon.</p>
+
+
+    <h3>Alkeistyyppi</h3>
+    
+    <p>Alkeistyyppiset muuttujat tallentavat arvonsa omaan lokeroon. Uutta alkeistyyppistä muuttujaa alustettaessa luodaan aina uusi lokero. Alkeistyyppiset muuttujat alustetaan sijoitusoperaatiolla <code>=</code>. Katsotaan esimerkkiä.</p>
+
+<pre class="sh_java">
+int vitonen = 5;
+int kutonen = 6;
+</pre>
+
+    <p>Esimerkki luo kaksi alkeistyyppistä muuttujaa, nimiltään <code>vitonen</code> ja <code>kutonen</code>. Muuttujan <code>vitonen</code> <em>lokeroon</em> asetetaan arvo 5, ja muuttujan <code>kutonen</code> lokeroon arvo 6. Kaikki alkeistyyppiset muuttujat, kuten javan kaikki muutkin muuttujat, ovat tietyn tyyppisiä. Muuttujat <code>vitonen</code> ja <code>kutonen</code> ovat kumpikin int-tyyppisiä, eli kokonaislukuja. Kuvana alkeistyyppiset muuttujat kannattaa ajatella laatikkoina jonka sisällä muuttujan arvo on talletettuna:</p> 
+	
+<pre>	
+          -----                                   
+ viitonen | 5 |                                     
+          -----       
+
+          -----                                   
+ kuutonen | 6 |                                     
+          -----  		  
+</pre>		
+	
+<p>Tarkastellaan vielä alkeistyyppisten muuttujien asettamista toisen muuttujan avulla.</p>
+
+<pre class="sh_java">
+int vitonen = 5;
+int kutonen = 6;
+
+vitonen = kutonen; // muuttuja vitonen sisältää nyt arvon 6, eli arvon joka oli muuttujassa kutonen
+kutonen = 42; // muuttuja kutonen sisältää nyt arvon 42
+
+// muuttuja vitonen sisältää vieläkin arvon 6
+</pre>   
+ 
+    <p>Esimerkissä alustetaan ensiksi muuttujat <code>vitonen</code> ja <code>kutonen</code>. Tämän jälkeen muuttujan <code>vitonen</code> lokeroon asetetaan muuttujan <code>kutonen</code> lokeron sisältämä arvo. Tässä vaiheessa siis muuttujan <code>vitonen</code> lokeroon tallentuu muuttujan <code>kutonen</code> sisältämä arvo. Jos muuttujan <code>kutonen</code> arvoa muutetaan tämän jälkeen, ei muuttujan <code>vitonen</code> sisältämä arvo muutu. Lopputilanne kuvana</p>
+    
+	<pre>	
+          ------                                   
+ viitonen |  6 |                                     
+          ------       
+
+          ------                                   
+ kuutonen | 42 |                                     
+          ------  		  
+</pre>	
+	
+    <h4>Alkeistyyppinen muuttuja metodin parametrina ja paluuarvona</h4>
+    
+    <p>Kun alkeistyyppinen muuttuja annetaan metodille parametrina, saa metodin parametrimuuttuja kopion annetun muuttujan arvosta. Katsotaan seuraavaa metodia <code>lisaaLukuun(int luku, int paljonko)</code>.</p>
+
+<pre class="sh_java">
+public int lisaaLukuun(int luku, int paljonko) {
+  return (luku + paljonko);  
+}
+</pre>
+    
+    <p>Metodi <code>lisaaLukuun()</code> saa kaksi parametria, kokonaisluvut <code>luku</code> ja <code>paljonko</code>. Metodi palauttaa uuden luvun, joka on annettujen parametrien summa. Tutkitaan vielä metodin kutsumista.</p>
+
+<pre class="sh_java">
+int omaLuku = 10;
+omaLuku = lisaaLukuun(omaLuku, 15);
+// muuttuja omaLuku sisältää nyt arvon 25
+</pre>
+    
+    <p>Esimerkissä kutsutaan <code>lisaaLukuun()</code>-metodia muuttujalla <code>omaLuku</code> ja arvolla <code>15</code>. Metodin muuttujiin <code>luku</code> ja <code>paljonko</code> kopioituvat siis arvot 10, eli muuttujan <code>omaLuku</code> sisältö, ja 15. Metodi palauttaa muuttujien <code>luku</code> ja <code>paljonko</code> summan, eli <code>10 + 15 = 25</code>.</p>
+         
+    <h4>Minimi- ja maksimiarvot</h4>
+    
+    <p>Eri tietotyypeillä on omat minimi- ja maksimiarvonsa, eli arvot joita pienempiä tai suurempia ne eivät voi olla. Tämä johtuu Javan (ja muidenkin useimpien ohjelmointikielten) sisäisestä tiedon esitysmuodosta, jossa tietotyyppien koot on ennalta määrätty.  </p>
+    
+    <p>Alla vielä muutama Javan alkeistyyppi ja niiden minimi- ja maksimiarvot</p>
+
+    <table cellpadding=5>
+      <tr><th>Muuttujatyyppi</th><th>Selitys</th><th>Minimiarvo</th><th>Maksimiarvo</th></tr>
+      <tr><td>int</td><td>Kokonaisluku</td><td>-2 147 483 648 (<code>Integer.MIN_VALUE</code>)</td><td>2 147 483 647 (<code>Integer.MAX_VALUE</code>)</td></tr>
+      <tr><td>long</td><td>Iso kokonaisluku</td><td>-9 223 372 036 854 775 808 (<code>Long.MIN_VALUE</code>)</td><td>9 223 372 036 854 775 807 (<code>Long.MAX_VALUE</code>)</td></tr>
+      <tr><td>boolean</td><td>Totuusarvo</td><td colspan=2><code>true</code> tai <code>false</code></td></tr>
+      <tr><td>double</td><td>Liukuluku</td><td><code>Double.MIN_VALUE</code></td><td><code>Double.MAX_VALUE</code></td></tr>
+    </table>
+    
+    <p>Liukulukuja käyttäessä kannattaa muistaa että liukuluvun arvo on aina <em>arvio</em> oikeasta arvosta. Koska liukuluvun, kuten kaikkien muidenkin alkeistyyppien sisältämä tietomäärä on rajoitettu, voidaan huomata yllättäviäkin pyöristysvirheitä. Esimerkiksi seuraava tilanne.</p>
+    
+<pre class="sh_java">
+double eka = 0.39;
+double toka = 0.35;
+System.out.println(eka - toka);
+</pre>
+    
+    <p>Esimerkki tulostaa arvon <code>0.040000000000000036</code>. Pyöristysvirheisiin varaudutaan usein muunmuassa vertaamalla arvon kuulumista tiettyyn arvoväliin. Ohjelmointikielet tarjoavat usein työkalut vastaavien tilanteiden välttämiseen, esimerkiksi Javassa on olemassa luokka <em>BigDecimal</em> liukulukujen tarkempaa laskemista varten.</p>
+    
+    
+    <h3>Viittaustyyppi</h3>
+    
+    <p>Viittaustyyppiset muuttujat tallentavat niihin liittyvän tiedon viitteen taakse, ja itse muuttuja toimii vain viitteenä tiedon sisältävään paikkaan. Toisin kuin alkeistyyppisillä muuttujilla, viittaustyyppisillä muuttujilla ei ole rajoitettua arvoaluetta, koska niiden oikea arvo tai <em>tieto</em> on viitteen takana.</p>
+    
+    <p>Viittaustyyppisistä muuttujista puhutaan olioina, ja ne luodaan <code>new</code>-kutsulla. Muuttujan arvo asetetaan vieläkin sijoitusoperaattorilla =, mutta komento <code>new</code> luo olion ja palauttaa viitteen olioon. Tämä viite asetetaan muuttujan arvoksi. Katsotaan kahden viittaustyyppisen muuttujan luontia. Käytetään ohjelmoinnin perusteet -kurssilta tuttua <em>Laskuri</em>-luokkaa esimerkeissä.</p>
+<pre class="sh_java">
+Laskuri matinLaskuri = new Laskuri(5);
+Laskuri artonLaskuri = new Laskuri(3);
+</pre>
+
+    <p>Esimerkissä luodaan ensiksi viittaustyyppinen muuttuja <code>matinLaskuri</code>. Komentoa <code>new</code> kutsuessa viitteen taakse varataan tila muuttujan tiedolle, luodaan Laskuri-tyyppinen olio, ja palautetaan viite siihen. Palautettu viite asetetaan sijoitusoperaattorilla <code>=</code> muuttujaan <code>matinLaskuri</code>. Sama tapahtuu muuttujalle nimeltä <code>artonLaskuri</code>. Kuvana viittaustyyppi kannattaa ajatella siten, että muuttuja sisältää "langan" tai "nuolen", jonka päässä on olio itse. Muuttuja siis ei säilytä olioa vaan tiedon eli viitteen sinne missä olio on.</p>
+    
+<pre>
+             -----             --olio----
+matinLaskuri | --|---------->  | arvo 5 |
+             -----             ----------
+	
+             -----             --olio----
+artonLaskuri | --|---------->  | arvo 3 |
+             -----             ----------
+</pre>
+	
+	
+    <p>Katsotaan seuraavaksi viittaustyyppisen muuttujan asettamista toisen muuttujan avulla.</p>
+
+<pre class="sh_java">
+Laskuri matinLaskuri = new Laskuri(5);
+Laskuri artonLaskuri = new Laskuri(3);
+
+matinLaskuri = artonLaskuri; // muuttuja matinLaskuri sisältää nyt muuttujan artonLaskuri sisältämän viitteen, 
+                             // eli viitteen Laskuri-tyyppiseen olioon joka on saanut konstruktorissaan arvon 3
+artonLaskuri = new Laskuri(10); // muuttujaan artonLaskuri asetetaan uusi viite, joka osoittaa 
+                                // new Laskuri(10) - kutsulla luotuun Laskuri-olioon
+
+// muuttuja matinLaskuri sisältää vieläkin viitteen Laskuri-olioon, joka sai konstruktorissaan arvon 3
+</pre>
+
+    <p>Esimerkissä tehdään käytännössä samat operaatiot kuin alkeistyyppi-kappaleessa olevassa asetusesimerkissä. Äskeisessä esimerkissä asetimme viittaustyyppisten muuttujien viitteitä, kun taas alkeistyyppi-esimerkissä asetimme alkeistyyppien arvoja. Lopussa kukaan ei viittaa Laskuriolioon, joka sai arvokseen konstruktorissa 5. Javan roskienkeruu huolehtii tälläisistä turhista oliosta. Lopputilanne uvana:<p> 
+	
+<pre>
+             -----             --olio----
+matinLaskuri | --|--           | arvo 5 |   tämä olio on muuttunut roskaksi, jonka Java pian hävittää
+             -----  --         ----------
+                      ---  
+                         --    --olio----
+             -----         --> | arvo 3 |
+artonLaskuri | --|--           ----------
+             -----  --
+                      ---
+                         --    --olio-----
+                           --> | arvo 10 |
+                               -----------
+</pre>	
+	
+	<p>Tarkastellaan vielä kolmatta esimerkkiä, joka näyttää viite- ja alkeistyyppisten muuttujien konkreettisen eron.</p>
+
+<pre class="sh_java">
+Laskuri matinLaskuri = new Laskuri(5);
+Laskuri artonLaskuri = new Laskuri(3);
+
+matinLaskuri = artonLaskuri; // muuttuja matinLaskuri sisältää nyt muuttujan artonLaskuri sisältämän viitteen, 
+                             // eli viitteen Laskuri-tyyppiseen olioon joka on saanut konstruktorissaan arvon 3
+artonLaskuri.kasvataArvoa(); // kasvatetaan artonLaskuri-viitteen takana olevan olion arvoa yhdellä
+
+System.out.println(matinLaskuri.annaArvo()); // koska matinLaskuri-muuttujan viite osoittaa samaan olioon, kuin 
+                                             // artonLaskuri-muuttuja, on matinLaskuri.annaArvo() - kutsun palauttama arvo 4
+</pre>
+
+    <p>Viittaustyyppiset muuttujat siis viittaavat aina toisaalla oleviin olioihin. Useat viittaustyyppiset muuttujat voivat sisältää saman viitteen, jolloin kaikki muuttujat osoittavat samaan olioon. Seuraavassa esimerkissä näemme kolme <code>Laskuri</code>-tyyppistä viitemuuttujaa, mutta vain yhden <code>Laskuri</code>-olion.</p>
+
+<pre class="sh_java">
+Laskuri mattiV = new Laskuri(5);
+Laskuri mattiL = mattiV;
+Laskuri mattiP = mattiV;
+</pre>
+
+    <p>Esimerkissä luodaan vain yksi <code>Laskuri</code>-olio, mutta kaikki <code>Laskuri</code>-tyyppiset viitemuuttujat osoittavat lopulta siihen. Tällöin kaikki metodikutsut viitteelle <code>mattiL</code>, <code>mattiP</code> ja <code>mattiV</code> muokkaavat samaa viitteen takana olevaa oliota. Viittaustyyppisiä muuttujia asetettaessa toisten muuttujien avulla viitteet siis kopioituvat viitemuuttujan lokeroon. Kuvana:</p> 
+	
+<pre>
+            -----             
+     mattiV | --|---           
+            -----   ---         
+                       ----       
+            -----          ---->  --olio----
+     mattiL | --|-------------->  | arvo 5 |
+            -----          ---->  ----------
+                       ----
+            -----   ---           
+     MattiP | --|---           
+            ----- 
+   
+</pre>	
+	
+	
+	
+	<p>Katsotaan kopioitumista vielä esimerkillä.</p>
+
+<pre class="sh_java">
+Laskuri mattiV = new Laskuri(5);
+Laskuri mattiP = mattiV; // muuttuja mattiP saa arvokseen mattiV-muuttujan sisältämän viitteen
+Laskuri mattiL = mattiP; // muuttuja mattiL saa arvokseen mattiP-muuttujan sisältämän viitteen
+
+mattiP = new Laskuri(3); // muuttuja mattiP saa arvokseen uuden viitteen, joka palautuu new Laskuri(3) - kutsusta
+</pre>
+
+    <p>Esimerkissä muuttujan <code>mattiL</code> sisältö ei muutu muuttujan <code>mattiP</code> saadessa uuden viitteen, sillä muuttujaan <code>mattiL</code> on luotu asetuksessa <code>mattiL = mattiP</code> kopio muuttujan <code>mattiP</code> sisällöstä, eli viitteestä. Kun muuttujan <code>mattiP</code> sisältö, eli viite muuttuu, se ei vaikuta muuttujan <code>mattiL</code> sisältämään viitteeseen koska se on asetettu jo aiemmin. Kuvana:</p>
+    
+<pre>
+            -----             
+     mattiV | --|---           
+            -----   ---         
+                       ----       
+            -----          ---->  --olio----
+     mattiL | --|-------------->  | arvo 5 |
+            -----                 ----------
+                     
+            -----                 --olio----
+     MattiP | --|-------------->  | arvo 3 |
+            -----                 ---------- 
+</pre>		
+    
+    <h4>Viittaustyyppinen muuttuja metodin parametrina</h4>
+    
+    <p>Kun viittaustyyppinen muuttuja annetaan metodille parametrina, saa metodin parametrimuuttuja kopion annetun muuttujan viitteestä. Katsotaan seuraavaa metodia <code>lisaaLaskuriin(Laskuri laskuri, int paljonko)</code>.</p>
+
+<pre class="sh_java">
+public void lisaaLaskuriin(Laskuri laskuri, int paljonko) {
+  for (int i = 0; i &lt; paljonko; i++) {
+    laskuri.kasvataArvoa();
+  }
+}
+</pre>
+
+    <p>Metodi <code>lisaaLaskuriin()</code> saa kaksi parametria, viittaustyyppisen parametrin <code>laskuri</code> ja alkeistyyppisen (kokonaisluvun) <code>paljonko</code>. Metodi kutsuu <code>Laskuri</code>-tyyppisen parametrin metodia <code>kasvataArvoa()</code> <code>paljonko</code>-muuttujan sisältämän arvon verran. Tutkitaan vielä metodin kutsumista.</p>
+
+<pre class="sh_java">
+int x = 10;
+Laskuri mattiL = new Laskuri(10);
+lisaaLaskuriin(mattiL, x);
+// muuttujan mattiL sisäinen arvo on nyt 20
+</pre>
+    
+    <p>Esimerkissä kutsutaan <code>lisaaLaskuriin()</code>-metodia muuttujalla <code>mattiL</code> ja muuttujalla <code>x</code> jonka arvo on 19. Metodin muuttujiin <code>laskuri</code> ja <code>paljonko</code> kopioituvat siis viittaustyyppisen muuttujan <code>mattiL</code> viite, ja arvo 10. Metodi suorittaa viitteelle <code>laskuri</code> <code>paljonko</code> muuttujan määrittelemän määrän <code>kasvataArvoa()</code>-metodikutsuja. Kuvana:</p>
+
+	<pre>
+    main:                                            metodissa:
+  
+            -----            --olio----                -----
+     mattiL | --|--------->  | arvo 5 |  <-------------|-- | laskuri
+            -----            ----------                -----
+			
+            ------                                     ------
+          x | 10 |                                     | 10 | paljonko
+            ------                                     ------
+</pre>		
+
+<p> Metodi siis näkee saman laskurin johon mattiL viittaa, eli metodin tekemä muutos vaikuttaa suoraan parametrina olevaan olioon. Alkeistyyppien suhteen tilanne on toinen, eli metodille tulee ainoastaan kopio <code>x</code>:n arvosta.
+</p>	
+
+    <h4>Viittaustyyppinen muuttuja metodin paluuarvona</h4>
+    
+    <p>Kun metodi palauttaa viittaustyyppisen muuttujan, palauttaa se viitteen muualla sijaitsevaan olioon. Metodin palauttaman viittaustyyppisen muuttujan voi asettaa muuttujalle samalla tavalla kuin normaalikin asetus tapahtuu, eli yhtäsuuruusmerkin avulla. Katsotaan metodia <code>luoLaskuri()</code>, joka luo uuden viittaustyyppisen muuttujan.</p>
+    
+<pre class="sh_java">
+public Laskuri luoLaskuri(int alkuarvo) {
+  Laskuri uusiLaskuri = new Laskuri(alkuarvo);
+  return uusiLaskuri;
+}
+</pre>
+
+    <p>Metodi luoLaskuri palauttaa siis metodissa luotuun olioon viittaavan viitteen <code>uusiLaskuri</code>. Uusi olio luodaan aina metodia kutsuttaessa, seuraavassa esimerkissä luomme kaksi erillistä <code>Laskuri</code>-tyyppistä oliota.</p>
+
+<pre class="sh_java">
+Laskuri mattiV = luoLaskuri(10);
+Laskuri mattiP = luoLaskuri(10);
+</pre>
+  
+    <p>Metodi <code>luoLaskuri</code> luo aina uuden <code>Laskuri</code>-tyyppisen olion. Ensimmäisessä kutsussa, eli kutsussa <code>Laskuri mattiV = luoLaskuri(10);</code> asetetaan metodin palauttama viite viittaustyyppiseen muuttujaan <code>mattiV</code>. Toisessa metodikutsussa luodaan uusi viite, joka asetetaan muuttujaan <code>mattiP</code>. Muuttujat <code>mattiV</code> ja <code>mattiP</code> eivät sisällä samaa viitettä, sillä metodi luo aina uuden olion ja palauttaa viitteen juuri luotuun olioon.</p>
+       
+    <h2 id="stat_ja_ei">Static ja ei-static</h2>
+    
+    <p>Staattisilla ja ei-staattisilla metodeilla ja muuttujilla erotetaan se, mihin muuttuja tai metodi liittyy. Staattiset metodit ja muuttujat liittyvät luokkaan, kun taas ei-staattiset metodit ja muuttujat ovat oliokohtaisia.</p>
+    
+    
+    <h3>Static</h3>
+    
+    <p>Static-määreen saavat muuttujat eivät liity olioihin vaan luokkiin. Esimerkiksi <code>Integer.MAX_VALUE</code>, <code>Long.MIN_VALUE</code> ja <code>Double.MAX_VALUE</code> ovat kaikki staattisia muuttujia. Staattisia muuttujia ja metodeja käytetään luokan nimen kautta, esimerkiksi <code>LuokanNimi.muuttuja</code> tai <code>LuokanNimi.metodi()</code>, tietysti riippuen metodien ja muuttujien näkyvyydestä. Vain public-näkyvyydellä määritetyt muuttujat ja metodit ovat suoraan käytettävissä. </p>
+    
+    
+    <h4>Luokkakirjasto</h4>
+    
+    <p>Luokkakirjastoksi kutsutaan luokkaa, jossa on yleiskäyttöisiä metodeja ja muuttujia. Esimerkiksi Javan <code>Math</code>-luokka on sellainen. <code>Math</code>-luokkahan tarjoaa muunmuassa <code>Math.PI</code>-muuttujan, jossa on piin likiarvo, sekä <code>Math.random()</code>-metodin, joka palauttaa satunnaisen liukuluvun väliltä 0 ja 1. Omien luokkakirjastojen toteuttaminen on usein hyödyllistä. Esimerkiksi Helsingin Seudun Liikenne (HSL) voisi pitää lippujensa hintoja luokkakirjastossa, josta ne löytyisi aina tarvittaessa.</p>
+
+<pre class="sh_java">
+public class HslHinnasto {
+  public static double KERTALIPPU_AIKUINEN = 2.50;
+  public static double RAITIOVAUNULIPPU_AIKUINEN = 2.50; 
+}    
+</pre>
+
+    <p>Tällöin kaikki ohjelmat, jotka käyttävät kerta- tai raitiovaunulipun hintaa voivat käyttää niitä <code>HslHinnasto</code>-luokan kautta. Seuraavassa esimerkissä esitellään yksinkertainen <code>Ihminen</code>-luokka, jolla on metodi <code>onkoRahaaKertalippuun()</code>, joka käyttää <code>HslHinnasto</code>-luokasta löytyvää lipun hintaa.</p>
+
+<pre class="sh_java">
+public class Ihminen {
+  private double rahat; // rahat
+  ...
+  
+  public boolean onkoRahaaKertalippuun() {
+    if(rahat >= HslHinnasto.KERTALIPPU_AIKUINEN) {
+      return true;
+    }
+    
+    return false;
+  }
+  ...
+}    
+</pre>
+
+    <p>Metodi <code>onkoRahaaKertalippuun()</code> siis vertaa luokan <code>Ihminen</code> ei-staattista muuttujaa <code>rahat</code> <code>HslHinnasto</code>-luokan staattiseen muuttujaan <code>KERTALIPPU_AIKUINEN</code>. Metodia <code>onkoRahaaKertalippuun()</code> voi kutsua vain olion yhteydessä, koska se ei ole staattinen.</p>
+    
+    <p>Huomaa nimeämiskäytäntö! Kaikki staattiset <em>alkeistyyppiset</em> muuttujat kirjoitetaan ISOLLA_JA_ALAVIIVOILLA. Staattiset metodit toimivat vastaavasti. Esimerkiksi Luokka <code>HslHinnasto</code> saattaisi <em>kapseloida</em> muuttujat ja antaa vain <em>aksessorit</em> niihin. Aksessoriksi kutsutaan metodia, jolla voi joko lukea muuttujan arvon tai sijoittaa muuttujalle uuden arvon.</p>
+
+<pre class="sh_java">
+public class HslHinnasto {
+  private static double KERTALIPPU_AIKUINEN = 2.50;
+  private static double RAITIOVAUNULIPPU_AIKUINEN = 2.50;
+  
+  public static double annaKertalipunHinta() {   // Aksessori
+    return KERTALIPPU_AIKUINEN;
+  }
+  
+  public static double annaRaitiovaunulipunHinta() {   // Aksessori
+    return RAITIOVAUNULIPPU_AIKUINEN;
+  }
+}    
+</pre>
+
+    <p>Tällöin <code>Ihminen</code>-luokan toteutuksessa täytyisikin kutsua metodia<code>annaKertalipunHinta()</code> sen sijaan että kutsuttaisiin muuttujaa suoraan.</p>
+<pre class="sh_java">
+public class Ihminen {
+  private double rahat; // rahat
+  ...
+  
+  public boolean onkoRahaaKertalippuun() {  
+    if(rahat >= HslHinnasto.annaKertalipunHinta()) {
+      return true;
+    }
+    
+    return false;
+  }
+  ...
+}    
+</pre>
+
+
+    <h3>Ei-static</h3>
+    
+    <p>Ei-staattiset metodit ja muuttujat liittyvät olioihin. Oliomuuttujat, eli attribuutit, määritellään luokan alussa. Kun oliota luodaan <code>new</code>-kutsulla, kaikki attribuutit saavat arvon olion liittyvän viitteen päässä, jolloin niihin pääsee käsiksi oliokohtaisesti. Esimerkiksi taas yksinkertainen luokka <code>Ihminen</code>, jolla on kaksi attribuuttia: <code>nimi</code> ja <code>rahat</code>.</p>
+
+<pre class="sh_java">
+public class Ihminen {
+  private String nimi; // olioattribuutteja, jokaiselle näistä on oliokohtainen arvo
+  private double rahat;
+  
+  ...
+}    
+</pre>
+
+    <p>Kun luokasta <em>Ihminen</em> luodaan uusi ilmentymä, alustetaan myös siihen liittyvät muuttujat. Jos viittaustyyppistä muuttujaa <code>nimi</code> ei alusteta, saa se arvokseen <em>null</em>-viitteen. Lisätään luokan <em>Ihminen</em> toteutukseen vielä <em>konstruktori</em> ja muutama metodi.</p>
+
+<pre class="sh_java">
+public class Ihminen {
+  private String nimi; // olioattribuutteja, jokaiselle näistä on oliokohtainen arvo
+  private double rahat;
+  
+  // konstruktori
+  public Ihminen(String nimi, double rahat) {
+    this.nimi = nimi;
+    this.rahat = rahat;
+  }
+  
+  // annaNimi
+  public String annaNimi() {
+    return this.nimi;
+  }
+  
+  // annaRahat
+  public double annaRahat() {
+    return this.rahat;
+  }
+  
+  // lisaaRahaa, lisätään vain jos yritetään lisätä positiivinen määrä
+  public void lisaaRahaa(double summa) {
+    if(summa &gt; 0) {
+      this.rahat += summa;    
+    }
+  } 
+  ...
+}    
+</pre>
+
+    <p>Konstruktori <code>Ihminen(String nimi, double rahat)</code> luo uuden ihmisolion ja palauttaa viitteen siihen. Aksessori <code>annaNimi()</code> palauttaa viitteen <code>nimi</code>-olioon, ja <code>annaRahat()</code>-metodi palauttaa alkeistyyppisen muuttujan <code>rahat</code>. Metodi <code>lisaaRahaa(double summa)</code> lisaa oliomuuttujaan <code>rahat</code> parametrina annetun summan jos parametrin arvo on suurempi kuin 0.</p>
+    
+    <p>Oliometodeja kutsutaan olion viitteen kautta. Seuraava koodiesimerkki luo uuden Ihmis-olion, lisää sille rahaa, ja lopuksi tulostaa sen nimen. Huomaa että metodikutsut ovat muotoa <code>olionNimi.metodinNimi()</code></p>
+
+<pre class="sh_java">
+Ihminen mattiV = new Ihminen("Matti V", 3.0);
+mattiV.lisaaRahaa(5); // palkka, jes!
+System.out.println(mattiV.annaNimi());
+</pre>
+
+    <p>Esimerkki tulostaa "<code>Matti V</code>".</p>
+    
+    
+    <h4>Metodit luokan sisällä</h4>
+    
+    <p>Luokan sisäisiä ei-staattisia metodeja voi tietysti kutsua myös ilman olio-etuliitettä. Esimerkiksi seuraava <code>toString()</code>-metodi <code>Ihminen</code> luokalle, joka kutsuu metodia <code>annaNimi()</code>. Metodi <code>toString()</code>:han mahdollistaa olion tilan tulostamisen vain olion nimeä parametrina käyttäen.</p>
+    
+<pre class="sh_java">
+public class Ihminen {
+  private String nimi; // olioattribuutteja, jokaiselle näistä on oliokohtainen arvo
+  ...
+  
+  public String annaNimi() {
+    return this.nimi;
+  }
+  
+  ...
+  
+  public String toString() {
+    return annaNimi();
+  }
+}
+</pre>    
+    
+    <p>Metodi <code>toString()</code> kutsuu siis luokan sisäistä, tähän olioon liittyvää <code>annaNimi()</code>-metodia. Metodikutsuun voi lisätä etuliitteen <code>this</code> jos haluaa korostaa kutsun liittyvän juuri tähän ilmentymään.</p>
+
+<pre class="sh_java">
+public class Ihminen {
+  private String nimi; // olioattribuutteja, jokaiselle näistä on oliokohtainen arvo
+  ...
+  
+  public String annaNimi() {
+    return this.nimi;
+  }
+  
+  ...
+  
+  public String toString() {
+    return this.annaNimi();
+  }
+}
+</pre>
+
+    <p>Ei-staattiset metodit voivat kutsua myös staattisia, eli luokkakohtaisia metodeja. Toisaalta, luokkakohtaiset metodit eivät voi kutsua oliokohtaisia metodeja ilman viitettä itse olioon, sillä ilman viitettä ei ole tietoa oliosta.</p>  
+      
+    
+    <h4>Muuttujat metodien sisällä</h4>
+    
+    <p>Poikkeuksena "Ei staattiset metodit ja muuttujat liittyvät olioihin" -sääntöön on metodien sisällä määriteltävät muuttujat. Metodien sisällä määriteltävät muuttujat eivät saa static-määrettä (eivätkä muitakaan määreitä tyyppinsä lisäksi). Metodien sisällä määriteltävät muuttujat ovat metodien suorituksessa käytettäviä apumuuttujia, eikä niitä tule sekoittaa oliomuuttujiin, eli attribuutteihin. Alla esimerkki metodista, jossa luodaan metodimuuttuja. Muuttuja <code>indeksi</code> on olemassa ja käytössä vain metodin suorituksen ajan.</p>
+<pre class="sh_java">
+public class ... {
+  ...
+  
+  public static void tulostaTaulukko(String[] taulukko) {
+    int indeksi = 0;
+    
+    while(indeksi &lt; taulukko.length) {
+      System.out.println(taulukko[indeksi]);
+      indeksi++;
+    }    
+  }
+  
+  ...
+}
+</pre>
+
+    <p>Metodissa <code>tulostaTaulukko()</code> luodaan siis metodin sisäinen apumuuttuja <code>indeksi</code>, jota käytetään taulukon läpikäynnissä avuksi. Muuttuja <code>indeksi</code> on käytössä vain metodin suorituksen ajan.</p>
+    
+    
+    
+    <h3>Static ja ei-static yhteistyössä</h3>
+    
+    <p>Katsotaan esimerkkiä missä oliota luotaessa käytetään staattista muuttujaa järjestysnumeron antamiseen.</p>
+
+<pre class="sh_java">
+public class Jonotuspaikka {
+  private static int VUORONUMERO = 0;
+  
+  private int vuoronumero;
+  
+  public Jonotuspaikka() {
+    this.vuoronumero = VUORONUMERO;
+    VUORONUMERO++;
+  }
+  
+  public int annaVuoronumero() {
+    return this.vuoronumero;
+  }
+}
+</pre>
+
+    <p>Yllä olevassa luokassa käytetään staattista muuttujaa <code>VUORONUMERO</code> yleisen vuoronumeron ylläpitämiseen. Luokan <code>Jonotuspaikka</code> konstruktorissa uusi jonotuspaikka-olio saa vuoronumeron <code>VUORONUMERO</code>-muuttujalta, jonka jälkeen <code>VUORONUMERO</code>-muuttujan arvoa kasvatetaan yhdellä. Tällöin seuraavan jonotuspaikan vuoronumero olisi yhtä suurempi. Katsotaan vielä samaa toimintaa lähdekoodin avulla.</p>
+
+<pre class="sh_java">
+Jonotuspaikka mattiV = new Jonotuspaikka();
+Jonotuspaikka mattiP = new Jonotuspaikka();
+Jonotuspaikka mattiL = new Jonotuspaikka();
+
+System.out.println("Matti V:n vuoronumero on: " + mattiV.annaVuoronumero());
+System.out.println("Matti P:n vuoronumero on: " + mattiP.annaVuoronumero());
+System.out.println("Matti L:n vuoronumero on: " + mattiL.annaVuoronumero());
+</pre>
+
+    <p>Ohjelmapätkä tulostaisi seuraavaa:</p>
+<pre>
+Matti V:n vuoronumero on: 0
+Matti P:n vuoronumero on: 1
+Matti L:n vuoronumero on: 2
+</pre>
+    
+    
+   
+    <h3>Yhteenveto</h3>
+    
+    <p>Alla vielä pieni yhteenveto staattisten ja ei-staattisten muuttujien ja metodien eroista.</p>
+    
+    <table cellpadding=5>
+      <tr><th>&nbsp;</th><th>static</th><th>ei-static</th></tr>
+      <tr><th>muuttuja</th><td>Luokkaan liittyvä muuttuja, esimerkiksi numerolaskuri tai luokkakirjastotyyppinen vakio</td><td>olioon liittyvä muuttuja, esimerkiksi nimi, tai metodin sisällä määritelty muuttuja</td></tr>
+      <tr><th>metodi</th><td>Luokkaan liittyvä metodi, voi muokata vain staattisia muuttujia. Parametrina annetut muuttujat ovat tietysti aina muokattavissa. Käytössä esimerkiksi luokkakirjastoissa. Eivät voi kutsua oliometodeja ilman viitettä itse olioon.</td><td>Olihin liittyvät, juuri sen (<code>this</code>) olion tilaa muokkaavat metodit. Voivat kutsua staattisia luokkametodeja.</td></tr>
+    </table>
+    
+    
+    <h2 id="kap">Kapselointi</h2>
+    
+    <p>Kapselointi on yksi olio-ohjelmoinnin peruskäsitteistä. Muihin, eli periytymiseen, polymorfismiin ja abstrahointiin, palataan vielä myöhemmin tällä kurssilla. Kapseloinnilla tarkoitetaan toteutuksen, eli esimerkiksi oliomuuttujien, piilottamista asettamalla ne private-tyyppisiksi. Kun muuttuja on private-tyyppinen, siihen ei pääse käsiksi luokan ulkopuolelta. Kapselointia voi ajatella olion tilan suojaamisena, jolloin olion tilaa ei pääse muokkaamaan mistä tahansa. Ohjelmalla on siis pääsy olion tilaan vain tarkoin suunniteltujen metodien avulla.</p>
+  
+    <p>Tutkitaan aiemmin luotua Jonotuspaikka-luokkaa.</p>
+        
+<pre class="sh_java">
+public class Jonotuspaikka {
+  private static int VUORONUMERO = 0;
+  
+  private int vuoronumero;
+  
+  public Jonotuspaikka() {
+    this.vuoronumero = VUORONUMERO;
+    VUORONUMERO++;
+  }
+  
+  public int annaVuoronumero() {
+    return this.vuoronumero;
+  }
+}
+</pre>
+
+    <p>Luokan <code>Jonotuspaikka</code> muuttuja <code>vuoronumero</code> on toteutettu siten, että siihen pääsee käsiksi vain <code>annaVuoronumero()</code>-aksessorimetodin avulla. Jos luokkaa käytetään vain sen metodien kautta, voidaan sen sisäistä toteutusta muuttaa ilman että se näkyy ulkopuolelle, jolloin ohjelmia jotka käyttävät luokkaa <code>Jonotuspaikka</code> ei tarvitse muuttaa.</p>
+    
+    <p>Ajatellaan tilannetta, missä arkistointisyistä halutaan jonotuspaikan numerot alkamaan kymmenestä miljoonasta. Tällöin voimme muuttaa metodia <code>annaVuoronumero()</code> siten, että se palauttaa vuoronumeron summattuna kymmeneen miljoonaan. Luokan <code>Jonotuspaikka</code> metodi <code>annaVuoronumero()</code> olisi silloin seuraavanlainen.</p>
+<pre class="sh_java">
+  public int annaVuoronumero() {
+    return (this.vuoronumero + 10000000);
+  }
+</pre>    
+    
+    <p>Vastaavasti voisimme päätyä tilanteeseen missä joudumme muuttamaan <code>Jonotuspaikka</code> luokkaa siten, että vuoronumero tuleekin kolmannen osapuolen toteuttamalta komponentilta <code>UlkopuolinenKomponentti</code>. Ulkopuolinen komponentti pitää kirjaa annetuista vuoronumeroista, ja saattaa esimerkiksi mahdollistaa jonon ohittamisen korkeamman prioriteetin ihmisille. Tämä mahdollistaa useiden Jonotuspaikka-ohjelmien käyttämisen (esimerkiksi useat päätteet joista voi ottaa vuoronumeroita), kun vuoronumeroiden luominen on keskitettyä. Luokan <code>Jonotuspaikka</code> toteutus voisi olla silloin seuraavanlainen.</p>
+
+<pre class="sh_java">
+public class Jonotuspaikka {
+  private JonotusNumero jonotusNumero;
+  
+  public Jonotuspaikka() {
+    this.jonotusNumero = UlkopuolinenKomponentti.luoJonotusNumero();
+  }
+  
+  public int annaVuoronumero() {
+    return this.jonotusNumero.annaArvo(); // palauttaa kokonaisluvun
+  }
+}
+</pre>
+
+    <p>Vaikka luokan sisäinen toteutus onkin muuttunut täysin alkuperäisestä, on ulkopuolelle näkyvät toiminnot täysin samanlaiset. Tällöin <code>Jonotuspaikka</code>-luokkaa käyttävät ohjelmat eivät tarvitse minkäänlaisia muutoksia.</p>
+
+    <p>Ajatellaan vielä <code>Jonotuspaikka</code>-luokan toteutusta siten, että vuoronumero-oliomuuttuja olisikin ollut kaikille näkyvissa. Tällöin Jonotuspaikka-luokkaa käyttävä ohjelmoija olisi toteuttanut ohjelmansa esimerkiksi seuraavasti.</p>
+
+<pre class="sh_java">
+Jonotuspaikka paikka = new Jonotuspaikka();
+System.out.println("Vuoronumero: " + paikka.vuoronumero); // ei näin!
+</pre>
+    
+    <p>Ohjelma toimisi alkuperäisen <code>Jonotuspaikka</code>-luokan kanssa jotenkuten (vaikka ei noudatakaan hyvää ohjelmointityyliä!). Kun toteutusta muutetaan siten, että vuoronumero alkaa miljoonasta, täytyisi yllä olevaa ohjelmakoodia muokata. Samoin ulkopuolisen komponentin lisäämisessä. Toisaalta, jos toteutus on käyttänyt aksessoreita ja <code>Jonotuspaikka</code>-luokka on toteutettu kapseloinnin periaatteita seuraten, ei mikään ylläolevista muutoksista olisi vaatinut muutoksia. Seuraava esimerkki toimisi jokaisessa kolmesta tapauksesta. </p>
+ 
+ <pre class="sh_java">
+Jonotuspaikka paikka = new Jonotuspaikka();
+System.out.println("Vuoronumero: " + paikka.annaVuoronumero()); // jes!
+</pre>   
+    
+
+
+    
+    <h2 id="taul">Taulukot</h2>
+    
+    <p>Taulukot ovat viittaustyyppisiä muuttujia, eli taulukko-muuttuja viittaa muualle missä itse taulukon alkiot ovat. Taulukot, kuten kaikki muutkin viittaustyyppiset muuttujat, luodaan komennon <code>new</code>-avulla. Taulukolle määritellään aina sen koko ja tyyppi, eli kuinka monta alkiota siihen mahtuu ja minkätyyppisiä alkiot ovat. Taulukon alkiot voivat olla alkeis- tai viittaustyyppisiä. Seuraavassa esimerkissä luodaan 100 alkion kokoinen kokonaislukutaulukko, ja asetetaan sen alkoihin luvut yhdestä sataan.</p>
+
+<pre class="sh_java">
+int[] kokonaislukutaulukko = new int[100];
+for(int i = 0; i < kokonaislukutaulukko.length; i++) {
+  kokonaislukutaulukko[i] = i + 1;
+}
+</pre>
+
+    <p>Taulukot voivat olla sisäkkäisiä. Sisäkkäisiä taulukoita kutsutaan joskus myös <em>moniulotteisiksi</em> taulukoiksi. Sisäkkäisissä taulukoissa aina <em>ulommassa</em> taulukossa on viite <em>sisempään</em> taulukkoon. Seuraavassa esimerkissä luodaan kaksiulotteinen String-tyyppinen taulukko, ja täytetään kaikki alkiot merkkijonolla <code>"Moi"</code>. Huomaa että sisemmät taulukot luodaan esimerkissä vasta toiston aikana, tällöin voimme määritellä sisemmille taulukoille erilaisia kokoja. Lopuksi vielä taulukon sisältö tulostetaan. </p>
+
+<pre class="sh_java">
+String[][] moikka = new String[8][];  // luodaan 8 paikkainen taulukko, jonka alkiot merkkijonotaulukkoja
+
+// luodaan nyt taulukon sisälle tulevat 8 merkkijonotaulukkoa
+for(int i = 0; i < moikka.length; i++) { 
+  moikka[i] = new String[i+1];   // kaikki ovat eripituisia
+  
+  for(int j = 0; j < moikka[i].length; j++) {
+    moikka[i][j] = "Moi";
+  }
+}
+
+for(String[] taul: moikka) {
+  for(String moi: taul) {
+    System.out.print(moi + " ");
+  }
+  
+  System.out.println();
+}
+</pre>
+
+    <p>Yllä oleva taulukon koodinpätkä tuottaa seuraavanlaisen tulostuksen:</p>
+    
+<pre>
+Moi 
+Moi Moi 
+Moi Moi Moi 
+Moi Moi Moi Moi 
+Moi Moi Moi Moi Moi 
+Moi Moi Moi Moi Moi Moi 
+Moi Moi Moi Moi Moi Moi Moi 
+Moi Moi Moi Moi Moi Moi Moi Moi
+</pre>
+
+    <p>Taulukoista löytyy lisää ohjelmoinnin perusteiden kurssimateriaalista!</p>
+    
+    
+    <h2 id="api">API</h2>
+    
+    <p>Eräs tärkeistä taidoista ohjelmoinnissa on tiedon hakeminen ja soveltaminen. Java tarjoaa kattavan <em>Luokkakirjaston</em>, joka sisältää hyvin paljon käyttökelposia luokkia. Javan API (eli ohjelmointirajapinta) löytyy osoitteesta <a href="http://java.sun.com/javase/6/docs/api/" target="_blank">http://java.sun.com/javase/6/docs/api/</a>. Tällä kurssilla ehditään tutustutaan vain muutamaan luokkaan, tärkeämpää on API:n lukutaito.</p>
+    
+    <p>Etsitään <em>String</em>-luokan kuvaus. Vasemman alakulman laatikossa on listattu kaikki Javan API:n tarjoamat luokat. String löytyy luokkalistauksesta, suora osoite String-luokan kuvaukseen on <a href="http://java.sun.com/javase/6/docs/api/java/lang/String.html" target="_blank">http://java.sun.com/javase/6/docs/api/java/lang/String.html</a>.</p>
+    
+
+    <h3>Integer.parseInt()</h3>
+    
+    <p>Integer-luokka tarjoaa metodin merkkijonon kokonaisluvuksi muuttamiseksi. Seuraavassa esimerkissä luodaan aluksi merkkijonon "12345" sisältävä <code>String</code>-olio, jonka jälkeen kutsutaan Integer-luokan staattista <code>parseInt()</code>-metodia. Metodi <code>parseInt()</code> saa parametrikseen merkkijonon, ja palauttaa kokonaisluvun.</p>
+    
+<pre class="sh_java">
+String merkkijono = "12345";
+int luku = Integer.parseInt(merkkijono);
+System.out.println(luku);
+</pre>
+    
+    <p>Esimerkki tulostaa luvun 12345. Huomaa että <em>Integer</em>-luokan <code>parseInt()</code>-metodi olettaa merkkijonon olevan luku. Jos merkkijono ei esitä lukua, saamme poikkeuksen. Poikkeuksista lisää kurssin loppupuolella.</p>
+    
+
+    <h3>Math.random()</h3>
+    
+    <p>Javan <code>Math</code>-luokka tarjoaa paljon hyödyllisiä apuvälineitä. Yksi paljon käytetyistä apuvälineistä on staattinen metodi <code>random()</code>, joka palauttaa liukuluvun nollan ja yhden väliltä. Metodia <code>random()</code> voi käyttää myös isompien arvovälien arpomiseen. Seuraava esimerkki arpoo luvun 1 ja 39 väliltä ja tulostaa sen.</p>
+
+<pre class="sh_java">
+int luku = (int) (Math.random() * 39) + 1;
+System.out.println(luku);
+</pre>
+    
+    
+    <h3>ArrayList</h3>
+    
+    <p>Yksi eniten käytetyistä Javan valmiista Luokista on <code>ArrayList</code>. ArrayList on kapseloitu taulukko, jota kasvatetaan aina tarpeen tullen. <code>ArrayList</code>-luokan API-kuvaus löytyy osoitteesta <a href="http://java.sun.com/javase/6/docs/api/java/util/ArrayList.html">http://java.sun.com/javase/6/docs/api/java/util/ArrayList.html</a>. ArrayList saa tyyppiparametrikseen viittaustyyppisen muuttujan, mikä kertoo minkälaisia arvoja se sisältää. Esimerkiksi merkkijonoja sisältävän ArrayList-olion voi luoda seuraavasti.</p>
+
+<pre class="sh_java">
+ArrayList&lt;String&gt; mjonot = new ArrayList&lt;String&gt;();
+</pre>
+
+    <p>Huomaa tyyppiparametrin välitys <code>&lt;String&gt;</code>. Tämä kertoo ArrayList-oliolle että kaikki sen sisältämät arvot ovat tyyppiä <code>String</code>. Koska ArrayList-luokka voi ottaa vain viittaustyyppisiä parametreja arvoikseen, on alkeistyypeille olemassa luokat jotka kapseloivat ne. <code>Integer</code>-luokka kapseloi <code>int</code>-tyyppisen muuttujan, <code>Double</code>-luokka kapseloi <code>double</code>-tyyppisen muuttujan ym. Katsotaan vielä esimerkkiä missä luodaan ArrayList-olio kokonaisluvuille, lisätään sinne 5 lukua ja tulostetaan ne lopuksi.</p>
+
+<pre class="sh_java">
+ArrayList&lt;Integer&gt; kluvut = new ArrayList&lt;Integer&gt;();
+kluvut.add(3);
+kluvut.add(5);
+kluvut.add(7);
+
+for(int luku: kluvut) {
+  System.out.println(luku);
+}
+</pre>
+
+    <p>Esimerkin tuloste on seuraavanlainen:</p> <!-- Tsädäm! 87, -->
+
+<pre>
+3
+5
+7
+</pre>    
+    
+    <p>Huomaa, että Integer-tyyppisestä muuttujasta int-tyyppiseen muuttujaan tapahtuu automaattinen muunnos toistossa.</p>
+
+
+
+    <h2 id="arraylist">ArrayList</h2>
+    
+    <p>Viime luennolla nähty ArrayList on eräs Javan API:n tarjoamista valmiista listatoteutuksista, joka kasvaa sitä mukaa kun sinne lisätään alkioita. ArrayList löytyy Javan pakkauksesta <em>java.util.ArrayList</em>, eli sen saa otettua ohjelmassa käyttöön komennolla <code>import java.util.ArrayList;</code>, joka asetetaan lähdekoodin alkuun.</p>
+    
+    <p>Alla oleva esimerkki lisää <code>merkkijonot</code>-nimiseen ArrayList-olioon kaksi String-oliota. Ensimmäinen String-olio viittaa arvoon "Moi Kaikki!", toinen arvoon "Moi Uudestaan!". Huomaa että ArrayList-olio pitää kirjaa viitteistä. Kun kutsumme sen metodia <code>add()</code>, sille annetaan parametrina viitetyyppinen muuttuja. Viitetyyppiset muuttujathan toimivat metodikutsuissa siten, että viitteiden arvot kopioituvat metodin parametreihin. Alla oleva esimerkki siis lisää kaksi eri String-oliota ArrayList-olioon, vaikka viitetyyppisten muuttujien nimet ovat samat. Lopuksi ArrayList-olion sisältämät merkkijono-oliot tulostetaan.</p>
+
+<pre class="sh_java">
+ArrayList&lt;String&gt; merkkijonot = new ArrayList();
+String viesti = "Moi Kaikki!");
+merkkijonot.add(viesti);
+viesti = "Moi Uudestaan!";
+merkkijonot.add(viesti);
+
+for(String merkkijono: merkkijonot) {
+  System.out.println(merkkijono);
+}
+</pre>
+
+    <p>Esimerkin tulostus on seuraavanlainen:</p>
+
+<pre>
+Moi Kaikki!
+Moi Uudestaan!
+</pre>
+
+    <p>Vaikka ArrayListin sisäinen toteutus perustuu taulukkoon, ei sitä voi indeksoida kuten taulukkoa. ArrayList kapseloi taulukon. Kapseloinnilla tarkoitetaan sisäisen toteutuksen piilottamista, jolloin luokasta luotuja olioita käytetään niiden tarjoamien metodien kautta. Indeksointi, eli taulukon alkioiden käsittely niiden taulukkoindeksien avulla, on siis mahdollista vain taulukko-olioille. Taulukko-oliot tunnistaa niiden tyypistä, esimerkiksi tyyppi <code>int[]</code> määrittelisi taulukko-olion, joka sisältää alkeistyyppisiä int-arvoja, eli kokonaislukuja.</p>
+
+    <p>Seuraava esimerkki ei siis toimi, sillä ArrayList-tyyppistä oliota ei voi indeksoida.</p>
+
+<pre class="sh_java">
+ArrayList&lt;String&gt; merkkijonot = new ArrayList();
+String viesti = "Moi Kaikki!");
+merkkijonot.add(viesti);
+viesti = "Moi Uudestaan!";
+merkkijonot.add(viesti);
+
+for(int i = 0; i &lt; merkkijonot.size(); i++)) {
+  System.out.println(merkkijonot[i]); // ei toimi, sillä ArrayList ei ole taulukko-tyyppinen muuttuja
+}
+</pre>    
+    
+    <p>Kaikista olioista, kuten ArrayList-tyyppisistä olioista voi kuitenkin myös luoda taulukkoja. Seuraava esimerkki luo taulukon johon mahtuu kolme ArrayList-oliota, ja luo ArrayList-oliot taulukkoa indeksoimalla.</p>
+
+<pre class="sh_java">
+ArrayList&lt;String&gt;[] merkkijonotaulukot = new ArrayList[3];
+for(int i = 0; i &lt; merkkijonotaulukot.length; i++) {
+  merkkijonotaulukot[i] = new ArrayList&lt;String&gt;();
+}
+</pre>
+
+    <p>Koska ArrayList-tyyppinen olio sisältää viitetyyppisiä muuttujia, on seuraavanlainen toteutus mahdollinen.</p>
+<pre class="sh_java">
+ArrayList&lt;ArrayList&lt;String&gt;&gt; arrayListSisakkain = new ArrayList&lt;ArrayList&lt;String&gt;&gt;();
+for(int i = 0; i &lt; 3; i++) {
+  ArrayList&lt;String&gt; uusiArrayList = new ArrayList&lt;String&gt;();
+  arrayListSisakkain.add(uusiArrayList);      
+}
+
+String viesti = "Heippa!";
+arrayListSisakkain.get(0).add(viesti);
+</pre>
+
+    <p>Yllä olevassa esimerkissä luodaan ensiksi ArrayList-tyyppisiä olioita sisältävä ArrayList-olio. Tämän jälkeen lisätään kolme ArrayList-oliota alussa luotuun ArrayList-olioon. Lopuksi ensimmäiseen ArrayList-olioita sisältävän ArrayList-olion <code>arrayListSisakkain</code> ensimmäiseen ArrayList-olioon lisätään vielä merkkijono "Heippa!"</p>
+
+
+ 
+    <h2 id="abstrahointi">Abstrahointi</h2>
+    
+    <p>Abstrahoinnilla tarkoitetaan asioiden määrittelyä tarpeellisten toimintojen ja ominaisuuksien kautta, ottamatta kantaa siihen miten ne on toteutettu. Abstrahointi on perusteltua ohjelmistoja suunniteltaessa kun ei haluta ottaa kantaa siihen, miten yksittäiset toiminnot toteutetaan. Yksi abstrahoinnin välineistä on rajapinta, johon tutustutaan seuraavaksi. </p>
+
+    
+
+    <h2 id="rajapinta">Rajapinta</h2>
+    
+    <p>Rajapinta (engl. <em>interface</em>) kuvaa käyttäytymistä määrittelemällä listan metodeja, joita rajapinnan kuvaava käyttäytyminen toteuttaa. Rajapinta määritellään omassa tiedostossa, jonka nimi on <em>Rajapinnannimi.java</em>. Rajapinnan tyyppi on <em>interface</em>, ja se sisältää määrittelyn käyttäytymiseen liittyvistä metodeista, mutta ei niiden toteutusta. Rajapinta määrittelee siis vain metodien nimet ja paluuarvot, mutta ei sitä, miten ne on toteutettu. Tällöin eri luokat voivat toteuttaa rajapinnan määrittelemän käyttäytymisen niihin sopivalla tavalla. Katsotaan puhumiskäyttäytymistä määrittelevää rajapintaa <em>Puhuva</em>.</p>
+
+<pre class="sh_java">
+public interface Puhuva {
+  public String puhu(); // vain metodin nimi, ei toteutusta
+}
+</pre>
+
+    <p>Rajapinta <code>Puhuva</code> määrittelee metodin <code>puhu()</code>, joka palauttaa String-tyyppisen olion. Metodin <code>puhu()</code> toteutuksen pitää siis palauttaa merkkijono, joka kuvaa puhetta. Puhuva-rajapintaa voidaan ajatella sopimuksena puhumiskäyttäytymisestä.</p>
+    
+    <p>Rajapinta on vain sopimus käyttäytymisestä. Jotta käyttäytyminen toteutuu, täytyy luokan toteuttaa rajapinta. Luokka toteuttaa rajapinnan avainsanalla <em>implements</em>, joka kertoo luokan toteuttavan kaikki annetun rajapinnan metodit. Rajapinnan toteuttaminen tarkoittaa sopimuksen tekemistä siitä, että luokka tarjoaa kaikki rajapinnan määrittelemät toiminnot, eli metodit. Luokkaa, joka toteuttaa rajapinnan, mutta ei toteuta rajapinnan metodeja, ei voi olla olemassa. Seuraava luokka <em>Luennoitsija</em> toteuttaa rajapinnan <em>Puhuva</em>. Huomaa että Luennoitsija-luokan on pakko toteuttaa rajapinnan Puhuva määrittelevä metodi <code>public String puhu()</code>.</p>    
+    
+<pre class="sh_java">
+public class Luennoitsija implements Luennoiva {
+  ...
+  
+  public String puhu() {
+    String[] aiheet = {"kapselointi", "periytyminen", "polymorfismi", "abstrahointi"};
+    double satunnainen = Math.random() * 4;
+    // Double-luokasta löytyy metodi <code>intValue()</code>, joka palauttaa liukuluvun kokonaislukuna
+    int indeksi = new Double(satunnainen).intValue();
+
+    return "Yksi olio-ohjelmoinnin peruskäsitteistä, " + aiheet[indeksi] + ".";
+  }
+}
+</pre>
+ 
+    <p>Luennoitsija-luokka valitsee satunnaisesti yhden neljästä olio-ohjelmoinnin peruskäsitteestä, ja puhuu siitä. Satunnaisuus on toteutettu Math-luokan staattisen metodin <code>random()</code>-avulla. Kutsu <code>Math.random()</code> palauttaa liukuluvun väliltä 0 ja 1, joka kerrotaan neljällä. Tämän jälkeen käytetään <em><a href="http://java.sun.com/javase/6/docs/api/java/lang/Double.html">Double</a></em>-luokan oliometodia <code>intValue()</code> aiheen indeksin valintaan. Lopuksi palautetaan merkkijono "Yksi olio-ohjelmoinnin peruskäsitteistä, " katenoituna indeksin osoittamaan aiheeseen. Yllä olevan Luennoitsija-luokan metodi <code>puhu()</code> palauttaa siis satunnaisesti yhden seuraavasta neljästä erilaisesta lauseesta. </p>
+
+<pre>
+Yksi olio-ohjelmoinnin peruskäsitteistä, kapselointi.
+Yksi olio-ohjelmoinnin peruskäsitteistä, periytyminen.
+Yksi olio-ohjelmoinnin peruskäsitteistä, polymorfismi.
+Yksi olio-ohjelmoinnin peruskäsitteistä, abstrahointi.
+</pre>
+
+    <p>Toteutetaan vielä luokka Lapsi, joka myös toteuttaa rajapinnan Puhuva.</p>
+
+<pre class="sh_java">
+public class Lapsi implements Puhuva {
+  ...
+  public String puhu() {
+    return "Mikä toi on?";
+  }
+}
+</pre>
+
+    <p>Yllä oleva luokka Lapsi toteuttaa rajapinnan Puhuva ja sen määrittelemän metodin <code>puhu()</code>. Metodi <code>puhu()</code> palauttaa aina tekstin "Mikä toi on?".</p>
+    
+    <p>Luodaan vielä ohjelma, joka luo kolme rajapinnan Puhuva toteuttavaa luokkaa. Kaksi luennoitsijaa ja yhden lapsen.</p>
+
+<pre class="sh_java">
+Luennoitsija mattiL = new Luennoitsija();
+Luennoitsija mattiP = new Luennoitsija();
+Lapsi mattiV = new Lapsi();
+
+System.out.println(mattiV.puhu());
+System.out.println(mattiL.puhu());
+System.out.println(mattiV.puhu());
+System.out.println(mattiP.puhu());
+System.out.println(mattiV.puhu());
+System.out.println(mattiP.puhu());
+</pre>
+
+    <p>Yllä olevan ohjelman tulostus voisi olla esimerkiksi seuraavaa.</p>
+
+<pre>
+Mikä toi on?
+Yksi olio-ohjelmoinnin peruskäsitteistä, kapselointi.
+Mikä toi on?
+Yksi olio-ohjelmoinnin peruskäsitteistä, polymorfismi.
+Mikä toi on?
+Yksi olio-ohjelmoinnin peruskäsitteistä, kapselointi.
+</pre>    
+     
+
+    <h3>Rajapinta muuttujan tyyppinä</h3>
+    
+    <p>Koska rajapinta Puhuva määrittelee metodin <code>puhu()</code>, voidaan kaikilta Puhuva-rajapinnan toteuttavien luokkien olioilta kutsua metodia <code>puhu()</code>. Rajapinta toimii kuten viitetyyppiset muuttujat, eli rajapinta-tyyppinen muuttuja sisältää viitteen olioon. Jos olion tyyppinä käytetään rajapintaa, voidaan siltä kutsua vain rajapinnan määrittelemiä metodeja. Rajapintojen ja luokkien suurin ero on se, että rajapinnasta ei voi tehdä ilmentymää. Tietyn rajapinnan toteuttavan luokan voi kuitenkin asettaa rajapinta-tyyppiseen muuttujaan. Seuraavassa esimerkissä luodaan kaksi Puhuva-tyyppistä oliota, toinen Luennoija luokasta, toinen luokasta Lapsi. Kummallekin kutsutaan myös metodia <code>puhu()</code></p>
+
+<pre class="sh_java">
+Puhuva mattiP = new Luennoitsija();
+Puhuva mattiV = new Lapsi();
+
+System.out.println(mattiV.puhu());
+System.out.println(mattiP.puhu());
+</pre>
+  
+    <p>Yllä olevassa esimerkissä kutsutaan siis viitteiden mattiP ja mattiV takana oleville olioille metodia <code>puhu()</code>. Koska luokat Luennoitsija ja Lapsi toteuttavat rajapinnan Puhuva, on niillä myös metodi <code>puhu()</code>.</p>
+        
+    <p>Rajapintaa voidaan käyttää muuttujan tyyppinä. Tällöin ei tiedetä rajapinnan toteuttavan luokan muista metodeista, vaan käytetään vain metodeja, joita rajapinta määrittelee. Edellisessä kappaleessa nähdyn dialogin olioiden <code>mattiL</code>, <code>mattiP</code> ja <code>mattiV</code> välillä voi kirjoittaa seuraavasti.</p>
+
+<pre class="sh_java">
+Puhuva mattiL = new Luennoitsija();
+Puhuva mattiP = new Luennoitsija();
+Puhuva mattiV = new Lapsi();
+
+System.out.println(mattiV.puhu());
+System.out.println(mattiL.puhu());
+System.out.println(mattiV.puhu());
+System.out.println(mattiP.puhu());
+System.out.println(mattiV.puhu());
+System.out.println(mattiP.puhu());
+</pre>
+
+
+    <h3>Rajapinta metodin parametrina</h3>
+
+    <p>Koska rajapintaa voidaan käyttää muuttujan tyyppinä, voidaan sitä käyttää myös metodikutsuissa parametrin tyyppinä. Luodaan uusi käyttäytymistyyppi, eli rajapinta, Liikkuva. Rajapinta liikkuva määrittelee metodit <code>liiku()</code>, ja <code>paljonkoLiikuttu()</code>. Metodi <code>liiku()</code> määrittelee liikkumistoiminnon, ja metodi <code>paljonkoLiikuttu()</code> taas antaa tiedon kuljetusta matkasta.</p>
+
+<pre class="sh_java">
+public interface Liikkuva {
+  public void liiku();
+  public int paljonkoLiikuttu();
+}
+</pre> 
+    
+    <p>Toteutetaan myös kaksi luokkaa, Auto ja Formula, jotka kummatkin toteuttavat rajapinnan Liikkuva. Luokilla Auto ja Formula on attribuutti kilometrit, joka pitää kirjaa liikutuista kilometreistä.</p>
+    
+<pre class="sh_java">
+public class Auto implements Liikkuva {
+  private int kilometrit;
+  ...
+  
+  public Auto() {
+    this.kilometrit = 0;
+  }
+  ...
+  
+  public void liiku() {
+    this.kilometrit++;
+  }
+  
+  public int paljonkoLiikuttu() {
+    return this.kilometrit;
+  }
+}
+</pre>
+
+    
+<pre class="sh_java">
+public class Formula implements Liikkuva {
+  private int kilometrit;
+  ...
+  
+  public Formula() {
+    this.kilometrit = 0;
+  }
+  
+  ...
+  
+  public void liiku() {
+    this.kilometrit += 3;
+  }
+  
+  public int paljonkoLiikuttu() {
+    return this.kilometrit;
+  }
+}
+</pre>
+
+    <p>Sekä luokka Auto, että luokka Formula toteuttavat rajapinnan liikkuva. Luodaan seuraavaksi pääohjelma, jossa on metodi Liikkuva-tyyppisten olioiden liikuttamiseen.</p>
+    
+<pre class="sh_java">
+public static void main(String[] komentoriviParametrit) {
+  Auto volga = new Auto();
+  Formula f1 = new Formula();
+  
+  liikuta(volga);
+  liikuta(f1);
+  
+  System.out.println("Autolla ajettu " + volga.paljonkoLiikuttu() + " km.");
+  System.out.println("Formulalla ajettu " + f1.paljonkoLiikuttu() + " km.");
+}
+
+public static void liikuta(Liikkuva liikkuva) {
+  liikkuva.liiku();
+}
+</pre>
+
+    <p>Esimerkki tulostaa seuraavan tulosteen</p>
+
+<pre>
+Autolla ajettu 1 km.
+Formulalla ajettu 3 km.
+</pre>
+    
+    <p>Koska luokat Auto ja Formula toteuttavat rajapinnan Liikkuva, voidaan ne antaa parametrina metodille joka ottaa Liikkuva-tyyppisiä olioita. Metodin sisällä voi tietysti kutsua vain rajapinnan Liikkuva määrittelemiä metodeja. </p>
+    
+    <h3>Rajapinta metodin paluuarvona</h3>
+    
+    <p>Rajapinta voi olla myös metodin paluuarvo. Seuraava metodi luo uusia Liikkuva-rajapinnan toteuttavia olioita. Huomaa että rajapinnalla ei ole konstruktoria, vaan metodi palauttaa rajapinnan toteuttavista luokista tehtyjä ilmentymiä.</p>
+
+<pre class="sh_java">
+public static Liikkuva luoLiikkuva() {
+  if(Math.random() &gt; 0.5) {
+    return new Auto();
+  }
+  
+  return new Formula();
+}
+</pre>
+
+    <p>Yllä oleva metodi luo 50% todennäköisyydellä auto-olion, ja 50% todennäköisyydellä formulaolion. Luotu Auto tai Formula palautetaan rajapinnan Liikkuva toteuttavana oliona.</p>
+    
+    <h3>Valmiit rajapinnat</h3>
+    
+    <p>Javan API tarjoaa ison määrän valmiita rajapintoja. Muunmuassa tuttu ArrayList-luokka toteuttaa rajapinnan List, joka määrittelee listan perustoiminnot. ArrayList-luokkaa voisikin käyttää myös seuraavasti:</p>
+
+<pre class="sh_java">
+List&lt;String&gt; merkkijonot = new ArrayList&lt;String&gt;();
+merkkijonot.add("Moi taas!");
+</pre>
+    <p>Koska luokka ArrayList toteuttaa rajapinnan List, ja rajapinta List määrittelee metodin <code>add()</code>, voidaan metodia <code>add()</code> kutsua yllä luodulle List-tyyppiselle oliolle.</p>
+    
+
+    <h4>Comparable</h4>
+    
+    <p>Yksi Javan valmiiksi tarjoamista rajapinnoista on <em><a href="http://java.sun.com/javase/6/docs/api/java/lang/Comparable.html">Comparable</a></em>. Rajapinta Comparable määrittelee metodin <code>compareTo()</code>, joka palauttaa <code>this</code>-olion paikan verrattuna parametrina annettuun olioon. Muutetaan aiemmin luotua luokkaa Lapsi siten, että sillä on nimi ja se toteuttaa Comparable-rajapinnan. Lisätään lapselle myös attribuutit pituus, jota käytetään <code>compareTo()</code>-metodissa. Comparable-rajapinta ottaa tyyppiparametrina myös luokan, johon sitä verrataan.</p>
+
+<pre class="sh_java">
+public class Lapsi implements Puhuva, Comparable&lt;Lapsi&gt; {
+  private String nimi;
+  private int pituus;
+  
+  public Lapsi(String nimi, int pituus) {
+    this.nimi = nimi;
+    this.pituus = pituus;
+  }
+  
+  public String annaNimi() {
+    return this.nimi;
+  }
+  
+  public int annaPituus() {
+    return this.pituus;
+  }
+  
+  // metodi saa parametrikseen Lapsi-tyyppisen olion, sillä Comparable-rajapinnalle on annettu tyypiksi Lapsi
+  public int compareTo(Lapsi toinen) {
+    if(this.annaPituus() == toinen.annaPituus()) {
+      return 0;
+    } else if (this.annaPituus() &gt; toinen.annaPituus()) {
+      return -1;
+    } else {
+      return 1;
+    }
+  }
+  
+  public String puhu() {
+    return "Mikä toi on?";
+  }
+}
+</pre>
+
+
+    <h2 id="collections">Collections</h2>
+    
+    <p>Java tarjoaa suuren määrän valmiiksi tehtyjä toimintoja erilaisten tietorakenteiden käsittelyyn. Luokkakirjasto <em><a href="http://java.sun.com/javase/6/docs/api/java/util/Collections.html">Collections</a></em> on eräs kirjasto, jota tullaan käyttämään tällä kurssilla. Collections löytyy Javan pakkauksesta <em>java.util.Collections</em>, eli sen saa käyttöön kutsulla <code>import java.util.Collections;</code>, joka asetetaan lähdekooditiedoston alkuun.</p>
+    
+    <h3>Järjestäminen</h3>
+    
+    <p>Luokkakirjasto collections tarjoaa valmiiksi toteutetun järjestämisalgoritmin, jolla voidaan järjestää Comparable-rajapinnan toteuttavia olioita. Katsotaan seuraavaksi Lapsi-olioiden järjestämistä pituusjärjestykseen.</p>
+
+<pre class="sh_java">
+ArrayList&lt;Lapsi&gt; lapset = new ArrayList();
+lapset.add(new Lapsi("Matti L", 187));
+lapset.add(new Lapsi("Robert W", 272));
+lapset.add(new Lapsi("Aditya D", 56));
+
+for(Lapsi l: lapset) {
+  System.out.println(l.annaNimi());
+}
+
+System.out.println();
+Collections.sort(lapset);
+for(Lapsi l: lapset) {
+  System.out.println(l.annaNimi());
+}
+</pre>
+
+    <p>Esimerkin tulostus on seuraavanlainen</p>
+
+<pre>
+Matti L
+Robert W
+Aditya D
+
+Robert W
+Matti L
+Aditya D
+</pre>
+
+    
+    <h3>Hakeminen</h3>
+    
+    <p>Collections-luokkakirjasto tarjoaa myös valmiiksi toteutetun binäärihaun. Metodi <code>binarySearch()</code> palauttaa haetun alkion indeksin listasta, jos se löytyy. Jos alkioita ei löydy, hakualgoritmi palauttaa negatiivisen arvon. Metodi <code>binarySearch()</code> käyttää Comparable-rajapintaa haetun olion löytämiseen. Jos olion <code>compareTo()</code>-metodi palauttaa arvon 0, eli olio on sama, ajatellaan arvon löytyneen.</p>
+
+    <p>Lapsi-luokkamme vertaa pituuksia <code>compareTo()</code>-metodissaan, eli listasta etsiessä etsisimme samanpituista lasta.</p>
+
+<pre class="sh_java">
+ArrayList&lt;Lapsi&gt; lapset = new ArrayList();
+lapset.add(new Lapsi("Matti L", 187));
+lapset.add(new Lapsi("Robert W", 272));
+lapset.add(new Lapsi("Aditya D", 56));
+
+Collections.sort(lapset);
+
+Lapsi haettava = new Lapsi("Nimi", 180);
+int indeksi = Collections.binarySearch(lapset, haettava);
+if(indeksi &gt;= 0) {
+  System.out.println("180 senttiä pitkä löytyi indeksistä " + indeksi);
+  System.out.println("Nimi: " + lapset.get(indeksi).annaNimi());
+}
+
+haettava = new Lapsi("Nimi", 187);
+int indeksi = Collections.binarySearch(lapset, haettava);
+if(indeksi &gt;= 0) {
+  System.out.println("187 senttiä pitkä löytyi indeksistä " + indeksi);
+  System.out.println("Nimi: " + lapset.get(indeksi).annaNimi());
+}
+</pre>
+
+    <p>Esimerkkimme tulostaa seuraavaa</p>
+    
+<pre>
+187 senttiä pitkä löytyi indeksistä 1
+Nimi: Matti L
+</pre>
+
+    <p>Huomaa että esimerkissä kutsuttiin myös metodia <code>Collections.sort()</code>. Tämä tehdään sen takia, että binäärihakua ei voida tehdä jos taulukko tai lista ei ole valmiiksi järjestyksessä.</p>
+    
+   
+    <h2 id="virheet">Virheiden löytäminen ohjelmasta</h2>
+    
+    <p>Kurssilla ollaan usein törmätty tilanteeseen, missä ohjelman suoritus antaa virheen, eikä paikkaa josta virhe johtuu löydy helposti. Tässä kappaleessa esitellään muutama hyvä keino virheiden löytämiseksi.</p>
+    
+    <h3>Ohjelman tilan tulostaminen</h3>
+    
+    <p>Ensimmäinen tapa virheiden löytämiseen on muuttujien tilan tulostaminen <code>System.out.println()</code>-komentojen avulla. Jos metodi tai ohjelma toimii väärin, voi siihen lisätä välitulostuksia, jotka tulostavat arvot aina sopivissa kohdissa. Näitä arvoja tutkimalla voi katsoa, onko ohjelman toiminta halutunlaista.</p>
+    
+    <h3>Debuggerin käyttö</h3>
+    
+    <p>NetBeans tarjoaa myös niinsanotun debuggerin, eli työkalun jolla ohjelmaa voidaan suorittaa askeleittain. Lähdekoodi-ikkunan vasenta laitaa painamalla voidaan asettaa pysähdyspisteitä (engl. breakpoint), joissa ohjelman suoritus pysähtyy automaattisesti. Debugger näyttää pysähdyskohdissa muuttujat ja niiden arvot. Debuggerin saa valitsemalla Run-valikosta "Debug Main Project". Myös komento "Ctrl+F5" ajaa debuggerin. Seuraavaan pysähdyskohtaan pääsee etenemällä painamalla "F5". Huomaa että pysähdyskohdat täytyy määritellä sellaisille riveille, joissa on komento.</p>
+	
+<p> <a href="http://www.youtube.com/watch?v=joWldbcp1So">Youtube-video</a> NetBeansin bebuggerin käytön perusteista.</p>
+    
+
+    <h2 id="final">Final</h2>
+    
+    <p>Final on samanlainen määre kuin static, eli sitä käytetään muuttujien määrittelyssä. Final-määre lukitsee muuttujan arvon siten, että sitä ei voi enää muuttaa. Alkeistyyppisille muuttujille tämä tarkoittaa sitä, että muuttujan arvo pysyy samana. Viitetyyppisille muuttujille lukitseminen tarkoittaa sitä, että viitettä ei voi muuttaa, mutta viitteen takana olevan olion sisäistä tilaa voi toki muuttaa. </p>
+    
+    <p>Viime viikolla nähtiin luokkakirjasto HslHinnasto, jossa muuttujat oli määritelty kaikille näkyviksi. </p>
+
+<pre class="sh_java">
+public class HslHinnasto {
+  public static double KERTALIPPU_AIKUINEN = 2.50;
+  public static double RAITIOVAUNULIPPU_AIKUINEN = 2.50; 
+}    
+</pre> 
+    
+    <p>Yllä olevan toteutuksen heikkous on se, että muuttujien arvoa voi muuttaa myös mistä tahansa. Final-määre lukitsee arvot paikalleen, eli määrittelemällä luokkakirjaston seuraavasti muuttujien arvoa ei enää voi muuttaa.</p>    
+
+<pre class="sh_java">
+public class HslHinnasto {
+  public static final double KERTALIPPU_AIKUINEN = 2.50;
+  public static final double RAITIOVAUNULIPPU_AIKUINEN = 2.50; 
+}    
+</pre>
+
+    <p>Hyvä suunnittelutapa on lukita kaikkialle näkyvät staattiset muuttujat, eli määreen <code>public static</code> omaavat muuttujat, pysyviksi määreellä final.</p>
+    
+    
+    
+    
+    
+    
+    
+    <h2 id="nimeaminen">Metodien nimeäminen</h2>
+    
+    <p>Javassa puhutaan usein gettereistä ja settereistä, eli metodeista jotka joko palauttavat tai asettavat arvoja. Kirjoitetaan tästä eteenpäin arvon asettavat metodit muodossa <code><em>set</em>MuuttujanNimi()</code>, ja arvon palauttavat metodit muodossa <code><em>get</em>MuuttujanNimi()</code>. Alla olevassa luokassa <code>Elain</code> on oikein nimetyt getterit ja setterit.</p>
+
+<pre class="sh_java">
+public class Elain {
+  private String nimi;
+  private double pituus;
+
+  public Elain(String nimi, double pituus) {
+    this.nimi = nimi;
+    this.pituus = pituus;
+  }
+  
+  public double getPituus() {
+    return this.pituus;
+  }
+  
+  public void setPituus(double pituus) {
+    this.pituus = pituus;
+  }
+  
+  public String getNimi() {
+    return this.nimi;
+  }
+  
+  public void setNimi(String nimi) {
+    this.nimi = nimi;
+  }
+}
+</pre>
+
+    <p>Getterit ja Setterit voidaan luoda automaattisesti useimmissa IDEissä, esimerkiksi NetBeanssissa niiden luominen tapahtuu valitsemalla <em>Source -&gt; Insert Code -&gt; Getter and Setter...</em> ja valitsemalla muuttujat joille getterit ja setterit tehdään.</p>
+
+
+    <h2 id="periytyminen">Periytyminen</h2>
+    
+    <p>Periytymisellä tarkoitetaan sitä kun luokka saa, eli perii, jo olemassa olevan luokan ominaisuudet. Periytymisen hyötynä on ohjelmointityön väheneminen, kun jo valmiiksi olemassaolevia toteutuksia voidaan käyttää pohjana uusille toteutuksille. Luodaan luokka <code>Tehdas</code>, jolla on metodi <code>soitaPillia()</code>.</p>
+    
+<pre class="sh_java">
+public class Tehdas {
+  public void soitaPillia() {
+    System.out.println("Piip!");
+  }
+}
+</pre>
+
+    <p>Periytyminen tapahtuu avainsanalla <em>extends</em>, jota seuraa perittävän luokan nimi. Luokka voi periä aina vain yhden luokan. Luodaan seuraavaksi luokka <code>OhjelmistoTehdas</code>, joka perii luokan <code>Tehdas</code> toiminnot. Ohjelmistotehtaalla on myös metodi <code>tuotaKoodia()</code>, joka palauttaa lähdekoodia merkkijonona.</p>
+    
+<pre class="sh_java">
+public class OhjelmistoTehdas extends Tehdas {
+  public String tuotaKoodia() {
+    return "System.out.println(\"HelloWorld!\");";
+  }
+}
+</pre>
+
+    <p>Koska luokka <code>OhjelmistoTehdas</code> perii luokan <code>Tehdas</code>, on sillä käytössä myös Tehtaan metodi <code>soitaPillia()</code>. Voimme siis käyttää yllä olevaa ohjelmistotehdasta seuraavasti.</p>
+
+<pre class="sh_java">
+OhjelmistoTehdas t = new OhjelmistoTehdas();
+t.soitaPillia();
+System.out.println(t.tuotaKoodia());
+</pre>
+
+    <p>Konstruktorikutsun <code>new OhjelmistoTehdas()</code> voi tehdä koska luokka <code>Tehdas</code> sisältää parametrittoman oletuskonstruktorin. Perivän luokan konstruktoria kutsuttaessa kutsutaan automaattisesti perityn luokan parametritonta konstruktoria. Saamma ylläolevasta esimerkistä seuraavan tulosteen.</p>
+
+<pre>
+Piip!
+System.out.println("HelloWorld!");
+</pre>
+
+    <p>Perittyä luokkaa kutsutaan <em>yläluokaksi</em>, ja perivää luokkaa <em>aliluokaksi</em>. Kukin luokka voi periä vain yhden luokan, mutta moni luokka voi periä saman luokan. Yllä olevassa esimerkissä luokka <code>Tehdas</code> on yläluokka, luokka <code>OhjelmistoTehdas</code> aliluokka.</p>
+    
+    <p>Luodaan vielä toinen tehdas, luokka <code>KarkkiTehdas</code>.</p>
+
+<pre class="sh_java">
+public class KarkkiTehdas extends Tehdas {
+  private String karkkimerkki;
+
+  public KarkkiTehdas(String karkkimerkki) {
+    this.karkkimerkki = karkkimerkki;
+  }
+  
+  public String getKarkkimerkki() {
+    return this.karkkimerkki;
+  }
+}
+</pre>
+
+    <p>Myös luokalla <code>KarkkiTehdas</code> on käytössä metodi <code>soitaPillia()</code>. Karkkitehtaan voi ottaa käyttöön seuraavasti. </p>
+    
+<pre class="sh_java">
+KarkkiTehdas tehdas = new KarkkiTehdas("Kater");
+tehdas.soitaPillia();
+</pre>
+
+    <p>Karkkitehtaan <code>soitaPillia()</code> metodikutsu tuottaa myös tulosteen <code>Piip!</code>.</p>
+    
+    
+    <h3 id="ylakonst">Yläluokan konstruktorit - super</h3>
+    
+    <p>Jos yläluokalla on määritelty parametrillinen konstruktori, voi sitä kutsua määreen <code>super</code>-avulla. Määre <code>super</code> on kuin <code>this</code>, mutta viittaa perityn luokan ominaisuuksiin, kun taas <code>this</code> viittaa kyseiseen olioon. Luodaan parametrillisen konstruktorin omaava luokka <code>Elain</code>, jolla on nimi ja pituus.</p>
+    
+<pre class="sh_java">
+public class Elain {
+  private String nimi;
+  private double pituus;
+  
+  public Elain(String nimi, double pituus) {
+    this.nimi = nimi;
+    this.pituus = pituus;
+  }
+  
+  public double getPituus() {
+    return this.pituus;
+  }
+  
+  public String getNimi() {
+    return this.nimi;
+  }
+}
+</pre>
+    
+    <p>Seuraavaksi luodaan luokka Vesieläin (<code>Vesielain</code>), joka laajentaa luokkaa <code>Elain</code> ja osaa uida. Luokan <code>Elain</code> konstruktorissa viitataan yläluokkaan avainsanalla <em>super</em>. Jos kutsua <code>super()</code> käytetään konstruktorissa, täytyy sen olla konstruktorin ensimmäinen komento.</p>
+    
+<pre class="sh_java">
+public class Vesielain extends Elain {
+  // vesieläimillä lienee myös kidukset, mutta unohdetaan ne hetkeksi
+  public double nopeus;
+  
+  public Vesielain(String nimi, double pituus, double nopeus) {
+    super(nimi, pituus);
+    this.nopeus = nopeus;
+  }
+  
+  public void ui() {
+    System.out.println("Viuh!");
+  }
+}
+</pre>
+
+<p>Koska luokalla <code>Elain</code> on ohjelmoijan kirjoittama konstruktori, ei luokalla ole enää Javan automaattisesti generoimaa parametrotonta oletuskonstruktoria. Aliluokan konstruktorista on pakko kutsua yliluokan konstruktoria. Sen takia seuraava konstruktori ei kelpaisi luokalle <code>Vesieläin:</code></p>
+
+<pre class="sh_java">
+public Vesielain(String nimi, double pituus, double nopeus) {
+	this.nimi = nimi;
+	this.pituus = pituus;
+	this.nopeus = nopeus;
+}
+</pre>
+
+<p>Jos taas luokalle <code>Elain</code> lisättäisiin parametriton konstruktori, edelleinen kävisi luokan <code>Vesieläin</code> konstruktoriksi, Java nimittäin lisää aliluokaan kutsun yliluokan parametrittomaan konstruktoriin jos konstruktori ei sisällä <code>super</code>-kutsua yliluokan konstruktoriin.</p>
+
+
+    <p>Tehdään vielä luokat <a href="http://kuvablogi.com/nayta/prev/img1041374.jpg">Riikinkukkoahven</a> ja <a href="http://cartinafinland.fi/kuvapankki/imagebank/image/50/50778/Siipisimppu.jpg">Siipisimppu</a>, jotka perivät luokan <code>Vesielain</code> ominaisuudet.</p>
+
+<pre class="sh_java">
+public class Riikinkukkoahven extends Vesielain {
+  public Riikinkukkoahven(String nimi, double pituus, double nopeus) {
+    super(nimi, pituus, nopeus);
+  }
+}
+</pre>
+    
+<pre class="sh_java">
+public class Siipisimppu extends Vesielain {
+  public Siipisimppu(String nimi, double pituus, double nopeus) {
+    super(nimi, pituus, nopeus);
+  }
+}
+</pre>
+
+    <p>Koska Riikinkukkoahven ja Siipisimppu perivät kummatkin luokan <code>Vesielain</code>, voivat ne käyttää Vesieläin luokassa toteutettuja valmiita toimintoja. Seuraavassa esimerkissä luodaan "Matti" - niminen siipisimppu, ja kutsutaan sen metodia <code>ui()</code>. Huomaa että metodi <code>ui()</code> on toteutettu luokassa <code>Vesielain</code>. Koska Siipisimppu perii luokan Vesielain, saa se käyttää sen ja sen yläluokkien metodeja.</p>
+    
+<pre class="sh_java">
+Siipisimppu mattiL = new Siipisimppu("Matti", 187, 22.5);
+mattiL.ui();
+</pre>    
+    
+    <p>Esimerkki luo <code>mattiL</code>-nimisellä viitteellä varustetun Siipisimppu-tyyppisen olion ja kutsuu sen <code>ui()</code>-metodia. Metodi <code>ui()</code> tulostaa merkkijonon <code>Viuh!</code>.</p>
+    
+    <h3 id="ylamet">Yläluokan metodit</h3>
+    
+    <p>Yläluokan metodit ovat suoraan alaluokan käytettävissä jos niille ei ole asetettu näkyvyysmäärettä private.. Lisätään luokalle <code>Siipisimppu</code> <code>toString()</code>-metodi, joka kutsuu luokassa <code>Elain</code> määriteltyä <code>getNimi()</code>-metodia.</p>
+
+<pre class="sh_java">
+public class Siipisimppu extends Vesielain {
+  public Siipisimppu(String nimi, double pituus, double nopeus) {
+    super(nimi, pituus, nopeus);
+  }
+  
+  public String toString() {
+    return "Hei, olen Siipisimppu, ja nimeni on " + getNimi();
+  }
+}
+</pre>
+
+    <p>Luodaan vielä Siipisimppu-olio ja tulostetaan sen tila.</p>
+
+<pre class="sh_java">
+Siipisimppu mattiL = new Siipisimppu("Matti", 187, 22.5);
+System.out.println(mattiL);
+</pre>
+
+    <p>Esimerkki tulostaa merkkijonon <code>Hei, olen Siipisimppu, ja nimeni on Matti</code>.</p>
+    
+    <h3 id="ylikirjoitus">Metodien ylikirjoitus</h3>
+    
+    <p>Metodien ylikirjoituksella tarkoitetaan sitä, että yläluokassa oleva metodi toteutetaan uudestaan aliluokassa. Tällöin kun aliluokasta luodulle oliolle kutsutaan kyseistä metodia, kutsutaan aliluokan toteutusta. Yläluokasta luodulle oliolle kutsutaan yläluokan metoditoteutusta.</p>
+    
+    <p>Toteutetaan <code>Vesielain</code>-luokan periva luokka <a href="http://upload.wikimedia.org/wikipedia/commons/2/22/RNK_jastog.jpg"><code>Hummeri</code></a>. Hummerit eivät osaa uida, joten niitä varten <code>Vesielain</code>-luokassa oleva metodi <code>ui()</code> täytyy ylikirjoittaa.</p>
+
+<pre class="sh_java">
+public class Hummeri extends Vesielain {
+  public Hummeri(String nimi, double pituus, double nopeus) {
+    super(nimi, pituus, nopeus);
+  }
+  
+  public void ui() {
+    System.out.println("Uisin jos osaisin :,(");
+  }
+}
+</pre>
+
+    <p>Luodaan vielä kaksi vesieläintä, Hummeri ja Siipisimppu, ja kutsutaan kummallekin metodia <code>ui()</code>.</p>
+    
+<pre class="sh_java">
+Siipisimppu mattiL = new Siipisimppu("Matti", 187, 22.5);
+System.out.println("Siipisimppu ui:");
+mattiL.ui();
+
+Hummeri mattiV = new Hummeri("Matti", 180, 3.5);
+System.out.println("Hummeri ui:");
+mattiV.ui();
+</pre>        
+  
+    <p>Esimerkin tulostus on seuraavanlainen</p>
+    
+<pre>
+Siipisimppu ui:
+Viuh!
+Hummeri ui:
+Uisin jos osaisin :,(
+</pre>
+
+
+    <p>Yllä olevan esimerkin kautta huomaamme suunnittelemassamme <em>Eläin-&gt;Vesieläin-&gt;Hummeri</em> periytymishierarkiassamme piilevän ongelman. Olemme luoneet Vesielain-luokan, jolla on <code>ui()</code>-metodi, vaikka kaikki vesieläimet eivät osaa uida. Parempi ratkaisu olisikin luoda luokasta <code>Vesielain</code> luokat <code>Kala</code> ja <code>Äyriäinen</code>. Hummeri laajentaisi, eli perisi, luokkaa Äyriäinen, kun taas Riikinkukkoahven ja Siipisimppu perisivät luokan Kala.</p>
+
+    <h3 id="ylikirj_meto">Yliluokan ylikirjoitettujen metodien kutsuminen - super</h3>
+	
+        <p>Jos aliluokka ylikirjoittaa yliluokan metodin, on aliluokan sisältä mahdollista tarvittaessa kutsua yliluokan metodia viittaamalla siihen <code>super.metodinNimi();</code> Seuraavassa luokan <code>Muikku</code> hyödyntää omassa <code>ui()</code>-metodin toteutuksessa yliluokan <code>ui()</code>-metodia, johon siis viitataan <code>super.ui()</code>.</p>
+		
+<pre class="sh_java">
+public class Muikku extends Vesielain {
+  public Muikku(String nimi, double pituus, double nopeus) {
+    super(nimi, pituus, nopeus);
+  }
+  
+  public void ui() {
+    for (int i = 0; i &lt; 10; i++) {
+      super.ui();    
+    }
+  }
+}
+</pre>
+
+<p>Vielä käyttöesimerkki:</p>
+
+<pre class="sh_java">
+Muikku mattiP = new Muikku("Matti", 12, 7.5);
+System.out.println("Muikku ui:");
+mattiP.ui();
+</pre>        
+  
+    <p>Esimerkin tulostus on seuraavanlainen</p>
+    
+<pre>
+Muikku ui:
+Viuh!Viuh!Viuh!Viuh!Viuh!Viuh!Viuh!Viuh!Viuh!Viuh!
+</pre>
+		
+		
+    <h3 id="nakyvyys_protected">Näkyvyys - Protected</h3>
+    
+    <p>Olemme tähän mennessä nähneet kaksi erilaista näkyvyysmäärettä. Määre <code>public</code> asettaa metodit ja muuttujat kaikille näkyviksi, kun taas määrettä <code>private</code> käytetään luokan ominaisuuksien kapselointiin. Periytymisessä voidaan käyttää kolmatta määrettä <em>protected</em>, joka tarkoittaa sitä, että metodi tai muuttuja on aliluokille näkyvissä. Määrettä <code>protected</code> käytetään esimerkiksi silloin, kun tarvitaan luokan sisäisiä apuvälineitä, joita ei kuitenkaan haluta kaikkien näkyville. Esimerkiksi seuraava <code>Kassa</code>-toteutus sisältää <code>Laskuri</code>-tyyppiä olevan olion, joka näkyy kaikille luokan periville luokille.</p>
+
+<pre class="sh_java">
+public class Kassa {
+  protected Laskuri laskuri;
+  
+  public Kassa() {
+    this.laskuri = new Laskuri();
+  }
+  
+  public void lisaaKassaan(int montako) {
+    for(int i = 0; i &lt; montako; i++) {
+      laskuri.kasvataArvoa();
+    }
+  }
+  
+  // muita metodeja
+}
+</pre>
+
+    <p>Toinen luokka, <code>MatinKassa</code> tekee oman toteutuksen <code>lisaaKassaan()</code>-metodista.</p>
+
+<pre class="sh_java">
+public class MatinKassa extends Kassa {
+  private Laskuri jemma;
+  
+  public MatinKassa() {
+    jemma = new Laskuri();
+  }
+  
+  @Override
+  public void lisaaKassaan(int montako) {
+    for(int i = 0; i &lt; montako; i++) {
+      if(i % 5 == 0) {
+        jemma.kasvataArvoa();
+      } else {
+        laskuri.kasvataArvoa();
+      }
+    }
+  }
+}
+</pre>   
+
+    <p>Luokka <code>MatinKassa</code> jemmaa siis aina joka viidennen asian, eikä lisää sitä alkuperäisen kassan laskuriin. Alkuperäisen kassan <code>laskuri</code>-attribuutti on käytettävissä, koska sille on annettu määre <code>protected</code>. Javassa on <code>public</code>, <code>protected</code> ja <code>private</code>-määreiden lisäksi käsite pakkausnäkyvyys, jolla tarkoitetaan metodien ja attribuuttien näkymistä saman pakkauksen sisällä. Palataan pakkausmääreeseen ensi viikolla.</p>
+    
+    <h3 id="ylaluokka_object">Yläluokka Object</h3>
+    
+    <p>Javan kaikki luokat periytyvät luokasta <code><a href="http://java.sun.com/javase/6/docs/api/java/lang/Object.html">Object</a></code>, jota voidaan ajatella kaikkien luokkien peruspalikkana. Luokka <code>Object</code> määrittelee muunmuassa metodin <code>toString()</code>, joka tulostaa olion sisäisen tilan. Jos oma luokkamme ei toteuta metodia <code>toString()</code>, kutsumme oliota tulostettaessa luokan <code>Object</code> määrittelemää <code>toString()</code>-metodia. Perimistä voidaan ajatella seuraavanlaisena puuna, missä jokainen solmu, eli laatikko, perii yläpuolellaan olevan solmun.</p>
+    
+    <p><a href="http://java.sun.com/docs/books/tutorial/figures/java/classes-object.gif">Katso kuva Javan tutorialista</a></p>
+    
+    
+    <h2>Rajapinnat ja niiden periytyminen</h2>
+    
+    <p>Rajapinnat käyttäytyvät kuin luokat periytymisessä, eli niitä voi periä kuten luokkia. Katsotaan kahta erilaista periytymistilannetta.</p>
+    
+    <h3 id="rajapintojen_per">Rajapintojen periytyminen</h3>
+    
+    <p>Jos yläluokka toteuttaa rajapinnan, on sen toteutus olemassa myös rajapinnalle. Tällöin myös alaluokkaa voidaan käyttää esimerkiksi parametrina metodille, joka ottaa parametrikseen yläluokan toteuttaman rajapinnan tyyppiä olevan olion. Esimerkiksi luokka <code>KahviLaskuri</code>, joka toteuttaa rajapinnan <code>Laskuri</code>.</p>
+
+<pre class="sh_java">
+public class KahviLaskuri implements Laskuri {
+  protected int arvo;
+
+  public KahviLaskuri() {
+    this.arvo = 0;
+  }
+
+  public void kasvataArvoa() {
+    arvo = arvo + 1;
+  }
+
+  public void vahennaArvoa() {
+    arvo = arvo - 1;
+  }
+
+  public int getArvo() {
+    return arvo;
+  }
+  
+  public void lisaaArvoon(Laskuri laskuri) {
+    this.arvo += laskuri.getArvo();
+  }
+}
+</pre>
+
+    <p>Luokka <code>KahviLaskuri</code> toteuttaa rajapinnan <code>Laskuri</code>. Kahvilaskurilla on lisäksi metodi <code>lisaaArvoon()</code>, joka lisää arvoon parametrina annetun arvon. Toteutetaan luokka <code>EspressoLaskuri</code>, joka perii luokan <code>KahviLaskuri</code>.</p>    
+    
+<pre class="sh_java">
+public class EspressoLaskuri extends KahviLaskuri {
+    // ei mitään tällä hetkellä
+}
+</pre>    
+ 
+    <p>Luokan <code>EspressoLaskuri</code> ilmentymää voi käyttää <code>KahviLaskuri</code>-luokan metodin <code>lisaaArvoon()</code> parametrina koska sen yläluokka toteuttaa rajapinnan <code>Laskuri</code>.</p>   
+    
+<pre class="sh_java">
+EspressoLaskuri espressoLaskuri = new EspressoLaskuri();
+
+// juodaan espressoa
+espressoLaskuri.kasvataArvoa();
+espressoLaskuri.kasvataArvoa();
+espressoLaskuri.kasvataArvoa();
+espressoLaskuri.kasvataArvoa();
+
+// siirretään saldot kahviin
+KahviLaskuri kahviLaskuri = new KahviLaskuri();
+kahviLaskuri.lisaaArvoon(espressoLaskuri);
+System.out.println("Kahvilaskurissa arvona " + kahviLaskuri.getArvo());
+</pre>
+
+    <p>Esimerkin tulostus tulostaa merkkijonon <code>Kahvilaskurissa arvona 4</code>.</p>
+    
+    <h3>Rajapinnan periminen</h3>
+    
+    <p>Rajapinnan voi periä samalla tavalla kuin luokan. Tällöin alirajapinta saa ylärajapinnan kaikki metodit ja määrittelyt käyttöönsä. Esimerkiksi rajapinta <code>Laskuri</code> ja sen periva rajapinta <code>AsettavaLaskuri</code>.</p>
+    
+<pre class="sh_java">
+public interface Laskuri {
+  public void kasvataArvoa();
+  public void vahennaArvoa();
+  public int getArvo();
+}
+</pre>
+
+<pre class="sh_java">
+public interface AsettavaLaskuri extends Laskuri {
+  public void setArvo(int arvo);
+}
+</pre>
+
+    <p>Rajapinnan <code>AsettavaLaskuri</code> toteuttavan luokan pitää toteuttaa neljä metodia, <code>kasvataArvoa()</code>, <code>vahennaArvoa()</code>, <code>getArvo()</code> ja <code>asetaArvo()</code>. Toteutetaan vielä luokka <code>MokkaLaskuri</code>, joka toteuttaa rajapinnan <code>AsettavaLaskuri</code>. Koska olemme oppineet perimään luokkien metodeja ja attribuutteja, laajennamme luokkaa <code>KahviLaskuri</code>.</p>
+
+<pre class="sh_java">
+public class MokkaLaskuri extends KahviLaskuri implements AsettavaLaskuri {
+  public void setArvo(int uusiArvo) {
+    arvo = uusiArvo;
+  }
+}
+</pre>
+
+    <p>Huomaa että arvon asetus toimii vain, koska luokan <code>KahviLaskuri</code> toteutuksessa on määritelty muuttuja <code>arvo</code> aliluokille näkyviksi.</p>
+    
+    <h2 id="file">Tiedosto</h2>
+    
+    <p>Javaan kuuluu myös valmis tiedostoa kuvaava luokka <a href="http://java.sun.com/javase/6/docs/api/java/io/File.html">File</a>, jonka sisältö voidaan lukea kurssilla jo tutuksi tulleen <a href="http://java.sun.com/javase/6/docs/api/java/util/Scanner.html">Scanner</a>-luokan avulla. Tiedosto saa konstruktorissaan parametriksi <em>tiedostopolun</em>, joka kuvaa tiedoston sijaintia tietokoneen levyjärjestelmässä.</p>
+    
+    <h3>Tiedostot NetBeanssissa</h3>
+    
+    <p>NetBeans-ohjelmassa tiedostoille on oma välilehti nimeltä <em>Files</em>. Files-välilehdellä on määritelty kaikki projektiin liittyvät tiedostot. Jos projektin <em>juureen</em>, eli ei yhdenkään kansion sisälle, lisätään tiedosto, voidaan siihen viitata projektin sisältä suoraan tiedoston nimellä. Tiedosto-olion luominen tapahtuu antamalla sille parametrina polku tiedostoon, esimerkiksi seuraavasti</p>
+
+<pre class="sh_java">
+File tiedosto = new File("tiedoston-nimi.txt");
+</pre>
+
+
+    <h3>Tiedoston lukeminen</h3>
+    
+    <p>Koska Scanner-luokan konstruktori on kuormitettu, voi lukemislähde olla näppäimistön lisäksi myös tiedosto. Käytössämme on siis samat metodit tietoston lukemiseen kuin käyttäjän syötteen lukemiseen. Seuraavassa esimerkissä avataan tiedosto, tarkistetaan onko siellä tekstiriviä, ja luetaan se jos on. Lopuksi luettu rivi tulostetaan ja lukijan avaama tiedosto suljetaan. Huomaa että olemme lisänneet määreen <code>throws Exception</code> <code>main()</code>-metodiin. Tutustumme poikkeuksiin ja niiden hallintaan paremmin myöhemmin tällä kurssilla.</p>
+
+<pre class="sh_java">
+import java.io.File;
+import java.util.Scanner;
+
+public class TiedostonLuku {
+
+  public static void main(String[] komentoriviParametrit) throws Exception {
+    // tiedosto mistä luetaan
+    File tiedosto = new File("tiedosto.txt");
+    
+    Scanner lukija = new Scanner(tiedosto);
+    if(lukija.hasNextLine()) {
+      String rivi = lukija.nextLine();
+      System.out.println(rivi);  
+    }
+    
+    lukija.close();
+  }
+}
+</pre>
+
+    <p>Yllä oleva esimerkki avaa tiedoston <code>tiedosto.txt</code>, joka sijaitsee samassa sijainnissa ohjelman kanssa, ja lukee sen ensimmäisen rivin. Lopuksi lukija suljetaan, jolloin tiedosto myös suljetaan. Määre <code>throws Exception</code> kertoo että metodi saattaa heittää poikkeuksen. Samanlaisen määreen voi laittaa kaikkiin metodeihin jotka käsittelevät tiedostoja.</p>
+
+    <p>Useampia rivejä voi lukea esimerkiksi seuraavanlaisen toistorakenteen avulla. </p>
+    
+<pre class="sh_java">
+while(lukija.hasNextLine()) {
+  String rivi = lukija.nextLine();
+  System.out.println(rivi);
+}
+</pre>
+
+    <p>Luokan <code>Scanner</code> metodi <code>hasNextLine()</code> palauttaa totuusarvon <code>true</code> jos tiedostossa on luettava rivi.</p>
+
+    <p>Koska käytämme luokkaa <code>Scanner</code> tiedoston lukemiseen, voimme käyttää myös sen muita metodeja. Seuraavassa esimerkissä luetaan tiedosto sana kerrallaan. Metodi <code>hasNext()</code> palauttaa totuusarvon <code>true</code>, jos tiedostossa on vielä luettava sana, ja metodi <code>next()</code> lukee sen <code>String</code>-olioon, jonka se palauttaa.</p>
+    
+    <p>Esimerkkitiedostomme "tiedosto.txt" sisältää seuraavan tekstin: (voit copy-pasteta seuraavan tekstin oman tiedoston sisään kokeillessasi esimerkkiä itse!)</p>
+
+<pre>
+Poikkeukset (exceptions) ovat "poikkeuksellisia tilanteita" kesken normaalin ohjelmansuorituksen:
+tiedosto loppuu, merkkijono ei kelpaa kokonaisluvuksi, odotetun olion tilalla onkin null-arvo, 
+taulukon indeksi menee ohjelmointivirheen takia sopimattomaksi, ... 
+</pre>
+
+    <p>Seuraava ohjelma luo <code>Scanner</code>-olion, joka avaa tiedoston <code>tiedosto.txt</code>. Sen jälkeen se tulostaa joka viidennen sanan tiedostosta.</p>
+<pre class="sh_java">    
+File tiedosto = new File("tiedosto.txt");
+Scanner lukija = new Scanner(tiedosto);
+int monesko = 0;
+while (lukija.hasNext()) {
+  monesko++;
+  String sana = lukija.next();
+  if (monesko % 5 == 0) {
+    System.out.println(sana);
+  }
+}   
+</pre>
+    
+    <p>Ohjelman tulostus on seuraavanlainen</p>
+    
+<pre>
+tilanteita"
+loppuu,
+odotetun
+taulukon
+sopimattomaksi,
+</pre>
+
+
+
+		<h2 id="abstrakti_luokka">Abstrakti Luokka</h2>
+    
+    <p>Abstrakti luokka on periytymiseen ja abstrahointiin liittyvä apuväline. Abstraktista luokasta ei voida tehdä ilmentymiä, eli olioita, mutta sen voi periä. Abstraktin luokan tunnistaa määreestä <code>abstract</code> sen määrittelyssä. Luodaan abstrakti luokka <code>Korjaaja</code>.</p>
+    
+<pre class="sh_java">
+public abstract class Korjaaja {
+  protected String korjattava;
+  
+  public Korjaaja(String korjattava) {
+    this.korjattava = korjattava;
+  }
+  
+  public void setKorjattava(String korjattava) {
+    this.korjattava = korjattava;
+  }
+  
+  public String getKorjattava() {
+    return korjattava;
+  }
+}
+</pre>
+    
+    <p>Ilmentymän luonti luokasta <code>Korjattava</code> ei ole mahdollista, eli seuraava konstruktorikutsu ja viitteen asetus ei toimi.</p>
+    
+<pre class="sh_java">
+Korjaaja mattiV = new Korjaaja("abstraktinen, sellainen, joka ei ole kouriintuntuva eikä konkreettinen");
+</pre>
+
+    <p>Abstrakteilla luokilla määritellään yleiskäyttöinen runko runko sen periville luokille. Esimerkiksi abstraktista luokasta <code>Korjaaja</code> voidaan periä luokka <code>KokeenKorjaaja</code>. Luokka <code>KokeenKorjaaja</code> korjaa kokeita, ja sillä on abstraktin luokan <code>Korjaaja</code> määrittelemien metodien lisäksi metodi <code>korjaa()</code>. Abstraktin luokan periminen seuraa normaalin periytymisen sääntöjä, eli kutsumme yläluokan parametrillista konstruktoria <code>super()</code>-kutsulla. Myös yläluokan muuttujat ja metodit olisivat saatavilla.</p>
+  
+<pre class="sh_java">
+public class KokeenKorjaaja extends Korjaaja {
+  public KokeenKorjaaja(String korjattava) {
+    super(korjattava);
+  }
+
+  public void korjaa() {
+    this.korjattava += "\n - Pisteet " + Math.min(this.korjattava.length / 4, 60);
+  }
+}
+</pre>
+  
+    <p>Metodi <code>korjaa()</code> korjaa kokeen, eli tässä tapauksessa määrittelee siitä saatavat pisteet. Luokkakirjaston <code>Math</code> metodi <code>min()</code> palauttaa pienemmän kahdesta parametrista, eli kokeesta voi saada maksimissaan 60 pistettä. Luokasta <code>KokeenKorjaaja</code> voi tehdä ilmentymän normaalilla olion luontikutsulla. </p>
+
+<pre class="sh_java">
+String teksti = "An abstract class is designed only as a parent class " + 
+  "from which child classes may be derived.";
+KokeenKorjaaja mattiP = new KokeenKorjaaja(teksti);
+mattiP.korjaa();
+System.out.println(mattiP.getKorjattava());
+</pre>
+
+    <p>Yllä oleva esimerkki luo ilmentymän luokasta <code>KokeenKorjaaja</code> ja kutsuu sen <code>korjaa()</code>-metodia. Esimerkin tulostus on seuraavanlainen: </p>
+
+<pre>
+An abstract class is designed only as a parent class from which child classes may be derived.
+ - Pisteet 23
+</pre>
+
+    <p>Abstrakteja luokkia käytetään tapauksissa joissa useat luokat tarvitsevat samaa rakennuspiirrustusta, mutta rakennuspiirrustukset itsessään eivät kuitenkaan ole sellaiset, joista haluttaisiin luoda konkreettinen ilmentymä.</p>
+
+    <h3>Abstrakti Metodi</h3>
+    
+    <p>Abstraktin luokan metodit voidaan määritellä abstrakteiksi, jolloin niihin ei määritellä toteutusta. Abstrakti metodi määritellään avainsanalla <code>abstract</code> ja antamalla metodin paluuarvo, nimi ja parametrit. Esimerkiksi abstrakti metodi <code>piirra()</code>.</p>
+    
+<pre class="sh_java">
+public abstract void piirra();
+</pre>
+
+    <p>Abstraktin metodin määrittely on lähes kuin rajapintametodin määrittely. Sillä ei ole aaltosuluilla rajattavaa metodirunkoa, ja metodimäärittely päättyy puolipisteeseen. Luodaan abstrakti luokka <code>Hahmo</code>, jolla on abstrakti metodi <code>piirra()</code>. Jokainen luokkaa <code>Hahmo</code> laajentava <em>ei abstrakti</em> luokka joutuu toteuttamaan oman <code>piirra()</code>-metodinsa.</p>
+
+<pre class="sh_java">
+public abstract class Hahmo {
+  protected String nimi;
+  
+  public Hahmo(String nimi) {
+    this.nimi = nimi;
+  }
+  
+  public String getNimi() {
+    return this.nimi;
+  }
+  
+  public void setNimi(String nimi) {
+    this.nimi = nimi;
+  }
+  
+  public abstract void piirra();
+}
+</pre>
+
+    <p>Abstraktin metodin määrittelyssä ei siis määritellä metodin toteutusta, vaan vain tyyppi, nimi ja parametrit. Abstraktin luokan perivät <em>ei abstraktit</em> luokat joutuvat toteuttamaan abstraktit metodin. Jos abstrakti luokka perii abstraktin luokan, ei sen tarvitse toteuttaa yläluokan abstraktia metodia. Esimerkiksi seuraava luokka <code>Elvis</code> määrittelee myös Elviksen piirtämisen.</p>    
+
+<pre class="sh_java">
+public class Elvis extends Hahmo {
+  public Elvis(String nimi) {
+    super(nimi);
+  }
+
+  public void piirra() {
+    System.out.println("G   __");
+    System.out.println("\\\\  ,,)_");
+    System.out.println(" \\'-\\( /");
+    System.out.println("  \\ | ,\\");
+    System.out.println("   \\|_/\\\\");
+    System.out.println("   / _ '.D");
+    System.out.println("  / / \\ |");
+    System.out.println(" /_\\  /_\\");
+    System.out.println("'-    '-");
+    System.out.println("\"" + this.nimi + "\"");
+  }
+}
+</pre>
+
+    <p>Ylimääräiset kenoviivat <em>\</em> ennen kenoviivoja ja lainausmerkkejä <em>"</em> johtuu siitä, että osa merkeistä toimii erikoismerkkeinä. Esimerkiksi lainausmerkki aloittaa ja lopettaa merkkijonon. Asettamalla kenoviivan ennen erikoismerkkiä, esimerkiksi lainausmerkkiä, tulostetaan kenoviivaa seuraava erikoismerkki normaalina merkkinä. Luodessamme luokan <code>Elvis</code> ilmentymän ja kutsuessamme sen <code>piirra()</code>-metodia seuraavasti saamme luontikappaleen alla olevan tulosteen.</p>
+    
+<pre class="sh_java">
+Elvis e = new Elvis("Matti L");
+e.piirra();
+</pre>    
+    
+<pre>
+G   __
+\\  ,,)_
+ \'-\( /
+  \ | ,\
+   \|_/\\
+   / _ '.D
+  / / \ |
+ /_\  /_\
+'-    '-
+"Matti L"
+</pre>
+
+		<p>Voimme vastaavasti luoda luokan <code>Janis</code> (Jänis), jolla on oma <code>piirra()</code>-metodinsa.</p>
+
+<pre class="sh_java">
+public class Janis extends Hahmo {
+
+  public Janis(String nimi) {
+    super(nimi);
+  }
+
+  public void piirra() {
+    System.out.println("(\\___/)");
+    System.out.println("(='.'=)");
+    System.out.println("(\")_(\")");
+  }
+}
+</pre>
+
+    <p>Jäniksen <code>piirra()</code>-metodikutsu luo seuraavanlaisen tulosteen:</p>
+    
+<pre>
+(\___/)
+(='.'=)
+(")_(")
+</pre>
+
+    <p>Lisätään jänikselle vielä rajapinta <code>Liikkuva</code>.</p>
+
+<pre class="sh_java">
+public interface Liikkuva {
+  public void liiku();
+  public void liiku(int montaKertaa);
+}
+</pre>
+
+    <p>Ja muutetaan jäniksen toteutusta siten, että piirretty jänis oikeasti liikkuu.</p>
+
+<pre class="sh_java">
+public class Janis extends Hahmo implements Liikkuva {
+  private int sijainti;
+
+  public Janis(String nimi) {
+    super(nimi);
+    this.sijainti = 0;
+  }
+
+  public void piirra() {
+    tulostaTyhjaa(); System.out.println("(\\___/)");
+    tulostaTyhjaa(); System.out.println("(='.'=)");
+    tulostaTyhjaa(); System.out.println("(\")_(\")");
+  }
+  
+  private void tulostaTyhjaa() {
+    for(int i = 0; i &lt; sijainti; i++) {
+      System.out.print(" ");
+    }
+  }
+
+  public void liiku() {
+    this.sijainti++;    
+  }
+
+  public void liiku(int montaKertaa) {
+    for(int i = 0; i &lt; montaKertaa; i++) {
+      liiku();
+    }
+  }
+}
+</pre>
+
+    <p>Kokeile minkälaisella koodilla saat jäniksen liikkumaan seuraavasti!</p>
+
+<pre>
+(\___/)
+(='.'=)
+(")_(")
+ (\___/)
+ (='.'=)
+ (")_(")
+      (\___/)
+      (='.'=)
+      (")_(")
+</pre>
+   
+    <h3 id="rajapinnat_abstrakti">Rajapinnat Abstraktissa Luokassa</h3>
+    
+    <p>Abstraktille luokalle voidaan myös tehdä sopimus rajapintojen toteuttamisesta, aivan kuten kaikille muille luokille. Jos abstraktille luokalle määritellään rajapinta, ei rajapinnan metodeja ole kuitenkaan pakko toteuttaa abstraktin luokan sisällä. Tällöin abstraktin luokan perivä (ei abstrakti) luokka joutuu toteuttamaan rajapinnan määrittelemät metodit. Siirretään yllä määritelty <code>Liikkuva</code>-rajapinta abstraktiin luokkaan <code>Hahmo</code>.</p>
+
+<pre class="sh_java">
+public abstract class Hahmo implements Liikkuva {
+  protected String nimi;
+  
+  public Hahmo(String nimi) {
+    this.nimi = nimi;
+  }
+  
+  public String getNimi() {
+    return this.nimi;
+  }
+  
+  public void setNimi(String nimi) {
+    this.nimi = nimi;
+  }
+  
+  public abstract void piirra();
+}
+</pre>
+
+    <p>Koska <code>Liikkuva</code>-rajapinnan metodit ovat vain sopimuksia metodien toteuttamisesta, aivan kuten abstraktit metoditkin, ei rajapinnan metodeja tarvitse määritellä erikseen <code>Hahmo</code>-luokassa. Tällöin, samoin kuin abstraktien metodien tapauksessa, perivät luokat joutuvat toteuttamaan määritellyt metodit.</p>
+    <p>Esimerkiksi <code>Hahmo</code>-luokan toteuttava luokka <code>Elvis</code> jouduttaisiin <em>joko</em> muuttamaan abstraktiksi <em>tai</em> määrittelemään rajapinnan vaatimat metodit. Abstraktin luokan ei tarvitse sisältää sovittujen metodien toteutuksia, kun taas normaalissa luokassa niiden on oltava joko kyseisessä luokassa tai periytymisen kautta. Lisätään Elvikselle myös liikkumismetodi.</p>
+
+<pre class="sh_java">
+public class Elvis extends Hahmo {
+  private boolean vasen;
+
+  public Elvis(String nimi) {
+    super(nimi);
+    this.vasen = true;
+  }
+
+  public void piirra() {
+    if (vasen) {
+      piirraVasen();
+    } else {
+      piirraOikea();
+    }
+    System.out.println("\"" + this.nimi + "\"");
+  }
+
+  private void piirraVasen() {
+    System.out.println("G   __");
+    System.out.println("\\\\  ,,)_");
+    System.out.println(" \\'-\\( /");
+    System.out.println("  \\ | ,\\");
+    System.out.println("   \\|_/\\\\");
+    System.out.println("   / _ '.D");
+    System.out.println("  / / \\ |");
+    System.out.println(" /_\\  /_\\");
+    System.out.println("'-    '-");
+  }
+
+  private void piirraOikea() {
+    System.out.println("   __    G");
+    System.out.println("   _(,,  //");
+    System.out.println("   \\ )/-'/");
+    System.out.println("   /, | /");
+    System.out.println("  //\\_|/");
+    System.out.println(" D.' _ \\");
+    System.out.println("  | / \\ \\");
+    System.out.println("  / \\  / \\");
+    System.out.println("   -'   -'");
+  }
+
+  public void liiku() {
+    this.vasen = !this.vasen; // käänteinen totuusarvo huutomerkin avulla!
+  }
+
+  public void liiku(int montaKertaa) {
+    System.out.println("Sori, boogie toimii askel kerrallaan.");
+  }
+}
+</pre>
+
+    <p>Kuten seuraavasta esimerkistä ja tulosteesta huomaamme, Elviksemme osaa diskotanssin alkeet (jo ennen diskoa!). </p>
+    
+<pre class="sh_java">
+Elvis e = new Elvis("Matti L");
+e.piirra();
+e.liiku();
+e.piirra();
+e.liiku();
+e.piirra();
+</pre>
+
+<pre>
+G   __
+\\  ,,)_
+ \'-\( /
+  \ | ,\
+   \|_/\\
+   / _ '.D
+  / / \ |
+ /_\  /_\
+'-    '-
+"Matti L"
+     __   D
+   _(,,  //
+   \ )/-'/
+   /, | /
+  //\_|/
+ G.' _ \
+  | / \ \
+  / \  / \
+   -'   -'
+"Matti L"
+G   __
+\\  ,,)_
+ \'-\( /
+  \ | ,\
+   \|_/\\
+   / _ '.D
+  / / \ |
+ /_\  /_\
+'-    '-
+"Matti L"
+</pre>
+    
+    <h2 id="polymorfismi">Polymorfismi</h2>
+		
+		<p>Polymorfismi on neljäs olio-ohjelmoinnin peruskäsitteistä kapseloinnin, abstrahoinnin ja periytymisen lisäksi. Polymorfismilla tarkoitetaan olioiden monimuotoisuutta, eli oliolla voi olla monta eri tyyppiä. Eri tyypit, joita olio voi edustaa, koostuvat sen perintöhierarkiasta ja toteutetuista rajapinnoista. Olemme jo sivunneet polymorfismia, vaikkakin salaa. Viime viikon materiaalissa olevan <code>Kahvilaskuri</code>-luokan metodi <code>lisaaArvoon()</code>-ottaa parametrikseen <code>Laskuri</code>-tyyppisen olion, joka siis voi olla mikä tahansa olio, mikä toteuttaa <code>Laskuri</code>-rajapinnan.</p>
+    
+    <p>Yllä olevalla <code>Elvis</code>-luokallamme on neljä eri tyyppiä:</p>
+    <ul>
+      <li><code>Elvis</code>, eli sen oma luokka</li>
+      <li><code>Hahmo</code>, eli Elviksen yläluokka</li>
+      <li><code>Liikkuva</code>, eli Hahmon sopima rajapinta, sekä</li>
+      <li><code>Object</code>, eli kaikkien luokkien yläluokka</li>
+    </ul>
+    
+    <p>Luokasta <code>Elvis</code> luodun olion voi siis antaa neljänä erityyppisenä parametrina. Elvis-olion voisi siis antaa kaikille neljästä seuraavasta metodista. </p>
+
+<pre class="sh_java">
+public void metodi(Elvis elvis) { ... }
+public void metodi(Hahmo hahmo) { ... }
+public void metodi(Liikkuva liikkuva) { ... }
+public void metodi(Object object) { ... }
+</pre>
+
+    <p>Kussakin tapauksessa annetulle oliolle voi kutsua vain siihen tyyppiin liittyviä metodeja, vaikka itse annettu viite oikeasti viittaisikin <code>Elvis</code>-tyyppiseen olioon. Esimerkiksi metodikutsu <code>public void metodi(Liikkuva l)</code>, jolle annetaan parametrina <code>Elvis</code>-tyyppinen olio, tietää vain <code>Liikkuva</code>-rajapinnan määrittelevät metodit <code>liiku()</code> ja <code>liiku(int montaKertaa)</code>. Seuraava metodikutsu yrittää liikuttaa <code>Liikkuva</code>-tyyppistä oliota yhteensä 5 kertaa.</p>
+    
+<pre class="sh_java">
+public void liikuta(Liikkuva liikkuva) {
+  // mahdollisia kutsuja siis vain
+  liikkuva.liiku();
+  // ja 
+  liikkuva.liiku(4);
+  // jossa parametrina annettu luku voi olla mikä tahansa kokonaisluku
+}
+</pre>
+
+    <p>Toisaalta, koska <code>Liikkuva</code>-rajapinta ei tiedä <code>Elvis</code>-luokan muista metodeista, ei esimerkiksi seuraava olisi mahdollista (vaikka parametrina annettaisiin <code>Elvis</code>-luokasta luotu olio!).</p>
+
+<pre class="sh_java">
+public void liikuta(Liikkuva liikkuva) {
+  liikkuva.piirra(); // ei mahdollinen kutsu, sillä Liikkuva rajapinnassa ei määritelty piirra()-metodia
+}
+</pre>
+
+    <p>Luokalle <code>Hahmo</code> taas metodin <code>piirra()</code> kutsuminen olisi mahdollista. Huomaa että koska <code>Hahmo</code> on abstrakti luokka, kutsutaan oikeasti sen perivän luokan määrittelemää metodia <code>piirra()</code>. Esimerkiksi seuraavalle metodille voisi antaa minkä tahansa <code>Hahmo</code>-luokan perivän luokan ilmentymän.</p>
+    
+<pre class="sh_java">
+public void piirraHahmo(Hahmo hahmo) {
+  hahmo.piirra();
+}
+</pre>
+
+    <p>Voisimme antaa yllä olevalle metodille sekä <code>Elvis</code>-tyyppisiä olioita, että <code>Jänis</code>-tyyppisiä olioita, sillä ne molemmat perivät <code>Hahmo</code>-luokan, jolloin <code>Hahmo</code> on yksi niiden mahdollisista muodoista. Yllä olevaa metodia kutsuttaessa seuraavasti saisimme alla olevan esimerkin jälkeen olevan tulosteen.</p>
+
+<pre class="sh_java">
+Elvis elmeri = new Elvis("Matti L");
+Janis jano = new Janis("Matti P");
+
+piirraHahmo(elmeri);
+System.out.println();
+piirraHahmo(jano);
+</pre>
+
+<pre>
+G   __
+\\  ,,)_
+ \'-\( /
+  \ | ,\
+   \|_/\\
+   / _ '.D
+  / / \ |
+ /_\  /_\
+'-    '-
+"Matti L"
+
+(\___/)
+(='.'=)
+(")_(")
+</pre>
+
+    <p>Viitetyyppisen muuttujan tyyppi kertoo siis sen mitä metodeja ja attribuutteja muuttujalla on käytössä. Monimuotoisuutensa takia viite voi osoittaa oikeasti erityyppiseen olioon, kuin mikä tyyppi oliolle on annettu. Tutkitaan vielä seuraavaksi Jänis-oliota, joka annetaan parametriksi metodille joka ottaa <code>Hahmo</code>-tyyppisiä muuttujia parametrikseen. Metodilla <code>kaannaNimi()</code> käännetään hahmon nimi ympäri.</p>
+    
+<pre class="sh_java">
+public void kaannaNimi(Hahmo hahmo) {
+  String hahmonNimi = hahmo.getNimi();
+  char[] merkit = new char[hahmonNimi.length()];
+  for (int i = 0; i &lt; hahmonNimi.length(); i++) {
+    merkit[i] = hahmonNimi.charAt(hahmonNimi.length() - 1 - i);
+  }
+  hahmo.setNimi(new String(merkit));
+}
+</pre>
+   
+    <p>Kun annamme Jänis-olion <code>kaannaNimi()</code>-metodille, viittaa hahmo-viite metodin sisällä vieläkin Jänis-olioon, vaikka sen tyypiksi tuleekin metodin sisällä <code>Hahmo</code>. Jänis-olio on siis monimuotoinen, ja siihen voi viitata myös <code>Hahmo</code>-tyyppisellä viitteellä.</p>
+    
+<pre class="sh_java">
+Janis jano = new Janis("Matti P");
+System.out.println(jano.getNimi());
+kaannaNimi(jano);
+System.out.println(jano.getNimi());
+</pre>
+
+<pre>
+Matti P
+P ittaM
+</pre>
+    
+    <h2 id="hashmap">Hajautustaulu (HashMap)</h2>
+    
+    <p><a href="http://java.sun.com/javase/6/docs/api/java/util/HashMap.html">Hajautustaulu</a> on yksi Javan yleishyödyllisistä tietorakenteista. Hajautustaulun ideana on laskea oliota kuvaavalle <em>avaimelle</em>, esimerkiksi ihmisen nimi, yksilöivä arvo. Tätä yksilöivää arvoa voidaan käyttää taulukon indeksinä, johon olion viite tallennetaan. Kun hajautustaulusta haetaan avaimen perusteella, löydetään suoraan taulun indeksi jossa olioviite on. Javan luokka <code>HashMap</code> kapseloi hajautustaulun toteutuksen, ja tarjoaa valmiit metodit sen käyttöön.</p>
+    
+    <p>Hajautustaulu ottaa kaksi tyyppiparametria, avaimen tyypin ja tallennettavan olion tyypin. Seuraava esimerkki käyttää avaimena <code>Integer</code>-tyyppistä oliota, ja oliona <code>String</code>-tyyppistä oliota. </p>
+
+<pre class="sh_java">
+HashMap&lt;Integer, String&gt; numerot = new HashMap&lt;Integer, String&gt;();
+numerot.put(1, "Yksi");
+numerot.put(2, "Kaksi");
+
+String merkkijono = numerot.get(1);
+System.out.println(merkkijono);
+merkkijono = numerot.get(42);
+System.out.println(merkkijono);
+</pre>
+
+    <p>Esimerkissä siis luodaan hajatustaulu, jonka avaimena on kokonaisluku (huomaa että avaimet ovat myös aina viitetyyppisiä muuttujia), ja tallennettavana oliona merkkijono. Hajautustauluun lisätään tietoa <code>put()</code>-metodilla, joka ottaa parametreikseen viitteet avaimeen ja tallennettavaan olioon. Metodi <code>get()</code>-palauttaa annettuun avaimeen liittyvän viitteen.</p>
+    
+    <p>Koska hajautustauluun ei ole lisättyä oliota avaimelle <code>42</code>, palauttaa <code>get()</code>-metodi avaimelle <code>42</code> <code>null</code>-viitteen. Esimerkin tulostus on siis seuraavanlainen.</p>
+    
+<pre>
+Yksi
+null
+</pre>
+    
+    <p>Hajautustaulussa tietty avain osoittaa aina tiettyyn paikkaan, jolloin avain ei voi osoittaa kahteen eri olioon samalla aikaa. Jos samalla avaimelle tallennetaan uusi olio, poistuu vanhan olion viite hajautustaulusta.</p>
+
+<pre class="sh_java">
+HashMap&lt;Integer, String&gt; numerot = new HashMap&lt;Integer, String&gt;();
+numerot.put(1, "Yksi");
+numerot.put(2, "Kaksi");
+numerot.put(1, "Iiso yksi!");
+
+String merkkijono = numerot.get(1);
+System.out.println(merkkijono);
+merkkijono = numerot.get(42);
+System.out.println(merkkijono);
+</pre>
+
+    <p>Koska avain <code>1</code> asetetaan uudestaan, on yllä olevan esimerkin tulostus seuraavanlainen.</p>
+    
+<pre>
+Iiso yksi!
+null
+</pre>
+
+    <h3 id="kirjastotietokanta">Kirjojen haku hajautustaulun avulla</h3>
+    
+    <p>Tutkitaan hajautustaulun toimintaa yksinkertaisen kirjastoesimerkin avulla. Kirjastosta voi hakea kirjoja kirjan nimellä, <em>nimi toimii siis avaimena</em>. Jos annetulle nimelle löytyy kirja, saadaan siihen liittyvä viite ja samalla kirjan tiedot. Toteutetaan ensiksi esimerkkiluokka <code>Kirja</code>, jolla on attribuutteina nimi ja sisältö.</p>
+    
+<pre class="sh_java">
+public class Kirja {
+  private String nimi;
+  private String sisalto;
+
+  public Kirja() {  
+  }
+
+  public Kirja(String nimi, String sisalto) {
+    this.nimi = nimi;
+    this.sisalto = sisalto;
+  }
+
+  public String getNimi() {
+    return nimi;
+  }
+
+  public void setNimi(String nimi) {
+    this.nimi = nimi;
+  }
+
+  public String getSisalto() {
+    return sisalto;
+  }
+
+  public void setSisalto(String sisalto) {
+    this.sisalto = sisalto;
+  }
+    
+  public String toString() {
+    String palautus = "Nimi: " + this.nimi + "\n"
+      + "Sisältö: " + this.sisalto;
+    return palautus;
+  }
+}
+</pre>
+
+    <p>Luodaan seuraavaksi hajautustaulu, joka ottaa avaimekseen kirjan nimen, eli String-tyyppisen olion, ja tallettaa viitteitä <code>Kirja</code>-olioihin.</p>
+    
+<pre class="sh_java">
+HashMap&lt;String, Kirja&gt; kirjahakemisto = new HashMap&lt;String, Kirja&gt;();
+</pre>
+
+    <p>Yllä oleva hajautustaulu siis käyttää avaimena <code>String</code>-oliota. Hajautustaulu käyttää avaimen arvon laskemiseen <code>Object</code>-luokassa määriteltyä <code>hashCode()</code>-metodia, jonka perivän luokat voivat ylikirjoittaa. Emme kuitenkaan tutustu hajautustaulun toteutukseen tarkemmin tällä kurssilla.</p>
+    
+    <p>Laajennetaan esimerkkiä siten, että kirjahakemistoon lisätään kaksi kirjaa, <code>Matti L:n Matkat</code> ja <code>Matti P:n Tarinat</code>.</p>
+    
+<pre class="sh_java">
+Kirja mattiLMatkat = new Kirja();
+mattiLMatkat.setNimi("Matti L:n Matkat");
+mattiLMatkat.setSisalto("Eräänä rauhallisena iltana Saksassa, poliisi lähestyi tuttavallisesti minua..");
+
+Kirja mattiPTarinat = new Kirja();
+mattiPTarinat.setNimi("Matti P:n Tarinat");
+mattiPTarinat.setSisalto("Palatessani eräältä lomalta ikkuna oli säpäleinä ja kodistani oli siivottu vanha elektroniikka..");
+
+HashMap&lt;String, Kirja&gt; kirjahakemisto = new HashMap&lt;String, Kirja&gt;();
+kirjahakemisto.put(mattiLMatkat.getNimi(), mattiLMatkat);
+kirjahakemisto.put(mattiPTarinat.getNimi(), mattiPTarinat);
+</pre>
+
+    <p>Nyt kirjahakemistosta voi hakea kirjan nimellä kirjoja. Seuraavan esimerkin ensimmäinen haku ei tuota osumaa, ja hajautustaulu palauttaa <code>null</code>-viitteen. Kirja "Matti L:n Matkat" kuitenkin löytyy.</p>
+
+<pre class="sh_java">
+Kirja k = kirjahakemisto.get("Matti V:n Jorinat");
+System.out.println(k);
+System.out.println();
+k = kirjahakemisto.get("Matti L:n Matkat");
+System.out.println(k);
+</pre>
+
+<pre>
+null
+
+Nimi: Matti L:n Matkat
+Sisältö: Eräänä rauhallisena iltana Saksassa, poliisi lähestyi tuttavallisesti minua..
+</pre>
+
+    <p>Hajautustaulu on hyödyllinen silloin kun tiedetään millaista tietoa halutaan hakea. Avaimet ovat aina yksilöllisiä, joten saman avaimen taakse ei voi tallettaa montaa eri oliota. Tallennettava olio voi toki olla lista tai toinen hajautustaulukko!</p>
+
+    <h3 id="kapseloitu_kirjasto">Kirjasto</h3>
+
+    <p>Yllä olevan kirjahakemiston ongelmana on se, että kirjoja haettaessa täytyy muistaa kirjan nimi merkki merkiltä oikein. Javan valmis <code>String</code>-luokka tarjoaa meille välineet tähänkin. Metodi <code>toLowerCase()</code> muuttaa merkkijonon kirjaimet pieniksi, ja metodi <code>trim()</code> poistaa merkkijonon alusta ja lopusta tyhjät merkit (esimerkiksi välilyönnit). </p>
+
+<pre class="sh_java">
+String teksti = "  JEEEEEEEeeeEE";
+teksti = teksti.toLowerCase(); // teksti nyt "  jeeeeeeeeeeee"
+teksti = teksti.trim() // teksti nyt "jeeeeeeeeeeee"
+</pre>
+
+    <p>Luodaan luokka <code>Kirjasto</code>, joka kapseloi hajautustaulun siten, että avaimien kirjainkoolla ei ole väliä. Lisätään <code>Kirjasto</code>-luokalle myös metodit <code>lisaaKirja(Kirja kirja)</code> ja <code>poistaKirja(String kirjanNimi)</code>.</p>
+    
+<pre class="sh_java">
+public class Kirjasto {
+  private HashMap&lt;String, Kirja&gt; hakemisto;
+  
+  public Kirjasto() {
+    hakemisto = new HashMap&lt;String, Kirja&gt;();
+  }
+  
+  public void lisaaKirja(Kirja kirja) {
+    String avainNimi = kirja.getNimi();
+    avainNimi = avainNimi.toLowerCase(); // muunnetaan nimi pieniksi kirjaimiksi
+    avainNimi = avainNimi.trim(); // poistetaan tyhjät merkit alusta ja lopusta
+    
+    if(hakemisto.containsKey(avainNimi)) {
+      System.out.println("Kirja on jo kirjastossa!");
+    } else {
+      hakemisto.put(avainNimi, kirja);
+    }
+  }
+  
+  
+  public void poistaKirja(String kirjanNimi) {
+    kirjanNimi = kirjanNimi.toLowerCase(); // muunnetaan nimi pieniksi kirjaimiksi
+    kirjanNimi = kirjanNimi.trim(); // poistetaan tyhjät merkit alusta ja lopusta
+    
+    if(hakemisto.containsKey(kirjanNimi)) {
+      Kirja poistettava = hakemisto.get(kirjanNimi);
+      hakemisto.remove(kirjanNimi);
+    } else {
+      System.out.println("Kirjaa ei löydy, ei voida poistaa!");
+    }
+  }
+}
+</pre>
+
+    <p>Yllä olevasta kirjastosta puuttuu vielä lista kaikista kirjoista, mikä on kirjastoille hyvin tärkeää. Käytetään tuttua luokkaa <code>ArrayList</code> kirjojen listaamiseen. Joudumme myös muuttamaan kirjojen lisäystä ja poistoa siten, että viitteet poistetaan kummastakin tietorakenteesta.</p>
+    
+<pre class="sh_java">
+public class Kirjasto {
+  private HashMap&lt;String, Kirja&gt; hakemisto;
+  private ArrayList&lt;Kirja&gt; kirjat;
+  
+  public Kirjasto() {
+    hakemisto = new HashMap&lt;String, Kirja&gt;();
+    kirjat = new ArrayList&lt;Kirja&gt;();
+  }
+  
+  public void lisaaKirja(Kirja kirja) {
+    String avainNimi = kirja.getNimi();
+    avainNimi = avainNimi.toLowerCase(); // muunnetaan nimi pieniksi kirjaimiksi
+    avainNimi = avainNimi.trim(); // poistetaan tyhjät merkit alusta ja lopusta
+    
+    if(hakemisto.containsKey(avainNimi)) {
+      System.out.println("Kirja on jo kirjastossa!");
+    } else {
+      hakemisto.put(avainNimi, kirja);
+      kirjat.add(kirja);
+    }
+  }
+  
+  public void poistaKirja(String kirjanNimi) {
+    kirjanNimi = kirjanNimi.toLowerCase(); // muunnetaan nimi pieniksi kirjaimiksi
+    kirjanNimi = kirjanNimi.trim(); // poistetaan tyhjät merkit alusta ja lopusta
+    
+    if(hakemisto.containsKey(kirjanNimi)) {
+      Kirja poistettava = hakemisto.get(kirjanNimi);
+      kirjat.remove(poistettava);
+      hakemisto.remove(kirjanNimi);
+    } else {
+      System.out.println("Kirjaa ei löydy, ei voida poistaa!");
+    }
+  }
+}
+</pre>
+
+    <p>Kirjojen listaaminen <code>ArrayList</code>in avulla jää lukijan itse toteutettavaksi. Toteutetaan vielä kirjan hakutoiminnallisuus siten, että kirjaa haetaan hajautusrakenteesta sen nimellä.</p>
+
+<pre class="sh_java">
+public Kirja haeKirja(String kirjanNimi) {
+  kirjanNimi = kirjanNimi.toLowerCase(); // muunnetaan nimi pieniksi kirjaimiksi
+  kirjanNimi = kirjanNimi.trim(); // poistetaan tyhjät merkit alusta ja lopusta
+  return hakemisto.get(kirjanNimi);    
+}
+</pre>
+
+    <p>Yllä oleva metodi palauttaa haetun kirjan jos sellainen löytyy, muulloin <code>null</code>-arvon. Voimme myös käydä kaikki hakemiston avaimet läpi yksitellen, etsien esimerkiksi alkuosaa kirjan nimestä. Tällä tavalla etsiessä menetämme kuitenkin hajautustaulun nopeusedun, sillä huonoimmassa tapauksessa joudumme käymään kaikkien kirjojen nimet läpi.</p>
+    
+<pre class="sh_java">
+public Kirja haeKirja(String kirjanNimi) {
+  kirjanNimi = kirjanNimi.toLowerCase(); // muunnetaan nimi pieniksi kirjaimiksi
+  kirjanNimi = kirjanNimi.trim(); // poistetaan tyhjät merkit alusta ja lopusta
+  for(String nimi: hakemisto.keySet()) {
+    if(nimi.startsWith(kirjanNimi)) {
+      return hakemisto.get(nimi);
+    }
+  }
+  return null;
+}
+</pre>
+    
+    <p>Yksi ohjelmoinnin periaatteista on ns. <em>DRY</em>-periaate (Don't Repeat Yourself), jolla pyritään välttämään saman koodin olemista useassa paikassa. Merkkijonon pieneksi muuttaminen ja <em>trimmaus</em>, eli tyhjien merkkien poisto alusta ja lopusta, toistuu useasti kirjastoluokassamme. Siistitään <code>Kirjasto</code>-luokkaa siten, että kirjan nimen siistiminen tehdään erillisessä metodissa. Lisätään metodi <code>siisti()</code>, joka ottaa parametrina <code>String</code>-olion, ja palauttaa oliosta siistityn version.</p>
+    
+<pre class="sh_java">
+private String siisti(String siistittava) {
+  siistittava = siistittava.toLowerCase(); // muunnetaan nimi pieniksi kirjaimiksi
+  return siistittava.trim(); // poistetaan tyhjät merkit alusta ja lopusta
+}
+</pre>
+
+    <p>Luokka <code>Kirjasto</code> vielä kokonaisuudessaan.</p>
+    
+<pre class="sh_java">
+public class Kirjasto {
+  private HashMap&lt;String, Kirja&gt; hakemisto;
+  private ArrayList&lt;Kirja&gt; kirjat;
+  
+  public Kirjasto() {
+    hakemisto = new HashMap&lt;String, Kirja&gt;();
+    kirjat = new ArrayList&lt;Kirja&gt;();
+  }
+  
+  public void lisaaKirja(Kirja kirja) {
+    String avainNimi = kirja.getNimi();
+    avainNimi = siisti(avainNimi);
+    
+    if(hakemisto.containsKey(avainNimi)) {
+      System.out.println("Kirja on jo kirjastossa!");
+    } else {
+      hakemisto.put(avainNimi, kirja);
+      kirjat.add(kirja);
+    }
+  }
+  
+  public void poistaKirja(String kirjanNimi) {
+    kirjanNimi = siisti(kirjanNimi);
+    
+    if(hakemisto.containsKey(kirjanNimi)) {
+      Kirja poistettava = hakemisto.get(kirjanNimi);
+      kirjat.remove(poistettava);
+      hakemisto.remove(kirjanNimi);
+    } else {
+      System.out.println("Kirjaa ei löydy, ei voida poistaa!");
+    }
+  }
+  
+  // kirjojen läpi käyminen yksi kerrallaan jätettiin pois Kirjasto-toteutuksesta
+  public Kirja haeKirja(String kirjanNimi) {
+    kirjanNimi = siisti(kirjanNimi);
+    return hakemisto.get(kirjanNimi);    
+  }
+  
+  private String siisti(String siistittava) {
+    siistittava = siistittava.toLowerCase(); // muunnetaan nimi pieniksi kirjaimiksi
+    return siistittava.trim(); // poistetaan tyhjät merkit alusta ja lopusta
+  }
+}
+</pre>
+    
+		<h2 id="tiedostostoon_kirjoitus">Tiedostoon kirjoittaminen</h2>
+    
+    <p>Tutustuimme viime viikolla tiedoston lukemiseen, joka tapahtui luokkien <code>Scanner</code> ja <code>File</code> avulla. Tiedostoon kirjoittamiseen on myös apuvälineet. Java tarjoaa luokan <code><a href="http://java.sun.com/javase/6/docs/api/java/io/FileWriter.html">FileWriter</a></code>, jolla voi kirjoittaa tekstiä tiedostoon. Luokan <code>FileWriter</code> konstruktori on kuormitettu, eli sillä on monta eri konstruktoria. Käytetään tiedoston nimen parametrina saavaa konstruktoria.</p>
+
+<pre class="sh_java">
+FileWriter kirjoittaja = new FileWriter("tiedosto.txt");
+kirjoittaja.write("Hei tiedosto!");
+kirjoittaja.close(); // sulkemiskutsu sulkee tiedoston ja varmistaa kirjoitettu teksti menee tiedostoon
+</pre>
+    
+    <p>Esimerkissä kirjoitetaan tiedostoon "tiedosto.txt" merkkijono "Hei tiedosto!". Tiedosto löytyy <em>Files</em>-välilehdeltä projektin tiedostoista. Tiedostoon kirjoittaminen voi aiheuttaa poikkeustilanteen, eli <em>heittää poikkeuksen</em>. Emme varaudu poikkeuksiin vielä, vaan annamme metodille määreen <code>throws Exception</code>. Metodi, jolle annetaan parametrina kirjoitettavan tiedoston nimi ja kirjoitettava sisältö voisi näyttää seuraavalta.</p>
+    
+<pre class="sh_java">
+public static void kirjoitaTiedostoon(String tiedostonNimi, String teksti) throws Exception {
+  FileWriter kirjoittaja = new FileWriter(tiedostonNimi);
+  kirjoittaja.write(teksti);
+  kirjoittaja.close();
+}
+</pre>
+
+  <p>Metodin (myös <code>main()</code>), joka kutsuu metodia <code>kirjoitaTiedostoon()</code> täytyy joko varautua poikkeukseen, tai heittää poikkeus. Luodaan vielä <code>main()</code>-metodi jossa kutsutaan <code>kirjoitaTiedostoon()</code>-metodia. Huomaa että myös <code>main()</code>-metodille on määritelty <code>throws Exception</code>-määre.</p>
+  
+<pre class="sh_java">
+public static void main(String[] args) throws Exception {
+  kirjoitaTiedostoon("paivakirja.txt", "Rakas päiväkirja, tänään oli kiva päivä.");
+}
+</pre>
+
+  <p>Yllä olevaa metodia kutsuttaessa luodaan tiedosto "paivakirja.txt", ja kirjoitetaan siihen teksti "Rakas päiväkirja, tänään oli kiva päivä.". Jos tiedosto on jo olemassa, pyyhkiytyy vanhan tiedoston sisältö uutta kirjoittaessa. Metodilla <code>append()</code> voidaan lisätä olemassaolevan tiedoston perään tekstiä, jolloin olemassaolevaa tekstiä ei poisteta. Seuraava metodi <code>lisaaTiedostoon()</code> lisää annetun tekstin tiedoston loppuun.</p>
+  
+<pre class="sh_java">
+public static void lisaaTiedostoon(String tiedostonNimi, String teksti) throws Exception {
+  FileWriter kirjoittaja = new FileWriter(tiedostonNimi);
+  kirjoittaja.append(teksti);
+  kirjoittaja.close();
+}
+</pre>
+  
+  
+  <h3 id="kirj_ja_luku">Kirjoitus ja Lukeminen</h3>
+  
+  <p>Tehdään vielä pieni yhteenveto kirjoituksesta ja lukemisesta. Tiedoston voi lukea <code>Scanner</code>-luokan avulla jolle annetaan parametrina <code>File</code>-tyyppinen olio. Tiedoston kirjoitus taas tapahtuu <code>FileWriter</code>-luokan avulla. Tehdään vielä esimerkki jossa kirjoitetaan ensiksi tiedostoon, ja sitten luetaan tiedoston sisältö. Käytetään lukijan luonnissa <code>FileWriter</code>-luokan konstruktoria, joka saa parametrikseen <code>File</code>-olion.</p>
+  
+<pre class="sh_java">
+File tiedosto = new File("tiedosto.txt");
+FileWriter kirjoittaja = new FileWriter(tiedosto);
+kirjoittaja.write("Heippa vaan!");
+kirjoittaja.close();
+
+Scanner lukija = new Scanner(tiedosto);
+System.out.println(lukija.nextLine());
+</pre>
+
+  <p>Esimerkin tulostus on <code>Heippa vaan!</code></p>
+
+
+
+
+
+
+
+
+
+    <h2>Toiston kontrollointi</h2>
+    
+    
+    <p>Toistorakenteet (<code>for, while</code>) ovat hyvin hyödyllisiä listojen ja taulukoiden läpikäyntiin. Tutustutaan tässä kappaleessa kahteen toiston kontrollimahdollisuuteen, <code>break</code> ja <code>continue</code>, eli <i>lopeta</i> ja <i>jatka</i>. Tutustutaan myös niinkutsuttuun <code>while-true</code>-toistotapaan, jossa toistoa jatketaan niin pitkään kunnes tietty ehto toteutuu. Avainsanat <code>break</code> ja <code>continue</code> toimivat kaikissa toistorakenteissa.</p>
+    
+    
+    <h3>Break</h3>
+    
+    <p>Avainsanalla <code>break</code> poistutaan suoritettavasta toistorakenteesta. Toistosta poistuminen on hyvin hyödyllistä esimerkiksi tilanteissa, joissa toivottu tulos on jo saavutettu, eikä haluta jatkaa enää toistoa. Katsotaan muutamaa esimerkkiä merkkijonon hakemiseen merkkijonolistasta. Oletetaan että <code>merkkijonot</code>-olio on luotu seuraavasti, eli se sisältää 50000 erilaista merkkijonoa.</p>
+    
+<pre class="sh_java">
+ArrayList&lt;String&gt; merkkijonot = new ArrayList();
+for(int i = 0; i &lt; 50000; i++) {
+  merkkijonot.add("Hei " + i);
+}
+</pre>
+
+    <p>Ensimmäinen vaihtoehto sanan hakemiseen listasta on kaikkien sanojen läpikäynti. Fiksua olisi tietenkin käyttää binäärihakua tai sopivampaa tietorakennetta, kuten <code>HashMap</code>, mutta pidetään asiat yksinkertaisina esimerkin vuoksi. Merkkijonon <code>"Hei 2"</code> etsiminen <code>merkkijonot</code> listasta ilman lopetusehtoa käy kaikki 50000 alkiota läpi. Alla oleva esimerkki <i>ei</i> ole hyvää ohjelmointityyliä!</p>
+    
+<pre class="sh_java">
+boolean loytyi = false;
+String haettava = "Hei 2";
+
+for(String merkkijono: merkkijonot) {
+  System.out.println("Tutkitaan merkkijono: " + merkkijono);
+
+  if(haettava.equals(merkkijono)) {
+    loytyi = true;  
+  }
+}
+
+if(loytyi) {
+  System.out.println();
+  System.out.println("Haettu löytyi!");
+}
+</pre>
+
+<pre>
+Tutkitaan merkkijono: Hei 0
+Tutkitaan merkkijono: Hei 1
+Tutkitaan merkkijono: Hei 2
+...
+Tutkitaan merkkijono: Hei 49998
+Tutkitaan merkkijono: Hei 49999
+
+Haettu löytyi!
+</pre>
+
+    <p>Esimerkki tulostaa jokaiselle alkiolle tulostuksen "Tutkitaan merkkijono: Hei <i>numero</i>", koska jokainen alkio käydään läpi riippumatta merkkijonon löytymisestä.</p>
+
+    <p>Avainsanaa <code>break</code> käytetään toiston lopettamiseen halutussa tilanteessa. Muokataan ylläolevaa esimerkkiä siten, että toistosta poistutaan heti kun haettava merkkijono löytyy.</p>
+
+<pre class="sh_java">
+boolean loytyi = false;
+String haettava = "Hei 2";
+
+for(String merkkijono: merkkijonot) {
+  System.out.println("Tutkitaan merkkijono: " + merkkijono);
+
+  if(haettava.equals(merkkijono)) {
+    loytyi = true;
+    break;
+  }
+}
+
+if(loytyi) {
+  System.out.println();
+  System.out.println("Haettu löytyi!");
+}
+</pre>
+
+<pre>
+Tutkitaan merkkijono: Hei 0
+Tutkitaan merkkijono: Hei 1
+Tutkitaan merkkijono: Hei 2
+
+Haettu löytyi!
+</pre>
+
+    <p>Esimerkissä toisto lopetetaan siis avainsanaan <code>break</code>, jolloin kaikkia merkkijonoja ei tarvitse tutkia.</p>
+    
+    <p>Avainsanalla <code>break</code> poistutaan vain tällä hetkellä suoritettavasta toistosta. Jos toistoja on useampia sisäkkäin, jatkuu ulompi toisto kuten ennenkin. Katsotaan seuraavaa esimerkkiä, jossa rivin alkioita tulostetaan kunnes saavutaan lukuun jonka arvo on yli 100.</p>
+    
+<pre class="sh_java">
+int[][] numerot = {
+    {17, 4, 2009},
+    {12, 53},
+};
+
+for(int[] rivi: numerot) {
+  for(int luku: rivi) {
+    if(luku &gt; 100) {
+      break;
+    }
+    
+    System.out.print(luku + " ");
+  }
+  System.out.println();
+}
+</pre>
+
+    <p>Yllä olevan hieman teennäisen esimerkin sisempi toisto lopetetaan jos <code>luku</code> on suurempi kuin <code>100</code>. Koska <code>break</code>-ehto poistuu vain tällä hetkellä suoritettavasta toistosta, jatkuu ulomman toiston suoritus normaalisti. Esimerkin tulostus on seuraavanlainen.</p>
+
+<pre>
+17 4 
+12 53
+</pre>
+
+    <p>Toinen esimerkki <code>break</code>-avainsanan käytöstä ja hyödyllisyydestä sisäkkäisissä toistorakenteissa on seuraava (ei kovin tehokas!) alkulukuja etsivä <i>algoritmi</i>. Alkuluvut ovat lukuja, jotka ovat jaollisia vain yhdellä ja itsellään. Ulompi toistorakenne määrittelee luvut, joita tutkitaan, ja sisemmässä toistorakenteessa jaetaan lukua mahdollisilla luvuilla. Jos jakojäännös (<code>%</code>) on 0, on tutkittava luku jaollinen jakajalla, eikä se voi olla alkuluku. </p>
+    
+<pre class="sh_java">
+int tutkiLukuun = 500;
+
+for (int alkulukuEhdokas = 2; alkulukuEhdokas &lt; tutkiLukuun; alkulukuEhdokas++) {
+  boolean onAlkuluku = true;
+  for (int jakaja = 2; jakaja &lt; alkulukuEhdokas; jakaja++) {
+    if (alkulukuEhdokas % jakaja == 0) {
+      onAlkuluku = false;
+      break;
+    }
+  }
+
+  if (onAlkuluku) {
+    System.out.println(alkulukuEhdokas);
+  }
+}
+</pre>
+
+<pre>
+2
+3
+5
+7
+11
+13
+17
+19
+...
+</pre>
+
+    
+    
+    <h3>While-true</h3>
+    
+    <p>Eräs hyödyllisistä toistorakenteista on <code>while-true</code> rakenne. While-true - rakenteen idea on jatkaa toistoa loputtomiin, tai niin pitkään kunnes poistutaan toistosta. Yksi esimerkki <code>while-true</code>-toistorakenteen käytöstä on salasanan kysyminen. Salasanaa kysytään niin pitkään, kunnes käyttäjä syöttää oikean salasanan.</p>
+    
+<pre class="sh_java">
+while (true) {
+  System.out.print("Kirjoita salasana: ");
+  
+  if("salasana".equals(lukija.nextLine())) {
+    break;
+  } else {
+    System.out.println("Väärin!");
+  }
+}
+
+System.out.println("Kiitos!");
+</pre>
+
+    <p>Yllä olevassa esimerkissä toistoa jatketaan niin pitkään kunnes käyttäjä antaa syötteeksi merkkijonon <code>salasana</code>.</p>
+
+<pre>
+Kirjoita salasana: kala
+Väärin!
+Kirjoita salasana: salakana
+Väärin!
+Kirjoita salasana: salasana
+Kiitos!
+</pre>
+    
+
+    <h3>Continue</h3>
+
+    <p>Avainsana <code>continue</code> määrittelee tilanteen, jossa kyseinen toistokierros lopetetaan ja jatketaan seuraavasta. Käytetään aiemmin luotua <code>merkkijonot</code>-oliota <code>continue</code> avainsanan esittämiseen.</p>
+
+<pre class="sh_java">
+for(String merkkijono: merkkijonot) {
+  if("Hei 2".equals(merkkijono)) {
+    continue;
+  }
+  
+  System.out.println("Tutkitaan merkkijono: " + merkkijono);
+}
+</pre>
+
+    <p>Kun toisto kohtaa merkkijonon "Hei 2" päätyy se ehtoon, jossa on avainsana <code>continue</code>. Tällöin se lopettaa kyseisen toistokierroksen ja jatkaa seuraavasta. Ylläolevan esimerkin tulostus olisi seuraavanlainen.</p>
+
+<pre>
+Tutkitaan merkkijono: Hei 0
+Tutkitaan merkkijono: Hei 1
+Tutkitaan merkkijono: Hei 3
+Tutkitaan merkkijono: Hei 4
+...
+</pre>
+
+    <p>Avainsana <code>continue</code> on hyödyllinen esimerkiksi tilanteissa, missä kaikki listan tai taulukon alkiot täytyy käydä läpi, mutta tiedetään että tietynlaisia alkioita ei haluta ottaa huomioon. Seuraava esimerkki laskee lukujen 1..100 summan siten, että kolmella ja viidellä jaollisia lukuja ei oteta huomioon.</p>
+
+<pre class="sh_java">
+int summa = 0;
+
+for(int luku = 1; luku &lt;= 100; luku++) {
+  if(luku % 3 == 0 || luku % 5 == 0) {
+    continue;
+  }
+  
+  summa += luku;
+}
+
+System.out.println(summa);
+</pre>
+
+    <p>Yllä oleva esimerkki tulostaa luvun <code>2632</code>.</p>
+    
+    <h3>Toistorakenteiden nimeäminen</h3>
+    
+    <p>Toistorakenteille on myös mahdollista antaa nimet. Toistorakenteiden nimeäminen tapahtuu määrittelemällä nimi ennen toistorakenteen tyyppiä, esimerkiksi <code>Nimi: for...</code>. Tätä ohjelmointityyliä näkee harvemmin, sillä se saattaa johtaa tilanteisiin joissa ohjelman seuraaminen vaikeutuu. Seuraavassa esimerkissä toistorakenteen nimeksi on määritelty <code>LueSalasana</code>.</p>
+
+<pre class="sh_java">
+LueSalasana: while (true) {
+  System.out.print("Kirjoita salasana: ");
+  
+  if("salasana".equals(lukija.nextLine())) {
+    break;
+  } else {
+    System.out.println("Väärin!");
+  }
+}
+
+System.out.println("Kiitos!");
+</pre>
+
+    <p>Toistorakenteiden nimet mahdollistavat <code>break</code> ja <code>continue</code> avainsanojen käytön siten, että voidaan jatkaa tai poistua tietyn nimisestä toistorakenteesta vaikka se olisi ulompi toistorakenne. Seuraavassa esimerkissä luetaan käyttäjätunnus ja salasana. Jos salasana menee oikein, poistutaan <code>LueKayttaja</code>-nimisestä toistorakenteesta, eli ulommasta toistosta.</p>
+
+<pre class="sh_java">
+String kayttaja;
+String salasana;
+
+LueKayttaja: while(true) {
+  System.out.print("Anna käyttäjätunnus: ");
+  kayttaja = lukija.nextLine();
+  
+  for(int yritykset = 0; yritykset &lt; 3; yritykset++) {
+    System.out.print("Anna salasana: ");
+    salasana = lukija.nextLine();
+    
+    if("salasana".equals(salasana)) {
+      break LueKayttaja; // poistutaan toistosta jonka nimi on LueKayttaja
+    } else {
+      System.out.println("Väärä salasana!");
+    }
+  }
+  
+  System.out.println("Liian monta yritystä!");
+  System.out.println();
+}
+
+System.out.println();
+System.out.println("Tervetuloa " + kayttaja);
+System.out.println("Annoit salasanaksi " + salasana);
+</pre>
+
+<pre>
+Anna käyttäjätunnus: Matti
+Anna salasana: kala
+Väärä salasana!
+Anna salasana: sala
+Väärä salasana!
+Anna salasana: mikäsenytoli
+Väärä salasana!
+Liian monta yritystä!
+
+Anna käyttäjätunnus: Matti
+Anna salasana: salasana
+
+Tervetuloa Matti
+Annoit salasanaksi salasana
+</pre>
+
+    <p>Voimme käyttää toistorakenteiden nimeämistä myös alkulukulaskuriimme. Sen sijaan, että pitäisimme yllä muuttujaa <code>onAlkuluku</code>, voimme jatkaa ulommasta toistosta jos huomaamme että tarkastelemamme luku ei ole alkuluku. Alkuluvun tarkistava toisto on nimetty <code>AL</code>:ksi, eli Alkuluvuksi. Jos huomaamme että jakaja pystyy jakamaan alkulukuehdokkaan, siirrymme tarkastelemaan seuraavaa lukua.</p>
+    
+<pre class="sh_java">
+int tutkiLukuun = 500;
+
+AL: for (int alkulukuEhdokas = 2; alkulukuEhdokas &lt; tutkiLukuun; alkulukuEhdokas++) {
+  for (int jakaja = 2; jakaja &lt; alkulukuEhdokas; jakaja++) {
+    if (alkulukuEhdokas % jakaja == 0) {
+      continue AL;
+    }
+  }
+
+  System.out.println(alkulukuEhdokas);
+}
+</pre>
+
+<pre>
+2
+3
+5
+7
+11
+13
+17
+19
+23
+29
+31
+37
+...
+</pre>
+
+    <p>Toistorakenteet ja niiden kontrollointi avainsanojen <code>break</code> ja <code>continue</code> on hyvin hyödyllistä. Ne kuitenkin mahdollistavat tilanteita, joissa ohjelmakoodin kulku ei ole kovin loogista. Ohjelmakoodin dokumentointi onkin tärkeää niiltä kohdin, joissa ohjelman kulku ei ole selkeää!</p>
+
+
+    <h2>Pakkaukset</h2>
+    
+    <p>Huomaamme suurempia ohjelmia suunniteltaessa ja toteuttaessa luokkamäärän kasvavan suureksi. Pakkauksilla (<code>package</code>) voidaan jakaa luokat eri sijainteihin niiden toiminnallisuuden perusteella, ja parantaa ohjelmiston ylläpidettävyyttä ja hallittavuutta. Pakkausten käyttö tarkoittaa käytännössä sitä, että luokat sijaitsevat kansioissa projektin sisällä.</p>
+    
+    <p>Luokka määrittelee oman pakkauksensa määreellä <code>package</code>. Esimerkiksi seuraava luokka <code>Kirja</code> sijaitsee pakkauksessa <code>kirjasto</code>.</p>
+    
+<pre class="sh_java">
+package kirjasto;
+
+public class Kirja {
+  private String nimi;
+  private String sisalto;
+  
+  public Kirja() {
+  }
+  
+  ...
+}
+</pre>    
+
+    <p>Huomaa että pakkausten nimet kirjoitetaan <em>aina</em> pienellä!</p>
+    
+    <p>Jos luokan pakkauksena on kirjasto, sijaitsee se ohjelman lähdekoodikansion sisällä kansiossa <code>kirjasto</code>. Vastaavasti voimme luoda pakkauksia siten, että luokat on jaettu useammalle tasolle. Esimerkiksi seuraava luokka <code>KirjanLainaaja</code> sijaitsisi kansion kirjasto sisällä olevassa kansiossa lainaus.</p>
+    
+<pre class="sh_java">
+package kirjasto.lainaaja;
+
+public class KirjanLainaaja {
+  private String sijainti;
+  
+  public KirjanLainaaja() {
+  }
+  
+  ...
+}
+</pre>
+
+    <p>Kaikki hyvät ohjelmointiympäristöt, kuten NetBeans ja Eclipse, tarjoavat valmiit pakkausten hallintaan, jolloin ohjelmoijan ei tarvitse huolehtia kansioista. Uuden pakkauksen voi luoda NetBeansissa projektin <code>Source Packages</code>-osiossa oikeaa hiirennappia painamalla ja valitsemalla <code>New -&gt; Java Package...</code>. Luodun pakkauksen sisälle voidaan luoda luokkia kuten oletuspakkaukseenkin (<code>default package</code>).</p>
+    
+    <p>Pakkausten käyttö mahdollistaa myös lähdekoodin jakamisen siten, että eri projekteissa toteutetut lähdekoodit eivät sekoitu toisiinsa. Yksi nimeämiskäytäntö paketeille on <code>maa.organisaation-webosoite.projekti....</code>, esimerkiksi <code>fi.visiojapojat.supertuote</code>, jotka alla on supertuote-projektiin liittyvät lähdekoodit (ja pakkaukset!).</p>
+    
+    <p>Javan API:n pakkaukset ovat yleensä pakkauksissa <code>java.alue.</code>. Esimerkiksi Javan luokka <code>ArrayList</code> sijaitsee pakkauksessa <code>java.util</code>, eli javan työkalut. Ottaessamme luokan <code>ArrayList</code> käyttöömme komennolla <code>import java.util.ArrayList</code> kerromme käytännössä halutun luokan nimen, sekä pakkauksen jonka sisällä luokka sijaitsee.</p>
+    
+    <p>Jos pakkauksessa <code>kirjasto.lainaaja</code> sijaitseva luokka <code>KirjanLainaaja</code> haluaa käyttää pakkauksessa <code>kirjasto</code> sijaitsevaa luokkaa <code>Kirja</code>, täytyy sen myös tuoda kirja käyttöön komennolla <code>import kirjasto.Kirja</code></p>
+
+<pre class="sh_java">
+package kirjasto.lainaaja;
+
+import kirjasto.Kirja;
+
+public class KirjanLainaaja {
+  private String sijainti;
+  ...
+  
+  public KirjanLainaaja() {
+  }
+  
+  public void lainaa(Kirja kirja) {..}
+  
+  ...
+}
+</pre>
+
+    <p>Samassa pakkauksessa sijaitsevia luokkia ei tarvitse erikseen tuoda käyttöön, eli saman pakkauksen sisällä olevat luokat ovat oletuksena käytössä pakkauksessa oleville luokille.</p>
+        
+        
+    <h3>Pakkausnäkyvyys</h3>    
+    
+    <p>Pakkausnäkyvyydellä tarkoitetaan sitä, että metodeille ja luokille ei määritellä erikseen näkyvyyttä. Näkyvyysmääreitähän ovat <code>public</code>, <code>protected</code> ja <code>private</code>. Jos näkyvyysmääreet jätetään pois metodeilta, voi metodeja kutsua pakkauksen sisällä olevista luokista. Vastaavasti konstruktorilla ja muuttujilla.</p>
+    
+    <p>Jos luokka <code>Kirja</code> olisi määritelty ilman näkyvyysmäärettä public, voi sitä käyttää siis vain saman pakkauksen sisällä. </p>
+    
+<pre class="sh_java">
+package kirjasto;
+
+class Kirja {
+  private String nimi;
+  private String sisalto;
+  
+  ...
+}
+</pre>
+
+    <p>Nyt luokka <code>KirjanLainaaja</code> ei voi käyttää luokkaa <code>Kirja</code>, koska ne sijaitsevat eri pakkauksissa. Näkyvyysmääre <code>protected</code> määrittelee näkyvyyden siten, että muuttujat ja metodit ovat näkyvissä vain luokan periville luokille sekä samassa pakkauksessa oleville luokille. Määrettä <code>protected</code> ei kuitenkaan voi käyttää määrittelemään luokan näkyvyyttä.</p>
+
+
+    <h2>Poikkeukset</h2>
+    
+    
+    <p>Poikkeustilanteet ovat tilanteita joissa ohjelman suoritus ei ole edennyt toivotusti. Olemme tähän mennessä jättäneet poikkeustilanteet käsittelemättä määrittelemällä metodit ja pääohjelman sellaisiksi, että ne heittävät poikkeuksen (<code>throws Exception</code>). Katsotaan esimerkiksi metodia <code>lueTiedosto()</code>, joka lukee kokonaisen tiedoston sisällön merkkijonoon.</p>
+
+<pre class="sh_java">
+public static String lueTiedosto(String tiedostonNimi) throws Exception {
+  File tiedosto = new File(tiedostonNimi);
+  Scanner lukija = new Scanner(tiedosto);
+  String teksti = "";
+  while(lukija.hasNextLine()) {
+    teksti += lukija.nextLine() + "\n";
+  }
+  return teksti;
+}
+</pre>
+
+    <p>Metodissa <code>lueTiedosto()</code> luokan <code>Scanner</code> tiedoston parametrina ottava konstruktori saattaa heittää poikkeuksen tilanteessa, jossa tiedoston lukeminen ei onnistu. Javan APIsta näkee poikkeuksen heittävät metodit ja konstruktorit. </p>
+
+
+    <p>Voimme myös itse hoitaa poikkeustenkäsittelyn, jolloin poikkeusta ei siirretä eteenpäin. Tällöin poikkeuksen käsittelyvastuu pysyy metodilla, jossa poikkeus tapahtuu. </p>
+    
+    <p>Poikkeukset käsitellään <code>try { } catch () { }</code> - lohkorakenteella, jossa <code>try { }</code> - lohkon sisällä on ohjelmakoodi joka halutaan suorittaa. Osio <code>catch () { }</code> kertoo poikkeuksen mihin varaudutaan, ja siihen liittyvässä lohkossa on ohjelmakoodi, mikä suoritetaan poikkeustilanteessa.</p>
+
+<pre class="sh_java">
+try {
+  // poikkeuksen heittävä ohjelmakoodi
+} catch (Exception e) { // poikkeus johon varaudutaan
+  // ohjelmakoodi, joka suoritetaan poikkeustilanteessa
+}
+</pre>    
+
+    <p>Muutetaan metodia <code>lueTiedosto()</code> siten, että se varautuu itse mahdollisen poikkeustilanteen. Jos <code>Scanner</code>-konstruktori heittää poikkeuksen, palautetaan <code>null</code>-viite luettuna merkkijonona ja tulostetaan virheilmoitus. <code>System</code>-luokan staattinen muuttuja <code>err</code> tarjoaa samat tulostusmetodit kuin <code>out</code>, mutta niitä käytetään virhetapahtumien tulostamiseen.</p> 
+    
+<pre class="sh_java">
+public static String lueTiedosto(String tiedostonNimi) { // ei heitetä poikkeusta
+  File tiedosto = new File(tiedostonNimi);
+  Scanner lukija = null;
+  
+  try {
+    lukija = new Scanner(tiedosto);
+  } catch (Exception e) {
+    System.err.println("Tiedoston avaaminen ei onnistunut!");
+    return null;
+  }
+  
+  String teksti = "";
+  while(lukija.hasNextLine()) {
+    teksti += lukija.nextLine() + "\n";
+  }
+  return teksti;
+}
+</pre>
+
+    <p>Metodi siis varautuu <code>Scanner</code>-luokan konstruktorin mahdolliseen poikkeukseen. Jos poikkeus tapahtuu, tulostetaan virheviesti ja palautetaan <code>null</code>-viite.</p>
+    
+    <p><i>Lisätietoa:</i> Katenointi, eli kahden merkkijonon yhdistäminen, luo aina uuden <code>String</code>-olion, jolloin tarvitaan myös roskienkeruuta vanhoille merkkijonoille. Luokkaa <code><a href="http://java.sun.com/javase/6/docs/api/java/lang/StringBuilder.html">StringBuilder</a></code> käyttämällä voimme yhdistää merkkijonoja ilman uusien <code>String</code>-olioiden luomista. Yllä oleva metodi on paljon <i>tehokkaampi</i> seuraavanlaisena.</p>
+    
+<pre class="sh_java">
+public static String lueTiedosto(String tiedostonNimi) { // ei heitetä poikkeusta
+  File tiedosto = new File(tiedostonNimi);
+  Scanner lukija = null;
+  
+  try {
+    lukija = new Scanner(tiedosto);
+  } catch (Exception e) {
+    System.err.println("Tiedoston avaaminen ei onnistunut!");
+    return null;
+  }
+  
+  StringBuilder teksti = new StringBuilder();
+  while(lukija.hasNextLine()) {
+    teksti.append(lukija.nextLine());
+    teksti.append("\n");
+  }
+  return teksti.toString();
+}
+</pre>
+    
+    <h3>Yläluokka Exception</h3>
+    
+    <p>Luokka <code>Exception</code> on poikkeusten yläluokka, eli kaikki poikkeukset perivät luokan <code>Exception</code>. Polymorfismin ansiosta voimme varautua kaikkiin poikkeuksiin varautumalla poikkeustyyppiin <code>Exception</code>, eli kaikkien poikkeusten yläluokkaan. Tämä ei kuitenkaan aina ole tarpeellista tai toivottua, koska erilaiset poikkeustilanteet saattavat tarvita erilaista käsittelyä.</p>
+    
+    <p>Yksi eniten nähdyistä poikkeuksista on <code>NullPointerException</code>, eli poikkeustilanne, joka johtuu <code>null</code>-viitteen käyttämisestä esimerkiksi metodikutsussa. Voimme nähdä <code>NullPointerException</code> poikkeuksen esimerkiksi seuraavan lähdekoodin avulla.</p>
+    
+<pre class="sh_java">
+String merkkijono = null;
+System.out.println("Merkkijonon pituus on " + merkkijono.length());
+</pre>
+
+    <p>Koska viite <code>merkkijono</code> on null, ei <code>String</code>-olioon liittyvän <code>length()</code> metodin suoritus onnistu ja ohjelma heittää poikkeuksen <code>NullPointerException</code>.</p>
+    
+    <p>Aiemmin luomamme metodi <code>lueTiedosto()</code> varautuu poikkeustyyppiin <code>Exception</code>, vaikka <code>Scanner</code>-luokan konstruktori oikeasti heittää <code>FileNotFoundException</code>-tyyppisen poikkeuksen. Poikkeukset ovat yleensä hyvin nimettyjä, esimerkiksi FileNotFoundException kertoo sen, että haettua tiedostoa ei löytynyt tai sen avaamisessa oli ongelmia. Voimme muuttaa <code>lueTiedosto()</code>-metodia varautumaan <code>FileNotFound</code>-tyyppiseen poikkeukseen seuraavasti.</p>
+    
+<pre class="sh_java">
+public static String lueTiedosto(String tiedostonNimi) { // ei heitetä poikkeusta
+  File tiedosto = new File(tiedostonNimi);
+  Scanner lukija = null;
+  
+  try {
+    lukija = new Scanner(tiedosto);
+  } catch (FileNotFoundException e) {
+    System.err.println("Tiedoston avaaminen ei onnistunut!");
+    return null;
+  }
+  
+  String teksti = "";
+  while(lukija.hasNextLine()) {
+    teksti += lukija.nextLine() + "\n";
+  }
+  return teksti;
+}
+</pre>
+
+    <h3>Poikkeuksen tiedot</h3>
+    
+    <p>Lohko <code>catch() {}</code> määrittelee varauduttavan poikkeuksen lisäksi muuttujan, mihin poikkeuksen tiedot tallennetaan. Esimerkiksi seuraava rakenne määrittelee poikkeuksen <code>FileNotFoundException</code> tallentumisen muuttujaan <code>e</code>. Koska poikkeukset perivät yläluokan <code>Exception</code>, voimme käyttää sen metodeja poikkeuksen tietojen tulostamiseen.</p>
+
+<pre class="sh_java">
+try {
+  // ohjelmakoodi, joka saattaa heittää poikkeuksen
+} catch (FileNotFoundException e) {
+  // poikkeuksen tiedot ovat tallessa muuttujassa e
+}
+</pre>
+
+    <p>Luokka <code>Exception</code> tarjoaa muutamia hyödyllisiä metodeja. Esimerkiksi metodi <code>printStackTrace()</code> tulostaa polun, joka johti poikkeukseen. Tutkitaan seuraavaa metodin <code>printStactTrace()</code> tulostamaa virhettä.</p>
+    
+<pre>
+Exception in thread "main" java.lang.NullPointerException
+  at pakkaus.Luokka.tulosta(Luokka.java:43)
+  at pakkaus.Luokka.main(Luokka.java:29)
+</pre>
+
+    <p>Poikkeuspolun lukeminen tapahtuu alhaalta ylöspäin. Alimpana on ensimmäinen kutsu, eli ohjelman suoritus on alkanut luokan <code>Luokka</code> metodista <code>main()</code>. Rivillä 29 on kutsuttu metodia <code>tulosta()</code>. Metodissa <code>tulosta()</code> on tapahtunut rivillä 43 poikkeus, <code>NullPointerException</code>. Poikkeuksen tiedot ovatkin hyvin hyödyllisiä virhekohdan selvittämisessä.</p>
+
+    <h3>Finally</h3>
+    
+    <p>Poikkeuksiin varauduttaessa on mahdollista määritellä myös lohko, joka suoritetaan riippumatta siitä, tapahtuiko poikkeus vai ei. Lohko <code>finally { }</code> tulee poikkeuslohkon jälkeen, ja se sisältää joka tapauksessa suoritettavan koodin. Finally lohkon lähdekoodi suoritetaan sen jälkeen, kun <code>try {}</code> ja <code>catch {}</code> -lohkot on suoritettu. Katsotaan viime viikolla nähtyä esimerkkiä tiedostoon kirjoittamisesta. </p>
+
+<pre class="sh_java">
+public static void kirjoitaTiedostoon(String tiedostonNimi, String teksti) throws Exception {
+  FileWriter kirjoittaja = new FileWriter(tiedostonNimi);
+  kirjoittaja.write(teksti);
+  kirjoittaja.close();
+}
+</pre>
+    
+    <p>Luokan <code>FileWriter</code> konstruktori siis avaa parametrina annetun tiedoston kirjoittamista varten, ja yrittää kirjoittaa siihen. Yllä olevassa esimerkissä on kaksi erillistä poikkeuskohtaa. Luokka <code>FileWriter</code> voi heittää poikkeuksen <code>IOException</code> jos tiedostoa ei jostain syystä saada avattua kirjoittamista varten. Metodi <code>write()</code> voi myös heittää poikkeuksen jos tiedostoon kirjoittaminen ei onnistu, vaikka tiedoston avaaminen olisikin jo onnistunut. Muutetaan metodia siten, että poikkeustenkäsittely tapahtuu metodin sisällä. </p>
+
+<pre class="sh_java">
+public static void kirjoitaTiedostoon(String tiedostonNimi, String teksti) throws Exception {
+  FileWriter kirjoittaja = null;
+  try {
+    kirjoittaja = new FileWriter(tiedostonNimi);
+    kirjoittaja.write(teksti);
+    kirjoittaja.close();
+  } catch (Exception e) {
+    System.err.println("Tiedostoon kirjoittaminen epäonnistui.");
+    e.printStackTrace();
+  }
+}
+</pre>
+
+    <p>Poikkeusten käsittelyyn siirrytään heti poikkeuksen tapahtuessa, esimerkiksi jos ylläolevassa esimerkissä konstruktorikutsu <code>new FileWriter()</code> heittää poikkeuksen, ei sitä seuraavaa kahta kutsua suoriteta ollenkaan. Jos poikkeus tapahtuu metodissa <code>write()</code>, jää metodikutsu <code>close()</code> suorittamatta, ja tiedosto jää auki.</p>
+    
+    <p>Lohko <code>finally {}</code> on erinomainen tapauksiin, joissa täytyy sulkea resursseja lopuksi, riippumatta suorituksen kulusta. Siirretään metodikutsu <code>close</code> lohkoon <code>finally {}</code>, jotta sen suoritus tapahtuu aina.</p>
+
+<pre class="sh_java">
+public static void kirjoitaTiedostoon(String tiedostonNimi, String teksti) throws Exception {
+  FileWriter kirjoittaja = null;
+  try {
+    kirjoittaja = new FileWriter(tiedostonNimi);
+    kirjoittaja.write(teksti);
+  } catch (Exception e) {
+    System.err.println("Tiedostoon kirjoittaminen epäonnistui.");
+    e.printStackTrace();
+  } finally {
+    if(kirjoittaja != null) {
+      kirjoittaja.close();
+    } else {
+      System.err.println("Kirjoittajaa ei koskaan luotu.");
+    }
+  }
+}
+</pre>
+
+  <p>Jos metodi palauttaa arvon <code>try {}</code> tai <code>catch</code> -lohkossa, lohkon <code>finally</code> sisältö suoritetaan silti. Tutkitaan metodia <code>vitonen()</code>, joka palauttaa arvon 5 <code>try</code>-lohkossa, ja tulostaa merkkijonon <code>Moi</code> finally lohkossa.</p>
+
+<pre class="sh_java">
+public static int vitonen() {
+  try {
+    return 5;
+  } catch (Exception e) {
+  } finally {
+    System.out.println("Moi!");
+  }
+  
+  return 0;
+}
+</pre>
+
+<pre class="sh_java">
+System.out.println(vitonen());
+</pre>
+
+<pre>
+Moi!
+5
+</pre>
+
+  <p>Esimerkin tulostuksesta huomataan että lohko <code>finally</code> suoritetaan ennen arvon palauttamista, jolloin myös merkkijono <code>Moi!</code> tulostuu ennen lukua <code>5</code>.</p>
+  
+  
+
+  <h2 id="kalit">Käyttöliittymät</h2>
+  
+  <p>Olemme tähän mennessä rakentaneet ohjelmamme kahdella eri tavalla. Ohjelmat ovat joko suorittaneet laskutoimituksia, jonka jälkeen ne ovat lopettaneet toimintansa, tai niitä on ohjattu tekstipohjaisen käyttöliittymän kautta. Tutustutaan tässä kappaleessa graafisen käyttöliittymän luomiseen Javalla.</p>
+  
+  <p>Käyttöliittymät koostuvat pohjakerroksesta, niinkutsutusta <em>containerista</em>, ja siihen asetetuista komponenteista. Komponentteja ovat napit, tekstit, ym. Container voi sisältää myös toisen containerin. Seuraava esimerkki luo <i>dialogityylisen</i> ikkunan, ja asettaa siihen napin (luokka <code>JButton</code>) jossa on teksti "Ok!".</p>
+  
+<pre class="sh_java">
+JDialog dlg = new JDialog();
+JButton ok = new JButton("Ok!");
+// lisätään dialogin containeriin nappi "ok"
+Container container = dlg.getContentPane();
+container.add(ok);
+
+// asetetaan koko 240*120 pikseliä
+dlg.setSize(240, 120);
+// sulje ikkuna kun käyttäjä painaa X
+dlg.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+// näytä ikkuna
+dlg.setVisible(true);
+</pre>
+
+    <p><img src="img/ok.png"/></p>
+
+    <p>Napin painaminen ei vielä tee yhtään mitään. Jos haluamme lisätä dialogiin uuden komponentin, esimerkiksi tekstielementin, joudumme päättämään sille sijainnin. Containerille on määritelty myös ulkoasu, eli jokaisella sen sisältämällä komponentilla on myös sijainti. Luokka <code>BorderLayout</code> on eräs ulkoasun määrittelyyn käytetty luokka. Sen avulla voidaan määritellä komponenttien sijainti ilmansuuntia käyttäen (<code>NORTH, EAST, SOUTH, WEST</code>). Muutetaan dialogia siten, että ikkunassa on pohjoisessa nappi "Ok!", ja etelässä teksti (luokka <code>JLabel</code>) "Eipäs!".</p>
+
+<pre class="sh_java">
+// luodaan dialogi-tyyppinen ikkuna
+JDialog dlg = new JDialog();
+
+// luodaan komponentit
+JButton ok = new JButton("Ok!");
+JLabel eipas = new JLabel("Eipäs!");
+
+// lisätään komponentit containeriin
+Container container = dlg.getContentPane();
+container.add(ok, BorderLayout.NORTH);
+container.add(eipas, BorderLayout.SOUTH);
+
+// ikkunan ulkoasun ja käyttäytymisen asettelua
+dlg.setSize(240, 120);
+dlg.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+dlg.setVisible(true);
+</pre>
+
+    <p><img src="img/ok-eipas.png"/></p>
+
+    <p>Tässäkään esimerkissä napin painaminen ei vielä tee mitään.</p>
+    
+    
+    <h3>Tapahtumapohjainen ohjelmointi</h3>
+    
+    <p>Käyttöliittymiä rakennettaessa jokainen komponentti on oma osansa käyttöliittymää. Tällöin jokaiselle komponentille täytyy myös tehdä oma tapahtumanhallinta. Java tarjoaa joukon erilaisia <i>tapahtumankuuntelijoita</i>, jotka voidaan liittää komponentteihin. Jos komponentilla (esimerkiksi nappi) on tapahtumankuuntelija, ja komponentissa tapahtuu toiminto (esimerkiksi nappia painetaan), kuulee tapahtumankuuntelija tapahtuman, ja suorittaa tapahtumankäsittelyyn ohjelmoidun ohjelman.</p>
+    
+    <p>Tapahtumien kuuntelijat on määritelty rajapintoina. Esimerkiksi rajapinta <code>ActionListener</code> määrittelee metodin <code>actionPerformed()</code>, joka saa käyttöliittymästä parametrina <code>ActionEvent</code>-olion. Olio <code>ActionEvent</code> sisältää tapahtumaan liittyvät tiedot. Luodaan luokka, joka toteuttaa tapahtumankuuntelijan <code>ActionListener</code>.</p>
+    
+<pre class="sh_java">
+public class NapinKuuntelija implements ActionListener {
+  public void actionPerformed(ActionEvent e) {
+    System.out.println("Nappia painettu!");
+  }
+}
+</pre>
+
+    <p>Tapahtumankuuntelijan voi rekisteröidä, eli liittää komponenttiin, komponenttiin liittyvillä metodeilla. Esimerkiksi luokalla <code>JButton</code> on metodi <code>addActionListener()</code>, jolle voidaan antaa parametrina <code>ActionListener</code>-rajapinnan toteuttava luokka. Esimerkiksi ylläolevaan ohjelmaan voidaan liittää luokka <code>Napinkuuntelija</code> seuraavasti.</p>
+
+<pre class="sh_java">
+// luodaan dialogi-tyyppinen ikkuna
+JDialog dlg = new JDialog();
+
+// luodaan komponentit
+JButton ok = new JButton("Ok!");
+JLabel eipas = new JLabel("Eipäs!");
+
+// lisätään napille tapahtumankuuntelija
+ok.addActionListener(new NapinKuuntelija());
+
+// lisätään komponentit containeriin
+Container container = dlg.getContentPane();
+container.add(ok, BorderLayout.NORTH);
+container.add(eipas, BorderLayout.SOUTH);
+
+// ikkunan ulkoasun ja käyttäytymisen asettelua
+dlg.setSize(240, 120);
+dlg.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+dlg.setVisible(true);
+</pre>
+  
+    <p>Nyt jos nappia painetaan kolmesti saadaan konsoliin seuraavanlainen tuloste:</p>
+    
+<pre>
+Nappia painettu!
+Nappia painettu!
+Nappia painettu!
+</pre>
+
+    <p>Muutetaan luokkaa <code>NapinKuuntelija</code> siten, että se saa parametrina <code>JLabel</code>-tyyppisen tekstielementin. Kun nappia painetaan, tekstielementin tekstiksi asetetaan teksti "Nappia painettu!"</p>
+ 
+<pre class="sh_java">
+public class NapinKuuntelija implements ActionListener {
+  private JLabel tekstielementti;
+  
+  public NapinKuuntelija(JLabel teksti) {
+    this.tekstielementti = teksti;
+  }
+
+  public void actionPerformed(ActionEvent e) {
+    teksti.setText("Nappia painettu!");
+  }
+}
+</pre>
+
+    <p>Muutetaan dialoginluontia vielä siten, että <code>NapinKuuntelija</code> saa parametrikseen <code>JLabel</code>-olion</p>
+    
+<pre class="sh_java">
+// lisätään napille tapahtumankuuntelija
+ok.addActionListener(new NapinKuuntelija(eipas));
+</pre>
+
+    <p>Napin painalluksen jälkeen ikkuna näyttää seuraavalta.</p>
+    
+    <p><img src="img/nappia-painettu.png"/></p>
+    
+    <h3>JDialog luokan periminen</h3>
+    
+    <p>Voimme myös periä <code>JDialog</code> luokan ja rakentaa oman dialogimme sen avulla. Seuraava esimerkki <code>NapinPainallus</code> vastaa yllä olevaa esimerkkiä, mutta olemme käyttäneet perittyä luokkaa suoraan. Myös tapahtumankäsittely hoidetaan luokassa <code>NapinPainallus</code>.</p>
+
+<pre class="sh_java">
+public class NapinPainallus extends JDialog implements ActionListener {
+
+  // käyttöliittymän komponentit
+  private JButton okButton;
+  private JLabel eipasLabel;
+
+  public NapinPainallus() {
+    super();
+
+    okButton = new JButton("Ok!");
+    eipasLabel = new JLabel("Eipäs!");
+    okButton.addActionListener(this);
+
+    Container container = getContentPane();
+    container.add(okButton, BorderLayout.NORTH);
+    container.add(eipasLabel, BorderLayout.SOUTH);
+
+    setSize(240, 120);
+    setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    setVisible(true);
+  }
+
+  public void actionPerformed(ActionEvent e) {
+    eipasLabel.setText("Nappia painettu!");
+  }
+}
+</pre>
+
+    <p>Nyt voimme luoda uuden ikkunan <code>main()</code>-metodissa kutsumalla <code>new NapinPainallus()</code>.</p>
+    
+<pre class="sh_java">
+public class Main {
+    public static void main(String[] args) {
+        new NapinPainallus();
+    }
+}
+</pre>
+
+    <h3>JPanel</h3>
+  
+  
+    <p>Luokkaa <code>JPanel</code> käytetään muunmuassa piirtoalustana. Luokalla <code>JPanel</code> on metodi <code>paint()</code>, jota kutsutaan aina kun <i>paneeli</i> halutaan piirtää. Metodi <code>paint()</code> saa käyttöliittymältä <code>Graphics</code>-tyyppisen olion, jolla voidaan piirtää paneelille. Laajennetaan <code>JPanel</code> luokkaa luokalla <code>Piirturi</code>, ja muutetaan sen piirtotoiminnallisuutta.</p>
+    
+<pre class="sh_java">
+public class Piirturi extends JPanel {
+
+    public void paint(Graphics g) {
+        super.paint(g);
+    }
+}
+</pre>
+
+    <p>Luokkamme <code>Piirturi</code> ei vielä tee mitään muuta, kuin kutsuu yläluokkansa (eli <code>JPanel</code>-luokan) <code>paint()</code>-metodia. Luodaan myös pääohjelma, jossa luodaan <code>JDialog</code>-tyyppinen ikkuna, ja asetetaan sen containeriin luokan <code>Piirturi</code> ilmentymä.</p>
+    
+<pre class="sh_java">
+// luodaan ikkuna
+JDialog dlg = new JDialog();
+
+// luodaan piirturi
+Piirturi piirturi = new Piirturi();
+
+// otetaan viite ikkunan containeriin ja asetetaan piirturi siihen
+Container container = dlg.getContentPane();
+container.add(piirturi);
+
+// ikkunan koko, sulkemistoiminnallisuus ja näkyväksi asetus
+dlg.setSize(480, 360);
+dlg.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+dlg.setVisible(true);
+</pre>
+
+    <p>Ohjelmaa ajettaessa ikkuna näyttää seuraavalta.</p>
+    
+    <p><img src="img/piirturi-1.png"/></p>
+    
+    
+    <p>Piirretään piirturiin ympyrä. Graphics-oliolla piirrettäessä iso osa metodeista määrittelee piirrettävän objektin siten, että ensiksi annetaan sen vasemman yläkulman koordinaatit, jonka jälkeen tulee piirrettävän kuvion leveys ja korkeus. Esimerkiksi seuraava kutsu luo kohdasta (30, 30) alkavan ympyrän, jonka halkaisija on 100. Huomaa että kohta 30, 30 lasketaan paneelin vasemmasta ylälaidasta!</p>
+
+<pre class="sh_java">
+g.fillOval(30, 30, 100, 100);
+</pre>
+
+    <p>Ikkuna näyttää nyt seuraavanlaiselta.</p>
+    
+    <p><img src="img/ikkuna-ymp.png"/></p>
+    
+    
+    <p>Lisätään vielä toinen ja kolmas ympyrä. Kolmas ympyrä ei ole täytetty.</p>
+    
+<pre class="sh_java">
+g.fillOval(250, 40, 80, 80);
+g.drawOval(40, 200, 300, 100);
+</pre>
+
+    <p>Ikkuna näyttää nyt kokonaisuudessaan seuraavanlaiselta.</p>
+    
+    <p><img src="img/hemmo.png"/></p>
+    
+    <p>Piirturi luokan sisältämä lähdekoodi on seuraavanlainen.</p>
+    
+<pre class="sh_java">
+public class Piirturi extends JPanel {
+  public void paint(Graphics g) {
+    super.paint(g);
+
+    g.fillOval(30, 30, 100, 100);
+    g.fillOval(250, 40, 80, 80);
+    g.drawOval(40, 200, 300, 100);
+  }
+}
+</pre>
+
+
+    <h3>Näppäimistön kuunteleminen</h3>
+    
+    <p>Tutustutaan näppäimistön kuunteluun tarkoitettuun rajapintaan, eli rajapintaan <code>KeyListener</code>. Rajapinta <code>KeyListener</code> tarjoaa metodit näppäimistön tapahtumien kuunteluun. Rajapinta määrittelee kolme erilaista näppäimistöltä tulevaa tapahtumaa, kirjaimen kirjoitus (<code>keyTyped()</code>), paino (<code>keyPressed()</code>) ja nosto (<code>keyReleased()</code>. Toteutetaan rajapinta <code>KeyListener</code> luokassa <code>Piirturi</code>.</p>
+    
+<pre class="sh_java">
+public class Piirturi extends JPanel implements KeyListener {
+
+  public void paint(Graphics g) {
+    super.paint(g);
+
+    g.fillOval(30, 30, 100, 100);
+    g.fillOval(250, 40, 80, 80);
+    g.drawOval(40, 200, 300, 100);
+  }
+
+  public void keyPressed(KeyEvent e) {
+  }
+  
+  public void keyTyped(KeyEvent e) {
+  }
+
+  public void keyReleased(KeyEvent e) {
+  }
+}
+</pre>
+    
+    <p><code>KeyListener</code>-rajapinnan tarjoavat metodit saavat parametrina <code>KeyEvent</code>-tyyppisen olion käyttöliittymältä. <code>KeyEvent</code>-oliolta voimme esimerkiksi kysyä, mitä nappia on painettu (metodi <code>getKeyCode()</code>). Muutetaan piirturi-luokkaa siten, että nuoli ylös pienentää hahmon suuta, nuoli alas suurentaa sitä (eli sen korkeus muuttuu). Käytetään tähän metodia <code>keyPressed()</code>, sillä jos näppäimistön nappia pidetään pohjassa metodia <code>keyPressed()</code> kutsutaan jatkuvasti. </p>
+    
+<pre class="sh_java">
+public class Piirturi extends JPanel implements KeyListener {
+    int y = 0;
+
+  public void paint(Graphics g) {
+    super.paint(g);
+
+    g.fillOval(30, 30, 100, 100);
+    g.fillOval(250, 40, 80, 80);
+    g.drawOval(40, 200, 300, 100 + y);
+  }
+
+  public void keyPressed(KeyEvent e) {
+    if (e.getKeyCode() == KeyEvent.VK_UP) {
+      this.y--;
+      repaint();
+    }
+
+    if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+      this.y++;
+      repaint();
+    }
+  }
+
+  public void keyTyped(KeyEvent e) {
+  }
+
+  public void keyReleased(KeyEvent e) {
+  }
+}
+</pre>
+
+  <p>Tapahtumankäsittelijä pitää rekisteröidä ikkunaan, eli käytettävään dialogiin, sillä se on uloin käyttöliittymän kerros. Voimme rekisteröidä näppäimistönkuuntelijan pääohjelmalle seuraavasti.</p>
+
+
+<pre class="sh_java">
+// luodaan ikkuna
+JDialog dlg = new JDialog();
+
+// luodaan piirturi
+Piirturi piirturi = new Piirturi();
+
+// otetaan viite ikkunan containeriin ja asetetaan piirturi siihen
+Container container = dlg.getContentPane();
+container.add(piirturi);
+
+// lisätään näppäimistönkuuntelija
+dlg.addKeyListener(piirturi);
+
+// ikkunan koko, sulkemistoiminnallisuus ja näkyväksi asetus
+dlg.setSize(480, 360);
+dlg.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+dlg.setVisible(true);
+</pre>
+
+  <p>Alla oleva kuva on kuva hahmosta kun ylöspäin nappia on pidetty muutama hetki pohjassa.</p>
+  
+  <p><img src="img/keylistener.png"/></p>
+    
+  
+  <h2 class="bonus">Säikeistä</h2>
+  
+  <p><i>Ei kuulu koealueeseen!</i></p>
+  
+  <p>Ohjelmissa halutaan usein suorittaa asioita samaan aikaan esimerkiksi siten, että osa ohjelmasta tekee laskentaa, ja toinen osa tulostaa tietoa. Useimmat hyvin suunnitellut käyttöliittymät toimivat siten, että ne vain näyttävät tiedon, jolloin itse tiedon laskenta tapahtuu taustalla. Tutustutaan Javassa oleviin säikeisiin, eli suorituksen jakamiseen, rajapinnan <code>Runnable</code> avulla.</p>
+  
+  <p>Rajapinta <code>Runnable</code> määrittelee metodin <code>run()</code>, joka mahdollistaa olion suorituksen erillisessä säikeessä. Toteutetaan luokka <code>Hiekkalaatikko</code>, jossa on yksinäinen liikkuva muurahainen. Esitetään muurahainen pisteenä. Toteutetaan metodi <code>run()</code> seuraavasti.</p>
+  
+<pre class="sh_java">
+public void run() {
+  while(true) {
+    liikutaMuurahaista();
+    System.out.println(getMuurahainen());
+
+    try {
+      Thread.sleep(30);
+    } catch (InterruptedException ex) {}            
+  }
+}
+</pre>
+
+  <p>Kutsu <code>Thread.sleep(30)</code> komentaa kyseisen säikeen nukkumaan 30 millisekunniksi. Jos säiettä ei pyydettäisi nukkumaan, pyrkisi se käyttämään niin paljon tietokoneen tehoa kuin mahdollista. Käytännössä muurahainen kulkisi niin lujaa ettei sen liikkeestä saisi kunnolla selvää. <i>Vanhojen pelien ystäville: </i> Tämä on syynä siihen, että osa hyvin vanhoista peleistä toimivat järjettömillä nopeuksilla jos niitä yrittää pelata nykyajan tietokoneilla. Ennen muinoin pelejä suunniteltaessa ei otettu huomioon sitä, että eri tietokoneet ovat eri tehoisia, ja kaikki pelit pyrkivät ottamaan kaiken tehon irti koneesta.</p>
+  
+  <p>Luokka <code>Hiekkalaatikko</code> on kokonaisuudessaan seuraavanlainen.</p>
+  
+<pre class="sh_java">
+public class Hiekkalaatikko implements Runnable {
+  private Point muurahainen;
+
+  private int leveys;
+  private boolean oikealle = true;
+
+  public Hiekkalaatikko(int leveys) {
+    this.leveys = leveys;
+
+    // käytetään luokkaa Random satunnaisen pisteen saamiseen
+    Random random = new Random();
+    this.muurahainen = new Point(random.nextInt(leveys), 5);
+  }
+
+  private void liikutaMuurahaista() {
+    if(oikealle) {
+      muurahainen.x++;
+    } else {
+      muurahainen.x--;
+    }
+
+    if(muurahainen.x &lt; 0) {
+      oikealle = true;
+    }
+
+    if(muurahainen.x &gt; leveys) {
+      oikealle = false;
+    }
+  }
+
+  public Point getMuurahainen() {
+    return muurahainen;
+  }
+
+  public void run() {
+    while(true) {
+      liikutaMuurahaista();
+      System.out.println(getMuurahainen());
+
+      try {
+        Thread.sleep(30);
+      } catch (InterruptedException ex) {}            
+    }
+  }
+}
+</pre> 
+  
+    <p>Jos ylläoleva luokka ajetaan seuraavalla <code>main()</code>-metodilla, ei ohjelman suoritus pääty kun <code>main()</code>-metodi päättyy. Kutsu <code>new Thread().start()</code>, jolle annetaan parametrina <code>Runnable</code>-rajapinnan toteuttava olio, aloittaa uuden säikeen parametrina annetulle oliolle.</p>
+
+<pre class="sh_java">
+Hiekkalaatikko hiekkis = new Hiekkalaatikko(250);
+new Thread(hiekkis).start();
+</pre>
+
+    <p>Koska muurahainen on esitetty Javan <code>Point</code>-luokan avulla, on ohjelman tulostus seuraavanlainen (ja päättyy vasta kun ohjelma <i>tapetaan</i>).</p>
+    
+<pre>
+java.awt.Point[x=126,y=5]
+java.awt.Point[x=127,y=5]
+java.awt.Point[x=128,y=5]
+java.awt.Point[x=129,y=5]
+java.awt.Point[x=130,y=5]
+java.awt.Point[x=131,y=5]
+java.awt.Point[x=132,y=5]
+java.awt.Point[x=133,y=5]
+...
+</pre>
+
+    <p>Luodaan hiekkalaatikolle vielä oma pieni graafinen käyttöliittymä. Hiekkalaatikko ottaa parametrina graafisen käyttöliittymän, ja kutsuu omassa <code>run()</code>-metodissaan käyttöliittymän päivittämistä. Toteutetaan piirtäminen <code>JPanel</code>-luokkaa laajentaen.</p>
+
+<pre class="sh_java">
+public class Paneeli extends JPanel {
+  private Point piste;
+  
+  public void paint(Graphics g) {
+    super.paint(g);
+    
+    if(piste != null) {
+      g.drawRect(piste.x, piste.y, 2, 2);
+    }
+  }
+
+  public void piirra(Point p) {
+    this.piste = p;
+    repaint();
+  }
+}
+</pre>
+
+    <p>Luodaan dialogi, jonka sisään paneeli asetetaan pääohjelmassa. Koska ohjelmassa on useampia säikeitä, joudumme muokkaamaan ikkunan sulkemismetodia siten, että se sulkee koko ohjelman.</p>
+    
+<pre class="sh_java">
+Paneeli paneeli = new Paneeli();
+
+JDialog dialog = new JDialog();
+dialog.getContentPane().add(paneeli);
+// ikkunan koko, sulkemistoiminnallisuus ja näkyväksi asetus
+dialog.setSize(300, 100);
+
+// suljetaan koko ohjelma kun ikkuna suljetaan, muuten säie jäisi
+// pyörimään
+dialog.addWindowListener(new WindowAdapter() {
+  public void windowClosing(WindowEvent e) {
+    System.exit(0);
+  }
+});
+
+dialog.setVisible(true);
+
+Hiekkalaatikko hiekkis = new Hiekkalaatikko(paneeli, 250);
+new Thread(hiekkis).start();
+</pre>
+
+    <p>Hiekkalaatikko vielä siten, että se saa parametrina <code>Paneeli</code>-olion.</p>
+    
+<pre class="sh_java">
+public class Hiekkalaatikko implements Runnable {
+  private Point muurahainen;
+  private Paneeli paneeli;
+  
+  private int leveys;
+  private boolean oikealle = true;
+
+  public Hiekkalaatikko(Paneeli paneeli, int leveys) {
+    this.leveys = leveys;
+    this.paneeli = paneeli;
+
+    // käytetään luokkaa Random satunnaisen pisteen saamiseen
+    Random random = new Random();
+    this.muurahainen = new Point(random.nextInt(leveys), 5);
+  }
+
+  private void liikutaMuurahaista() {
+    if(oikealle) {
+      muurahainen.x++;
+    } else {
+      muurahainen.x--;
+    }
+
+    if(muurahainen.x < 0) {
+      oikealle = true;
+    }
+
+    if(muurahainen.x > leveys) {
+      oikealle = false;
+    }
+  }
+
+  public Point getMuurahainen() {
+    return muurahainen;
+  }
+
+  public void run() {
+    while(true) {
+      liikutaMuurahaista();
+
+      if(paneeli != null) {
+        paneeli.piirra(muurahainen);
+      }
+
+      try {
+        Thread.sleep(30);
+      } catch (InterruptedException ex) {}            
+    }
+  }
+}
+</pre>
+
+    <p>Nyt ohjelma on seuraavanlainen (muurahainen toki liikkuu!).</p>
+    
+    <p><img src="img/muurahainen.png"/></p>
+    
+    <h3>Samanaikaisuudesta</h3>
+    
+    <p>Jos useampi säie käyttää samaa resurssia, esimerkiksi <code>ArrayList</code>-luokan ilmentymää, voivat ne päätyä tilanteeseen, missä toinen yrittää poistaa alkiota mitä toinen lukee. Tällöin puhumme rinnakkaisuusongelmista. Kurssilla rinnakkaisohjelmistot pääsemme tutustumaan rinnakkaisuuteen liittyviin ongelmiin (ja rinnakkaisuuden mahdollistamaan tehokkuuteen! :)).</p>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <h2 id="osuto">Olioiden suunnittelusta ja toteutuksesta</h2>
+    
+    <p>Seuraavassa esitellään joukko neuvoja olioiden suunnitteluun ja toteutukseen.</p>
+    
+    
+    <h3>Olioiden attribuuteista</h3>
+    
+    <p>Olion attribuutit, eli luokkaan liittyvät ei-staattiset muuttujat, kuvaavat olion rakennetta ja ominaisuuksia. Esimerkiksi luokalla <code>Opiskelija</code> on opiskelijan nimi ja opiskelijanumero.</p>
+
+<pre class="sh_java">
+public class Opiskelija {
+  // yksittäisen opiskelijan attribuutit
+  private String nimi;
+  private int opiskelijanumero;  
+  ...
+</pre>
+
+    <p>Opiskelijan attribuutit ovat vain <code>Opiskelija</code>-tyyppiin, eli konkreettiseen opiskelijaan liittyviä tietoja. Rakentaessamme tallennus- ja latausmahdollisuutta opiskelijalle käyttäen Javan valmista luokkakirjastoa, eivät opiskelijan lataamiseen tai tallentamiseen käytetyt luokat kuulu <code>Opiskelija</code>-olion ominaisuuksiin. Esimerkiksi seuraavanlainen toteutus, missä opiskelijan tallennukseen käytettävä <code>FileWriter</code>-luokka on opiskelijan attribuuttina on väärin.</p>
+    
+<pre class="sh_java">
+public class Opiskelija {
+  // yksittäisen opiskelijan attribuutit
+  private String nimi;
+  private int opiskelijanumero;
+  private FileWriter tallentaja;
+  
+  ...
+  
+  public void tallenna() throws Exception {
+    tallentaja = new FileWriter(nimi);
+    tallentaja.write(nimi + "\n");
+    tallentaja.write("" + opiskelijanumero + "\n");
+    tallentaja.close();
+  }  
+  ...
+</pre>
+    
+    <p>Vaikka esimerkki toimii, ei se rakenteellisesti ole hyvin suunniteltu. Olioiden attribuuttien on tarkoitus kuvata aina tiettyä käsitettä (esimerkiksi opiskelija) selkeärajaisesti. Opiskelija nimeltä Matti, jolla on opiskelijanumero on selkeä opiskelijan määritelmä. Toisaalta, jos opiskelija määritellään siten, että sillä on nimen ja opiskelijanumeron lisäksi myös attribuutti <code>tallentaja</code>, kadotamme olion selkeärajaisuuden. Selkeärajaisuudesta puhutaan myös termillä <em>koheesio</em>, jolla tarkoitetaan sitä, että luokan rakenne liittyy aina tiettyyn selkeästi rajattavaan toiminnallisuuteen. Esimerkiksi <code>Opiskelija</code>-luokan attribuuttien tulee liittyä opiskelijaan.</p>
+    
+    
+    <p>Yllä oleva esimerkki pitääkin muuttaa sellaiseksi, että <code>FileWriter</code>-olio liittyy vain metodiin, ei koko olioon. Tällöin opiskelijaan liittyy vain siihen kuuluvat attribuutit, jotka oikeasti kuvaavat opiskelijan rakennetta.</p>
+    
+<pre class="sh_java">
+public class Opiskelija {
+  // yksittäisen opiskelijan attribuutit
+  private String nimi;
+  private int opiskelijanumero;
+  
+  ...
+  
+  public void tallenna() throws Exception {
+    FileWriter tallentaja = new FileWriter(nimi);
+    tallentaja.write(nimi + "\n");
+    tallentaja.write("" + opiskelijanumero + "\n");
+    tallentaja.close();
+  }  
+  ...
+</pre>
+
+    <p>Nyt myös metodi <code>tallenna()</code> on selkeärajainen. Tallenna-metodi käyttää vain siinä tarvittavaa <code>FileWriter</code>-oliota, ja rajaa tallentamistoiminnallisuuden omaan toteutukseensa. Huom! Selkeärajaisuudella ei kuitenkaan tarkoiteta sitä, että kaikki toiminnallisuus pitäisi toteuttaa aina saman metodin sisällä. Luettavuutta voidaan helpottaa rajaamalla metodien toteutusta siten, että metodit ovat lyhyitä. Metodista <code>tallenna()</code> voikin erottaa vielä tallennettavan tiedon luomisen omaan metodiinsa <code>tallennettavaOpiskelija()</code> seuraavasti.</p>
+
+<pre class="sh_java">
+public class Opiskelija {
+  // yksittäisen opiskelijan attribuutit
+  private String nimi;
+  private String opiskelijaNumero;
+  
+  ...
+  
+  public void tallenna() throws Exception {
+    FileWriter tallentaja = new FileWriter(nimi);
+    tallentaja.write(tallennettavaOpiskelija());
+    tallentaja.close();
+  }  
+  
+  private String tallennettavaOpiskelija() {
+    StringBuilder sb = new StringBuilder();
+    sb.append(nimi + "\n");
+    sb.append("" + opiskelijanumero + "\n");
+    ...
+    return sb.toString();    
+  }
+  ...
+</pre>
+
+
+    <h3>Olioiden suunnittelusta</h3>
+    
+    <p>Jatketaan vielä yllä-esitetyn <code>Opiskelija</code>-luokan avulla. <code>Opiskelijalla</code> on attribuutteina opiskelijan nimi ja opiskelijanumero.</p>
+
+<pre class="sh_java">
+public class Opiskelija {
+  // yksittäisen opiskelijan attribuutit
+  private String nimi;
+  private int opiskelijanumero;  
+  ...
+</pre>
+
+    <p>Olioiden suunnittelussa oliot pyritään pitämään yksittäisinä kokonaisuuksina. Esimerkiksi jos opiskelija on ilmoittautunut kursseille, on opiskelijalla attribuuttina vain viitteet <code>Kurssi</code>-olioihin. Kurssi-oliot taas sisältävät kurssien tiedot, kuten kurssikoodin ja nimen.</p>
+    
+<pre class="sh_java">
+public class Kurssi {
+  // yksittäisen kurssin attribuutit
+  private String kurssikoodi;
+  private String nimi;
+  ...
+</pre>
+
+    <p>Kun Opiskelija-luokalle lisätään attribuutiksi kurssit, joihin opiskelija on ilmoittautunut, halutaan lisätä viitteet oikeisiin kursseihin. Seuraava esimerkki, jossa kursseihin viitataan kurssikoodin avulla (<code>String</code>-tyyppinen muuttuja) ei ole oikein toteutettu, sillä kurssin sisällön ja tietojen muuttuessa ilmoittautumisviite pysyy samana ja opiskelija-olio ei tiedä kurssin muutoksista.</p>
+    
+<pre class="sh_java">
+public class Opiskelija {
+  // yksittäisen opiskelijan attribuutit
+  private String nimi;
+  private int opiskelijanumero;
+  
+  private ArrayList&lt;String&gt; kurssiIlmoittautumiset;  
+  ...
+</pre>    
+    
+    <p>Jos ilmoittautumiset eivät viittaa <code>Kurssi</code>-olioihin, eivät mahdolliset muutokset <code>Kurssi</code>-olioissa näy opiskelijan kurssilistalla, sillä viitteet eivät viittaa oikeisiin olioihin. Parempi tapa onkin toteuttaa kurssi-ilmoittautuminen siten, että kurssi-ilmoittautumiset ovat viitteitä oikeisiin <code>Kurssi</code>-olioihin.</p>
+    
+<pre class="sh_java">
+public class Opiskelija {
+  // yksittäisen opiskelijan attribuutit
+  private String nimi;
+  private int opiskelijanumero;
+  
+  private ArrayList&lt;Kurssi&gt; kurssiIlmoittautumiset;  
+  ...
+</pre>    
+
+    <p>On myös mahdollista rakentaa ilmoittautuminen siten, että vastuu opiskelijoiden kurssi-ilmoittautumisten ylläpidosta ei ole opiskelijoilla, vaan jollain muulla oliolla. Olio <code>KurssiIlmoittautumiset</code> on esimerkki vastuun siirtämisestä kolmannelle osapuolelle. Tällöin <code>Opiskelija</code>-olion ei myöskään tarvitse pitää kirjaa ilmoittautumisista.</p>
+
+<pre class="sh_java">
+public class KurssiIlmoittatumiset {
+  private HashMap&lt;Opiskelija, ArrayList&lt;Kurssi&gt;&gt; opiskelijoidenKurssit;
+  ...
+</pre> 
+
+<pre class="sh_java">
+public class Opiskelija {
+  // yksittäisen opiskelijan attribuutit
+  private String nimi;
+  private int opiskelijanumero;
+  ...
+</pre>
+
+    <p>Jos haluamme tietää jokaiseen kurssiin liittyneet opiskelijat voimme joko käydä <code>KurssiIlmoittautumiset</code>-tyyppisen olion <code>opiskelijoidenKurssit</code>-hajautustaulun läpi yksitellen, tai muuttaa toteutusta siten, että se pitää kirjaa myös jokaiseen <code>Kurssi</code>-olioon ilmoittatuneista opiskelijoista. Tällöin tiettyyn <code>Kurssi</code>-ilmentymään liittyneet opiskelijat saadaan nopeasti selville.</p>
+    
+<pre class="sh_java">
+public class KurssiIlmoittatumiset {
+  private HashMap&lt;Opiskelija, ArrayList&lt;Kurssi&gt;&gt; opiskelijoidenKurssit;
+  private HashMap&lt;Kurssi, ArrayList&lt;Opiskelija&gt;&gt; kurssienOpiskelijat;
+  ...
+</pre>
+
+
+    <p>Toteutettavaa järjestelmää määriteltäessä tulee suunnitella myös järjestelmän hienojakoisuus, eli kuinka pieniin osiin järjestelmä jaetaan. Esimerkiksi kursseihin voi liittyä myös harjoitusajat ja luennoitsijat. Luennoitsijat voidaan myös toteuttaa omana luokkana. Miten kannattaa toimia jos luennoitsija on (jatko-)opiskelija?</p>
+
+
+
+    <h3>Gettereistä ja settereistä</h3>
+    
+    <p>Get- ja set-metodien tarkoituksena on luoda näkyvyyttä luokan sisäisiin (kapseloituihin) attribuutteihin, joihin ei muuten ole mahdollista päästä käsiksi luokan ulkopuolelta. Luokan sisäisessä toteutuksessa näihin muuttujiin kuitenkin pääsee käsiksi. Getterien käyttö luokan sisäisessä toteutuksessa kannattaa jättää väliin, jos sille ei ole erityistä tarvetta. Seuraavassa esimerkissä metodi <code>lisaaElementti()</code> tekee yhden ylimääräisen askeleen kutsuessaan metodia <code>getElementit()</code>.</p>
+    
+<pre class="sh_java">
+public class Dokumentti {
+  private ArrayList&lt;Elementti&gt; elementit;
+  ...
+  
+  public ArrayList&lt;Elementti&gt; getElementit() {
+    return elementit;
+  }
+  
+  public void lisaaElementti(Elementti elementti) {
+    getElementit().add(elementti);
+  }
+  ...
+</pre>
+
+    <p>Yllä oleva metodi <code>lisaaElemetti()</code> kannattaakin kirjoittaa siten, että se käyttää luokan sisäistä attribuuttia <code>elementit</code> suoraan. Tällöin toteutus näyttää seuraavanlaiselta.</p>
+
+    <pre class="sh_java">
+public class Dokumentti {
+  private ArrayList&lt;Elementti&gt; elementit;
+  ...
+  
+  public ArrayList&lt;Elementti&gt; getElementit() {
+    return elementit;
+  }
+  
+  public void lisaaElementti(Elementti elementti) {
+    elementit.add(elementti);
+  }
+  ...
+</pre>
+
+    <p>Nyrkkisääntönä voidaan ajatella seuraavaa; Jos muuttuja on näkyvissä, käytä sitä suoraan. Jos muuttuja ei ole näkyvissä, käytä getteriä. Tämä nyrkkisääntö vaatii toteuttajalta huolellisuutta olioiden suunnittelussa ja kapseloinnissa, sillä ilman kapselointia kaikki muuttujat ovat näkyvissä.</p>
+    
+    
+
+    
+    <h3>Static ja ei-static</h3>
+    
+    <p>Staattiset ja ei-staattiset muuttujat rajaavat eron olioiden ja luokkien välille. Staattiset muuttujat liittyvät luokkiin, ei olioihin, mutta niihin voi viitata olion sisältä. Ei-staattiset muuttujat taas liittyvät aina olioon, eli jos luokasta luodaan uusi olio, luodaan olioon liittyvät (ei staattiset) muuttujat myös oliota varten. Opiskelija-luokalla on staattinen muuttuja <code>OPISKELIJANUMERO</code>, jonka avulla pidetään kirjaa opiskelijanumeroista siten, että yksikään opiskelija ei saa samaa opiskelijanumeroa. Luokalla <code>Opiskelija</code> on myös ei-staattinen muuttuja opiskelijanumero, joka liittyy aina kyseiseen olioon.</p>
+
+<pre class="sh_java">
+public class Opiskelija {
+  private static int OPISKELIJANUMERO = 0;
+  
+  private String nimi;
+  private int opiskelijanumero;
+  
+  public Opiskelija(String nimi) {
+    OPISKELIJANUMERO++;
+
+    this.nimi = nimi;
+    this.opiskelijanumero = OPISKELIJANUMERO;
+  }
+  ...
+</pre>
+
+    <p>Kun luomme luokasta <code>Opiskelija</code> ilmentymän, kasvatetaan luokkamuuttujaa <code>OPISKELIJANUMERO</code> yhdellä, ja kopioidaan sen arvo uuden olion <code>opiskelijanumero</code>-muuttujan arvoksi. Havainnollistetaan tilannetta vielä <em>hifi</em>grafiikalla. Alussa on luokka Opiskelija, josta ei ole luotu yhtään ilmentymää.</p>
+
+<pre>
+Luokka Opiskelija:
+  private:
+    OPISKELIJANUMERO: 0
+</pre>
+
+    <p>Uutta <code>Opiskelija</code>-ilmentymää luotaessa (kutsulla <em>new</em>) ajetaan luokan konstruktori läpi. Luodaan uusi opiskelija viitteen <code>matti</code> taakse (<code>Opiskelija matti = new Opiskelija("Matti");</code>). Huomaa että <code>matti</code> on vain muuttujan nimi, johon viite on tallennettu.</p>
+
+<pre>
+Luokka Opiskelija:
+  private:
+    OPISKELIJANUMERO: 1
+  
+Luokasta opiskelija tehdyt ilmentymät (oliot):
+
+          _______________________
+matti-&gt;  | private:              |
+         |   nimi: Matti         |
+         |   opiskelijanumero: 1 |
+          ----------------------- 
+</pre>
+
+    <p>Luodaan toinen <code>Opiskelija</code>-ilmentymä. Uudelle oliolle luodaan kentät <code>nimi</code> ja <code>opiskelijanumero</code>. Luodaan uusi opiskelija viitteen <code>arto</code> taakse (<code>Opiskelija arto = new Opiskelija("Arto");</code>).</p>
+
+<pre>
+Luokka Opiskelija:
+  private:
+    OPISKELIJANUMERO: 2
+      
+Luokasta opiskelija tehdyt ilmentymät (oliot):
+
+          _______________________
+matti-&gt;  | private:              |
+         |   nimi: Matti         |
+         |   opiskelijanumero: 1 |
+          ----------------------- 
+          
+          _______________________
+arto-&gt;   | private:              |
+         |   nimi: Arto          |
+         |   opiskelijanumero: 2 |
+          -----------------------          
+</pre>
+
+    <p>Staattiset muuttujat siis liittyvät aina luokkaan. Staattisiin muuttujiin voi viitata ei-staattisesta ympäristöstä, eli olioiden maailmasta.</p>
+    
+    <p>Tutkitaan samaa tilannetta vielä siten, että luokalla on staattinen metodi <code>opiskelijoitaLuotu()</code>, ja ei-staattinen metodi <code>getOpiskelijanumero()</code>. Metodit näkyvät kaikkialle, eli niillä on näkyvyysmääre <code>public</code>.</p>
+
+    
+<pre class="sh_java">
+public class Opiskelija {
+  private static int OPISKELIJANUMERO = 0;
+  
+  private String nimi;
+  private int opiskelijanumero;
+  
+  public Opiskelija(String nimi) {
+    OPISKELIJANUMERO++;
+
+    this.nimi = nimi;
+    this.opiskelijanumero = OPISKELIJANUMERO;
+  }
+  
+  public int getOpiskelijanumero() {
+    return opiskelijanumero;
+  }
+  
+  ...
+  
+  public static int opiskelijoitaLuotu() {
+    return OPISKELIJANUMERO;
+  }
+</pre>
+
+    <p>Staattiset metodit liittyvät luokkaan <code>Opiskelija</code>, kun taas ei-staattiset metodit liittyvät luokasta tehtyihin ilmentymiin. Luokassa <code>Opiskelija</code> olevaan staattiseen metodiin <code>opiskelijoitaLuotu()</code> voidaan viitata suoraan kutsulla <code>Opiskelija.opiskelijoitaLuotu()</code>, mutta metodiin <code>getOpiskelijanumero()</code> ei ole pääsyä luokasta, sillä metodi ei liity luokkaan vaan olioon. Jatketaan <em>hifi</em>grafiikkaamme vielä hieman.</p>
+
+
+<pre>
+Luokka Opiskelija:
+  private:
+    OPISKELIJANUMERO: 2
+  public:
+    opiskelijoitaLuotu()
+  
+Luokasta opiskelija tehdyt ilmentymät (oliot):
+
+          _________________________
+matti-&gt;  | private:                |
+         |   nimi: Matti           |
+         |   opiskelijanumero: 1   |
+         | public:                 |
+         |   getOpiskelijanumero() |
+          ------------------------- 
+          
+          _________________________
+arto-&gt;   | private:                |
+         |   nimi: Arto            |
+         |   opiskelijanumero: 2   |
+         | public:                 |
+         |   getOpiskelijanumero() |
+          -------------------------        
+</pre>
+    
+    <p>Metodi <code>getOpiskelijanumero()</code> liittyy siis olion ilmentymään, eikä sitä voi kutsua ilman viitettä itse olioon. Esimerkiksi metodi <code>opiskelijoitaLuotu()</code> ei voi kutsua <code>matti</code>-viitteen takana olevan olion <code>getOpiskelijanumero()</code>-metodia ilman viitettä <code>matti</code>-olioon. Toisaalta, oliot voivat käyttää luokan muuttujia ja metodeja.</p>
+    
+    <p><em>Olioihin liittyvien metodien toteutus ei kopioidu, eli metodeista ei tehdä kopioita uusia olioita luotaessa. Vain olioihin liittyvät muuttujat kopioituvat uudelle oliolle, jolloin jokaisella oliolla on omat arvot muuttujissaan. Ei-staattisten metodien toiminta liittyy kuitenkin aina viitattavaan olioon.</em></p>
+    
+    <p>Staattisia luokkamuuttujia käytetään siis silloin, kun tarvitaan jotain luokkaan yleisesti liittyvää. Hyvä esimerkki yleisesti käytettävästä muuttujasta on tekstikäyttöliittymissä tarvittu <code>Scanner</code>-luokka, jolla voidaan lukea syötettä näppäimistöltä. <code>Scanner</code>-luokasta kannattaa tehdä vain yksi ilmentymä näppäimistön lukemiseen, jolloin kaikki metodit voivat käyttää samaa näppäimistönlukijaa.</p>
+    
+    <p>Esimerkiksi seuraava luokka syötteiden lukemiseen on toteutettu vaikeasti (luokassa on muitakin pulmia!), sillä jokaisessa metodissa luodaan aina uusi <code>Scanner</code>-ilmentymä.</p>
+    
+<pre class="sh_java">
+public class MunLukija {
+
+  public static String lueEkaSana() {
+    Scanner lukija = new Scanner(System.in);
+    
+    while(true) {
+      System.out.println("Kirjoita rivi: ");
+      String rivi = lukija.nextLine();
+      rivi = rivi.trim();
+      
+      if(rivi.isEmpty()) {
+        continue;
+      }
+      
+      String[] sanat = rivi.split(" ");
+      return sanat[0];    
+    }
+  }
+  
+  public static String lueVikaSana() {
+    Scanner lukija = new Scanner(System.in);
+    
+    while(true) {
+      System.out.println("Kirjoita rivi: ");
+      String rivi = lukija.nextLine();
+      rivi = rivi.trim();
+      
+      if(rivi.isEmpty()) {
+        continue;
+      }
+      
+      String[] sanat = rivi.split(" ");
+      return sanat[sanat.length-1];    
+    }
+  }
+  ...
+</pre>
+
+    <p><code>Scanner</code>-olio kannattaa siirtää luokkamuuttujaksi, jolloin siihen voidaan viitata aina tarvittaessa.</p>
+
+<pre class="sh_java">
+public class MunLukija {
+  private static final Scanner lukija = new Scanner(System.in);
+
+  public static String lueEkaSana() {
+    while(true) {
+      System.out.println("Kirjoita rivi: ");
+      String rivi = lukija.nextLine();
+      rivi = rivi.trim();
+      
+      if(rivi.isEmpty()) {
+        continue;
+      }
+      
+      String[] sanat = rivi.split(" ");
+      return sanat[0];    
+    }
+  }
+  
+  public static String lueVikaSana() {
+    while(true) {
+      System.out.println("Kirjoita rivi: ");
+      String rivi = lukija.nextLine();
+      rivi = rivi.trim();
+      
+      if(rivi.isEmpty()) {
+        continue;
+      }
+      
+      String[] sanat = rivi.split(" ");
+      return sanat[sanat.length-1];    
+    }
+  }
+  ...
+</pre>
+
+    <p>Luokan metodeissa on myös paljon toistoa, itse lukeminen kannattaakin tässä tapauksessa siirtää kokonaan omaan metodiinsa.</p>
+    
+<pre class="sh_java">
+public class MunLukija {
+  private static final Scanner lukija = new Scanner(System.in);
+
+  public static String lueEkaSana() {
+    String[] sanat = lueRivinSanat();
+    return sanat[0];    
+  }
+  
+  public static String lueVikaSana() {
+    String[] sanat = lueRivinSanat();
+    return sanat[sanat.length-1];    
+  }
+  
+  private static String[] lueRivinSanat() {
+    while(true) {
+      System.out.println("Kirjoita rivi: ");
+      String rivi = lukija.nextLine();
+      rivi = rivi.trim();
+      
+      if(rivi.isEmpty()) {
+        continue;
+      }
+      return rivi.split(" ");
+    }
+  }
+  ...
+</pre>
+    
+    <h3>Viite this</h3>
+    
+    <p>Viitteen <code>this</code>-käytöstä on ollut paljon puhetta, ja tärkeintä sen käytössä on jatkuvuus. Jos viitettä <code>this</code> käytetään tilanteissa, joissa sitä ei vaadita, kannattaa sitä käyttää aina. Viitteen <code>this</code> vaativat tilanteet ovat tilanteita, joissa metodin (tai konstruktorin) parametrina saadaan muuttuja, jolla on sama nimi, kuin olioon liittyvällä muuttujalla. Tällöin parametrina saatu muuttuja <em>peittää</em> olion muuttujan.</p>
+    
+    <p>Seuraava konstruktorikutsu <code>Opiskelija</code>-luokalle asettaa parametrina saadulle muuttujalle <code>nimi</code> parametrina saadun muuttujan <code>nimi</code> arvon. Tällöin <code>Opiskelija</code>-luokan attribuutti <code>nimi</code> ei saa mitään arvoa.</p>
+    
+<pre class="sh_java">
+public class Opiskelija {
+  private String nimi;
+  ...
+  
+  public Opiskelija(String nimi) {
+    nimi = nimi;
+    ...
+</pre>
+
+    <p>Toinen tapa tehdä samankaltainen virhe on asettaa oliomuuttuja <code>nimi</code> parametrina saatuun muuttujaan. Tällöin parametrina saatu muuttuja saa oliomuuttujassa <code>nimi</code> olevan arvon, mutta olion muuttujan arvo ei muutu.</p>
+
+<pre class="sh_java">
+public class Opiskelija {
+  private String nimi;
+  ...
+  
+  public Opiskelija(String nimi) {
+    nimi = this.nimi;
+    ...
+</pre>
+
+    <p>Oikea tapa tehdä ylläoleva asetus on seuraava. Tällöin luotuun opiskelijaan liittyvä muuttuja <code>nimi</code> saa arvokseen parametrina annetun muuttujan <code>nimi</code> arvon.</p>
+   
+<pre class="sh_java">
+public class Opiskelija {
+  private String nimi;
+  ...
+  
+  public Opiskelija(String nimi) {
+    this.nimi = nimi;
+    ...
+</pre>
+
+
+    <p>Esimerkki <code>this</code>-viitteen epäkonsistentista (ei jatkuvasta) käytöstä:</p>
+    
+<pre class="sh_java">
+public class Opiskelija {
+  private String nimi;
+  private int opiskelijanumero;
+  ...
+  
+  public Opiskelija(String nimi) {
+    this.nimi = nimi;
+    ...
+    
+  public String getNimi() {
+    return nimi;
+  }
+  
+  public int getOpiskelijanumero() {
+    return this.opiskelijanumero;
+  }
+  ..
+</pre>
+
+    <p>Tarkoitus onkin rakentaa lähdekoodi siten, että se seuraa samoja sääntöjä kaikkialla. Seuraavat esimerkit ovat molemmat paremmin tehty kuin ylläoleva esimerkki.</p>
+
+<pre class="sh_java">
+public class Opiskelija {
+  private String nimi;
+  private int opiskelijanumero;
+  ...
+  
+  public Opiskelija(String nimi) {
+    this.nimi = nimi;
+    ...
+    
+  public String getNimi() {
+    return this.nimi;
+  }
+  
+  public int getOpiskelijanumero() {
+    return this.opiskelijanumero;
+  }
+  ..
+</pre>
+
+
+<pre class="sh_java">
+public class Opiskelija {
+  private String nimi;
+  private int opiskelijanumero;
+  ...
+  
+  public Opiskelija(String nimi) {
+    this.nimi = nimi;
+    ...
+    
+  public String getNimi() {
+    return nimi;
+  }
+  
+  public int getOpiskelijanumero() {
+    return opiskelijanumero;
+  }
+  ..
+</pre>
+
+   
+    <h2 id="ongelmia">Ongelmia ja ratkaisuja</h2>
+    
+    <p>Seuraavassa esitellään joitakin <a href="http://cs.helsinki.fi/group/java/k10/ohja/k2.html">viikkojen 3-4</a> laskarikertoimesta poimittuja esimerkkejä.</p>
+    
+    
+    <h3>Asetus ylä- ja alaluokassa</h3>
+    
+    <p>Ongelma: rekisterinumeron etuliite asetetaan alaluokassa yläluokassa määriteltyyn kenttään.</p>
+
+<pre class="sh_java">
+public Saab(String rekkari){
+	super(rekkari);
+	rekkari = "SA-" + rekkari;
+}
+</pre>
+
+
+                <p>Ongelma: Rekisterinumeron alkuosa asetetaan yläluokan metodilla <code>setRekisteriKilpi(String)</code>.</p>
+
+<pre class="sh_java">
+public Saab(String rekisteriNumero) {
+	super(rekisteriNumero);
+	super.setRekisteriKilpi("sa");
+}
+</pre>
+
+                <p>Ongelma: Yläluokassa ja alaluokassa on molemmissa rekisterinumero.</p>
+
+<pre class="sh_java">
+public abstract class Auto {
+    private String rekisterinumero;
+
+    public Auto(String rekisterinumero) {
+        this.rekisterinumero=rekisterinumero;
+    }
+
+    public void aja(){
+        System.out.println(this.rekisterinumero+" Ajetaan...");
+    }
+
+}
+
+// Saab
+public class Saab extends Auto{
+    private String rekisterinumero;
+
+    public Saab(String numero) {
+        super("SA-"+numero);
+        numero="SA-"+numero;
+        this.rekisterinumero=numero;
+    }
+</pre>
+
+
+
+                <p>Ongelma: Alaluokka asettaa yläluokan attribuutin <code>rekisteroi(String)</code> "konstruktorilla".</p>
+
+<pre class="sh_java">
+public abstract class Auto {
+
+   String rekisterinro;
+
+   public String rekisteroi(String numero) {
+       return this.rekisterinro = numero;
+   }
+
+   public void aja() {
+       System.out.println(this.rekisterinro + " sanoo Vrrrrrrooooooooooom!");
+   }
+
+   public String toString() {
+       return "" + this.rekisterinro;
+   }
+
+}
+
+// Saab
+public class Saab extends Auto {
+
+   public Saab(String numero) {
+       this.rekisterinro = "SA-" + this.rekisteroi(numero);
+   }
+
+}
+
+</pre>
+
+
+    <p>Ratkaisu: Etuliite asetetaan siten, että se välittyy yläluokan konstruktorille ja asettuu siellä olion attribuutiksi.</p>
+
+<pre class="sh_java">
+public Saab(String rekkari){
+	super("SA-" + rekkari);	
+}
+</pre>
+
+
+    <h3>Metodia aja() ei ole toteutettu yläluokassa</h3>
+    
+    <p>Ongelma: Metodin <code>aja()</code> toteutus on toistettu kaikissa alaluokissa.</p>
+
+<pre class="sh_java">
+public abstract class Auto {
+    String rekisterinumero;
+
+    public Auto(String rekisterinumero) {
+        this.rekisterinumero = rekisterinumero;
+    }
+
+    public abstract void aja();
+
+}
+
+// Saab
+
+public class Saab extends Auto {
+
+    public Saab(String rekisterinumero) {
+        super(rekisterinumero);
+    }
+
+    public void aja() {
+        System.out.println("SA-" + rekisterinumero + " sanoo Vrrrrrrooooooooooom!");
+    }
+}
+</pre>
+
+                <p>Ratkaisu: Korjataan siten, että tehdään rekisterinumeron etuliitteen asetus kuten edellisessä esimerkissä ja siirretään <code>aja()</code>-metodin toteutus yläluokkaan.</p> 
+
+<pre class="sh_java">
+public abstract class Auto {
+    String rekisterinumero;
+
+    public Auto(String rekisterinumero) {
+        this.rekisterinumero = rekisterinumero;
+    }
+
+    public abstract void aja() {
+        System.out.println(this.rekisterinumero + " sanoo Vrrrrrrooooooooooom!");
+    }
+        
+}
+
+// Saab
+
+public class Saab extends Auto {
+
+    public Saab(String rekisterinumero) {
+        super("SA"+rekisterinumero);
+    }
+
+}
+</pre>
+
+
+
+                 <h3>Abstrakti luokka kuten rajapinta</h3>
+
+                 <p>Ongelma: Abstrakti luokka on toteutettu kuten rajapinta, tällöin jokaisessa alaluokassa täytyy toteuttaa kaikki samansisältöiset metodit.</p>
+
+<pre class="sh_java">
+public abstract class Auto {
+	public abstract void talletaRekkari(String rekkari);
+	public abstract void aja();
+	public abstract String getRekkari();
+	public abstract void lisaaBongaus();
+	public abstract int getBongaukset();
+}
+</pre>
+
+
+                 <h3>Bongausmuistiolla laskuri</h3>
+
+                 <p>Kaksi seuraavaa esimerkkiä eivät toimi ollenkaan oikein.  Ohjelman tarkoituksena on bongata rekisterinumeroita ja niiden esiintymiskertoja.</p>
+
+                 <p>Ongelma: <code>Bongausmuistio</code>-oliolla on attribuutti <code>arvo</code>.  Tällöin arvo kasvaa jokaisen bongauksen kanssa, eikä jokaiselle rekisterinumerolle erikseen.</p>
+
+<pre class="sh_java">
+public class Bongausmuistio {
+   int arvo=0;
+   HashMap&lt;Auto,Integer&gt; muistio;
+
+   public Bongausmuistio() {
+       muistio=new HashMap();
+   }
+
+   public void bongaa(Auto a) {
+       this.arvo=arvo+1;
+       muistio.put(a, arvo);
+   }
+
+   public String toString() {
+       return muistio.toString();
+   }
+
+}
+</pre>
+
+                 <p>Ongelma: Kuten edellisessä esimerkissä. Tämän lisäksi ensimmäinen bongausluku asettaa arvon nolla.</p>
+
+<pre class="sh_java">
+   private int bongausluku = 0;
+
+   public Bongausmuistio() {
+       muistio = new HashMap&lt;Auto, Integer&gt;();
+   }
+
+   public void bongaa(Auto a) {
+       muistio.put(a, bongausluku);
+       bongausluku++;
+   }
+</pre>
+
+
+                <p>Seuraavassa kolmessa esimerkissä ohjelma toimii oikein, mutta ratkaisu voisi olla vielä parempi.</p>
+
+                <p>Ongelmia: ylimääräinen muuttuja <code>paljon</code> ja komento <code>put</code> kahdesti.</p>
+
+<pre class="sh_java">
+public void bongaa(Auto a){
+	if (muistio.containsKey(a)){
+   		int paljon = muistio.get(a);
+		paljon++;
+		muistio.put(a, paljon);
+	} else {
+		muistio.put(a, 1);
+	}
+}
+</pre>
+
+<pre class="sh_java">
+public void bongaa(Auto a) {
+	if (this.bongaukset.containsKey(a)) {
+		int nahty = this.bongaukset.get(a);
+		nahty++;
+		this.bongaukset.put(a, nahty);
+	} else
+		this.bongaukset.put(a, 1);
+}
+</pre>
+
+<pre class="sh_java">
+public void bongaa(Auto auto) {
+	if (bm.containsKey(auto)) {
+		int montako = bm.get(auto);
+		montako++;
+		bm.put(auto, montako);
+	} else {
+		bm.put(auto, 1);
+	}
+}
+</pre>
+
+                <p>Ratkaisu: Alustetaan muuttuja <code>aikaisemmat</code> ja haetaan siihen arvo <code>HashMap</code>:stä.  Tämän jälkeen asetaan yhdellä komennolla <em>aikaisemmat + 1</em>.</p>
+
+<pre class="sh_java">
+public void bongaa(Auto auto) {
+
+	int aikaisemmat = 0;
+
+	if (bm.containsKey(auto))
+		aikaisemmat = bm.get(auto);
+	
+        bm.put(auto, aikaisemmat + 1);
+}
+</pre>
+
+
+                <h3>Periytymisen suunnittelu</h3>
+
+                <p>Rekisterinumero on toteutettu jakamalla "SA-313" tyyppiin ("SA") ja numerotunnisteeseen ("313").  Toteutuksessa alaluokka kysyy yläluokalta metodia <code>getRekkari()</code>, joka taas kysyy alaluokalta tyyppiä ja yhdistää sen rekisterinumeroon, jonka vihdoin palauttaa.  Jos tyyppi ja numerotunniste halutaan pitää edelleen, voisi toteutuksessa käyttää suoraan attribuutteja, eikä <em>gettereitä</em>.</p>
+
+                <p>Lisäksi <code>aja()</code>-metodia ei ole toteuttetu yläluokassa.</p>
+
+<pre class="sh_java">
+public abstract class Autot {
+    protected String rekkari;
+
+    public Autot(String rekkari) {
+        this.rekkari = rekkari;
+    }
+
+    public abstract void aja();
+
+    public abstract String getTyyppi();
+
+    public String getRekkari() {
+        return getTyyppi() + this.rekkari;
+    }
+}
+
+public class Saab extends Autot {
+
+    public Saab(String rekkari) {
+        super(rekkari);
+    }
+
+    public void aja() {
+        System.out.println(getRekkari() + " sanoo Vrrrrroooooooooom");
+    }
+
+    public String getTyyppi() {
+        return "SA-";
+    }
+}
+
+public class Volvo extends Autot{
+
+    public Volvo(String rekkari) {
+        super(rekkari);
+    }
+
+    public void aja() {
+        System.out.println(getRekkari() + " sanoo Vrrrrroooooooooom");
+    }
+
+    public String getTyyppi() {
+        return "VO-";
+    }
+}
+
+</pre>
+
+
+                <h3>Olioden vastuut</h3>
+                
+                <p>Bongauksessa bongausten lukumäärä talletetaan <em>bongausmuistioon</em>.  Seuraavassa esimerkissä <code>auto</code> tietää bongauksiensa lukumäärän.  Tämä tarkoittaisi reaalimaailmassa sitä, että autobongaaja raaputtaisi auton kohdatessaan bongatun auton kylkeen merkinnän.</p>
+
+<pre class="sh_java">
+public void bongaa(Auto a) {
+	a.talletus();
+	int lkm = a.getLkm();
+	String rek = a.getRekisterinumero();
+	lista.put(rek, lkm);
+}
+</pre>
+
+
+
+
+
+<pre class="sh_java">
+public class Saab extends Auto {
+
+    private String apu;
+
+    public Saab (String rekisterinumero) {
+      this.rekisterinumero = rekisterinumero;
+      apu = this.rekisterinumero;
+      this.rekisterinumero = "SA-"+apu;
+    }
+
+}
+</pre>
+
+
+                <h3>Attribuuttien näkyvyys</h3>
+
+                <p>Metodissa <code>aja()</code> nähdään attribuutti <code>rekisterinumero</code>, sitä voi käyttää suoraan.</p>
+                
+                <p>Lisäksi muuttuja <code>aja</code> on turha, sen sisältämä <code>String</code> voidaan antaa suoraan tulostuskomennolle.  Metodien nimissä käytetään aina <em>camelCasea</em>: <code>getrekisterinro()</code> &rarr; <code>get<strong>R</strong>ekisterinumero</code>.</p>
+
+<pre class="sh_java">
+public String getrekisterinro(){
+    return this.rekisterinro;
+}
+
+protected void aja(){
+    String aja = " -"+ getrekisterinro() + " sanoo Vrrrrrrooooooooooom!";
+    System.out.println(aja);
+}
+</pre>
+
+
+
+		<h2 id="goodpatterns">Hyviä käytäntöjä</h2>
+
+		<h3>while(true)</h3>
+
+		<p>Toistot tehdään useasti <em>kunnes jokin ehto täyttyy</em>.  Usein voi olla helpompaa muotoilla ehto siten, että toistoa tehdään ikuisesti ja poistuminen tarkistetaan toistorakenteen sisällä.</p>
+
+<pre class="sh_java">
+int valinta;
+
+while (true) {
+	int valinta = lukija.nextInt();
+
+	if (valinta > 0)
+		break;
+}
+</pre>
+
+
+
+
+		<h3>Portsari</h3>
+
+		<p>Ehtolauseita käytettäessä metodien luettavuus helposti kärsii. <em>Portsarin</em> tavoitteena on, että sisäkkäisiä tai hankalasti luettavia ehtolauseita ei enää tarvita.</p>
+
+		<p>Seuraavasta esimerkistä ei suoraan näe millä ehdoilla käyttäjä lisätään ilmoittautuneisiin:</p>
+
+<pre class="sh_java">
+void ilmoittaudu(String kayttaja) {
+	if (!ilmoittautuneet.contains(kayttaja)) {
+		
+		if (ilmoittautuneet.size() &lt; maksimiKoko) {
+			ilmoittautuneet.add(kayttaja);
+		}
+	}
+
+}
+</pre>
+		<p>Tai sama toisella tavalla:</p>
+
+<pre class="sh_java">
+void ilmoittaudu(String kayttaja) {
+	if (ilmoittautuneet.contains(kayttaja)) {
+		// Ei tehdä mitään
+	} else if (ilmoittautuneet.size() &lt; maksimiKoko) {
+		ilmoittautuneet.add(kayttaja);
+	}
+}
+</pre>
+		
+		<p>Muotoillaan ehtolauseet uudestaan.  Metodin alussa on kaksi ehtolausetta, eli portsaria, jotka tarkistavat pääseekö käyttäjä sisään.  Jos ensimmäinen ehto "Käyttäjä on jo ilmoittautunut" toteutuu, ohjaa portsari käyttäjän ystävällisesti ulos.  Tämän jälkeen voidaan tarkistaa toinen ehto välittämättä ensimmäisestä, koska suoritus on jo päättynyt jos ehto on ollut tosi.</p>
+
+		<p>Samoin tomitaan jos toinen ehto "Ilmoittautuneita on maksimimäärä" toteutuu.  Tämän jälkeen voidaan haluttu tapaus, <em>ilmoittautuminen</em> suorittaa ilman ympäröivää sotkuista ehtolausetta.</p>
+
+<pre class="sh_java">
+void ilmoittaudu(String kayttaja) {
+	if (ilmoittautuneet.contains(kayttaja))
+		return;
+
+ 	if (ilmoittautuneet.size() == maksimiKoko)
+		return;
+
+	ilmoittautuneet.add(kayttaja);
+}
+</pre>
+
+		<p>Saman voi tietysti sanoa vielä tiiviimmin:</p>
+<pre class="sh_java">
+void ilmoittaudu(String kayttaja) {
+	if (ilmoittautuneet.contains(kayttaja) || ilmoittautuneet.size() == maksimiKoko)
+		return;
+
+	ilmoittautuneet.add(kayttaja);
+}
+</pre>
+                  
+  </body>
+
+</html>
+

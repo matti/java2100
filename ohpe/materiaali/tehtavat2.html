@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fi" lang="fi">
+	<head>
+		<link rel="stylesheet" href="stylesheets/common.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="javascripts/common.js"></script>
+		
+		<link rel="stylesheet" href="stylesheets/shjs/sh_style.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/shjs/sh_main.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_java.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_ruby.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_scala.min.js"></script>
+		
+		<link rel="stylesheet" href="stylesheets/exercises.css" type="text/css" media="screen, print" />		
+		<script type="text/javascript" src="javascripts/exercises.js"></script>		
+	</head>
+
+	<body>
+		<h1>Tehtävät viikolle 2</h1>
+		
+		<p>Tehtävät tehdään harjoitussaleissa.</p>
+		
+		<p>Pakolliset tehtävät on merkitty harmalla taustavärillä.</p>
+		
+		<ul>
+			<li>Pakollisia tehtäviä on: <span id="required_exercises_count">-1</span> kpl</li>
+			<li>Lisätehtäviä on: <span id="additional_exercises_count">-1</span> kpl</li>
+			<li>Bonustehtäviä on: <span id="bonus_exercises_count">-1</span> kpl</li>
+		</ul>
+		
+
+
+		<h2>Laskentaa ja toistamista</h2>
+		
+		
+		<h3 class="req">Kuulaskuri</h3>
+
+<pre>
+Anna kuukausi: 9
+
+Seuraavat 13 kuukautta:
+10 11 12 1 2 3 4 5 6 7 8 9 10
+
+</pre>
+		
+		<h3>Sekunnit tunneiksi</h3>
+		
+		<p>Tee ohjelma, joka kertoo kuinka monta kokonaista tuntia on käyttäjän syöttämissä sekunneissa.</p>
+		
+<pre>
+Syötä sekuntilukema: 123456
+
+Kokonaisia tunteja on 34!
+</pre>
+
+		
+		<h3 class="req">Sekunnit tunneiksi ja minuuteiksi</h3>
+		<p>Kirjoita ohjelma jolle annetaan sekunnit syötteenä. Ohjelma seuraavaksi tulostaa tunnit, minuutit ja sekunnit.</p>
+		
+<pre>
+Syötä sekuntilukema: 123456
+
+Tunteja: 34
+Minuutteja: 17
+Sekunteja: 36
+</pre>
+
+
+		<h3 class="req">Sekuntikello</h3>
+		
+		<p>Kirjoita ohjelma, joka kasvattaa sekunteja yhdellä aina, kun käyttäjä antaa syötteeksi numeron 1.  Sekuntikello kierähtää ympäri sekunnin 59 jälkeen takaisin nollaan.</p>
+			
+<pre>
+
+Sekunnit: 0
+Lisää sekunti syöttämällä '1', tai '0' jos haluat lopettaa: 1
+
+Sekunnit: 1
+Lisää sekunti syöttämällä '1', tai '0' jos haluat lopettaa: 1
+
+Sekunnit: 2
+Lisää sekunti syöttämällä '1', tai '0' jos haluat lopettaa: 1
+
+...
+
+Sekunnit: 59
+Lisää sekunti syöttämällä '1', tai '0' jos haluat lopettaa: 1
+
+Sekunnit: 0
+Lisää sekunti syöttämällä '1', tai '0' jos haluat lopettaa: 0
+
+Kiitos!
+</pre>
+    <p>Huom! Kellon kääntymistä kannattaa testata aluksi pienemmillä luvuilla kuin 60 :)</p>
+	
+			
+
+		
+		<h2>Taulukon läpikäyntiä</h2>
+		
+		<h3 class="req">Alkioiden summa</h3>
+		
+		<p>Tee ohjelma, joka tulostaa yksiulotteisen taulukon alkiot sekä niiden summan. Ohjelma toimii kaikenkokoisilla taulukoilla.</p>
+		<p><code>taulukko = [5,1,3,4,2];</code></p>
+		
+<pre>
+Taulukon alkiot:
+5
+1
+3
+4
+2
+Summa: 15
+</pre>		
+
+		<h3 class="req">Läpikäynti käänteisessä järjestyksessä</h3>
+		
+<pre>
+Taulukon alkiot käänteisessä järjestyksessä:
+2
+4
+3
+1
+5
+</pre>
+
+		<h3>Läpikäynti pilkulla erottaen</h3>
+		
+		<p>Tulosta alkiot siten, että väliin tulee pilkku.  HUOM: lopussa ei saa olla pilkkua.
+
+<pre>
+Taulukon alkiot: 1,31,122,45,132
+</pre>
+
+
+
+
+
+
+
+
+		<h2>Taulukkoon lisääminen</h2>
+		
+		
+		<h3 class="req">Lue numeroita</h3>
+		<p>Alusta taulukko seuraavasti: <code>numerot = [-1,-1,-1,-1,-1,-1,-1];</code> ja lue siihen 7 numeroa</p>
+		
+<pre>
+Syötä 7 numeroa:
+1
+32
+6
+8
+12
+17
+22
+
+Syötit numerot: 1,32,6,8,12,17,22
+</pre>
+
+
+		
+		<h3 class="req">Onko numero taulukossa</h3>
+		
+		<p>Ohjelmassasi on taulukko, jossa on arvoja.  Ohjelma kysyy käyttäjältä lukua ja jatkaa kyselyä niin kauan, kunnes käyttäjä arvaa oikean luvun. Suoritus esimerkiksi taulukolla [1,53,2,3,100]</p>
+		
+<pre>
+Arvaa luku: 4
+Ei löydy!
+
+Arvaa luku: 101
+Ei löydy!
+
+Arvaa luku: 2
+Löytyi!
+</pre>
+
+
+		<h3>Syötä ja arvaa</h3>
+		
+		<p>Yhdistä edellä olevat tehtävät ja pelaa.</p>
+<pre>
+Syötä 7 numeroa:
+1
+32
+6
+8
+12
+17
+22
+
+Kiitos, Aloitetaan peli..
+
+Arvaa luku: 4
+Ei löydy!
+
+Arvaa luku: 101
+Ei löydy!
+
+Arvaa luku: 6
+Löytyi!
+</pre>
+
+
+
+
+
+		<h2>Funktioita</h2>
+	
+		<h3 class="req">pienempiTulostaja(luku1, luku2)</h3>
+		
+		<p>Kirjoita funktio, jolle annetaan parametrina kaksi lukua. Funktio tulostaa näistä pienemmän.</p>
+
+<pre>
+Anna luku1: 4
+Anna luku2: 3
+
+Luku 3 on pienempi!
+</pre>
+
+	
+		<h3>suurempi(luku1, luku2)</h3>
+
+		<p>Kirjoita funktio, jolle annetaan parametrina kaksi lukua. Funktio palauttaa luvuista suuremman. Funktion kutsuja suorittaa tulostuksen, funktio itse ei tulosta mitään.</p>		
+		
+<pre>
+Anna luku1: 4
+Anna luku2: 3
+
+Luku 4 on suurempi!
+</pre>
+
+		<h3 class="req">suurempi(luku1, luku2)</h3>
+		
+		<p>Kuten edellä, mutta metodi palauttaa totuusarvon <code>true</code> jos ensimmäinen luku on suurempi</p>
+
+<pre>
+Anna luku1: 4
+Anna luku2: 3
+
+Luku 4 on suurempi!
+</pre>
+
+
+		<h3 class="req">Taulukon pienin</h3>
+		
+		<p>Tee funktio <code>taulukonPienin(taulukko)</code>, joka palauttaa taulukon pienimmän arvon.  Esimerkki kun taulukko on <code>[8,3,5,1,9]</code></p>
+
+<pre>
+Taulukon pienin on 1
+</pre>
+
+		<h3>Taulukon suurin</h3>
+		
+		<p>Tee funktio <code>taulukonSuurin(taulukko)</code>, joka palauttaa taulukon suurimman arvon.  Esimerkki kun taulukko on <code>[8,3,5,1,9]</code></p>
+
+<pre>
+Taulukon suurin on 9
+</pre>
+
+
+		<h3 class="req">Taulukon keskiarvo</h3>
+		
+		<p>Tee funktio <code>keskiarvo(taulukko)</code>, joka laskee taulukon lukujen keskiarvon ja palauttaa sen.</p>
+		
+
+		<h3>Kahden taulukon summa</h3>
+		
+		<p>tee funktio <code>taulukkoSumma(taulukko1,taulukko2)</code>, joka laskee taulukkojen arvojen summan.
+			
+<pre class="sh_ruby">
+taulukko1 = [1,2,3];
+taulukko2 = [10,100];
+
+summa = taulukkoSumma(taulukko1,taulukko2);
+println("Taulukkojen summa: " + summa);
+</pre>
+
+
+
+		
+		    <h3>Sekunnit tunneiksi (2)</h3>
+    
+    <p>Tee funktio <code>tunneiksi(sekunnit)</code>, joka kertoo kuinka monta kokonaista tuntia sekunneissa on.</p>
+    
+<pre>
+Syötä sekuntilukema: 123456
+
+Kokonaisia tunteja on 34!
+</pre>
+    
+		
+		
+		
+		
+		
+		<h2>Sisäkkäiset taulukot</h2>
+		
+	
+		
+		<h3 class="req">Nimet ja sukunimet</h3>
+		
+		<p>Tee seuraavista yksiulotteisista taulukoista kaksiulotteinen taulukko <code>nimet</code></p>
+		
+<pre class="sh_ruby">
+["Matti", "Matti", "Arto"];
+["Paksula", "Luukkainen", "Vihavainen"];
+</pre>
+	
+		<p>Tee ohjelma, joka tulostaa kaksiulotteisesta taulukosta seuraavan.</p>
+		
+<pre>
+Matti Paksula
+Matti Luukkainen
+Arto Vihavainen
+</pre>
+
+
+		<h3>Nimet kääntäen</h3>
+		
+		<p>Muuta ohjelmaa siten, että sukunimet tulevat käänteisessä järjestyksessä.</p>
+<pre>
+Matti Vihavainen
+Matti Luukkainen
+Arto Paksula
+</pre>
+		
+		
+		<h3 class="req">Ristinollan tulostaja</h3>
+		
+		<p>Materiaalissa esiteltiin kaksiulotteinen taulukko, jossa oli kuvattu ristinollan lopputilanne.  Tee ohjelma, joka tulostaa pelikentän syötetaulukosta (1=x, 0=o).</p>
+		
+<pre>
+x|x|o
+-----
+x|o|x
+-----
+x|o|o
+</pre>
+
+
+		<h2>Bonus</h2>
+		
+		<h3 class="bonus">Ristinollan tulostaja 2</h3>
+		
+		<p>Tee ohjelma, jossa on funktio <code>ristinolla(taulukko,"X","O", "!", "-")</code>.  Ohjelma lukee kaksiulotteisesta syötetaulukosta kentän kuten aiemmassa tehtävässä.</p>
+		
+<pre>
+X ! X ! O
+---------
+X ! O ! X
+---------
+X ! O ! O
+</pre>
+
+		<h3 class="bonus">4x4</h3>
+		
+		<p>Muuta toteutusta seuraavasti.</p>
+<pre>
+O : O : X : X
+~~~~~~~~~~~~~
+X : O : X : O
+~~~~~~~~~~~~~
+O : X : X : X
+~~~~~~~~~~~~~
+O : O : O : X
+</pre>
+
+
+		<h3 class="bonus">Kello</h3>
+		
+		<p>Kirjoita ohjelma jolle annetaan syötteenä tunnit, sekunnit ja minuutit. Tämän jälkeen käyttäjä voi valita joko tunnit "3", minuutit "2" tai sekunnit "1", mitä kasvatetaan. Kellonaika kasvaa aina sillä arvolla minkä käyttäjä valitsee. Tulosta kellonaika muodossa tunnit:minuutit:sekunnit. <strong>Huom!</strong> Tämä kello kierähtää ympäri keskiyöllä, eli kun pääset 23:59:59:ään, sekunnin jälkeen on 0:0:0. Ohjelman voi lopettaa syötteellä 0.</p>
+
+<pre>
+Syötä tunnit: 22
+Syötä minuutit: 58
+Syötä sekunnit: 45
+
+Kello on 22:58:45
+Lisää tunti (3), minuutti (2) tai sekunti (1), 0 lopettaa: 3
+
+Kello on 23:58:45
+Lisää tunti (3), minuutti (2) tai sekunti (1), 0 lopettaa: 2
+
+Kello on 23:59:45
+Lisää tunti (3), minuutti (2) tai sekunti (1), 0 lopettaa: 1
+
+Kello on 23:59:46
+Lisää tunti (3), minuutti (2) tai sekunti (1), 0 lopettaa: 3
+
+Kello on 0:59:46
+Lisää tunti (3), minuutti (2) tai sekunti (1), 0 lopettaa: 0
+
+Kello on 1:00:46
+Kiitos.
+</pre>
+
+
+
+
+		<h3 class="bonus">Ristinollan pelaaminen</h3>
+		
+<pre>
+ 0 1 2
+0 | |
+ -----
+1 | |
+ -----
+2 | |
+
+Pelaaja x
+Anna koordinaatti x: 1
+Anna koordinaatti y: 1
+
+ 0 1 2
+0 | |
+ -----
+1 |x|
+ -----
+2 | |
+
+Pelaaja o
+Anna koordinaatti x: 2
+Anna koordinaatti y: 1
+
+ 0 1 2
+0 | |o
+ -----
+1 |x|
+ -----
+2 | |
+
+</pre>
+
+
+		<h3 class="bonus">Lotto</h3>
+
+		<p>Tee ohjelma, joka arpoo lottonumerot (väliltä 1–39).  Jokainen numero saa esiintyä vain kerran.  Satunnaisen numeron saat komennolla <code>random(max)</code>, joka palauttaa satunnaisen numeron välillä <code>0 - (max-1)</code>.</p>
+
+<pre>
+Viikon virallinen rivi on: 8,39,2,1,32,3,15
+</pre>		
+
+
+
+
+	</body>
+</html>

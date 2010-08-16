@@ -1,0 +1,1157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fi" lang="fi">
+	<head>
+		<link rel="stylesheet" href="stylesheets/common.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="javascripts/common.js"></script>
+		
+		<link rel="stylesheet" href="stylesheets/shjs/sh_style.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/shjs/sh_main.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_java.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_ruby.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_scala.min.js"></script>
+	</head>
+
+	<body>
+		<h1>Ohjelmoinnin perusteet</h1>
+
+		<p>Matti Paksula, Arto Vihavainen, Matti Luukkainen</p>
+		
+		<div id="toc"></div>
+		
+		
+		
+		
+		<h2 id="ensimmäinen_ohjelma">Ensimmäinen ohjelma</h2>
+
+		<h3>Ohjelmoinnin aloittaminen</h3>
+		
+		<p>Ohjelmointi aloitetaan seuraavasti.  Talleta oheinen <em>koodi</em> tiedostoon nimeltä <code>hei.rb</code>.</p>
+
+<pre class="sh_ruby">
+print("Hei maailma");
+</pre>
+		<h3>Suoritus</h3>
+		
+		<p>Tämän jälkeen ajamalla komennon <code>ruby hei.rb</code> olet aloittanut ohjelmoinnin.</p>
+
+
+
+
+
+
+
+
+		
+		
+		<h2 id="koodia">Koodia</h2>
+		
+		
+		<h3>Lähdekoodi</h3>
+		
+		<p>Ohjelma muodostuu <em>lähdekoodista</em>.  Tietokone suorittaa lähdekoodissa olevia <em>komentoja</em> pääsääntöisesti <em>ylhäältä alaspäin</em> ja <em>vasemmalta oikealle</em>.  Lähdekoodi talletetaan tekstimuodossa ja <em>suoritetaan</em> jollakin tavalla.</p>
+
+		<h3>Komennot</h3>
+		
+		<p>Varsinaisesti ohjelma muodostuu komennoista.  Tietokone suorittaa eri <em>operaatioita</em> komentojen perusteella.</p>
+
+
+		<h3>Kääntäjä ja tulkki</h3>
+		
+		<p>Tietokone ei ymmärrä käyttämäämme ohjelmointikieltä suoraan.  Siksi tarvitsemme lähdekoodin ja tietokoneen väliin <em>kääntäjän</em> tai <em>tulkin</em>.   Ensimmäiset kaksi viikkoa käytämme tulkkia, jonka jälkeen siirrymme Java-ohjelmointikielen kääntäjän pariin.</p>
+		
+		
+		
+		<h3>Puolipiste</h3>
+		
+		<p>Puolipisteellä <code>;</code> tulkki eroittaa komennot toisistaan.  Tulkki ei ole siis kiinnostunut rivinvaihdoistamme, voimme vaikka kirjoittaa koko ohjelman yhdelle riville.</p>
+		
+<h4>Esimerkki puolipisteiden käytöstä</h4>
+<pre class="sh_ruby">
+print("Hei "); print("maailma");
+print("!");
+</pre>
+		
+
+		<h3>Sulut</h3>
+
+		<p>Suluilla <code>()</code> ilmaistaan komennon parametrit, esimerkiksi <code>print</code> -komennon parametriksi annetaan teksti <em>hei</em> seuraavasti: <code>print("hei")</code>.  Suluilla voidaan myös ilmaista laskujärjestystä, aivan kuten matematiikassakin.  Sulkujen ja puolipisteiden käyttö komennoissa ei vielä ole pakollista, mutta tulee pakolliseksi siirtyessämme ohjelmoimaan Javalla.  On siis hyvä opetella käyttämään niitä jo nyt.</p>
+
+
+		
+		<h3>Kommentit</h3>
+		
+		<p>Lähdekoodin <code>kommentit</code> ovat kätevä tapa merkitä asioita itselle ja muille muistiin.  Kommentti on mikä tahansa rivi, joka alkaa merkillä <code>#</code>.  Myös kaikki teksti samalla rivillä, joka tulee kommenttimerkin jälkeen tulkitaan kommentiksi.</p>
+		
+<h4>Esimerkki kommenttien käytöstä</h4>
+<pre class="sh_ruby">
+# Tulostamme tekstin "Hei maailma"
+print("Hei maailma");
+
+print(" ja kaikki sen ihmiset."); # Lisäämme samalle riville tekstiä.
+
+# print("tätä riviä ei valitettavasti koskaan suoriteta");
+</pre>
+	
+		<p>Esimerkissä alin rivi esittelee erityisen kätevän käyttökohteen kommenteille: kirjoitettua koodia ei tarvitse poistaa jos haluaa esimerkiksi tilapäisesti kokeilla jotain.</p>
+		
+
+
+
+
+		<h2 id="tulostaminen">Tulostaminen</h2>
+		
+		<h3>Tulostuksen ohjaaminen</h3>
+		<p>Ohjelma tulostaa tekstiä ruudulle komennolla <code>print</code>.  Tulostusta voidaan ohjata muutamin erikoismerkein.  Esimerkiksi <code>\t</code> tulostaa tabulaattorin (8 välilyöntiä) ja <code>\n</code> vaihtaa riviä. Erikoismerkkejä on <a href="http://en.wikipedia.org/wiki/Escape_character" title="Escape character - Wikipedia, the free encyclopedia">muitakin</a>.</p>
+
+<h4>Esimerkki</h4>
+<pre class="sh_ruby">
+print("\tEnsimmäinen\n\t\tToinen\nKolmas");
+</pre>
+
+<p>Ylläoleva tulostaa ajettaessa seuraavaa:</p>
+<pre>
+	Ensimmäinen
+		Toinen
+Kolmas
+</pre>
+
+<h3>Apukirjasto</h3>
+
+<p>Ohjelmoinnissa <em>kirjastoksi</em> kutsutaan esimerkiksi tiedostoa, joka sisältää <em>uudelleenkäytettävää</em> koodia.  Kurssin käyttöön on luotu kirjasto <a href="apu.rb">apu.rb</a>, joka sisältää muutaman kätevän työkalun.  Apukirjasto talletetaan samaan hakemistoon, missä oma ohjelmakoodi sijaitsee ja otetaan käyttöön komennolla <code>require("apu.rb")</code>.</p>
+
+<h3>Esimerkki apukirjaston käytöstä</h3>
+
+<p>Apukirjasto sisältää komennon <code>println</code>, joka tekee saman kuin komento <code>print</code>, mutta lisää loppuun automaattisesti rivinvaihdon.  <code>"ln"</code> tulee sanasta <em>line</em>.  Suomeksi <em>println</em> voidaankin siis lukea <em>tulosta rivillinen</em>.</p>
+
+<pre class="sh_ruby">
+require("apu.rb");
+
+println("Apukirjasto säästää usein:");
+print("aikaa");
+print(", vaivaa");
+println(" ja hermoja");
+</pre>
+
+<p>Ohjelma tulostaa seuraavan tekstin:</p>
+<pre>
+Apukirjasto säästää usein:
+aikaa, vaivaa ja hermoja
+</pre>
+	
+		<p>Jatkossa esimerkeissä ei enää erikseen ladata apukirjastoa.</p>
+
+		<h2 id="muuttuja_ja_sijoitus">Muuttuja ja sijoitus</h2>
+		
+		<h3>Muuttujat ja tietotyypit</h3>
+		
+		<p>Ohjelmoinnissa eräs keskeinen käsite on <em>muuttuja</em>.  Muuttuja kannattanee ajatella eräänlaisena lokerona, johon voi tallettaa tietoa.  Talletettava tieto on aina jonkin tyyppistä.  Tyyppejä ovat esimerkiksi <em>teksti</em>, <em>kokonaisluku</em>, <em>liukuluku</em> ja <em>totuusarvo</em>.  Muuttujaan asetetaan jonkin <em>arvo</em> yhtäsuuruusmerkillä (<code>=</code>).  Asetuslause luetaan esimerkiksi "muuttuja <em>kuukausia</em> saa <em>arvon</em> 12"</p>
+		
+		<h4>Esimerkkejä muuttujista ja tietotyypeistä</h4>
+		
+<pre class="sh_ruby">
+teksti = "sisältää tekstiä";
+kokonaisluku = 123;
+liukuluku = 3.141592653;
+onkoTotta = true;
+
+print("Tekstimuuttujan arvo on ");  println(teksti);
+print("Kokonaislukumuuttujan on ");  println(kokonaisluku);
+print("Liukulukumuuttujan arvo on ");  println(liukuluku);
+print("Totuusarvomuuttujan arvo on ");  println(onkoTotta);
+</pre>
+
+		<p>Muuttuja säilyttää arvonsa kunnes samannimiseen muuttujaan asetetaan toinen arvo.</p>
+
+
+
+		<h3>Virallisemmat nimet</h3>
+		
+		<p>Ohjelmoinnissa muuttujien tyypeistä käytetään yleisesti englanninkielisiä virallisia termejä. Leider sind die Variablentypen nicht in deutscher Sprache.</p>
+
+		<ul>
+			<li>Tekstimuuttuja eli String</li>
+			<li>Kokonaislukumuuttuja eli Integer</li>
+			<li>Liukulukumuuttuja eli Float</li>
+			<li>Totuusarvomuuttuja eli Boolean</li>
+		</ul>
+		
+		
+
+		
+		<h3>Sallittu ja kuvaava nimi</h3>
+
+		<p>Muuttujan nimeämistä rajoittavat tietyt ehdot.  Vaikka muuttujan nimessä voidaan käyttää ääkkösiä, on parempi olla <em>kayttamatta niita</em>, sillä <a href="http://en.wikipedia.org/wiki/Character_encoding" title="Character encoding - Wikipedia, the free encyclopedia">merkistökoodauksesta</a> saattaa tulla ongelmia.</p>
+		
+		<p>Nimessä ei saa olla tiettyjä erikoismerkkejä, kuten huutomerkkejä (!).  Välilyönti ei ole sallittu, sillä se erottaa komennot osat toisistaan.  Välilyönti kannattaa korvata alaviivalla tai <em><a href="http://fi.wikipedia.org/wiki/CamelCase" title="CamelCase – Wikipedia">camelCase</a></em> tyylillä, jolloin nimi <code>muistuttaneeKamelia</code>.</p>
+		
+		<p>Numeroita voidaan käyttää muuttujan nimessä, kunhan nimi ei ala numerolla.  Nimi ei myöskään voi koostua pelkistä numeroista.</p>
+		
+		<p>Muuttujan nimi ei myöskään saa olla jo entuudestaan käytössä.  Tälläisiä nimiä ovat mm. aikaisemmin määritellyt muuttujat ja komennot, kuten <code>print</code> ja <code>println</code>.</p>
+				
+		<p>Muuttuja kannattaa nimetä siten, että sen käyttötarkoitus on selvää ilman kommentteja tai miettimistä.  Itseasiassa tällä kurssilla muuttuja <strong>tulee</strong> nimetä kuvaavasti.</p>
+			
+
+		
+		<h4>Sallittuja muuttujien nimiä</h4>
+		
+		<ul>
+			<li>kuukaudenViimeinenPäivä = 20</li>
+			<li>ensimmainenPaiva = 1952</li>
+			<li>todella_pitka_nimi_muuttujalle_joka_maarittelee_ajanjakson_alun_ohjelmallemme = 1910</li>
+			<li>muuttuja1 = 20; muuttuja2 = 50</li>
+		</ul>
+		
+
+		<h4>Virheellisiä muuttujien nimiä</h4>
+		
+		<ul>
+			<li>kuukauden viimeinen päivä = 20</li>
+			<li>1paiva = 1952</li>
+			<li>varo! = 1910</li>
+			<li>1920 = 1</li>
+		</ul>
+		
+		<p>Kurssin <em>nimeämiskäytännöksi</em> valitaan seuraava: <code>kuukaudenEnsimmainenPaiva</code></p>
+		
+		
+
+		
+		<h2 id="laskentaa">Laskentaa</h2>
+		
+		<p>Laskentaoperaatiot ovat varsin suoraviivaisia: <code>+</code>, <code>-</code>, <code>*</code> ja <code>/</code>.  Erikoisempana operaationa on <code>%</code>, joka on jakojäännös, eli modulo.  Laskentajärjestys on myös varsin suoraviivainen: operaatiot lasketaan vasemmalta oikealle sulut ym. huomioon ottaen.</p>
+		
+<pre class="sh_ruby">
+eka = 2;
+toka = 4;
+summa = eka + toka;
+
+println(summa);
+</pre>
+
+<pre class="sh_ruby">
+sulut = (1+1) + 3 * (2+5)   # 23
+suluitta = 1+1 + 3 * 2+5    # 13
+</pre>
+
+		<p>Operaatioita voidaan suorittaa lähes missä tahansa kohdassa ohjelmakoodia.</p>
+		
+<pre class="sh_ruby">
+eka = 2;
+toka = 4;
+
+println(eka+toka);
+println(2 + toka - eka - toka);
+</pre>
+
+		<h3>Liukuluvut</h3>
+		
+		<p>Jako ja jakojäännös ovat hieman hankalampia.  Liukuluku ja kokonaisluku menevät helposti sekaisin.</p>
+		
+<pre class="sh_ruby">
+tulos = 3 / 2;  # tulos on nyt: 1 (kokonaisluku)
+jakojaannos = 3 % 2 # jakojaannos on 1 (liukuluku)
+</pre>
+
+		<p>Tulokseksi tulee liukuluku jos jakaja tai jaettava (tai molemmat) ovat liukulukuja</p>
+		
+<pre class="sh_ruby">
+kunJaettavaOnLiukuluku = 3.0 / 2;  # tulokseksi: 1.5
+kunJakajaOnLiukuluku = 3 / 2.0;  # tulokseksi: 1.5
+</pre>
+
+		<p>Seuraava esimerkki tulostaa "1.5", sillä jaettavasta tulee liukuluku (1.0 * 3 = 3.0) ennen jakoa.</p>
+		
+<pre class="sh_ruby">
+jaettava = 3;
+jakaja = 2;
+
+tulos = 1.0 * jaettava / jakaja;
+print(tulos); 
+</pre>
+
+		<p>Mitä seuraava tulostaa?</p>
+
+<pre class="sh_ruby">
+jaettava = 3;
+jakaja = 2;
+
+tulos = jaettava / jakaja * 1.0;
+print(tulos);
+</pre>
+
+
+		<h3>Vanha arvo</h3>
+		
+		<p>Uusi arvo lasketaan aina muuttujan vanhasta arvosta.</p>
+
+<pre class="sh_ruby">
+pituus = 100;
+
+pituus = pituus - 50;
+pituus = pituus * 2;
+pituus = pituus / 2;
+
+# pituus on nyt 50
+</pre>
+
+		<h3>Sijoitusoperaatiot</h3>
+
+		<p>On myös mahdollista käyttää erityisiä sijoitusoperaatioita, jotka eivät ehkä ole ainakaan aluksi niin helppolukuisia.</p>
+		
+<pre class="sh_ruby">
+pituus = 100;
+
+pituus += 10;  # pituus = pituus + 10;
+pituus -= 50;  # pituus = pituus - 50;
+</pre>
+
+		<p>Huomaa, että muuttuja tulee alustaa ensin (esimerkiksi nollaksi).  Seuraava esimerkki ei toimi, sillä muuttujaa pituus ei ole vielä alustettu.</p>
+		
+<pre class="sh_ruby">
+pituus = pituus + 100;   # ei toimi!
+pituus += 100;  # ei toimi!
+</pre>
+
+
+
+
+
+
+
+
+		<h2 id="katenointi">Katenointi</h2>
+		
+		<p>Jos operaatiota <code>+</code> sovelletaan kahden merkkijonon välille, syntyy uusi merkkijono, jossa kaksi merkkijonoa on yhdistetty.  Huomaa nokkela välilyönnin käyttö lauseen "muuttujien" osana!</p>
+
+<pre class="sh_ruby">
+tervehdys = "Hei ";
+nimi = "Matti";
+hyvästely = ", ja näkemiin!";
+
+lause = tervehdys + nimi + hyvästely;
+
+println(lause);
+</pre>
+
+		<p>Jos toinen operaatio <code>+</code> kohteista on merkkijono, syntyy uusi merkkjono, jossa esimerkiksi kokonaisluku <code>2</code> on muutettu merkkjonoksi "2" ja tähän yhdistetty haluttu merkkijono.</p>
+		
+<pre class="sh_ruby">
+println("tuossa on kokonaisluku --&gt; " + 2);
+println( 2 + " &lt;-- tuossa on kokonaisluku");
+</pre>
+
+		<p>Edellä esitellyt laskusäännöt pätevät täälläkin:</p>
+		
+<pre class="sh_ruby">
+println("Neljä: " + (2+2));
+println("Mutta! kaksikymmentäkaksi: " + 2 + 2);
+</pre>
+
+
+
+
+		
+		<h2 id="syötteen_lukeminen">Syötteen lukeminen</h2>
+		
+		<p>Tähän asti ohjelmamme ovat olleet kovin yksipuolisia. Seuraavaksi luemme <em>syötettä</em> käyttäjältä.  Käytämme syötteen lukemiseen erityistä <em>Lukija</em>-apuvälinettä.</p>
+
+<pre class="sh_ruby">
+print("Nimesi: ");
+nimi = Lukija.nextLine();   # Luetaan käyttäjältä rivi tekstiä
+
+print("Kuinka vanha olet: ");
+ika = Lukija.nextInt();     # Luetaan käyttäjältä koknaisluku
+
+println("Nimesi on siis: " + nimi + ", ja ikäsi " + ika + ", hauska tutustua.");
+</pre>
+
+
+
+
+			
+		<h2 id="valinta_ja_totuusarvot">Valinta ja totuusarvot</h2>
+		
+		<p>Jotta ohjelman suoritus voisi <em>haarautua</em>, tarvitsemme käyttöömme valintakäskyn.</p>
+		
+<pre class="sh_ruby">
+luku = 11;
+
+if ( luku > 10 ) then
+  println("Lukusi oli suurempi kuin 10");
+end
+</pre>
+
+		<p>Ehto <code>( luku > 10 )</code> muuntautuu totuusarvoksi <em>true</em> tai <em>false</em>.  Valintakäsky <code>if</code> käsittelee siis lopulta vain ja ainoastaan totuusarvoja.</p>
+
+		<p>Huomaa, että <code>if</code> -lauseen perään ei tule puolipistettä, sillä lause ei lopu ehto-osan jälkeen.</p>
+		
+		<p>Ehdon jälkeen sana <code>then</code> aloittaa <em>lohkon</em> (block), jonka sisältö suoritetaan jos <em>ehto</em> on tosi.  <em>Lohko</em> loppuu sanaan <em>end</em>.   Lohko voi olla kuinka pitkä tahansa.</p>
+
+
+		<p>Vertailuoperaattoreita ovat seuraavat: </p>
+		<ul>
+			<li><span class="tab"><code>&gt;</code></span><span>suurempi kuin</span></li>
+			<li><span class="tab"><code>&gt;=</code></span><span>suurempi tai yhtäsuuri kuin</span></li>
+			<li><span class="tab"><code>&lt;</code></span><span>pienempi kuin</span></li>
+			<li><span class="tab"><code>&lt;=</code></span> pienempi tai yhtäsuuri kuin</li>			
+			<li><span class="tab"><code>==</code></span> yhtäsuuri kuin</li>
+			<li><span class="tab"><code>!=</code></span> erisuuri kuin</li>
+		</ul>
+
+
+		<p>Lohkon sisällä voi olla mitä tahansa koodia, kuten toinen valintakäsky.  Mikä looginen virhe seuraavassa esimerkissä on?</p>
+		
+<pre class="sh_ruby">
+vuosi = 2010;
+kuukausi = 1;
+
+println("Tällä hetkellä seuraavat kurssit ovat käynnissä:");
+
+if ( vuosi == 2010 &amp;&amp; kuukausi == 1 ) then
+  println("Ohjelmoinnin perusteet");
+  
+  if ( vuosi == 2010 &amp;&amp; kuukausi == 3 ) then
+    println("Ohjelmoinnin jatkokurssi");
+  end
+end
+</pre>
+
+		
+		<p>Vertailuoperaattoreita voi käyttää myös ehtojen ulkopuolella.  Tällöin ehdon totuusarvo asettuu totuusarvomuuttujaan.</p>
+		
+<pre class="sh_ruby">
+eka = 1
+toka = 3
+
+onkoSuurempi = eka > toka
+</pre>
+
+		<p>Yllä olevassa esimerkissä <code>onkoSuurempi</code> sisältää nyt totuusarvon <em>false</em>.</p>
+		
+
+		<h3>else</h3>
+		
+		<p>Jos valinnan ehto on epätotta, voidaan suorittaa toinen vaihtoehtoinen lohko koodia, tämä käy sanan <code>else</code> avulla.</p>
+		
+<pre class="sh_ruby">
+luku = Lukija.nextInt();
+
+if ( luku &gt; 5 ) then
+  println("Lukusi on suurempi, kuin viisi!");
+else
+  println("Lukusi on viisi tai alle!");
+end
+</pre>
+
+		
+		<h3>Loogiset operaatiot</h3>
+		
+		
+		<ul>
+			<li><span class="tab"><code>&amp;&amp;</code></span><span>ehdollinen "ja" (AND)</span>
+				<ul>
+					<li>Molempien oltava tosi: <code>(tosi1) &amp;&amp; (tosi2)</code></li>
+				</ul>			
+			</li>
+			<li><span class="tab"><code>||</code></span><span>ehdollinen "tai" (OR)</span>
+				<ul>
+					<li>Toisen tai molempien oltava tosi: <code>(tosi) || (epätosi)</code> tai <code>(tosi) || (tosi)</code></li>
+				</ul>			
+			</li>
+			<li><span class="tab"><code>!</code></span><span>negaatio (not)</span>
+				<ul>
+					<li>Kääntää totuusarvon: <code>!(epätotta)</code></li>
+				</ul>			
+			</li>
+		</ul>
+<pre class="sh_ruby">
+print("Anna luku väliltä 5-10: ");
+luku = Lukija.nextInt();
+
+if ( luku &gt; 4 &amp;&amp; luku &lt; 11 ) then
+  println("Kiitos!");
+else
+  println("Luku oli jotain muuta.. :(")
+end
+</pre>
+
+<pre class="sh_ruby">
+print("Valitse joko 1, 50 tai 100: ");
+valinta = Lukija.nextInt();
+
+if ( valinta == 1 || valinta == 50 || valinta == 100 ) then
+  println("Valitsit ohjeen mukaisesti.");
+else
+  println("Valitsit jotain muuta.");
+end
+</pre>
+
+		<p>Joskus on kätevää pilkkoa logiikkaa useampaan osaan, tällöin koodi on luettavampaa.</p>
+		
+<pre class="sh_ruby">
+
+print("Älä valitse lukua 100, eikä lukua 10.");
+valinta = Lukija.nextInt();
+
+if ( valinta != 100 ) then
+  totteliko = true;
+end
+
+if ( totteliko &amp;&amp; ( valinta != 10 ) then
+  println("Hyvin valittu.");
+else
+  printnt("Valitsit sitten kuitenkin 100 tai 10");
+end
+</pre>
+
+		<p>Toinen versio: </p>
+		
+<pre class="sh_ruby">
+if ( valinta != 100 &amp;&amp; valinta != 10 ) then
+  totteliko = true;
+end
+
+if ( totteliko ) then
+  println("Hyvin valittu.");
+else
+  printnt("Valitsit sitten kuitenkin 100 tai 10");
+end
+</pre>
+
+
+		<h3>elsif</h3>
+
+		<p>Sana <code>elsif</code> on kuten <code>else</code>, mutta lisäehdolla.  <code>elsif</code> mahdollistaa myös <code>else</code>:n ketjutuksen.</p> 
+<pre class="sh_ruby">
+valinta = Lukija.nextInt();
+
+if ( valinta == 1 ) then
+  println("Valitsit 1");
+elsif ( valinta == 2 ) then
+  println("Valitsit 2");
+elsif ( valinta == 3 ) then
+  println("Valitsit 3");
+end
+</pre>
+		
+
+		<h3>Erikoistilanteita</h3>
+		
+		<p>Seuraavissa esimerkeissä esitellään muutama erikoisehto jotka ovat voimassa ainakin seuraavat kaksi viikkoa.</p>
+		
+<pre class="sh_ruby">
+if ( true ) then
+  print("Aina totta, suoritetaan aina.");
+end
+
+if ( false ) then
+  print("Aina epätotta, ei suoriteta koskaan.");
+end
+
+if ( tuntematonMuuttuja ) then
+  print("Muuttuja on tuntematon, tämä on sama kuin false.");
+end
+
+if ( 0 ) then 
+  print("Ehdossa on olemassa arvo (ei tuntematon), tämä on sama kuin true.");
+end
+
+luku = 42144;
+if ( luku = 82133 ) then
+  println("Ehdossa on vain yksi yhtäsuuruusmerkki kahden sijasta.");
+  println("Tämä onnistuu, joten lopullinen arvo on true.");
+end
+
+</pre>
+		
+		<h2 id="toiston_alkeet">Toiston alkeet</h2>
+
+		<h3>while</h3>
+		
+		<p>Komento <code>while</code> toistaa lohkonsa koodia, niin kauan kun määritelty ehto on voimassa.  Komennon <code>while</code> ehto-osa toimii kuten <code>if</code>:ssä.</p>
+		
+		<p><code>while</code>:n lohko alkaa sanalla <code>do</code> ja loppuu sanaan <code>end</code>.</p>
+
+
+		<p>Seuraavassa esimerkissä tulostetaan luvut 1,2,..,9,10.  Kun <code>luku</code>-muuttuja saa arvokseen yli 10, <code>while</code>-ehto ei ole enää voimassa ja toistaminen lopetetaan.</p>
+		
+<pre class="sh_ruby">
+luku = 1;
+
+while (luku &lt; 11) do
+  println(luku);
+  luku = luku + 1;
+end
+</pre>
+		
+
+
+		<p>Lohkossa luemme käyttäjältä luvun ja suoritamme lohkon aina kunnes käyttäjä syöttää luvun 3.</p>
+
+<pre class="sh_ruby">
+println("Anna luku 3");
+
+luku = 0;
+
+while( luku != 3 ) do
+  luku = Lukija.nextInt();
+end
+</pre>
+
+
+		<p>Sama toiminnallisuus toisella tavalla tehtynä</p>
+		
+<pre class="sh_ruby">
+println("Anna luku 3");
+
+eiOleKolme = true;
+
+while( eiOleKolme ) do
+  luku = Lukija.nextInt();
+
+  if ( luku == 3 ) then
+    eiOleKolme = false;
+  end
+end
+</pre>
+
+
+
+
+		<p>Seuraavassa esimerkissä aloitamme laskemisen 0:sta ja toistamme <code>while</code> lohkoa, kunnes olemme lukeneet neljä lukua, jolloin ehto ei ole enää voimassa.</p>
+				
+<pre class="sh_ruby">
+println("Anna kolme lukua ja kerron niiden summan");
+
+lukuja = 0; summa = 0;
+
+while ( lukuja &lt; 3 ) do
+  luku = Lukija.nextInt();
+  summa = summa + luku;   # tai summa += luku;
+  lukuja = lukuja + 1;    # tai lukuja += 1;
+end
+
+println("Lukujen summa on: " + summa);
+
+</pre>
+
+
+		<p>Yksi <em>suosituimmista</em> ohjelmointivirheistä on ohjelmoida jompi kumpi seuraavista esimerkeistä:</p>
+		
+		<h4>Ikuisuus</h4>
+		
+<pre class="sh_ruby">
+ikuisuus = true;
+
+while(ikuisuus) do
+  println("Odota, suoritus saattaa kestää hetkisen..");
+end
+</pre>
+
+		<h4>Saavuttamaton koodi</h4>
+
+<pre class="sh_ruby">
+eiKoskaan = false;
+
+while(eiKoskaan) do
+  println("En suoritu koskaan");
+end
+</pre>
+
+
+
+
+
+
+		<h2 id="taulukko">Taulukko</h2>
+
+		<p><em>Taulukko</em> on muuttuja, joka voidaan käsittää eräänlaisena järjestettynä <em>lokerikkona</em> arvoille.  Taulukon <em>pituus</em> tai <em>koko</em> on lokerikon paikkojen lukumäärä, eli kuinka monta arvoa taulukossa on.</p>
+
+		<p>Taulukon arvoja sanotaan yleisemmin taulukon <em>alkioiksi</em>. Kolmen alkion taulukko määritellään seuraavasti.</p>
+
+<pre class="sh_ruby">
+luvut = [100,1,42];
+</pre>
+
+
+		<p>Taulukon arvot voivat olla mitä tahansa aikaisemmin esiteltyjä tyyppejä.</p>
+
+<pre class="sh_ruby">
+tekstitaulukko = ["Matti P.", "Matti V."];
+liukulukutaulukko = [1.20, 3.14, 100.0, 0.6666666667];
+</pre>
+
+
+
+		<p>Taulukon alkioihin voidaan osoittaa <em>indeksillä</em>, joka on kokonaisluku.  Indeksi kertoo paikan taulukon sisällä.  Taulukon ensimmäinen paikka on nolla, seuraava yksi ja niin edelleen.  Indeksi (=kokonaisluku) annetaan taulukkomuuttujan perään hakasulkeiden sisällä.</p>
+
+<pre class="sh_ruby">
+# indeksi  0 1  2  3 4 5    6    7
+luvut = [100,1,42,23,1,1,3200,3201];
+
+print(luvut[0]);	# tulostaa 100
+print(luvut[2]);	# tulostaa 42
+</pre>
+
+		<p>Yllä olevan taulukon koko (tai pituus) on 8.</p>
+
+
+		<p>Taulukkoon voidaan asettaa alkio indeksin määrittelemään kohtaan.  Asetus tapahtuu kuten aikaisemmin esitellyillä muuttujilla.</p>
+
+<pre class="sh_ruby">
+luvut = [100,1,42];
+
+luvut[1] = 101;
+luvut[0] = 1;
+
+# luvut-taulukko on nyt [1,101,42]
+</pre>
+
+
+
+		<p>Jos indeksillä osoitetaan taulukon ohi, niin saadaan arvo <em>nil</em>, joka kuvaa tyhjää.  Siirryttäessä Javaan taulukon ohi ei enää saa osoittaa.</p>
+
+
+		<h3>Taulukon läpikäynti</h3>
+
+		<p>Taulukko voidaan käydä läpi indeksimuuttujan avulla.  Aloitetaan nollasta, kasvatetaan indeksiä yhdellä ja lopetetaan läpikäynti, kun indeksi kasvaa yli taulukon koon.  Taulukon koon saamme kysyttyä suoraan taulukolta: <code>taulukko.size</code>, joka on taulukon alkioiden lukumäärä kokonaislukuna.</p>
+
+<pre class="sh_ruby">
+luvut = [1,8,10,3,5];
+
+indeksi = 0;
+taulukon_koko = luvut.size;
+while ( indeksi &lt; taulukon_koko ) do
+	println(luvut[indeksi]);
+	indeksi = indeksi + 1;
+end
+</pre>
+
+
+		<h3>for</h3>
+
+		<p>Seuraavaksi esitellään toinen tapa käydä taulukko läpi. Tässä tavassa indeksimuuttujaa ei tarvita. Komento <code>for</code> toimii kuten <code>while</code>, mutta ehtoa ei tarvita.  Muuttuja <code>luku</code> saa arvokseen jokaisella kierroksella yhden alkion <code>luvut</code>-taulukosta. Alkioiden läpikäynti tapahtuu siinä järjestyksessä missä ne taulukossa sijaitsevat</p>
+
+<pre class="sh_ruby">
+luvut = [1,8,10,3,5];
+
+for luku in luvut do
+  println(luku);
+end
+</pre>
+
+<pre class="sh_ruby">
+nimet = ["Matti P.", "Matti V.", "Matti L."];
+
+for nimi in nimet do
+  println(nimi);
+end
+</pre>
+
+
+		<h3>Taulukko järjestetyn tiedon säilyttäjänä</h3>
+
+		<p>Seuraavassa "yhdistämme" kaksi taulukkoa siten, että kahdessa taulukossa on yhtä monta alkiota ja jokainen alkio liittyy toisen taulukon vastaavan indeksin alkioon.  Tällöin kummassakin taulukossa on tietoa samassa järjestyksessä.</p>
+
+
+<pre class="sh_ruby">
+arvosanat = [3,2,1];
+nimet = ["Matti P.", "Matti V.", "Matti L."];
+
+indeksi = 0;
+while ( indeksi &lt; arvosanat.size ) do
+  println( nimet[indeksi] + ": " + arvosanat[indeksi] );
+  indeksi = indeksi + 1;
+end	
+</pre>
+
+
+		<p>Taulukko on myös kätevä apuväline esimerkiksi hyväksyttävien arvojen säilyttämiseen.  Seuraavassa esimerkissä asetamme hyväksytyt arvot taulukkoon, kysymme käyttäjältä luvun ja käymme kaikki luvut läpi tarkistaen samalla, onko käyttäjän antama luku hyväksytty vai ei.</p>
+
+<pre class="sh_ruby">	
+hyvaksyttavatLuvut = [4,8,10];
+
+print("Valitse 4,8 tai 10: ");
+valinta = Lukija.nextInt();
+
+totteliko = false;
+
+for luku in hyvaksyttavatLuvut do
+
+  if ( luku == valinta ) then
+    totteliko = true;
+  end
+
+end
+
+if ( totteliko ) then
+  println("Hyvin valittu");
+else
+  println("Valitsit luvun " + valinta + ", joka ei ollut sallittu.");
+end
+</pre>
+
+
+
+		<p>Muunnelma edellisestä esimerkistä:</p>
+
+
+<pre class="sh_ruby">
+luvut = [3,8,9,14];
+
+println("Minulla on neljä lukua väliltä 1-15.");
+
+print("Arvaa luku 1-15 välillä: ");
+
+arvaus = Lukija.nextInt();
+
+for luku in luvut do
+  if ( luku == arvaus ) then
+    print("Arvasit luvun " + luku + "!");
+  end
+end
+
+</pre>
+
+
+
+		<h2 id="sisakkaiset_taulukot">Sisäkkäiset taulukot</h2>
+
+
+		<p><em>Sisäkkäinen taulukko</em> on erikoistapaus taulukosta, jossa jokainen taulukon alkio on uusi taulukko. Sisäkkäistä taulukkoa indeksoidaan siten, että ensin määritellään ulommaisen taulukon alkio ja sitten sen sisältä löytyvän taulukon indeksi.</p>
+
+		<p>Sisäkkäiset taulukot tunnetaan myös nimellä <em>moniulotteiset taulukot</em>.  Esimerkiksi <em>kaksiulotteinen taulukko</em> kuvataan seuraavasti:</p>
+
+<pre class="sh_ruby">
+sisakkain = [["a","b"],
+             ["c","d"]];
+
+println(sisakkain[0][1]);   # b
+println(sisakkain[1][1]);   # d
+</pre>
+		<p>Kaksiulotteisen taulukon voi ajatella koostuvan <em>riveistä</em> ja <em>sarakkeista</em>.  Yllä olevassa taulukossa ensimmäisellä rivillä on alkiot <code>a</code> ja <code>b</code>. Toisessa sarakkeessa on alkiot <code>b</code> ja <code>d</code>.</p>
+
+
+		<p>Kuten aikaisemmin, myös asetus tapahtuu samalla tavalla.</p>
+
+<pre class="sh_ruby">
+sisakkain = [["a","b"],
+            [["d","e"]];
+
+sisakkain[1][0] = "b";
+sisakkain[1][1] = "a";
+
+# sisakkain on nyt:  [["a","b"],
+#                    [["b","a"]]
+</pre>
+
+		<p>Kaksiulotteinen taulukko on kätevä esimerkiksi koordinaateissa.  Seuraavassa esimerkissä ristinolla kuvataan kaksiulotteisena taulukkona siten, että jokainen rivi rakennetaan yksiulotteisena taulukkona ja näistä riveistä rakennetaan kaksiulotteinen taulukko.</p>
+
+<pre class="sh_ruby">
+rivi1 = [1,1,0];
+rivi2 = [0,1,1];
+rivi3 = [1,0,0];
+
+ristinolla = [rivi1,
+              rivi2,
+              rivi3];
+
+print(ristinolla[2][2]);  # Tulostetaan oikea alakulma (0)
+print(ristinolla[0][2]);  # Tulostetaan oikea yläkulma (0)
+</pre>
+
+
+		<h3>Läpikäynti indeksien avulla</h3>
+
+		<p>Läpikäyntiin tarvitsemme kaksi indeksimuuttujaa: indeksin nykyiselle riville ja nykyiselle sarakkeelle.  Seuraavassa esimerkissä käydään läpi aakkosia taulukosta riveittäin.  Rivin kaikki sarakkeet käydään läpi ja taulukossa oleva arvo tulostetaan.</p>
+
+<pre class="sh_ruby">
+aakkoset = [["a","b","c","d"],
+            ["e","f","g","h"],
+            ["i","j","k","l"],
+            ["m","n","o","p"]];
+
+
+riviIndeksi = 0;
+while ( riviIndeksi &lt; 4 ) do
+
+  sarakeIndeksi = 0;
+  while ( sarakeIndeksi &lt; 4) do
+    print(aakkoset[riviIndeksi][sarakeIndeksi]);
+    sarakeIndeksi = sarakeIndeksi + 1;
+  end
+
+  println(&quot;&quot;);
+  riviIndeksi = riviIndeksi + 1;
+end
+</pre>
+
+<pre>
+abcd
+efgh
+ijkl
+mnop
+</pre>
+		<h3>Läpikäynti ilman indeksejä</h3>
+
+		<p>Komentoa <code>for</code> voi käyttää myös sisäkkäisten taulukkojen kanssa.</p>
+
+<pre class="sh_ruby">
+matit = ["Matti P.", "Matti L.", "Matti N."];
+artot = ["Arto V.", "Arto W."];
+
+kaikkiNimet = [matit, artot];
+
+for samatEtunimet in kaikkiNimet do
+  println("Seuraavilla on samat etunimet:\n");
+
+  for samaEtunimi in samatEtunimet do
+    println(samaEtunimi);
+  end
+
+  println("\nSiinä kaikki.\n")
+end
+</pre>
+
+<pre>
+Seuraavilla on samat etunimet:
+
+Matti P.
+Matti L.
+Matti N.
+
+Siinä kaikki.
+
+Seuraavilla on samat etunimet:
+
+Arto V.
+Arto W.
+
+Siinä kaikki.
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<h2 id="funktiot">Funktiot</h2>
+
+		<p>Ohjelmoinnissa <em>funktioilla</em> on suuri rooli.  Funktioita käytetään paketoimaan suoritettavaa koodia omiin toistetaviin yksiköihinsä.</p>
+
+		<p>Kuten muuttuja, myös funktio tulee määritellä ennen sen käyttöä.</p>
+
+<pre class="sh_ruby">
+def tervehdi()
+  println("Terveiset funktiomaailmasta!");
+end
+
+println("Kokeillaan pääsemmekö funktiomaailmaan:")
+tervehdi();
+
+println("Näyttää siltä, kokeillaan vielä:");
+tervehdi(); tervehdi(); tervehdi();
+</pre>
+
+
+
+
+		<h3>Parametrit</h3>
+
+		<p>Funktiosta saa huomattavasti monikäyttöisemmän antamalla sille parametreja. Parametrit ovat kuin muuttujia, jotka annetaan funktion määrittelyssä. 
+<!--
+		Parametreissä määritellyt muuttujat ovat käytettävissä ainoastaan funktion sisällä.
+-->		
+Kun funktiota kutsutaan, annetaan parametrille arvo.
+
+		<p>Seuraavassa esimerkissä määritellään funktio ja kutsutaan sitä kahdesti siten, että parametriin <code>nimi</code> asetetaan ensimmäisellä kerralla arvoksi <code>Matti</code> ja toisella kutsukerralla <code>Arto</code>.</p>
+
+<pre class="sh_ruby">
+def tervehdi(nimi)
+  println("Hei " + nimi + ", terveiset funktiomaailmasta");
+end
+
+tervehdi("Matti");
+tervehdi("Arto");
+</pre>
+
+
+		<p>Funktion parametrejä voidaan antaa funktion määrittelyssä useita.  Tällöin funktion kutsussa parametrit annetaan samassa järjestyksessä.</p>
+
+<pre class="sh_ruby">
+def tervehdi(nimi,mistaTerveiset)
+  println("Hei" + nimi + ", terveiset " + mistaTerveiset);
+end
+
+kuka = "Matti";
+terveiset = "Kyröjoelta";
+
+tervehdi(kuka, terveiset);
+tervehdi(kuka, terveiset + " ja Kumpulasta");
+</pre>
+
+		<p>Jälkimmäisessä <code>tervehdi</code>-funktion kutsussa toinen parametri muodostetaan katenoimalla muuttujaan <code>terveiset</code> teksti <code>" ja Kumpulasta"</code>.  Tämä suoritetaan ennen varsinaista funktion suoritusta.</p>
+
+<pre>
+Hei Matti, terveiset Kyröjoelta
+Hei Matti, terveiset Kyröjoelta ja Kumpulasta	
+</pre>
+
+
+		<h3>Paluuarvot</h3>
+
+		<p>Funktio voi palauttaa jonkin arvon. Edellä olevissa esimerkeissä funktiot eivät palauttaneet mitään.  Paluuarvon voi määritellä komennolla <code>return</code>.</p>
+
+		<p>Seuraavassa esimerkissä käytetään funktiota summan laskemiseen.  Summa palautetaan paluuarvona ja tämä asetetaan muuttujaan.</p>
+
+<pre class="sh_ruby">
+def summa(eka, toka)
+  return eka+toka;
+end
+
+eka = 2000;
+toka = 10;
+
+mikaVuosi = summa(eka, toka);
+println(mikaVuosi);
+</pre>
+
+<p>Laajennetaan edellistä esimerkkiä siten, että käyttäjä syöttää luvut kuten ensimmäisissä harjoituksissa.</p>
+
+<pre class="sh_ruby">
+def summa(eka, toka)
+  return eka+toka;
+end
+
+print("Anna ensimmäinen luku: ");
+a = Lukija.nextInt();
+
+print("Anna toinen luku: ");
+b = Lukija.nextInt();
+
+print("Luvut ovat yhteensä: ");
+println(summa(a,b));
+</pre>
+
+		<p>Seuraavassa esimerkissä funktio <code>summa</code> saa parametreikseen kaksi kokonaislukua paluuarvoina.</p>
+
+<pre class="sh_ruby">
+def summa(eka, toka)
+  return eka+toka;
+end
+
+a = 3;
+b = 2;
+
+summa(summa(1,2), summa(a,b));
+# 1) suoritetaan uloimman funktion sisällä olevat funktiot
+#    summa(1,2) = 3   ja summa(a,b) = 5
+# 2) suoritetaan uloin summa-funktio:
+#    summa(3,5) = 8 
+</pre>
+
+
+		<h3>Näkyvyys</h3>
+
+		<p>Funktion sisäiset muuttujat ja parametrit ovat olemassa vain funktion sisällä.  Myöskään funktion ulkopuolella määritellyt muuttujat eivät näy funktion sisälle.  Seuraavassa esimerkissä määritellään muuttuja <code>x</code> ja funktio, joka kasvattaa (samannimistä, mutta ei samaa!) parametria <code>x</code>.</p>
+
+<pre class="sh_ruby">
+def kasvataKolmella(x)
+  x = x + 3;
+  return x;
+end
+
+x = 1;
+kasvatettu = kasvataKolmella(x);
+
+println(x);             # tulostaa 1, eli ei muuttunut
+println(kasvatettu);    # tulostaa 4
+</pre>
+
+
+
+
+		<h3>Uudelleenkäytettävyys</h3>
+
+		<p>Funktiosta saadaan <em>uudelleenkäytettävä</em> siten, että se ei ota kantaa ohjelmaan jossa sitä käytetään.  Tällöin toimiva ja testattu funktio voidaan uudelleenkäyttää missä ohjelmassa tahansa.</p>
+
+		<p>Seuraavassa teemme funktion, joka käy parametrinään saadun taulukon läpi ja palauttaa <code>true</code> jos kaikki arvot olivat positiivisia.</p>
+
+<pre class="sh_ruby">
+def onkoKokonaanPositiivinen(taulukko)
+  oliko = true;
+
+  for arvo in taulukko do
+    if ( arvo &lt; 0 ) then
+      oliko = false;
+    end
+  end
+
+  return oliko;
+end
+
+lokerikko = [1,3,-1,3];
+
+if ( onkoKokonaanPositiivinen(lokerikko) ) then
+  println("Lokerikko on kokonaan positiivinen");
+else
+  println("Lokerikko ei ole kokonaan positiivinen");
+end
+</pre>
+
+
+		<p>Kaksiulotteisen taulukon tulostus erotetaan omaksi funktiokseen.</p>
+
+<pre class="sh_ruby">
+def kaksiulotteisenTaulukonTulostaja(taulukko)
+  for rivi in taulukko do
+    for sarake in rivi do
+      print(sarake);
+    end
+    println();
+  end
+end
+
+
+aakkoset = [["a","b","c","d"],
+            ["e","f","g","h"],
+            ["i","j","k","l"],
+            ["m","n","o","p"]];
+
+rivi1 = [1,1,0];
+rivi2 = [0,1,1];
+rivi3 = [1,0,0];
+
+ristinolla = [rivi1,
+              rivi2,
+              rivi3];
+
+
+kaksiulotteisenTaulukonTulostaja(aakkoset);
+kaksiulotteisenTaulukonTulostaja(ristinolla);
+
+</pre>
+
+
+
+
+		</body>
+	
+</html>
+

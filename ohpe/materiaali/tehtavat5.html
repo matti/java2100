@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fi" lang="fi">
+	<head>
+		<link rel="stylesheet" href="stylesheets/common.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="javascripts/common.js"></script>
+		
+		<link rel="stylesheet" href="stylesheets/shjs/sh_style.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/shjs/sh_main.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_java.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_ruby.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_scala.min.js"></script>
+		
+		<link rel="stylesheet" href="stylesheets/exercises.css" type="text/css" media="screen, print" />		
+		<script type="text/javascript" src="javascripts/exercises.js"></script>		
+	</head>
+
+	<body>
+		<h1>Tehtävät viikolle 5</h1>
+				
+		<p>Pakolliset tehtävät on merkitty harmalla taustavärillä. Punaisella taustavärillä merkatut ovat kontrollitehtäviä, jotka näytetään ohjaajalle harjoitustilaisuudessa!</p>
+		
+		<ul>
+			<li>Pakollisia tehtäviä on: <span id="required_exercises_count">-1</span> kpl</li>
+			<li>Lisätehtäviä on: <span id="additional_exercises_count">-1</span> kpl</li>
+			<li>Bonustehtäviä on: <span id="bonus_exercises_count">-1</span> kpl</li>
+		</ul>
+		
+		
+		<p><strong>HUOM:</strong> nimeä tiedostot otsikossa olevan sanan mukaan</p>
+    
+<h2>Lämmittelyä</h2>
+
+<h3 class="req">Opintopistelaskuri</h3>
+<p>"Tee ohjelma, jolla voi laskea opintopisteiden laskennallisen työmäärän. 1 opintopiste on 27 tuntia." Voit käyttää viime laskareiden tehtävää alkupisteenä! Tee tämä ja seuraava tehtävä samaan projektiin.</p>
+
+<p>Muuta <code>TyoMaaramuunnin</code>-luokkaa siten, että sen attribuutit ovat nimeltään kurssi, opintopisteet, viikot. Muuta myös luokan konstruktoria siten, että se saa parametreikseen muuttujat nimeltä kurssi, opintopisteet, viikot.</p>
+<pre class="sh_java">
+import java.util.Scanner;
+
+public class OpintopisteetTunneiksi {
+  public static Scanner lukija = new Scanner(System.in);
+  
+  public static void main(String[] komentoriviParametrit) {
+    TyomaaraMuunnin ohpe = new TyomaaraMuunnin("Ohjelmoinnin perusteet", 5.0, 6);
+    TyomaaraMuunnin ohja = new TyomaaraMuunnin("Ohjelmoinnin jatkokurssi", 4.0, 6);
+    
+    System.out.println(ohpe);
+    System.out.println("---");
+    System.out.println(ohja);
+  }
+}
+</pre>
+<p>OpintopisteetTunneiksi ohjelman tulostus on seuraavanlainen:</p>
+<pre>
+Kurssin Ohjelmoinnin perusteet (5.0op) laskennallinen työmäärä
+Yhteensä 135.0h
+Viikossa 22.5h
+---
+Kurssin Ohjelmoinnin jatkokurssi (4.0op) laskennallinen työmäärä
+Yhteensä 108.0h
+Viikossa 18.0h
+</pre>
+
+
+<h3 class="show">Opintopistelaskuri jatkuu</h3>
+<p>Muuta <em>TyomaaraMuunnin</em>-luokkaa siten, että tuntimäärä yhteensä ja tuntimäärä viikossa -arvot lasketaan sisäisillä, eli ei näkyvillä metodeilla. Muuta myös toString-metodia siten, että se käyttää juuri sen olion private metodeja yhteensä ja viikossa -arvojen tulostamiseen.</p>
+<p>Aseta myös kaikki <em>TyomaaraMuunnin</em>-luokan attribuutit näkymättömiksi luokan ulkopuolelle!</p>
+<p>Testiohjelma ja tulostus pysyy samana kuin yllä.</p>
+
+
+<h3 class="req">NeliLaskija</h3>
+<p>Ota viime viikolta tuttu Nelilaskija, ja muuta sen toteutusta siten, että kaikki laskutoimitukset tapahtuvat samannimisen metodin <code>laske</code>-avulla. Ensimmäinen parametri on toivottu operaatio, toinen ja kolmas ovat laskettavia lukuja. Tee tämä ja seuraava tehtävä saman projektin sisään.</p>
+<pre class="sh_java">
+import java.util.Scanner;
+
+public class NeliLaskija {
+  public static Scanner lukija = new Scanner(System.in);
+
+  public static void main(String[] komentoriviParametrit) {
+
+    NeliLaskin laskin = new NeliLaskin();
+    System.out.println("1 - Summa");
+    System.out.println("2 - Erotus");
+    System.out.println("3 - Jako");
+    System.out.println("4 - Kerto");
+    
+    System.out.print("Anna haluttu operaatio: ");
+    int operaatio = lukija.nextInt();
+    
+    System.out.print("Anna ensimmäinen luku: ");
+    int eka = lukija.nextInt();
+
+    System.out.print("Anna toinen luku: ");
+    int toka = lukija.nextInt();
+    
+    System.out.println("Halutun laskun tulos: " + laskin.laske(operaatio, eka, toka));
+    
+    System.out.println("Katsotaan vielä mitä kaikista tulee..");
+    System.out.println("Summa: " + laskin.laske(1, eka, toka));
+    System.out.println("Erotus: " + laskin.laske(2, eka, toka));
+    System.out.println("Jako: " + laskin.laske(3, eka, toka));
+    System.out.println("Kerto: " + laskin.laske(4, eka, toka));
+  }
+}
+</pre>
+
+<h3 class="show">NeliLaskija jatkuu</h3>
+<p>Jos et jo tehnyt laskuoperaatioita aiemmin olemassaolleiden <code>summa</code>, <code>erotus</code>, <code>jako</code> ja <code>kerto</code>-metodien avulla, muuta ylläolevan tehtävän toteutusta siten, että laske-metodi kutsuu niitä tuloksen saamiseen.</p>
+<p>Muuta lisäksi metodit <code>summa</code>, <code>erotus</code>, <code>jako</code> ja <code>kerto</code> näkymättömiksi muille käyttäen <em>private</em>-näkyvyysmäärettä. Voit testata lopullista toteutusta ylläolevan <em>NeliLaskija</em>-pääohjelman avulla.</p>
+
+
+
+
+		<h2>Matkakortti</h2>
+    <p>Kaikki allaolevat tehtävät tulevat saman projektin sisään!</p>
+
+		<h3 class="req">Matkakortti</h3>		
+
+		<p>Määrittele luokka Matkakortti. Matkakortilla on omistaja (String) ja arvo (double). Toteuta Matkakortille myös toString-metodi, jolla saat aikaan seuraavan tulosteen seuraavassa:</p> 
+    <p>Testaa luokan Matkakortti toteutusta seuraavan Hkl-pääohjelman avulla.</p>
+<pre class="sh_java">
+public class Hkl {
+    public static void main(String[] args) {
+        Matkakortti matinKortti = new Matkakortti("Matti");
+        Matkakortti artonKortti = new Matkakortti("Arto");
+        
+        System.out.println(matinKortti);
+        System.out.println(artonKortti);
+    }
+}
+</pre>
+  <p>Tulosteen pitäisi olla seuraavanlainen:</p>
+		
+<pre>
+Omistaja Matti, arvoa 0.0 euroa
+Omistaja Arto, arvoa 0.0 euroa
+</pre>
+
+		
+		<h3 class="req">Lataajalaite</h3>
+		
+		<p>Kuten kaikki tietävät matkakortille saadaan arvoa ja aikaa Lataajalaitteen avulla. Määritellään luokka Lataajalaite. Toteutetaan lataajalaitteelle on metodi arvon lataamista varten. Ajan lataaminen tapahtuu vasta myöhemmin. Metodi saa parametriksi matkakortin, jolle arvo ladataan, sekä ladattavan arvon. Seuraavassa luodaan kolme lataajalaitetta. Matti lataa kortilleen rahaa Hakaniemessä. Arto lataa kortilleen rahaa Rautatietorilla.</p>
+		
+		<p>Testaa Lataajalaitteen ja Matkakortin yhteistoimintaa alla olevan Hkl-pääohjelman avulla.</p>
+			
+<pre class="sh_java">
+public class Hkl {
+  public static void main(String[] args) {
+    Matkakortti matinKortti = new Matkakortti("Matti");
+    Matkakortti artonKortti = new Matkakortti("Arto");
+    Lataajalaite rautatietori = new Lataajalaite();
+    Lataajalaite hakaniemi = new Lataajalaite();
+    Lataajalaite sornainen = new Lataajalaite();
+
+    System.out.println(matinKortti);
+    System.out.println(artonKortti);
+
+    rautatietori.lataaArvoa(artonKortti, 4);
+
+    hakaniemi.lataaArvoa(matinKortti, 35);
+
+    System.out.println(matinKortti);
+    System.out.println(artonKortti);
+
+  }
+}
+</pre>
+<p>Tulosteen pitäisi olla seuraavanlainen:</p>
+<pre>
+Omistaja Matti, arvoa 0.0 euroa
+Omistaja Arto, arvoa 0.0 euroa
+Omistaja Matti, arvoa 35.0 euroa
+Omistaja Arto, arvoa 4.0 euroa
+</pre>
+
+
+
+		<h3 class="req">Lukijalaite</h3>
+		
+		<p>Kulkuvälineeseen menevän matkustajan matkakortti luetaan Lukijalaitteella. Tee luokka Lukijalaite, jolla on voidaan maksaa joko ratikkalippu, Helsingin sisäinen tai seutulippu. Tee metodi, joka velottaa halutun lipputyypin hinnan kortilta. Lipputyyppi kerrotaan parametrina (0 ratikkalippu, 1 Helsingin sisäinen, 2 seutu). Metodi palauttaa totuusarvona tiedon siitä riittikö kortilla raha matkaan. Jos raha riittää, metodi vähentää kortilta matkaan kuluneen rahamäärän.</p>
+		
+		<p>HKL:n hinnat matkakorttia käytettäessä:</p>
+		<ul>
+		  <li>Ratikkalippu 1,28 euroa</li>
+		  <li>Helsingin sisäinen lippu 1,70 euroa</li>
+		  <li>Seutulippu 3,37 euroa</li>
+		</ul>
+		
+    <p>Seuraavassa Arto matkustaa kutosratikalla käyttäen ratikkalippua. Matti taas ostaa seutulipun bussikuskilta. Lopussa Arto yrittää vielä ostaa seutulipun.</p>
+
+<pre class="sh_java">
+public class Hkl {
+  public static void main(String[] args) {
+    Matkakortti matinKortti = new Matkakortti("Matti");
+    Matkakortti artonKortti = new Matkakortti("Arto");
+    Lataajalaite rautatietori = new Lataajalaite();
+    Lataajalaite hakaniemi = new Lataajalaite();
+    Lataajalaite sornainen = new Lataajalaite();
+    Lukijalaite ratikka6 = new Lukijalaite();
+    Lukijalaite bussi242 = new Lukijalaite();
+
+    rautatietori.lataaArvoa(artonKortti, 4);
+
+    hakaniemi.lataaArvoa(matinKortti, 35);
+
+    System.out.println();
+    System.out.println(matinKortti);
+    System.out.println(artonKortti);
+    System.out.println();
+
+    boolean tark = ratikka6.ostaLippu(artonKortti, 0);
+    if (tark) {
+      System.out.println("Arton rahat riittivät ratikkalippuun");
+    }
+    else {
+      System.out.println("Artolla ei rahaa ratikkalippuun");
+    }
+
+    tark = bussi242.ostaLippu(matinKortti, 2);
+    if (tark) {
+      System.out.println("Matin rahat riittivät seutulippuun");
+    }
+    else {
+      System.out.println("Matin ei rahaa seutulippuun");
+    }
+
+    System.out.println();
+    System.out.println(matinKortti);
+    System.out.println(artonKortti);
+    System.out.println();
+
+    tark = ratikka6.ostaLippu(artonKortti, 2);
+    if (tark) {
+      System.out.println("Arton rahat riittivät seutulippuun");
+    }
+    else {
+      System.out.println("Artolla ei rahaa seutulippuun");
+    }
+  }
+}
+</pre>
+
+<pre>
+Omistaja Matti, arvoa 35.0 euroa
+Omistaja Arto, arvoa 4.0 euroa
+
+Arton rahat riittivät ratikkalippuun
+Matin rahat riittivät seutulippuun
+
+Omistaja Matti, arvoa 31.63 euroa
+Omistaja Arto, arvoa 2.7199999999999998 euroa
+
+Artolla ei rahaa seutulippuun	
+</pre>
+
+
+<h3 class="show">Kioski</h3>
+
+<p>Tähän asti makakortit ovat ilmestyneet tyhjästä. Muutetaan tilanne sellaiseksi, etttä matkakortin saa ainoastaan kioskista. Eli tee luokka Kioski, josta voi ostaa matkakortin. Tee kioskille metodi, jota kutsuessa Kioski luo matkakortin ja palautta sen kutsujalle.</p>
+
+<p>Seuraavassa syntyy ensin Pihlajamäen R-kioski. Matti ja Arto hankkivat kioskilta matkakortit.</p>
+
+<pre class="sh_java">
+  Lataajalaite rautatietori = new Lataajalaite();
+  Lataajalaite hakaniemi = new Lataajalaite();
+  Lataajalaite sornainen = new Lataajalaite();
+  Lukijalaite ratikka6 = new Lukijalaite();
+  Lukijalaite bussi242 = new Lukijalaite(); 
+
+  Kioski ärräPihlis = new Kioski();
+
+  Matkakortti artonKortti = ärräPihlis.ostaMatkakortti("Arto");  
+  Matkakortti matinKortti = ärräPihlis.ostaMatkakortti("Matti");
+
+  rautatietori.lataaArvoa(artonKortti, 4);
+
+  hakaniemi.lataaArvoa(matinKortti, 35); 
+</pre>
+
+
+<h3>Laajenna Kioskia</h3>
+
+<p>Laajenna luokkaa Kioski siten, että matkakortin ostometodilla voi myös pyytää kioskia lataamaan kortille rahaa.</p>
+
+<pre class="sh_java">
+public class Hkl {
+  public static void main(String[] args) {
+    Kioski ärräPihlis = new Kioski();
+
+    Matkakortti artonKortti = ärräPihlis.ostaMatkakortti("Arto");
+    Matkakortti matinKortti = ärräPihlis.ostaMatkakortti("Matti", 10);
+    ...
+  }
+}
+</pre>
+
+
+
+<h3>Kertakortti</h3>
+
+<p>HKL:n valikoimassa on myös ns. kertakortteja. Kertakortille ladataan ostettaessa tietty määrä matkoja. Kun matkat on käytetty, kertakortti heitetään pois. Tee luokka Kertakortti. </p>
+
+<p>Laajenna lukijalaitetta siten, että matkoja voi maksaa myös kertakorteilla. Lukijalaitteet käyttävät saman nimistä metodia sekä Matka- että Kertakorttien käsittelyyn.</p>
+
+<p>Esimerkkiskenaariossa saadaan Kertakortti, jolla 1 ratikkamatka, 3 HKL-matkaa mutta ei seutumatkoja. Kortilla yritetään tehdä ensin seutumatka ja sen jälkeen tehdään onnistuneesti HKL-matka.</p>
+
+<pre class="sh_java">
+public class Hkl {
+  public static void main(String[] args) {
+    Lukijalaite ratikka6 = new Lukijalaite();
+
+    // kertakortti, jolle ladattuna 3 HKL:n kertamatkaa
+    Kertakortti kerta = new Kertakortti(1, 3, 0);
+
+    System.out.println(kerta);
+
+    boolean tark = ratikka6.ostaLippu(kerta, 2);
+    if (tark) {
+      System.out.println("seutumatka velotettu");
+    }
+    else {
+      System.out.println("kertakortilla ei seutulippua");
+    }
+
+    tark = ratikka6.ostaLippu(kerta, 1);
+    if (tark) {
+      System.out.println("HKL-matka velotettu");
+    }
+    else {
+      System.out.println("kertakortilla ei HKL-matkaa");
+    }
+
+    System.out.println(kerta);
+  }
+}
+</pre>
+
+<pre>
+kertakortti: 1 ratikkamatkaa 3 HKL-matkaa ja 0 seutumatkaa jäljellä
+kertakortilla ei seutulippua
+HKL-matka velotettu
+kertakortti: 1 ratikkamatkaa 2 HKL-matkaa ja 0 seutumatkaa jäljellä
+</pre>
+
+		<h3>Laajenna Kioskia</h3>	
+
+<p>Muuta tilanne vielä sellaiseksi, että myös Kertakortit ostetaan Kioskeista.</p>
+
+<p>Kertakortin hankinta tapahtuu seuraavan esimerkin mukaan. Osto-metodissa parametrina kerrotaan kortille tulevien ratikka-, HKL- ja seutumatkojen määrä.</p>
+
+<pre class="sh_java">
+public class Hkl {
+	public static void main(String[] args) {
+	 ...
+	 Kioski ärräPihlis = new Kioski();
+	 Kertakortti kerta = ärräPihlis.ostaKertakortti(1,3,0);
+	 ...
+  }
+}
+</pre>
+
+
+
+		<h3 class="req">Viimeinen voimassaolopäivä</h3>		
+
+		<p>Laajennetaan Matkakorttia siten, että kortilla on myös viimeinen voimassaolopäivä. Voimassaolopäivä esitetään kahtena int:inä, toinen kertoo päivän ja toinen kuukauden. Emme välitä vuodesta ollenkaan tässä tehtävässä. Matkakortin arvo on alussa 0 ja voimassaolopäivää ei ole. Olematon voimassaolopäivä voidaan merkitä esim. päivämäärällä "nollas nollatta". Laajenna Matkakortin toString-metodia siten, että saat aikaan seuraavan tulosteen:</p> 
+
+<pre class="sh_java">
+public class Hkl {
+  public static void main(String[] args) {
+    Matkakortti matinKortti = new Matkakortti("Matti");
+    Matkakortti artonKortti = new Matkakortti("Arto");
+
+    System.out.println(matinKortti);
+    System.out.println(artonKortti);
+
+    matinKortti.asetaViimeinenVoimassaolopaiva(28, 6);
+    artonKortti.asetaViimeinenVoimassaolopaiva(16, 3);
+    System.out.println(matinKortti);
+    System.out.println(artonKortti);
+  }
+}
+</pre>
+		
+<pre>
+Omistaja Matti, arvoa 0.0 euroa, aikaa 0.0. asti
+Omistaja Arto, arvoa 0.0 euroa, aikaa 0.0. asti
+Omistaja Matti, arvoa 0.0 euroa, aikaa 28.6. asti
+Omistaja Arto, arvoa 0.0 euroa, aikaa 16.3. asti
+</pre>
+
+<h3 class="req">Ajan tarkastaminen lukijalaitteella</h3>		
+
+		<p>Laajenna lukijalaitetta siten, että lukijalla voi tarkastaa onko kortilla aikaa jäljellä. Lukijan on siis tunnettava nykyinen päivämäärä. Tee lukijalle metodi, jolla päivämäärä etenee yhdellä päivällä. Voit olettaa, että jokaisessa kuussa on 30 päivää.</p> 
+
+<pre class="sh_java">
+public class Hkl {
+  public static void main(String[] args) {
+    // konstruktorissa kerrotaan että on päivämäärä on 1.1.
+    Lukijalaite ratikka9 = new Lukijalaite(1, 1);
+    
+    Matkakortti artonKortti = new Matkakortti("Arto");
+    boolean voimassa = ratikka9.onkoVoimassa(artonKortti);
+    if (voimassa == false) {
+      System.out.println("Osta lippu pummi!");
+    }
+
+    // klo 23.59
+    ratikka9.seuraavaPaiva();
+    // nyt on päiväys on 2.1
+
+  }
+}
+</pre>
+
+<h3 class="req">Ajan lataaminen lataajalaitteella</h3>		
+
+		<p>Laajenna lataajalaitetta siten, että sillä voidaan ladata kortille aikaa, eli asettaa uusi eräpäivä.</p> 
+
+<pre class="sh_java">
+public class Hkl {
+  public static void main(String[] args) {
+    Lataajalaite kurvinGrilli = new Lataajalaite();
+
+    kurvinGrilli.lataaAikaa(artonKortti, 30, 12);
+  }
+}
+</pre>
+
+<h3 class="req">Päivämäärä-olio ja Lukijalaite</h3>		
+
+		<p>Tee luokka Paivamaara, joka titetää monesko päivä kulloinkin on. Luokalla on metodi, seuraavaPaiva(), joka vie päivämäärää yhdellä eteenpäin. Konstruktorissa asetetaan aloituspäivämäärä. Luokalla on myös metodit, jolla voi kysyä menossa olevaa päivää ja kuukautta. </p> 
+		
+		<p>Muuta Lukijalaitetta siten, että lukijalaite tuntee päivämääräolion, eli käytännössä lukijalaite saa konstruktorissa viitteen päivämäärä-olioon. Kun lukijalaite tarkastaa onko matkakortti voimassa, se tarkastaa päivämäärän päivämääräoliolta ja vertaa sitä matkakortin eräpäivään.</p>
+
+<pre class="sh_java">
+public class Hkl {
+  public static void main(String[] args) {
+    Paivamaara paiva = new Paivamaara(1, 1);
+
+    // kaikki lukijalaitteet käyttävät samaa päiväoliota
+    Lukijalaite ratikka1 = new Lukijalaite(paiva);
+    Lukijalaite ratikka3T = new Lukijalaite(paiva);
+    Lukijalaite ratikka3B = new Lukijalaite(paiva);
+    Lukijalaite ratikka4 = new Lukijalaite(paiva);
+
+    // klo 23.59:
+    paiva.seuraavaPaiva();
+    // nyt on 2.1
+    // huom: koska kaikki lukijalaitteet kysyvät päiväyksen samalta oliolta,
+    // tuntevat kaikki nyt uuden päivämäärän!
+  }
+}
+</pre>
+
+<h3 class="req">Päivämäärä-olio ja Lataajalaite</h3>		
+		
+		<p>Muuta Lataajalaitetta siten, että sekin tuntee nykyisen päivämäärän. Kuormita lataaAikaa-metodi sellaiseksi, että sen avulla voi sanoa kuinka monta päivää kortille ladataan tai mikä on uusi eräpäivä.</p>
+
+<pre class="sh_java">
+public class Hkl {
+  public static void main(String[] args) {
+    // nyt on 1.1
+    Paivamaara paiva = new Paivamaara(1, 1);
+
+    // kaikki lukijalaitteet ja lataajalaitteet käyttävät samaa päiväoliota
+    Lukijalaite ratikka1 = new Lukijalaite(paiva);
+    Lukijalaite ratikka3T = new Lukijalaite(paiva);
+    Lukijalaite ratikka3B = new Lukijalaite(paiva);
+    Lukijalaite ratikka4 = new Lukijalaite(paiva);
+    Lataajalaite hakaniemi = new Lataajalaite(paiva);
+    Lataajalaite sornainen = new Lataajalaite(paiva);
+
+    Matkakortti matinKortti = new Matkakortti("Matti");
+    Matkakortti artonKortti = new Matkakortti("Arto");
+
+    // arto lataa 20 päivää aikaa kortille,
+    // 20 päivää lasketaan paivamaara-olion kertomasta nykyisestä päiväyksestä
+    sornainen.lataaAikaa(artonKortti, 20);
+
+    // matti lataa aikaa siten, että hän kertoo uuden eräpäivän olevan 24.5
+    sornainen.lataaAikaa(matinKortti, 24, 5);
+
+    // klo 23.59:
+    paiva.seuraavaPaiva();
+    // nyt on 2.1
+    // huom: koska kaikki lukijalaitteet ja lataajalaitteet
+    // kysyvät päiväyksen samalta oliolta, tuntevat kaikki nyt uuden
+    // päivämäärän!
+  }
+}
+</pre>
+
+
+
+
+
+<h2 id="bonus">Metro ja metroasema</h2>
+<p>Metroilla on <em>nykyään</em> kuskit, ja ne kulkevat reittiään pitkin asemalta seuraavalle. Toteutetaan pieni metrosimulaattori.</p>
+<p>Tee kaikki alla olevat tehtävät saman projektin sisään!</p>
+
+<h3>Metro</h3>
+<p>Tee luokka <em>Metro</em>, jolla on kuski ja tieto tämänhetkisestä asemasta. Testaa toteutusta alla olevan <em>MetroOhjelma</em>-pääohjelman avulla.</p>
+<p>Metrolla on kuski ja tieto tämän hetkisestä asemasta. Metron sijainti aluksi on Metrovarikko. Metro liikkuu <code>siirryAsemalle</code>-metodilla, joka saa parametrikseen siirryttävän aseman nimen.</p>
+<pre class="sh_java">
+public class MetroOhjelma {
+  public static void main(String[] komentoriviParametrit) {
+    String[] asemat = {"Kaisaniemi", "Hakaniemi", "Sörnäinen", "Kalasatama"};
+    
+    Metro matinMetro = new Metro("Matti P.");
+    System.out.println(matinMetro);
+    
+    for(int indeksi = 0; indeksi &lt; asemat.length; indeksi++) {
+      matinMetro.siirryAsemalle(asemat[indeksi]);
+      System.out.println(matinMetro);
+    }  
+  }
+}
+</pre>
+<p>Ohjelman tulostus on seuraavanlainen.</p>
+<pre>
+Metron asema on Metrovarikko, kuskina on Matti P.
+Metron asema on Kaisaniemi, kuskina on Matti P.
+Metron asema on Hakaniemi, kuskina on Matti P.
+Metron asema on Sörnäinen, kuskina on Matti P.
+Metron asema on Kalasatama, kuskina on Matti P.
+</pre>
+
+
+<h3>Metroasema</h3>
+<p>Tee luokka Metroasema, jonka konstruktori saa parametrikseen metroaseman nimen. Testaa toteutusta allaolevan <em>MetroOhjelma</em>-pääohjelman avulla.</p>
+
+<pre class="sh_java">
+public class MetroOhjelma {
+  public static void main(String[] komentoriviParametrit) {
+    String[] asemat = {"Kaisaniemi", "Hakaniemi", "Sörnäinen", "Kalasatama"};
+    
+    Metro matinMetro = new Metro("Matti P.");
+    System.out.println(matinMetro);
+    
+    for(int indeksi = 0; indeksi &lt; asemat.length; indeksi++) {
+      matinMetro.siirryAsemalle(asemat[indeksi]);
+      System.out.println(matinMetro);
+    }
+    
+    System.out.println("---");
+    
+    Metroasema kaisaniemi = new Metroasema(asemat[0]);
+    Metroasema hakaniemi = new Metroasema(asemat[1]);
+    Metroasema sornainen = new Metroasema(asemat[2]);
+    Metroasema kalasatama = new Metroasema(asemat[3]);
+    
+    
+    System.out.println(kaisaniemi);
+    System.out.println(hakaniemi);
+    System.out.println(sornainen);
+    System.out.println(kalasatama);
+  }
+}
+</pre>
+<p>Ohjelman tulostuksen tulisi olla seuraavanlainen:</p>
+<pre>
+Metron asema on Metrovarikko, kuskina on Matti P.
+Metron asema on Kaisaniemi, kuskina on Matti P.
+Metron asema on Hakaniemi, kuskina on Matti P.
+Metron asema on Sörnäinen, kuskina on Matti P.
+Metron asema on Kalasatama, kuskina on Matti P.
+---
+Asema Kaisaniemi
+Asema Hakaniemi
+Asema Sörnäinen
+Asema Kalasatama
+</pre>
+
+
+<h3 class="bonus">Seuraava metroasema</h3>
+<p>Laajenna Metroasema-luokkaa siten, että voit asettaa sille myös seuraavan metroaseman. Seuraava metroasema on myös tyyppiä <code>Metroasema</code>. Seuraavan metroAseman voi asettaa <code>asetaSeuraava</code>-metodilla, seuraavan metroaseman saa metodilla <code>annaSeuraava</code>. Muuta myös luokan Metroasema <code>toString</code>-metodia siten, että se tulostaa myös seuraavan metroaseman nimen jos se on asetettu.</p>
+<p>Testaa toteutusta seuraavan <em>MetroOhjelma</em>-ohjelman avulla.</p>
+
+<pre class="sh_java">
+public class MetroOhjelma {
+  public static void main(String[] komentoriviParametrit) {
+    String[] asemat = {"Kaisaniemi", "Hakaniemi", "Sörnäinen", "Kalasatama"};
+    
+    Metro matinMetro = new Metro("Matti P.");
+    System.out.println(matinMetro);
+    
+    for(int indeksi = 0; indeksi &lt; asemat.length; indeksi++) {
+      matinMetro.siirryAsemalle(asemat[indeksi]);
+      System.out.println(matinMetro);
+    }
+    
+    System.out.println("---");
+    
+    Metroasema kaisaniemi = new Metroasema(asemat[0]);
+    Metroasema hakaniemi = new Metroasema(asemat[1]);
+    Metroasema sornainen = new Metroasema(asemat[2]);
+    Metroasema kalasatama = new Metroasema(asemat[3]);
+  
+    kaisaniemi.asetaSeuraava(hakaniemi);
+    hakaniemi.asetaSeuraava(sornainen);
+    sornainen.asetaSeuraava(kalasatama);
+    kalasatama.asetaSeuraava(kaisaniemi);
+
+    System.out.println("---");
+    System.out.println(kaisaniemi);
+    System.out.println(hakaniemi);
+    System.out.println(sornainen);
+    System.out.println(kalasatama);
+  }
+}
+</pre>
+
+
+<p>Ohjelman tulostus on nyt seuraavanlainen</p>
+<pre>
+Metron asema on Metrovarikko, kuskina on Matti P.
+Metron asema on Kaisaniemi, kuskina on Matti P.
+Metron asema on Hakaniemi, kuskina on Matti P.
+Metron asema on Sörnäinen, kuskina on Matti P.
+Metron asema on Kalasatama, kuskina on Matti P.
+---
+Asema Kaisaniemi, seuraavana Hakaniemi
+Asema Hakaniemi, seuraavana Sörnäinen
+Asema Sörnäinen, seuraavana Kalasatama
+Asema Kalasatama, seuraavana Kaisaniemi
+</pre>
+
+
+<h3 class="bonus">Metrolla seuraavalle asemalle.</h3>
+<p>Laajenna Metro-luokkaa siten, että sen konstruktori ottaa parametrikseen kuskin nimen lisäksi <code>Metroasema</code>-tyyppisen olion. Lisää sinne myös metodi <code>ajaSeuraavalleAsemalle()</code>, joka siirtää metron seuraavalle asemalle.</p>
+<p>Testaa toteutusta alla olevalla <em>MetroOhjelma</em>-pääohjelmalla.</p>
+<pre class="sh_java">
+public class MetroOhjelma {
+  public static void main(String[] komentoriviParametrit) {
+    String[] asemat = {"Kaisaniemi", "Hakaniemi", "Sörnäinen", "Kalasatama"};
+    
+    Metroasema kaisaniemi = new Metroasema(asemat[0]);
+    Metroasema hakaniemi = new Metroasema(asemat[1]);
+    Metroasema sornainen = new Metroasema(asemat[2]);
+    Metroasema kalasatama = new Metroasema(asemat[3]);
+
+    kaisaniemi.asetaSeuraava(hakaniemi);
+    hakaniemi.asetaSeuraava(sornainen);
+    sornainen.asetaSeuraava(kalasatama);
+    kalasatama.asetaSeuraava(kaisaniemi);
+
+    System.out.println("---");
+    System.out.println(kaisaniemi);
+    System.out.println(hakaniemi);
+    System.out.println(sornainen);
+    System.out.println(kalasatama);
+            
+    System.out.println("---");
+    Metro matinMetro = new Metro("Matti P.", kaisaniemi);
+    System.out.println(matinMetro);
+    
+    for(int ajellaan = 0; ajellaan &lt; 5; ajellaan++) {
+      matinMetro.ajaSeuraavalleAsemalle();
+      System.out.println(matinMetro);
+    }
+  }
+}
+</pre>
+<p>Ohjelman tulostuksen tulee olla seuraavanlainen;</p>
+<pre>
+Asema Kaisaniemi, seuraavana Hakaniemi
+Asema Hakaniemi, seuraavana Sörnäinen
+Asema Sörnäinen, seuraavana Kalasatama
+Asema Kalasatama, seuraavana Kaisaniemi
+---
+Metron asema on Kaisaniemi, kuskina on Matti P.
+Metron asema on Hakaniemi, kuskina on Matti P.
+Metron asema on Sörnäinen, kuskina on Matti P.
+Metron asema on Kalasatama, kuskina on Matti P.
+Metron asema on Kaisaniemi, kuskina on Matti P.
+Metron asema on Hakaniemi, kuskina on Matti P.
+</pre>
+
+<p>
+  <em>Kivi-paperi-sakset tulee ensi viikolla!</em>
+</p>
+
+	</body>
+</html>

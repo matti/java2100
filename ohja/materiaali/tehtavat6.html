@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fi" lang="fi">
+	<head>
+		<link rel="stylesheet" href="stylesheets/common.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="javascripts/common.js"></script>
+		
+		<link rel="stylesheet" href="stylesheets/shjs/sh_style.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/shjs/sh_main.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_java.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_ruby.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_scala.min.js"></script>
+		
+		<link rel="stylesheet" href="stylesheets/exercises.css" type="text/css" media="screen, print" />		
+		<script type="text/javascript" src="javascripts/exercises.js"></script>		
+	</head>
+
+	<body>
+		<h1>Tehtävät viikolle 6</h1>
+				
+		<p>Pakolliset tehtävät on merkitty harmalla taustavärillä. Punaisella taustavärillä merkatut ovat kontrollitehtäviä, jotka näytetään ohjaajalle harjoitustilaisuudessa!</p>
+		
+		<ul>
+			<li>Pakollisia tehtäviä on: <span id="required_exercises_count">-1</span> kpl</li>
+			<li>Lisätehtäviä on: <span id="additional_exercises_count">-1</span> kpl</li>
+			<li>Bonustehtäviä on: <span id="bonus_exercises_count">-1</span> kpl</li>
+		</ul>
+		
+		
+		<p><strong>HUOM:</strong> nimeä tiedostot otsikossa olevan sanan mukaan</p>
+
+		
+		<h2>Kurssien listaaja</h2>
+
+		<p>Tietojenkäsittelytieteen laitoksen kesän 2010 erilliskokeet on listattu <a href="http://www.cs.helsinki.fi/kokeet/ekokeetv10.html">tällä sivulla.</a>.  WWW-sivuja tehdään HTML-merkkauskielellä.  Avaa sivu ja katso sen lähdekoodi painamalla Firefoxissa <code>ctrl+u</code> tai valitsemalla valikosta <code>View</code> &rarr; <code>Page Source</code>.</p>
+
+		<p>Tehdään ohjelma, joka hakee tuon sivun ja hakee sivun lähdekoodista kursseja.</p>
+
+		<h3 class="req">Haetaan sivu</h3>
+
+		<p>Laita seuraava pääohjelmaan.  Tarvitsemme siis kaksi luokkaa: <code>WebSivu</code> ja <code>WebHakija</code>.</p>
+
+<pre class="sh_java">
+WebSivu koeaikataulu = WebHakija.hae("http://www.cs.helsinki.fi/kokeet/ekokeetv10.html");
+
+System.out.println("Sivu haettu: " + koeaikataulu.getPvm());        
+System.out.println("Sivun lähdekoodissa on rivejä: " + koeaikataulu.getRivit());
+</pre>
+		<p>Ohjelma tulostaa seuraavaa:</p>
+<pre>
+Sivu haettu: Sat Apr 24 14:38:33 EEST 2010
+Sivun lähdekoodissa on rivejä: 241
+</pre>
+
+		<p>Päivämäärän saat luomalla uuden ilmentymän <code>Date</code>-luokasta.  Olion oletus <code>toString()</code> toimii ylläolevan tulosteen mukaisesti.  Huom! Luo päivämääräolio samalla, kun olio luodaan! Ei siis <code>getPvm()</code>-metodin yhteydessä.</p>
+	
+		<p><code>WebHakija</code>:n toteutukseen saat seuraavat vihjeet:</p>
+<pre class="sh_java">
+URL url = new URL(osoite);               
+Scanner l = new Scanner(url.openStream());        
+String sisalto = "";
+
+return new WebSivu(sisalto);
+</pre>
+
+		<p>Muista tallettaa sisältö siten, että jokaisen rivin päätteeksi on rivinvaihto. Tällöin rivimäärän laskeminen on kätevää <code>String</code>-luokan metodilla <code>split("\n")</code>.</p>
+
+
+
+		<h3 class="req">Haetaan tekstistä kurssit</h3>
+
+		<p>Lisää seuraava pääohjelman perään:</p>
+<pre class="sh_java">
+System.out.println("\n\nHaetaan Luukkaisen, Paksulan ja Vihavaisen kurssit:\n");
+
+TekstiHakija th = new TekstiHakija(koeaikataulu.getSisalto());
+
+for (String rivi : th.rivitJoilla("Luukkainen")) {
+    System.out.println(rivi);
+}
+
+for (String rivi : th.rivitJoilla("Paksula")) {
+    System.out.println(rivi);
+}
+
+for (String rivi : th.rivitJoilla("Vihavainen")) {
+    System.out.println(rivi);
+}
+</pre>
+
+		<p><code>TekstiHakija</code> saa konstruktorissaan sivun lähdekoodin Stringinä.  Metodi <code>rivitJoilla(String)</code> palauttaa <code>ArrayList&lt;String&gt;</code> listan hakutuloksia.  <code>String</code>-luokan metodit <code>split(String)</code> ja <code>contains(String)</code> ovat käteviä metodin toteutukseen.</p>
+
+		<p>Ohjelma tulostaa seuraavaa:</p>
+
+<pre>
+Haetaan Luukkaisen, Paksulan ja Vihavaisen kurssit:
+
+581325 Ohjelmoinnin perusteet / Luukkainen &lt;br&gt;
+582103 Ohjelmoinnin jatkokurssi (U) / Luukkainen &lt;br&gt;
+58131 Tietorakenteet (U) / Luukkainen &lt;br&gt;
+582104 Ohjelmistojen mallintaminen / Luukkainen&lt;br&gt;
+58131 Tietorakenteet / Luukkainen &lt;br&gt;
+582104 Ohjelmistojen mallintaminen / Luukkainen&lt;br&gt;
+581259 Ohjelmistotuotanto / Luukkainen &lt;br&gt;
+582331 Ketterä web-kehitys ja Ruby on Rails (HT) / Paksula &lt;br&gt;
+58144 Ohjelmointikielten kääntäjät (HT/U) / Vihavainen&lt;br&gt;
+581251 Ohjelmointitekniikka (C++) (HT/U) / Vihavainen&lt;br&gt;
+</pre>
+
+
+
+		<h3 class="req">Korjaa tulostus</h3>
+
+		<p>Poista lopussa oleva &lt;br&gt;</p>
+
+
+
+		<h3 class="req">Kuormita hakua</h3>
+
+		<p>Korvaa toistuvat for-loopit yhdellä, jossa hakusanat on lista hakusanoja.  Kuormita metodia <code>rivitJoilla()</code></p>
+
+		<p>Hae hakusanoilla "Jaring", "Jokela" ja "Nurmi".</p>
+<pre class="sh_java">
+for (String rivi : th.rivitJoilla(hakusanat)) {
+	System.out.println(rivi);
+}
+</pre>
+
+<pre>
+Haetaan Jaringin, Jokelan ja Nurmen kurssit:
+
+582630 Algoritmien suunnittelu ja analyysi / Nurmi
+581361 Software Testing / Jaring
+582201 Käyttöliittymät / Jokela 
+582632 Diskreetti optimointi / Nurmi
+582656 Käytettävyyssuunnittelu / Jokela
+582209 Grafiikkaohjelmointi / Nurmi
+582401 Geometriset menetelmät (U) / Nurmi
+582201 Käyttöliittymät / Jokela 
+</pre>
+
+
+
+		<h2>Kertoimet 1 ja 2 yhdistettynä</h2>
+
+		<p>Tehdään kertoimet 1 ja 2 uudestaan, mutta paremmin.</p>
+
+		<ul>
+			<li>Traileri ja Peräkärry periytyvät Raahattavasta</li>
+			<li>Bongausmuistioon talletetaan rekisterinumero, ei viitettä autoon</li>
+			<li>Yhdistetään rajapintoja ja abstrakteja luokkia</li>
+		</ul>
+
+		<p><strong>HUOM:</strong> älä copy-pastea vanhaa kerrointasi - on tärkeää, että ajattelet asian alusta asti uudestaan.  Lisäksi vain harvoilla oli tehtävä täysin oikein, tämä tehtävä kurssin ydinasiaa.</p>
+
+		<h3 class="req">Autot</h3>
+
+
+		<p>Luo ilmentymät luokista <code>Saab</code> ja <code>Volvo</code>. Toteuta näille luokille abstrakti yläluokka <code>Auto</code>. Jaettu toiminnallisuus (rekisterinumeron talletus ja aja-metodi) tulee olla tässä yläluokassa.</p>
+
+		<p>Huom: Saabissa tai Volvossa ei tule olla siis mitään muuta kuin konstruktori (jonka sisällä on 1 rivi).</p>
+
+<pre class="sh_java">
+// Autot
+
+Saab s = new Saab("313");
+Saab s2 = new Saab("616");
+
+Volvo v = new Volvo("821");
+
+s.aja();
+v.aja();
+</pre>
+
+<pre>
+SA-313 sanoo Vrrrrrrooooooooooom!
+VO-821 sanoo Vrrrrrrooooooooooom!
+</pre>
+
+
+		<h3 class="req">Bongaukset</h3>
+	
+		<p>Toteuta bongausmuistio siten, että avaimena on auton rekisterinumero, eikä viitettä autoon tms.  Tämä siksi, että autot s ja s2 vaihtavat keskenään rekisterikilpiä!  Bongaaja ei tiedä tästä ja kirjaa bongaukset pelkästään rekisterikilven mukaan.</p>
+		
+		<p>Toteuta bongaus siten, että käytät metodissa vain yhtä put-komentoa &amp; Portsaria (katso materiaali).</p>
+
+
+<pre class="sh_java">
+// Bongaukset
+
+Bongausmuistio bm = new Bongausmuistio();
+
+bm.bongaa(v);
+bm.bongaa(s);
+bm.bongaa(s2);
+
+System.out.println(bm);
+
+bm.bongaa(s);
+bm.bongaa(s);
+
+System.out.println(bm);
+
+
+// katala temppu
+        
+s.setRekisterinumero("616");
+s2.setRekisterinumero("313");
+
+bm.bongaa(s);
+bm.bongaa(s);
+
+System.out.println(bm);  
+</pre>
+
+		<p><strong>TARKISTA</strong>, että luvut ovat oikein!</p>
+
+<pre>
+{SA-616=1, SA-313=1, VO-821=1}
+{SA-616=1, SA-313=3, VO-821=1}
+{SA-616=3, SA-313=3, VO-821=1}
+</pre>
+
+
+
+		<h3 class="req">Kytkettävät ja raahattavat</h3>
+
+		<p>Peräkärry ja Traileri periytyvät abstraktista yläluokasta Raahattava.  Toteuta Peräkärry ja Traileri siten, että kaikki toiminnallisuus on yläluokassa.  Näissä luokissa tulee olla vain konstruktori ja <code>toString</code>-metodi.  Metodien pituudet ovat max. 1 rivi.</p>
+
+		<p>Tee rajapinta <code>Vetokoukullinen</code> määrittelee metodin <code>kytke(Kytkettava k)</code> ja <code>irroita()</code>.  Autot toteuttavat rajapinnan <code>Vetokoukullinen</code>. <code>Traileri</code> ja <code>Perakarry</code> toteuttavat rajapinnan <code>Kytkettava</code>.  Kytkennän toteutuksessa tulee käyttää viitettä kytkettävään.</p>
+
+	<p><strong>Vinkki</strong>: abstrakti luokka voi myös toteuttaa rajapinnan!</p>
+	
+	<p><strong>Huomaa</strong>: että jos kytkettava on jo kytketty, ei kytkeminen onnistu! (kytkeminen ei tällöin tee mitään)</p>
+
+<pre class="sh_java">
+// Kytkettävät ja raahattavat 
+
+Traileri venetraileri = new Traileri("PHX-243");
+Perakarry karry = new Perakarry("AXX-912");
+s.kytke(venetraileri);
+System.out.println(s);
+
+s.irroita();
+System.out.println(s);
+
+s.kytke(karry);
+System.out.println(s);
+
+s.kytke(venetraileri);
+System.out.println(s);
+</pre>
+
+<pre>
+Autoon kytketty: traileri PHX-243
+Autoon kytketty: ei mitään
+Autoon kytketty: peräkärry AXX-912
+Autoon kytketty: peräkärry AXX-912
+</pre>
+
+<h2>Liikkuva kuvio</h2>
+
+	<h3 class="req">Abstrakti luokka Kuvio</h3>
+
+	<p>Luo abstrakti luokka <code>Kuvio</code>. Kuviolla on attribuutit <code>x</code> ja <code>y</code>, jotka kertovat kuvion sijainnin ruudulla sekä metodi <code>void siirra(int dx, int dy)</code> jonka avulla kuvion sijainti siirtyy parametrina olevien kordinaattisiirtymien verran. Esim. jos sijainti aluksi on (100,100), niin kutsun <code>siirra(10,-50)</code> jälkeen sijainti on (110, 50). Luokan konstruktori asettaa kuviolle alkusijainnin. Luokalla on myös abstrakti metodi <code>public abstract void piirra(Graphics r);</code> jolla kuvio piirretään ruudulle.</p>
+
+	<h3 class="req">Ympyra</h3>
+	
+	<p>Tee luokka <code>Ympyra</code> joka perii Kuvion. Ympyrällä on <code>halkaisija</code> jonka arvo asetetaan konstruktorissa. Konstruktorissa asetetaan myös alkuperäinen sijainti. Ympyra määrittelee metodin <code>piirra</code> asiaan kuuluvalla tavalla.</p>
+	
+	<h3 class="req">Piirtoalusta</h3>
+	
+	<p>Luo Piirtoalusta samaan tyyliin kuten viikon 5 tehtävässä 4 tai viikon 5 materiaalin luvussa 4.3 tehtiin. Piirtoalusta saa konstruktorin parametrina <code>Kuvio</code>-tyyppisen olion. <code>paint()</code>-metodissa Piirtoalusta pyytää kuvioa piirtämään itsensä, eli kutsuu sen <code>piirra</code>-metodia.</p>
+	
+	<h3 class="req">Näppäimistöohjaus</h3>
+	
+<p>Laajenna piirtoalustaa siten, että kuvioa voi liikutella nuolinäppäinten avulla. Viikon 5 materiaalin luvusta 4.4 on tässä apua.</p>
+	
+	<h3 class="req">Nelio ja Laatikko</h3>
+	
+	<p>Peri luokasta <code>Kuvio</code> luokat <code>Nelio</code> ja <code>Laatikko</code>. Neliölle asetetaan konstruktorissa alkusijainnin lisäksi sivun pituus. Laatikolla on korkeus ja leveys.</p>
+	
+	<p>Varmista, että neliöt ja laatikot piirtyvät ja liikkuvat oikein Piirtoalustalla.</p>
+	
+	<h3 class="req">Koostekuvio</h3>
+	
+	<p>Peri luokasta <code>Kuvio</code> luokka <code>KoosteKuvio</code>. Koostekuvio sisältää joukon muita kuvioita jotka se tallettaa ArrayList:iin. Koostekuviolla on metodi <code>public void liita(Kuvio k)</code> jonka avulla koostekuvioon voi liittää kuvio-olion. Koostekuviolla ei ole omaa sijaintia. Koostekuvio piirtää itsensä pyytämällä osiaan piirtämään itsensä, koostekuvion siirtyminen tapahtuu samoin.</p>
+
+	<p>Testaa että koostekuviosi piirtyy ja siirtyy oikein, esim. seuraavan koostekuvion avulla:</p>
+	
+<pre class="sh_java">
+    Kuvio y1 = new Ympyra(90, 100, 50);
+    Kuvio y2 = new Ympyra(95, 105, 40);
+    KoosteKuvio takaRengas = new KoosteKuvio();
+    takaRengas.liita(y1);
+    takaRengas.liita(y2);
+
+    Piirtoalusta alusta = new Piirtoalusta(linjaAuto);		
+    // ...
+</pre>	
+		
+	<h3 class="req">Linja-auto</h3>
+	
+	<p>Linja-autolla on kaksi rengasta. Molemmat ovat kahdesta ympyrästä muodostuvia koostekuvioita. Linja-autolla on myös runko ja ainakin yksi ikkuna. Linja-auto on siis koostekuvio joka koostuu useasta kuviosta joista osa on koostekuvioita. Luo linja-auto ja liikuttele sitä ruudulla.</p>
+	
+	<p><img src="img/linja-auto.JPG"/></p>
+	
+	<p>Huomaa miten <b>olioiden vastuut</b> jakautuvat tehtävässä. Jokainen Kuvio on vastuussa itsensä piirtämisestä ja siirtämisestä. Yksinkertaiset kuviot siirtyvät kaikki samalla tavalla. Jokaisen yksinkertaisen kuvion on itse hoidettava piirtymisestään. KoosteKuvio siirtää itsensä pyytämällä osiaan siirtymään, samoin hoituu koostekuvion piirtyminen. Piirtoalusta tuntee Kuvio-olion joka siis voi olla mikä tahansa yksinkertainen kuvio tai koostekuvio, kaikki piirretään ja siirretään samalla tavalla. Piirtoalusta siis toimii samalla tavalla kuvan oikeasta tyypistä huolimatta, piirtoalustan ei tarvitse tietää kuvion yksityiskohdista mitään. Kun piirtoalusta kutsuu kuvion metodia <code>piirra</code> tai <code>siirra</code> <b>polymorfismin</b> ansiosta kutsutuksi tulee kuvion todellista tyyppiä vastaava metodi.</p>
+	
+	<p>Huomionarvoista tehtävässä on se, että KoosteKuvio voi sisältää mitä tahansa Kuvio-olioita, siis myös koostekuvioita! Luokkarakenne mahdollistaakin mielivaltaisen monimutkaisen kuvion muodostamisen ja kuvion siirtely ja piirtäminen tapahtuu aina täsmälleen samalla tavalla.</p>
+	
+	<p>Luokkarakennetta on myös helppo laajentaa, esim. perimällä Kuvio-luokasta uusia kuviotyyppejä: kolmio, piste, viiva, ym... KoosteKuvio toimii ilman muutoksia myös uusien kuviotyyppien kanssa, samoin piirtoalusta.</p>
+
+<!-- Liikkuva kuvio loppuu -->
+
+
+  <h2>Kevätpotemista</h2>
+
+  
+  <h3>Jatkuva päänsärky</h3>
+  
+  <p>Jatkuva päänsärky ei lähde pois vaikka kuinka haluaisi. Päänsärystä on olemassa siis vain yksi ilmentymä, joka ei muutu kun sen saa. Luo luokka <code>Paansarky</code>, jolla on attribuutti <code>aani</code>, joka ilmaistaan <code>char</code>-tyyppisenä muuttujana, sekä <code>voimakkuus</code>, joka ilmaistaan kokonaislukuna. Luokan konstruktori on <code>private</code>-tyyppinen, päänsärkyyn päästään käsiksi vain staattisen metodin <code>getPaansarky()</code>-avulla. Jos päänsärkyä ei ole vielä olemassa, staattinen metodi <code>getPaansarky()</code> luo sen. Arvo voimakkuus arvojen 0 ja 50 väliltä, äänelle arvotaan arvo seuraavien vokaalien joukosta: <code>a, e, i, o, i, y, ä, ö</code></p>
+
+  <p>Käytä seuraavaa <code>toString()</code>-metodia päänsärylle.</p>
+
+<pre class="sh_java">
+public String toString() {
+  String palautus = "";
+  for(int i = 0; i &lt; voimakkuus; i++) {
+    palautus += aani;
+  }
+  
+  return palautus;
+}
+</pre>
+
+  <p>Testaa luokkaa Paansarky seuraavan pääohjelman avulla:</p>
+  
+<pre class="sh_java">
+Paansarky jatkuva = Paansarky.getPaansarky();
+System.out.println(jatkuva);
+
+Paansarky toinen = Paansarky.getPaansarky();
+System.out.println(toinen);
+</pre>
+
+  <p>Tulostus on esimerkiksi seuraavanlainen</p>
+  
+<pre>
+iiiiiiiiiiiiiiiiii
+iiiiiiiiiiiiiiiiii
+</pre>
+
+  
+
+  <h2>Käyttöliittymä ilmolle</h2>
+  
+  <p>Tässä tehtävässä jatketaan viime viikolla aloitettua Ilmojärjestelmää tekemällä sille graafinen käyttöliittymä.</p>
+  
+  
+  <h3>Sisäänkirjautuminen</h3>
+  
+  <p>Luo sisäänkirjautuminen <code>JDialog</code>-luokkaa laajentavana luokkana ja toteuta sille metodi <code>luoSisalto()</code>.</p>  
+
+<pre class="sh_java">
+public class SisaanKirjautuminen extends JDialog {  
+  private JTextField kayttajatunnus;
+  private JPasswordField salasanaKentta;
+  private JButton kirjauduNappula;
+  
+  private Ilmo ilmo;
+  private Kayttajatietokanta kayttajatietokanta;
+    
+  public SisaanKirjautuminen(Ilmo ilmo, Kayttajatietokanta kayttajatietokanta) {
+    super();
+    
+    this.ilmo = ilmo;
+    this.kayttajatietokanta = kayttajatietokanta;
+    
+    luoSisalto();
+
+    pack();
+    setSize(getWidth() + 200, getHeight());
+    setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    setVisible(true);
+  }
+  
+  private void luoSisalto() {
+    // TODO: luo sisältö
+  }
+}
+</pre>
+
+  <p>Metodissa <code>luoSisalto()</code> luodaan käyttöliittymälle sisältö, ja asetetaan se yläluokan sisällöksi <code>setContentPane()</code>-metodilla. Voit käyttää luokan <code>JPanel</code> ilmentymää pohjana paneelille siten, että sille asetetaan sisältö. JPanel-ilmentymään voidaan lisätä myös uusia JPanel ilmentymiä.</p>
+  
+  <p><img src="img/t6-sisaankirjautuminen.png"/></p>
+  
+  <p>Yllä olevalle sisäänkirjautumisikkunalle on käytetty pohjana JPanel-alustaa, jolle on asetettu pohjoiseen <code>JPanel</code>, jonka sisällä on teksti (<code>JLabel</code>) ja tekstikenttä (<code>JTextField</code>). Voit käyttää seuraavaa esimerkkiä pohjana.</p>
+
+<pre class="sh_java">
+JPanel sisalto = new JPanel();
+sisalto.setLayout(new BorderLayout());
+
+JPanel tunnusPanel = new JPanel();
+tunnusPanel.setLayout(new BorderLayout());
+kayttajatunnus = new JTextField();
+kayttajatunnus.setSize(200, 80);
+tunnusPanel.add(new JLabel("Käyttäjätunnus:"), BorderLayout.NORTH);
+tunnusPanel.add(kayttajatunnus, BorderLayout.CENTER);
+..
+</pre>
+
+
+  <h3>Tapahtumankäsittelijä kirjautumiselle</h3>
+  
+  <p>Lisää "Kirjaudu"-napille tapahtumankäsittelijä, jonka toteutuksessa katsotaan onnistuiko käyttäjän kirjautuminen. Jos käyttäjän kirjautuminen onnistui, tulosta tekstikonsoliin (komennolla <code>System.out.println()</code>) viesti "Onnistui!". Jos kirjautuminen epäonnistui, tulosta viesti "Kirjautuminen epäonnistui."</p>
+
+  
+  <h3>Väärä käyttäjätunnus</h3>
+
+  <p>Muuta tapahtumankäsittelijää siten, että se käyttää virheviestin ilmoittamiseen <code>JOptionPane</code>-luokan <code>showMessageDialog</code>-metodia virheviestin näyttämiseen. Luokalle annettavalle <code>JFrame</code>-parametrille voidaan antaa arvo <code>null</code>. Nyt virhetapauksessa käyttäjän pitäisi nähdä seuraavankaltainen viesti.</p>
+  
+  <p><img src="img/t6-vaarakayttajatunnus.png"/></p>
+
+
+  <h3>GraafinenIlmo</h3>
+  
+  <p>Luo luokka <code>GraafinenIlmo</code> <code>JDialog</code>-luokkaa laajentavana luokkana. Luokassa ei aluksi tarvitse olla muuta kuin ohjelman sulkeminen "ruksia" painamalla. Kannattaa myös asettaa ikkunan koko sopivaksi konstruktorikutsussa, jolloin sen löytyminen helpottuu.</p>
+  
+  <p>Ohjelman sulkeminen ruksia painamalla kannattaa toteuttaa seuraavasti:</p>
+
+<pre class="sh_java">
+addWindowListener(new WindowAdapter() {
+  public void windowClosing(WindowEvent e) {
+    System.exit(0);
+  }
+});
+</pre>
+  
+  <h3>Onnistunut kirjautuminen</h3>
+  
+  <p>Muuta sisäänkirjautumisen tapahtumankäsittelyä siten, että onnistuneessa tilanteessa luodaan uusi GraafinenIlmo, joka näytetään käyttäjälle. Tällöin myös sisaankirjautumisikkuna sulketaan (kts. metodi <code>setVisible()</code>).</p>
+  
+  
+  <h3>Valikko</h3>
+  
+  <p>Lisää luokkaan <code>GraafinenIlmo</code> paneeli, jossa on seuraavat nappulat.</p>
+
+  <p><img src="img/t6-nappulat.png"/></p>
+  
+  <p>Paneelin "layout" kannattaa hoitaa <code>FlowLayout</code>-luokalla, eli seuraavasti. <code>FlowLayout</code>-asetteluun ei tarvitse määritellä ilmansuuntia.</p>  
+
+<pre class="sh_java">
+JPanel sisalto = new JPanel();
+sisalto.setLayout(new FlowLayout());
+</pre>  
+  
+  <h3>Tekstikenttä</h3>
+  
+  <p>Lisää luokkaan <code>GraafinenIlmo</code> tekstikenttä (<code>JTextArea</code>), jonka jälkeen ikkuna näyttää seuraavalta. Luokan <code>GraafinenIlmo</code> sisällön luominen kannattanee toteuttaa kuten luokalla <code>SisaanKirjautuminen</code>.</p>
+  
+  <p><img src="img/t6-kali.png"/></p>
+  
+  <h3>Tapahtumankäsittelijä graafiselle ilmolle</h3>
+  
+  <p>Lisää luokkaan <code>GraafinenIlmo</code> tapahtumankäsittelijä. Toteuta tapahtumankäsittelijä siten, että jokainen tapahtuma hoidetaan omassa metodissaan. Esimerkiksi seuraava yksittäinen tarkistus, jossa katsotaan tapahtuman lähdettä. Jos lähde on <code>listaaKurssit</code>, kutsutaan metodia <code>listaaKurssit()</code>.</p>
+  
+<pre class="sh_java">
+if (e.getSource() == listaaKurssit) {
+  listaaKurssit();
+}
+</pre>
+  
+  
+  <h3>Kurssien listaaminen</h3>
+  
+  <p>Lisää kurssien listaustoiminnallisuus käyttöliittymään. Kurssit voidaan listata suoraan tekstikentälle.</p>
+  
+  <p><img src="img/t6-kurssilista.png"/></p>
+  
+  <h3>Kurssille ilmoittautuminen</h3>
+
+  <p>Lisää kurssille ilmoittautumistoiminnallisuus käyttöliittymään. Luokan <code>JOptionPane</code> metodi <code>showInputDialog()</code> on tässä hyvin hyödyllinen.</p>
+
+<pre class="sh_java">
+Kurssi kurssi = (Kurssi) JOptionPane.showInputDialog(null, // ikkuna johon liittyy, saa olla null
+    "Valitse kurssi jolle ilmoittaudutaan...", // viesti 
+    "Kurssi-ilmoittautuminen", // otsikko
+    JOptionPane.QUESTION_MESSAGE, 
+    null, // kuvake, jätetään tyhjäksi
+    kurssit, // vaihtoehdot taulukkona
+    kurssit[0]); // valittu vaihtoehto
+</pre> 
+
+  <p><img src="img/t6-kurssiilmo.png"/></p>
+  
+  <h3>Omien ilmoittautumisien listaaminen</h3>
+  
+  <p>Toteuta omien ilmoittautumisten listaaminen siten, että ne näkyvät tekstikentässä. Voit itse päättää sopivan tekstimuodon.</p>
+  
+  
+  <h3>Osallistujien näyttäminen</h3>
+  
+	<p>Toteuta osallistujien näyttäminen siten, että ne näkyvät tekstikentässä. Voit itse päättää sopivan tekstimuodon.</p>
+	
+  
+  <h2>Sanakirjapalvelu</h2>
+  
+  <p>Tässä tehtävässä on tarkoitus itse pilkkoa tehtävä loogisiksi osarakenteiksi, ja rakentaa ohjelma osien pohjalta. Tarvitset tehtävään ainakin kolme eri luokkaa pääohjelma mukaanlukien. Toteutuksesta saa 3-5 rastia.</p>
+
+<pre>
+  Sanakirjapalvelu:
+
+Ohjelma lukee tekstitiedostosta sanapareja sana-käännös. Jokainen sana on tiedostossa 
+omalla rivillään, Jokainen pariton rivi esittää sanaa alkukielellä. Jokaista paritonta 
+riviä seuraava parillinen rivi on edellisen rivin sanan käännös.
+
+Opiskeltuaan sanaston ohjelma reagoi jokaiseen käyttäjän kirjoittamaan syöttöriviin 
+(= sana alkukielellä) tulostamalla näytölle kyseisen sanan käännöksen tai ilmoituksen, 
+ettei käännöstä löydy. Kun käyttäjä kirjoittaa tyhjän syöttörivin, ohjelman suoritus 
+päättyy.
+
+Saat tyytyä pitämään "sanoina" yksittäisiä syöttörivejä sellaisinaan, mutta muuten 
+ohjelman on varauduttava virheisiin ja käsiteltävä poikkeukset. Virheilmoitusten 
+pitää olla havainnollisia.
+</pre>
+
+
+  <h2 class="bonus">Väistelyä</h2>
+  
+  <p>Luodaan pieni väistelypeli, missä hiirellä ohjattava piste väistelee ylhäältä valuvia palikoita. Tehtävänannossa on tarkoituksella jätetty yksityiskohtia huomioimatta.</p>
+  
+  <p><img src="img/t6-vaistelya.png"/></p>
+  
+  <p>Ohjelma jaetaan korkealla tasolla kolmeen eri osaan. Käyttöliittymään, pelilogiikkaan ja tapahtumienkuunteluun ja ohjaukseen. Käytä seuraavaa <code>main()</code>-metodia lähtökohtana.</p>
+  
+<pre class="sh_java">
+public static void main(String[] args) {
+  Pelilogiikka logiikka = new Pelilogiikka(360, 480);    
+  PeliIkkuna ikkuna = new PeliIkkuna(logiikka);
+  Ohjaustoiminnallisuus ot = new Ohjaustoiminnallisuus(logiikka, ikkuna);
+  
+  while(true) {
+    logiikka.jatkaPelia();
+    ikkuna.repaint();
+    
+    if(logiikka.alusTormasi()) {
+      System.out.println("Alus törmäsi :(");
+      return;
+    }
+    
+    try {
+      Thread.sleep(20);
+    } catch (Exception e) {}
+  }
+}
+</pre>
+
+  
+  <h3 class="bonus">Perusluokat</h3>
+  
+  <p>Pelin perusluokat ovat <code>Avaruusalus</code>, <code>Este</code> ja rajapinta <code>Piirrettava</code>. Rajapinta <code>Piirrettava</code> vaatii metodin <code>piirra(Graphics g)</code>. <code>Avaruusalus</code> perii luokan <code>java.awt.Point</code> ja toteuttaa rajapinnan <code>Piirrettava</code>. <code>Este</code> perii luokan <code>java.awt.Rectangle</code> ja toteuttaa rajapinnan <code>Piirrettava</code>. Esteen korkeus ja leveys on 5!</p>
+  
+  <p>Toteuta luokat <code>Avaruusalus</code> ja <code>Este</code>, sekä rajapinta <code>Piirrettava</code>.</p>
+
+  
+  <h3 class="bonus">Pelilogiikka</h3>
+  
+  <p><code>Pelilogiikka</code>-olion attribuutteina on avaruusalus ja lista esteitä. Pelilogiikka saa myös parametrina pelin leveyden ja korkeuden, joita tarvitaan myös muualla.</p>
+  
+  <p>Pelilogiikalla on kaksi hyvin tärkeää metodia; <code>jatkaPelia()</code>, joka liikuttaa esteitä alaspäin, sekä <code>alusTormasi()</code>, joka kertoo törmäsikö alus esteisiin. Javan <code>Rectangle</code>-luokalla on metodi <code>contains()</code>, josta on todennäköisesti hyötyä tässä metodissa.</p>
+  
+  <p>Toteuta luokka <code>Pelilogiikka</code>.</p>
+
+  
+  <h3 class="bonus">Piirtoalusta</h3>
+  
+  <p>Luokka <code>Piirtoalusta</code> laajentaa luokkaa <code>JPanel</code> ja ylikirjoittaa sen <code>paint()</code>-metodin. Piirtoalustan <code>paint()</code>-metodi piirtää aluksen ja esteet. Piirtoalusta saa myös parametrina <code>Pelilogiikka</code>-olion, jolta se saa viitteet piirrettäviin olioihin.</p>
+  
+  <p>Toteuta luokka <code>Piirtoalusta</code>.</p>
+  
+  
+  <h3 class="bonus">PeliIkkuna</h3>
+  
+  <p>Luokka <code>PeliIkkuna</code> perii luokan <code>JDialog</code>. Luokan <code>PeliIkkuna</code> konstruktori saa parametrinaan luokan <code>PeliLogiikka</code> ilmentymän. Käytä <code>Pelilogiikka</code>-ilmentymän tietoja ikkunan koon määrittelyyn!</p>
+  
+  
+
+  <h3 class="bonus">Ohjaustoiminnallisuus</h3>
+  
+  
+  <p>Luokka ohjaustoiminnallisuus saa parametrinaan sekä <code>PeliIkkuna</code>- että <code>Pelialusta</code>-olion. Ohjaustoiminnallisuus toteuttaa <code>MouseMotionListener</code>-rajapinnan, jota käytetään hiiren liikkeiden seuraamiseen. Lisää viitteenä saadulle <code>PeliIkkuna</code>-oliolle hiiren liikkeiden kuuntelija sille kuuluvalla metodilla <code>addMouseMotionListener()</code>. </p>
+  
+  <p>Toteuta <code>mouseMoved()</code>-metodi siten, että jos alus on törmännyt ei tehdä mitään. Muuten kysytään tapahtuman sijaintia, muokataan sitä hieman (kokeile itse!), ja asetetaan alus saatuun sijaintiin.</p>
+  
+  
+  
+  <h3 class="bonus">Vaikeutta</h3>
+  
+  <p>Muuta pelilogiikan <code>jatkaPelia()</code>-metodin toteutusta siten, että 10% todennäköisyydellä luodaan uusi este. Myös pois valuneet esteet tulevat ylhäältä uudestaan. Kiitti!</p>
+  
+  <p>&nbsp;</p><p>&nbsp;</p>  
+  
+  <p><em>Valitettavasti Sokkelotehtävän graafinen toteutus jää teille! :)</em></p>
+  
+</body>
+</html>

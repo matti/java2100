@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fi" lang="fi">
+	<head>
+		<link rel="stylesheet" href="../stylesheets/common.css" type="text/css" media="screen, print" />
+		<link rel="stylesheet" href="../stylesheets/exercises.css" type="text/css" media="screen, print" />
+
+		<script type="text/javascript" src="../javascripts/jquery-1.3.2.min.js"></script>
+
+		<script type="text/javascript" src="../javascripts/common.js"></script>
+		<script type="text/javascript" src="../javascripts/exercises.js"></script>
+		
+		<link rel="stylesheet" href="../stylesheets/shjs/sh_style.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="../javascripts/shjs/sh_main.min.js"></script>
+		<script type="text/javascript" src="../javascripts/shjs/sh_java.min.js"></script>
+		<script type="text/javascript" src="../javascripts/shjs/sh_ruby.min.js"></script>
+		
+		
+	</head>
+
+	<body>
+		<h1>Tehtävät viikolle 4</h1>
+				
+		<p>Pakolliset tehtävät on merkitty harmalla taustavärillä. Punaisella taustavärillä merkatut ovat kontrollitehtäviä, jotka näytetään ohjaajalle harjoitustilaisuudessa!</p>
+		
+		<ul>
+			<li>Pakollisia tehtäviä on: <span id="required_exercises_count">-1</span> kpl</li>
+			<li>Lisätehtäviä on: <span id="additional_exercises_count">-1</span> kpl</li>
+			<li>Bonustehtäviä on: <span id="bonus_exercises_count">-1</span> kpl</li>
+		</ul>
+		
+		
+		<p><strong>HUOM:</strong> nimeä tiedostot otsikossa olevan sanan mukaan</p>
+
+    
+		<h2>Kahvikassa2000</h2>
+		
+		<h3 class="req">Kahvikassa</h3>
+		
+		<p>Kahvikassa2000 toimii siten, että ohjelma kysyy ensin juojan nimeä ja sitten kuppien määrää.  Tämän jälkeen ohjelma tallentaa nimelle juodut kupit.  Jos juoja on jo järjestelmässä, lisää ohjelma aikaisemmin juotujen kuppien määrään uudet kupit.  Ohessa on runko ohjelmaan.  Käytä tallentajan sisäisenä rakenteena <code>HashMap</code>-luokkaa.  Toteuta ohjelmaan toistorakenne (katso esimerkkitulostusta).  Ohjelman suorituksen ei tarvitse loppua koskaan.</p>
+		
+<pre class="sh_java">
+import java.util.Scanner;
+
+public class Kahvikassa2000 {
+
+    public static void main(String[] args) {
+
+        Tallentaja kk = new Tallentaja();     
+        Scanner lukija = new Scanner(System.in);
+
+        // TODO: toistorakenne, toistetaan ikuisesti kyselyä ja tulostelua
+		System.out.println("Kuka juo kahvia?");
+        System.out.println("Kuinka monta kuppia?");
+        
+        kk.talleta(kuka, monta);
+
+        System.out.println("\n"+kk+"\n");
+    }
+}
+</pre>
+
+<pre>
+Kuka juo kahvia?
+Matti L
+Kuinka monta kuppia?
+2
+
+{Matti L=2}
+
+Kuka juo kahvia?
+Matti V
+Kuinka monta kuppia?
+1
+
+{Matti V=1, Matti L=2}
+
+Kuka juo kahvia?
+Donald Knuth
+Kuinka monta kuppia?
+2
+
+{Donald Knuth=2, Matti V=1, Matti L=2}
+
+Kuka juo kahvia?
+Matti L
+Kuinka monta kuppia?
+2
+
+{Donald Knuth=2, Matti V=1, Matti L=4}
+
+Kuka juo kahvia?
+...
+</pre>
+
+  
+
+	<h2>Sanat</h2>
+
+	<h3 class="req">Valitaan sanat</h3>
+
+	<p>Tee ohjelma, joka kysyy käyttäjältä sanat seuraavasti:</p>
+	
+<pre>
+Anna sanat, joiden lukumäärä lasketaan. Tyhjä lopettaa.
+MielEni
+MINUn
+tekevi
+
+Olet kiinnostunut sanoista:
+[mieleni, minun, tekevi]
+</pre>
+
+	<p><strong>HUOM:</strong> talleta sana siten, että se on kokonaan pienillä kirjaimilla (katso Stringin API:sta sopiva apuväline tähän)</p>
+	
+	
+	<h3 class="req">Sanojen laskeminen</h3>
+	
+	<p>Jatka ohjelmaa siten, että luetaan tiedostosta <a href="tuki/kalevala.txt">kalevala.txt</a> sanat (talleta tiedosto projektin juureen) ja lasketaan sanan esiintymä jos se on listassa.</p>
+
+	<p>Sana määritellään siten, että se aloittaa rivin tai sitä ennen (tai jälkeen) on välilyönti.</p>
+	<p>Esimerkiksi rivillä: <code>"Mieleni minun tekevi,</code> ei ole sanaa <code>mieleni</code>, koska sana tässä määritelmässä on <code>"Mieleni</code>, eikä <code>mieleni</code>.</p>
+
+
+<pre class="sh_java">
+// Sanojen lukemisen toteutus siten, että sanat ovat ArrayList-muuttujassa sanat
+
+Kirjanlukija kl = new Kirjanlukija("kalevala.txt");
+Sanalaskuri sl = new Sanalaskuri();
+
+while (kl.lukuKesken()) {
+    sana = kl.seuraavaSana()
+	
+    // TODO: tee sanasta kokonaan pienillä kirjoitettu ("Mieleni" -> "mieleni")
+	
+    if (sanat.contains(sana)) {
+        sl.talletaEsiintyma(sana);
+ }
+}
+
+System.out.println("Sanoja löytyi seuraavat määrät:");
+System.out.println(sl);
+</pre>
+
+<pre>
+Anna sanat, joiden lukumäärä lasketaan. Tyhjä lopettaa.
+MieLENI
+minun
+TEKEVI
+
+Olet kiinnostunut sanoista:
+[mieleni, minun, tekevi]
+
+Sanoja löytyi seuraavat määrät:
+{mieleni=3, minun=69, tekevi=4}
+</pre>
+		
+		<p>Esimerkkitulosteen lukumäärien pitäisi olla oikein annetulla syötteellä.</p>
+		
+		<p>Kokeile ohjelmaa myös muilla sanoilla.  Jos sanaa ei löydy, ei sitä myöskään näytetä lopputuloksessa.  Ei siis tarvitse tehdä ohjelmaa siten, että tulostuksessa lukisi <code>{mieleni=3, minun=69, crazypartyillä=0}</code></p>
+
+
+
+  <h2>Olutmuistion tallentaminen</h2>
+  
+	<h3 class="req">Kirjoittaminen</h3>
+	
+  	<p>Jatka aikaisemmin tehdyn olutlistan toteutusta siten, että olutlistan voi myös tallettaa. Olutlista tallennetaan tiedostoon kun ohjelma suljetaan.  Kannattanee siis toteuttaa metodi <code>talletaMuistiot(ArrayList&lt;Olutmuistio&gt; muistiot)</code>, joka kirjoittaa sen tiedoston päälle mistä oluet alussa luetaan ohjelman lopussa vallitsevan tilan.  Katso edellisestä tehtävästä, että noudatat samaa rakennetta tiedostossa:</p>
+
+<pre>
+Nimi
+Olut 1
+Olut 2
+
+Nimi2
+Olut A
+Olut B
+</pre>
+
+	<p>Kokeile lisäyksen jälkeen käynnistää ohjelma uudestaan, säilyyvätkö talletetut oluet ohjelmassa käynnistyksien välillä?</p>
+	
+	
+	
+
+  <h2>Dokumentti</h2>
+
+  <p>Suurin osa tekstidokumenteista on rakenteellisia. Tässä tehtävässä toteutetaan yksinkertainen dokumentti. Tee koko tehtävä saman projektin sisään!</p>
+  
+  <h3>Dokumentti</h3>
+  
+  <p>Luokalla dokumentti on attribuuttina nimi ja tiivistelmä. Luo luokka Dokumentti ja sille getterit ja setterit. Lisää dokumentille myös metodi <code>tulosta()</code>, joka tulostaa dokumentin sisällön. Testaa Dokumentin toimintaa alla olevan koodiesimerkin ja esimerkkitulosteen avulla. Voit tehdä dokumentin nimen sisennyksen tabulaattorin <code>\t</code> avulla.</p>
+  
+<pre class="sh_java">
+Dokumentti doc = new Dokumentti("Olio-ohjelmoinnin peruskäsitteet");
+doc.setTiivistelma("Tämä dokumentti kertoo olio-ohjelmoinnin peruskäsitteistä.");
+doc.tulosta();
+</pre>
+
+<pre>
+	Olio-ohjelmoinnin peruskäsitteet
+  
+Tämä dokumentti kertoo olio-ohjelmoinnin peruskäsitteistä.
+</pre>
+  
+  <h3>TekstiElementti</h3>
+  
+  <p>Tekstielementillä on attribuuttina teksti. Luo luokka TekstiElementti, ja sille sopivat getterit ja setterit. Luo sille myös metodi <code>tulosta()</code>, joka tulostaa tekstielementin sisällön.</p>
+  
+<pre class="sh_java">
+TekstiElementti elementti = new TekstiElementti();
+elementti.setTeksti("Ensimmäinen peruskäsite on Kapselointi.");
+elementti.tulosta();
+</pre>
+
+<pre>
+Ensimmäinen peruskäsite on Kapselointi.
+</pre>
+  
+  <h3>Lista Tekstielementtejä Dokumentissa</h3>
+  
+  <p>Lisää <code>Dokumentti</code>-luokan attribuutiksi lista tekstielementtejä. Lisää dokumentille myös metodi <code>lisaaElementti()</code>, joka saa parametrikseen <code>TekstiElementti</code>-tyyppisen olion. Muuta dokumentin tulostusta vastaamaan seuraavaa esimerkkiä.</p>
+
+<pre class="sh_java">
+Dokumentti doc = new Dokumentti("Olio-ohjelmoinnin peruskäsitteet");
+doc.setTiivistelma("Tämä dokumentti kertoo olio-ohjelmoinnin peruskäsitteistä.");
+
+TekstiElementti elementti = new TekstiElementti();
+elementti.setTeksti("Ensimmäinen peruskäsite on Kapselointi.");
+doc.lisaaElementti(elementti);
+
+elementti = new TekstiElementti();
+elementti.setTeksti("Toinen peruskäsite on Abstrahointi.");
+doc.lisaaElementti(elementti);
+
+doc.tulosta();
+</pre>
+
+<pre>
+	Olio-ohjelmoinnin peruskäsitteet
+  
+Tämä dokumentti kertoo olio-ohjelmoinnin peruskäsitteistä.
+
+Ensimmäinen peruskäsite on Kapselointi.
+Toinen peruskäsite on Abstrahointi.
+</pre>  
+
+  <h3>ListaElementti</h3>
+  
+  <p>ListaElementti sisältää listan TekstiElemettejä-olioita. Luo luokka <code>ListaElementti</code>, ja testaa sen toteutusta seuraavalla esimerkillä.</p>
+  
+<pre class="sh_java">
+ListaElementti lista = new ListaElementti();
+TekstiElementti elementti = new TekstiElementti();
+elementti.setTeksti("Ensimmäinen peruskäsite on Kapselointi.");
+lista.lisaaElementti(elementti);
+
+elementti = new TekstiElementti();
+elementti.setTeksti("Toinen peruskäsite on Abstrahointi.");
+lista.lisaaElementti(elementti);
+
+lista.tulosta();
+</pre>
+
+<pre>
+- Ensimmäinen peruskäsite on Kapselointi.
+- Toinen peruskäsite on Abstrahointi.
+</pre>
+
+<!-- 
+  <h3>SisennettyTekstiElementti</h3>
+  
+  <p>Sisennettyä tekstiä tarvitaan myös. Luo luokka <code>SisennettyTekstiElementti</code> joka perii luokan <code>TekstiElementti</code>. Ylikirjoita luokan <code>TekstiElementti</code> <code>toString()</code>-metodi siten, että metodin palauttama teksti on sisennetty. Voit taas tehdä sisennyksen tabulaattorilla, eli merkkijonolla "\t".</p>
+  
+<pre class="sh_java">
+SisennettyTekstiElementti elementti = new SisennettyTekstiElementti();
+elementti.setTeksti("Ja niin edelleen..");
+System.out.println(elementti);
+</pre>
+
+<pre>
+	Ja niin edelleen.
+</pre>
+-->
+
+  <h3>Elementti</h3>
+  
+  <p>Sekä TekstiElementillä, että ListaElementillä on yhteisiä piirteitä. Luodaan niille yhteinen yläluokka Elementti, jolla on abstrakti metodi <code>tulosta()</code>. Metodin tulosta()-kutsuminen tulostaa elementin sisällön. Lisää <code>Elementti</code>-luokalle myös attribuutti <code>nimi</code> ja sille sopivat getterit ja setterit. Lisää luokalle <code>Elementti</code> myös konstruktori, joka saa parametrikseen <code>String</code>-tyyppisen olion.</p>
+  
+  <p>Peri myös luokat <code>TekstiElementti</code> ja <code>ListaElementti</code> luokasta <code>Elementti</code> siten, että <code>TekstiElementti</code> asettaa yläluokkansa attribuutin <code>nimi</code> (käytä <code>super()</code>-konstruktoria!) arvoksi merkkijonon <code>"teksti"</code> ja <code>ListaElementti</code> asettaa yläluokkansa attribuutin <code>nimi</code> arvoksi merkkijonon <code>"lista"</code>. Esimerkiksi luokan <code>ListaElementti</code> konstruktoriin tulee kutsu super("lista"). Vaikka tässä tehtävässä ei tallennusta ja lataamista toteutetakaan, nimeä voidaan käyttää elementtien tunnistamiseen niitä tallennettaessa ja lukiessa.</p>
+
+  <h3>Muuta Dokumenttia</h3>
+  
+  <p>Muuta <code>Dokumentti</code>-luokkaa siten, että se sisältää listan <code>Elementti</code>-olioita Tekstielementtien sijaan. Muuta myös <code>lisaaElementti()</code>-metodia vastaavasti. Ohjelman pitäisi toimia nyt seuraavasti.</p>
+
+<pre class="sh_java">
+Dokumentti dokumentti = new Dokumentti("Olio-ohjelmoinnin peruskäsitteet");
+dokumentti.setTiivistelma("Tämä dokumentti kertoo olio-ohjelmoinnin peruskäsitteistä.");
+
+ListaElementti lista = new ListaElementti();
+TekstiElementti elementti = new TekstiElementti();
+elementti.setTeksti("Ensimmäinen peruskäsite on Kapselointi.");
+lista.lisaaElementti(elementti);
+
+elementti = new TekstiElementti();
+elementti.setTeksti("Toinen peruskäsite on Abstrahointi.");
+lista.lisaaElementti(elementti);
+
+dokumentti.lisaaElementti(lista);
+
+dokumentti.tulosta();
+</pre>
+
+<pre>
+	Olio-ohjelmoinnin peruskäsitteet
+
+Tämä dokumentti kertoo olio-ohjelmoinnin peruskäsitteistä.
+
+ - Ensimmäinen peruskäsite on Kapselointi.
+ - Toinen peruskäsite on Abstrahointi.
+</pre>
+
+
+	<h2>Elokuvakirjasto</h2>
+  
+  <p>Erilaiset elokuvat ja muut viihdekäyttöön tarkoitetut mediat päätyvät Mattien huomassa usein hyvin sekaisin. Autetaan heitä tekemällä heille elokuvakirjasto.</p>
+  
+  
+  <h3 class="req">Media</h3>
+  
+  <p>Sekä elokuvat, että musiikkilevyt ovat medioita, joten on hyvä aloittaa perusrakenteesta Media. Luo abstrakti luokka <code>Media</code>, jolla on attribuutti <code>nimi</code>. Medialla on myös abstrakti metodi <code>getMediaTyyppi()</code>, joka kertoo median tyypin.</p>
+  
+  <h3 class="req">Elokuva</h3>
+  
+  <p>Elokuvalla on median tietojen lisäksi <code>genre</code>. Toteuta luokka <code>Elokuva</code>. Lisää elokuvalle myös <code>toString()</code>-metodi.</p>
+  
+<pre class="sh_java">
+Elokuva tuulenViemaa = new Elokuva("Tuulen viemää", "Draama");
+System.out.println(tuulenViemaa);
+System.out.println("Mediatyyppi: " + tuulenViemaa.getMediaTyyppi());
+</pre>
+
+<pre>
+Draama: Tuulen viemää
+Mediatyyppi: elokuva
+</pre>
+
+  <h3 class="req">Kirjasto</h3>
+  
+  <p>Kirjasto sisältää listan <code>Media</code>-olioita ja sillä on nimi. Kirjastoon voi lisätä <code>Media</code>-olioita <code>lisaa()</code>-metodilla. Luo luokka <code>Kirjasto</code>. Luo kirjastolle myös <code>toString()</code>-metodi!</p>
+
+<pre class="sh_java">
+Kirjasto leffaKirjasto = new Kirjasto("Elokuvani");
+
+Elokuva tuulenViemaa = new Elokuva("Tuulen viemää", "Draama");
+leffaKirjasto.lisaa(tuulenViemaa);
+Elokuva yksiLensiYliKaenpesan = new Elokuva("Yksi lensi yli käenpesän", "Komedia");
+leffaKirjasto.lisaa(yksiLensiYliKaenpesan);
+
+System.out.println(leffaKirjasto);
+</pre>
+
+<pre>
+--[ Elokuvani ]--
+
+Draama: Tuulen viemää
+-------------------------------------------------
+Komedia: Yksi lensi yli käenpesän
+-------------------------------------------------
+</pre>
+  
+  
+  <h3 class="req">Kirjastosta hakeminen</h3>
+  
+  <p>Luo kirjastolle metodi <code>haeAlulla()</code>, joka saa parametrikseen hakusanan. Metodilla voidaan hakea medioita nimen <em>alun</em> perusteella. Luokasta <code>String</code> löytyy tähänkin sopiva metodi. Metodi palauttaa listan elokuvista, joihin haku osuu. Toteuta vertailu siten, että merkkien koolla ei ole väliä!</p>
+
+<pre class="sh_java">
+Kirjasto leffaKirjasto = new Kirjasto("Elokuvani");
+
+Elokuva tuulenViemaa = new Elokuva("Tuulen viemää", "Draama");
+leffaKirjasto.lisaa(tuulenViemaa);
+Elokuva yksiLensiYliKaenpesan = new Elokuva("Yksi lensi yli käenpesän", "Komedia");
+leffaKirjasto.lisaa(yksiLensiYliKaenpesan);
+
+for(Media m: leffaKirjasto.haeAlulla("tu")) {
+  System.out.println(m);
+}
+</pre>
+
+<pre>
+Draama: Tuulen viemää
+</pre>
+
+  <p>Huomaa että koska Kirjasto sisältää Elokuva-olioita, myös Media-viite osoittaa oikeasti Elokuva-olioon. Tällöin Medialle tapahtuva <code>toString()</code>-metodikutsu on oikeasti Elokuvan <code>toString()</code>-kutsu.</p>
+  
+  <h3 class="req">Tulostettava</h3>
+  
+  <p>Metodi <code>haeAlulla()</code> palauttaa aina <code>Media</code>-tyyppisiä olioita, vaikka haluamme tällä hetkellä vain tulostaa median tiedot. Muuta abstraktia luokkaa Media siten, että sillä on rajapinta <code>Tulostettava</code>, joka mahdollistaa seuraavanlaisen toiminnallisuuden. Muuta myös hakumetodeja siten, että ne palauttavat listan <code>Tulostettava</code>-viitteitä.</p>
+
+<pre class="sh_java">
+Kirjasto leffaKirjasto = new Kirjasto("Elokuvani");
+
+Elokuva tuulenViemaa = new Elokuva("Tuulen viemää", "Draama");
+leffaKirjasto.lisaa(tuulenViemaa);
+Elokuva yksiLensiYliKaenpesan = new Elokuva("Yksi lensi yli käenpesän", "Komedia");
+leffaKirjasto.lisaa(yksiLensiYliKaenpesan);
+
+for(Tulostettava t: leffaKirjasto.haeAlulla("tu")) {
+  System.out.println(t);
+}
+</pre>
+
+<pre>
+Draama: Tuulen viemää
+</pre>
+
+  <h3 class="req">Elokuvakirjasto</h3>
+  
+  <p>Luo luokka <code>Elokuvakirjasto</code>, joka laajentaa luokkaa <code>Kirjasto</code>. Elokuvakirjasto pitää Mediakirjaston hakutoiminnallisuuden lisäksi listaa eri genren omaavista elokuvista. Toteuta genrelistaukset <em>Hajautustauluna</em>, kukin genre siis osoittaa listaan elokuvia. Lisää luokalle myös metodi <code>lisaa()</code>, jolle annetaan parametriksi <code>Elokuva</code>-tyyppinen olio.</p>
+  
+  <p>Elokuvaa lisättäessä lisää se hajautustaulun osoittamaan listaan genren perusteella. Kutsu myös yläluokan <code>lisaa()</code>-metodia, jolloin elokuva menee myös mediakirjastoon.</p>
+  
+<pre class="sh_java">
+ElokuvaKirjasto leffaKirjasto = new ElokuvaKirjasto("Elokuvani");
+
+Elokuva tuulenViemaa = new Elokuva("Tuulen viemää", "Draama");
+leffaKirjasto.lisaa(tuulenViemaa);
+Elokuva yksiLensiYliKaenpesan = new Elokuva("Yksi lensi yli käenpesän", "Komedia");
+leffaKirjasto.lisaa(yksiLensiYliKaenpesan);
+
+for(Tulostettava t: leffaKirjasto.haeAlulla("tu")) {
+  System.out.println(t);
+}
+</pre>
+
+<pre>
+Draama: Tuulen viemää
+</pre>  
+  
+  
+  <h3 class="req">Haku genren perusteella</h3>
+  
+  <p>Lisää elokuvakirjastolle metodi <code>haeGenre()</code>, joka saa parametrikseen merkkijono-olion. Metodi <code>haeGenre()</code> palauttaa listan <code>Elokuva</code>-olioita. Toteuta genren haku myös siten, että se ei välitä kirjainten koosta!</p>
+
+<pre class="sh_java">
+ElokuvaKirjasto leffaKirjasto = new ElokuvaKirjasto("Elokuvani");
+
+Elokuva tuulenViemaa = new Elokuva("Tuulen viemää", "Draama");
+leffaKirjasto.lisaa(tuulenViemaa);
+Elokuva yksiLensiYliKaenpesan = new Elokuva("Yksi lensi yli käenpesän", "Komedia");
+leffaKirjasto.lisaa(yksiLensiYliKaenpesan);
+
+for(Tulostettava t: leffaKirjasto.haeGenre("komedia")) {
+  System.out.println(t);
+}
+</pre>  
+  
+<pre>
+Komedia: Yksi lensi yli käenpesän
+</pre>
+  
+  
+  
+  <h2>MusiikkiKirjasto</h2>
+  
+  <p>Matit ovat myös sekaisin musiikkilevyjensä kanssa. Jatketaan edellistä tehtävää siten, että luodaan myös musiikkikirjasto.</p>
+  
+  <h3>MusiikkiLevy</h3>
+  
+  <p>Musiikkilevyllä on attribuutteina nimi, genre ja artisti. Toteuta luokka <code>MusiikkiLevy</code> perimällä se luokasta <code>Elokuva</code>. Ylikirjoita peritty <code>toString()</code>-metodi siten, että tulostus on seuraavanlainen.</p>
+  
+<pre class="sh_java">
+MusiikkiLevy levy = new MusiikkiLevy("Ring Ring", "popmusiikki", "ABBA");
+System.out.println(levy);
+</pre>
+
+<pre>
+ABBA: Ring Ring (popmusiikki)
+</pre>
+
+  <h3>MusiikkiKirjasto</h3>
+  
+  <p>Matit eivät niinkään välitä artistista, vaan musiikin genrestä. Toteuta MusiikkiKirjasto, jolla on hakutoiminnallisuus genrelle.</p>
+  
+<pre class="sh_java">
+MusiikkiKirjasto kirjasto = new MusiikkiKirjasto("Levyni");
+MusiikkiLevy levy = new MusiikkiLevy("Ring Ring", "popmusiikki", "ABBA");
+kirjasto.lisaa(levy);
+
+levy = new MusiikkiLevy("Aquarium", "popmusiikki", "Aqua");
+kirjasto.lisaa(levy);
+
+for(Tulostettava t: kirjasto.haeGenre("popmusiikki")) {
+  System.out.println(t);
+}
+</pre>
+
+<pre>
+ABBA: Ring Ring (popmusiikki)
+Aqua: Aquarium (popmusiikki)
+</pre>
+
+
+  <h2>TauluKirjasto</h2>
+  
+  <p>Matit huomaavat perinnän mahdollistavan ohjelmien luomisen vähällä vaivalla ja yrittävät hyötyä siitä. Luodaan vielä taidehistorialliselle museolle <code>TauluKirjasto</code>.</p>
+
+  <h3>Taulu</h3>
+  
+  <p>Taululla on nimi ja tekijä. Toteuta luokka taulu.</p>
+  
+<pre class="sh_java">
+Taulu taulu = new Taulu("Mona Lisa", "Leonardo da Vinci");
+System.out.println(taulu);
+</pre>
+
+<pre>
+Leonardo da Vinci: Mona Lisa
+</pre>
+  
+  <h3>TauluKirjasto</h3>
+  
+  <p>Taulukirjastosta voidaan etsiä vain taulun nimen (alun) perusteella. Toteuta luokka <code>TauluKirjasto</code>. Jos perit toteutuksen muualta, lisää taulukirjastolle metodit <code>hae()</code> ja <code>lisaa()</code>, joilla kapseloidaan peritty toteutus.</p>
+
+<pre class="sh_java">
+TauluKirjasto tauluKirjasto = new TauluKirjasto("Taidehistoriallinen Museo");
+Taulu taulu = new Taulu("Mona Lisa", "Leonardo da Vinci");
+tauluKirjasto.lisaa(taulu);
+
+taulu = new Taulu("Pyhä Ehtoollinen", "Leonardo da Vinci");
+tauluKirjasto.lisaa(taulu);
+System.out.println(tauluKirjasto);
+
+System.out.println("Haku:");
+for (Tulostettava t: tauluKirjasto.hae("py")) {
+  System.out.println(t);
+}
+</pre>
+
+<pre>
+--[ Taidehistoriallinen Museo ]--
+
+Leonardo da Vinci: Mona Lisa
+-------------------------------------------------
+Leonardo da Vinci: Pyhä Ehtoollinen
+-------------------------------------------------
+
+Haku:
+Leonardo da Vinci: Pyhä Ehtoollinen
+</pre>
+
+  
+  <h2>Bonus</h2>
+  
+  <p>Jatketaan taas viime viikoilla kehitettyä sokkeloa.</p>
+  
+  <h3 class="bonus">Pisteet</h3>
+  
+  <p>Tähän mennessä olemme pyrkineet pelaajallamme maaliin mahdollisimman suurella pistemäärällä. Muuta pelin toteutusta siten, että jokaisessa ei vielä käydyssä ruudussa on piste, joka täytyy kerätä. Ennen kuin kaikki pisteet on kerätty, ei pelaaja voi päästä maaliin. Muuta kentän tulostusta seuraavaksi. Muuta myös pisteytystä siten, että pelaajalta ei kulu pisteitä etenemisestä. Mörkö ei syö pisteitä, mutta mörön aloituskohdassa ei myöskään ole pistettä!</p>
+
+<pre>  
+XXXXXXXXXXXXXXXXXXXXX
+XO..X.X.....X.X.X..XX
+X.X...X.XXX.X....X..X
+X.XXX.....X.X.XX..X.X
+X.XAX.XXX........XX.X
+X.X...X.X.X.XXX...X.X
+X...X...X.X...X.X.X.M
+X.X.X.X.....X.X.X...X
+X.X..WX.XAX.....X.X.X
+XXXXXXXXXXXXXXXXXXXXX
+Pelaaja sijainnissa (1, 1), pisteet 0
+
+Anna liikkumissuunta: a
+XXXXXXXXXXXXXXXXXXXXX
+X ..X.X.....X.X.X..XX
+XOX...X.XXX.X....X..X
+X.XXX.....X.X.XX..X.X
+X.XAX.XXX........XX.X
+X.X...X.X.X.XXX...X.X
+X...X...X.X...X.X.X.M
+X.X.XWX.....X.X.X...X
+X.X.. X.XAX.....X.X.X
+XXXXXXXXXXXXXXXXXXXXX
+Pelaaja sijainnissa (1, 2), pisteet 1
+
+Anna liikkumissuunta: a
+XXXXXXXXXXXXXXXXXXXXX
+X ..X.X.....X.X.X..XX
+X X...X.XXX.X....X..X
+XOXXX.....X.X.XX..X.X
+X.XAX.XXX........XX.X
+X.X...X.X.X.XXX...X.X
+X...XW..X.X...X.X.X.M
+X.X.X.X.....X.X.X...X
+X.X.. X.XAX.....X.X.X
+XXXXXXXXXXXXXXXXXXXXX
+Pelaaja sijainnissa (1, 2), pisteet 2
+</pre>
+  
+  <h3 class="bonus">Reitin valinta</h3>
+  
+  <p>Mörkömme on jo aika pahis jos se osaa mennä pelaajaa kohti. Muutetaan mörköä siten, että sillä on aina <em>suunta</em>, mihin se on menossa. Kun mörkö lähtee liikkumaan johonkin suuntaan, se liikkuu sinne päin kunnes se joko osuu seinään, tai päätyy risteyskohtaan. Risteyskohdassa mörkö valitsee uuden suunnan siten, että 50% todennäköisyydellä valitaan suunta, joka kulkee pelaajaa kohti. Muulloin valitaan satunnainen suunta.</p>
+  
+  <p>Toteuta mörölle suuntatoiminnallisuus.</p>
+  
+  <h3 class="bonus">Useampi mörkö</h3>
+  
+  <p>Lisää kenttään mahdollisuus useammalle mörölle. Möröt voivat liikkua toistensa yli. Kokeile toteutusta seuraavalla taulukolla.</p>
+
+<pre class="sh_java">
+int[][] taulukko = {
+  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+  {1, 2, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1},
+  {1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1},
+  {1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1},
+  {1, 0, 1, 3, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 99, 0, 1, 1, 0, 1},
+  {1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1},
+  {1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, -1},
+  {1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 99, 1, 0, 1, 0, 1, 0, 0, 0, 1},
+  {1, 0, 1, 0, 0, 99, 1, 0, 1, 3, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
+  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+};
+</pre>
+  
+  <h3 class="bonus">Pelaa</h3>
+  
+  <p>Pelaa peliä seuraavalla kentällä.</p>
+
+<pre class="sh_java">
+int[][] taulukko = {
+    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,1,1,1,1,0,1,1,1,1,0,1,0,1,1,1,1,0,1,1,1,1,0,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,1,1,1,1,0,1,0,1,1,1,1,1,1,1,0,1,0,1,1,1,1,0,1},
+    {1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1},
+    {1,1,1,1,1,1,0,1,0,1,1,1,99,1,1,1,0,1,0,1,1,1,1,1,1},
+    {1,1,1,4,0,0,0,0,0,1,1,99,99,99,1,1,0,0,0,0,0,4,1,1,1},
+    {1,1,1,1,1,1,0,1,0,1,1,1,1,1,1,1,0,1,0,1,1,1,1,1,1},
+    {1,0,0,0,0,0,0,1,0,0,0,0,2,0,0,0,0,1,0,0,0,0,0,0,1},
+    {1,0,1,1,1,1,0,1,0,1,1,1,1,1,1,1,0,1,0,1,1,1,1,0,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,1,1,1,1,0,1,1,1,1,0,1,0,1,1,1,1,0,1,1,1,1,0,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+  };
+</pre>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-13136847-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>	
+	</body>
+</html>

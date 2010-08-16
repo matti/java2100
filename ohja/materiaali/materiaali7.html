@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fi" lang="fi">
+	<head>
+		<link rel="stylesheet" href="../stylesheets/common.css" type="text/css" media="screen, print" />
+
+		<script type="text/javascript" src="../javascripts/jquery-1.3.2.min.js"></script>
+
+		<script type="text/javascript" src="../javascripts/common.js"></script>
+		<script type="text/javascript" src="../javascripts/material.js"></script>
+
+		
+		<link rel="stylesheet" href="../stylesheets/shjs/sh_style.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="../javascripts/shjs/sh_main.min.js"></script>
+		<script type="text/javascript" src="../javascripts/shjs/sh_java.min.js"></script>
+		<script type="text/javascript" src="../javascripts/shjs/sh_ruby.min.js"></script>
+	</head>
+
+	<body>
+		<h1>Ohjelmoinnin jatkokurssi</h1>
+
+		<p>Matti Paksula, Arto Vihavainen, Matti Luukkainen</p>
+		
+		<div id="toc"></div>
+
+		<h2>Alkeistyyppi ja viitetyyppi</h2>
+		<h2>Static ja ei-static</h2>
+		<h2>kapselointi</h2>
+		<h2>final</h2>
+		<h2>taulukot</h2>
+		<h2>cast</h2>
+		<h2>api</h2>
+		<h3>Integer.parseInt()</h3>
+		<h3>Math.random()</h3>
+
+
+		<h2>Toistoa</h2>
+		
+<img src="ponttooni.jpg" width="50%" />
+
+	  <p>Javassa on useita toistorakenteita. Toistorakenteita käytetään erilaisten taulukkojen ja listojen läpikäyntiin. </p>
+		  
+	  <p>Esimerkiksi joka kolmas luku väliltä nollasta sataan voidaan tulostaa ainakin kolmella eri tavalla</p>
+<pre class="sh_java">
+
+<img src="http://www.student.cs.uwaterloo.ca/~cs462/Hall/knuth.gif"/>
+
+<img src="http://www.cs.helsinki.fi/u/tienari/tienari.jpg"/>
+
+
+
+
+
+</pre>    
+		
+		
+		
+	
+		<p>Javassa on kaksi erilaista muuttujatyyppiä, alkeistyyppiset muuttujat ja viitetyyppiset muuttujat. Alkeistyyppiset muuttujat ovat yksinkertaisia lokeroita tiedon tallentamiseen, viitetyyppiset muuttujat taas kapseloivat tietoa viitteensä taakse. Viitetyyppisten muuttujien voidaan ajatella osoittavan laatikkoon, joka sisältää tietoa.</p>
+
+
+		<h3>Alkeistyyppiset muuttujat</h3>
+
+		<p>Esimerkiksi <code>int</code>, <code>double</code>, <code>boolean</code></p>
+		
+
+		<h3>Viitetyyppiset muuttujat</h3>
+
+		<p>Viitetyyppisistä muuttujista puhutaan yleensä olioina.</p>
+		
+
+		<h2>Kertausta ja käsitteistöä</h2>
+
+		<p>Ohjelmoinnin perusteet -kurssilla luotiin rutiinia ohjelmointiin ja tutustuttiin muunmuassa olio-ohjelmointiin. Yksi olio-ohjelmoinnin perusajatuksista on ratkottavan ongelman jakaminen pienempiin <em>osaongelmiin</em>, jotka ratkaisemalla saadaan ratkaisu myös koko ongelmaan.</p>
+		<p>Tutustutaan ensiksi luokan käsitteeseen.</p>
+		
+
+		<h3>Luokka</h3>
+
+		<p>Luokka määrittelee rakennus- ja käyttöohjeet tietyntyyppisille asioille. Esimerkiksi alla oleva <em>Opiskelija</em>-luokka on rakennusohje yksinkertaisille opiskelijoille, ja sen avulla voitaisiin luoda monia <em>Opiskelija</em>-luokan ilmentymiä, eli olioita.</p>
+<pre class="sh_java">
+public class Opiskelija {
+  private String opiskelijaNumero;
+  private int ika;
+  private double opintoLaina;
+  
+  public Opiskelija(String opiskelijaNumero, int ika) {
+    this.opiskelijaNumero = opiskelijaNumero;
+    this.ika = ika;
+    this.opintoLaina = 0;
+  }
+  
+  public String annaOpiskelijaNumero() {
+    return this.opiskelijaNumero;
+  }
+  
+  public void otaLainaa(double maara) {
+    this.opintoLaina = this.opintoLaina - maara;
+  }
+  
+  public void maksaLainaa(double maara) {
+    if(maara + this.opintoLaina &gt; 0.0) {
+      maara = this.opintoLaina;
+    }
+    
+    this.opintoLaina = this.opintoLaina + maara;
+  }
+  
+  public boolean onkoSama(Opiskelija opiskelija) {
+    if(this.opiskelijaNumero.equals(opiskelija.annaOpiskelijaNumero())) {
+      return true;
+    }
+    
+    return false;
+  }
+  
+  public void vanhene() {
+    this.ika = this.ika + 1;
+  }
+  
+  public String toString() {
+    return "Opiskelija (" + this.opiskelijaNumero + "), ika " + this.ika
+        + ", lainaa " + this.opintoLaina + " euroa.";
+  }
+}
+</pre>
+
+
+		<h4>Kapselointi</h4>
+
+		<p>Kapseloinnilla tarkoitetaan toteutuksen piilottamista. Opiskelija-luokan muuttujat <code>opiskelijaNumero</code>, <code>ika</code> ja <code>opintoLaina</code> omaavat määreen <em>private</em>, joka kertoo muuttujien olevan luokan ulkopuolelle näkymättömissä.</p> 
+
+		
+		<h3>Alkeistyyppiset ja viitetyyppiset muuttujat</h3>
+
+		<p>Javassa on kaksi erilaista muuttujatyyppiä, alkeistyypit ja viitetyypit. Alkeistyyppejä ovat esimerkiksi <code>int</code>, <code>double</code> ja <code>boolean</code>. Alkeistyyppiset muuttujat sisältävät oman arvonsa. Viitetyyppiset muuttujat, esimerkiksi <em>String</em> ja <em>kaikki muut luokat</em>, osoittavat luokasta tehtyyn ilmentymään, eli olioon. </p>
+
+		
+		<h3>Kuormittaminen</h3>
+
+		<p>Yllä olevassa esimerkissä on kaksi lisaaArvo-metodia. Toinen saa parametrikseen alkeistyyppisen muuttujan, toinen taas viitetyyppisen muuttujan. Metodia kutsuttaessa sille annettava parametri määrittelee kumpaa metodia oikeasti kutsutaan.</p>
+
+		
+		<h3>Viitetyyppiset muuttujat</h3>
+
+		  
+		<h3>Static ja ei-static</h3>
+		
+		<table>
+			<tr><th>&nbsp;</th><th>static</th><th>ei static</th></tr>
+			<tr><th>muuttuja</th><td>luokkaan liittyvä</td><td>olioon tai metodiin liittyvä - AINA GETTERIT JA SETTERIT</td></tr>
+			<tr><th>metodi</th><td>luokkaan liittyvä, ei voi muokata ei-staattisia muuttujia (paitsi omat metodin sisäiset)</td><td>olion tilaan muokkaavat metodit</td></tr>
+		</table>
+		<p>Util-luokka, mihin voidaan tallentaa yleiskäyttöisiä työkaluja. Mm. static sop(String s)</p>
+
+
+		<h2>Kertaus ja IDE uusille</h2>
+
+		<h2>Enum</h2>
+		<p>Luetellut tyypit, näiden käyttö on vähän niin ja näin oikeasti. Jos otetaan esiin niin näytetään sit kunnolla kanssa, enumeillehan saa ihan hyvin kanssa asetettua arvoja jne. </p>
+<pre class="sh_java">
+public enum SheetViewColumnSet {
+    ALL("All"), INVESTMENTS("Investments"), ACQUISITIONS("Acquisitions"), NEW_PRODUCTS("New Products"), NOMINATIONS("Nominations"), MARKETING("Marketing"), OWNERSHIP("Ownership");
+
+    private String name;
+
+    SheetViewColumnSet(String key) {
+        this.name = key;
+    }
+
+    public List&lt;Column&gt; getColumns() {
+        return this.columns;
+    }
+
+    public void addColumn(Column column) {
+        attributes.add(column.getAttributeName());
+        this.columns.add(column);
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getKey() {
+        return this.name.substring(0, 3).toLowerCase();
+    }
+
+    public static SheetViewColumnSet getSheetViewColumnSet(String byKey) {
+        if (byKey == null) {
+            return ALL;
+        }
+
+        byKey = byKey.toLowerCase();
+        for (SheetViewColumnSet s : SheetViewColumnSet.values()) {
+            if (s.getName().toLowerCase().startsWith(byKey)) {
+                return s;
+            }
+        }
+
+        return ALL;
+    }
+}
+</pre>
+
+		<p>Toinen hyöty enumista on laiskan miehen singleton, ts</p>
+
+<pre class="sh_java">
+public enum Holder {
+    SINGLETON;
+
+    private Something instance;
+    
+    public Something getInstance() {
+      if(instance == null) {
+        instance = new Something();
+      }
+      
+      return instance;
+   }
+   
+   // jos ei halua metodia, myös seuraava menee
+    public final Something instance = new Something();
+   // tuossa katoaa taas vähän kapseloinnin idea taas.
+}
+</pre>
+		
+		
+		<h2>Castaaminen</h2>
+		
+		<p>alkeistyypeille</p>
+
+<pre class="sh_java">
+double x = 42.7;
+int y = (int) x;
+</pre>
+		
+		
+		<h2>Operaatioiden sitovuus, eli suoritusjärjestys</h2>
+		
+		<p>Melkein tän voisi sivuuttaa operaatio per rivi - mentaliteetilla</p>
+		
+		<p>Wiklan matskusta</p>
+		
+		
+		<h2>Keskeytyslauseet break, continue ja return</h2>
+		
+		<p>Toistojen kertaus, breakit, continuet ja returnit</p>
+		
+		<p>Wiklan matskusta</p>
+		
+		
+		<h2>Kirjastometodit ja niiden käyttö</h2>
+		
+		<p>Myös Javan API</p>
+		
+		
+		<h2>Rekursio</h2>
+		
+		<p>HelloWorld-rekursio, jossa kirjoitetaan merkkijonon indeksin mukaan merkki</p>
+		
+
+<pre class="sh_java">
+public void hello(String merkkijono, int indeksi) {
+  System.out.print(merkkijono.charAt(indeksi));
+  if(indeksi >= merkkijono.length) {
+    System.out.println();
+  } else {
+    hello(merkkijono, indeksi+1);
+  }
+}
+</pre>
+
+	
+	    <h2 id="final">Final</h2>
+    
+    <p><em>Final</em>-määre lukitsee muuttujan arvon siten, että sitä ei voi enää muuttaa. Alkeistyyppisillä muuttujilla tämä tarkoittaa sitä, että muuttujan arvoa ei voi asettaa enää toiseksi. Viittaustyyppisillä muuttujilla viite on se joka asetetaan muuttumattomaksi, mutta viitteen takana olevan olion tilaa voi toki muuttaa. Aiemmin nähty <code>HslHinnasto</code>-luokka kannattaakin toteuttaa siten, että staattiset muuttujat ovat final-määreisiä jos ne näkyvät luokan ulkopuolelle.</p>
+
+<pre class="sh_java">
+public class HslHinnasto {
+  public static final double KERTALIPPU_AIKUINEN = 2.50;
+  public static final double RAITIOVAUNULIPPU_AIKUINEN = 2.50; 
+}    
+</pre>
+
+    <p>Yllä olevassa hinnastossa hintoja ei voi muuttaa muuttamatta luokkaa. Aiemmassa toteutuksessahan ovela ohjelmoija olisi muuttanut lipun hinnan nollaksi, jolloin lipun hinta olisi muuttunut kaikille sitä käyttäville. Eräässä latausjärjestelmässä lipun hinnan muuttaminen negatiiviseksi voisi vaikuttaa latauksen toimintaan siten, että se lisäisi rahaa kortille sen sijaan että ottaisi rahaa sieltä.</p>
+    
+    <p>Kun muuttujat ovat final-tyyppisiä, asetuskutsu ei siis toimi enää sen jälkeen kun arvo on kertaalleen asetettu. Esimerkiksi seuraavanlainen kutsu ei toimisi yllä olevan <code>HslHinnasto</code>-luokan <code>KERTALIPPU_AIKUINEN</code>-muuttujalle.</p>
+<pre class="sh_java">
+HslHinnasto.KERTALIPPU_AIKUINEN = -2.50; // Ei toimi jos muuttujalla KERTALIPPU_AIKUINEN on final-määreen
+</pre>
+ 
+        
+    <h3>Final metodin parametreissa</h3>
+    
+    <p>Final-määrettä voi käyttää metodikutsun parametreja annettaessa. Tällöin annettuja parametreja ei voi muuttaa. Final-määrettä on hyvä käyttää varsinkin jos suunnittelee metodeita toisten toteutettavaksi. Tällöin voidaan antaa kuva siitä ettei parametreja muuteta. Alla esimerkki metodista, jonka parametrit saavat määreen final.</p>
+
+<pre class="sh_java">
+  public int kasvataJaPalauta(final int arvo) {
+    // arvo = arvo + 1; &lt;- EI TOIMI!
+    int uusiArvo = arvo + (int) (Math.random() * 50); // seuraavassa kappaleessa cast :)
+    return uusiArvo;
+  }
+</pre>
+   
+    <p>Esimerkissä parametrina saatu <code>arvo</code> asetetaan uuteen muuttujaan <code>uusiArvo</code>, ja lisätään siihen vielä satunnainen luku nollan ja viidenkymmenen väliltä.</p>
+    
+    <p>Toisaalta, viittaustyyppisen muuttujan tilaa voi muokata jos se saadaan metodiparametrina. Esimerkiksi <em>Laskuri</em>-luokan käyttö metodin parametrina.</p>    
+
+<pre class="sh_java">
+  public Laskuri kasvataJaPalauta(final Laskuri laskuri) {
+    // laskuri = new Laskuri(laskuri.annaArvo() + 1); // &lt;- EI TOIMI!
+    int asti = (int) (Math.random() * 50);
+    for(int i = 0; i &lt; asti; i++) {
+      laskuri.kasvataArvoa();
+    }
+    return laskuri;
+  }
+</pre>
+    
+    <p>Esimerkki käyttää <code>Laskuri</code>-tyyppisen <code>laskuri</code>-muuttujan metodia <code>kasvataArvoa()</code> satunnaisen määrän nollan ja viidenkymmenen väliltä.</p>
+
+
+    <h2 id="cast">Cast</h2>
+    
+    <p>Tyypin muuttamista toiseksi kutsutaan castaamiseksi. Tyypin muuttaminen toimii alkeistyypistä alkeistyyppiin ja viittaustyypistä viittaustyyppiin, mutta alkeistyyppisiä muuttujia ei pysty muuttamaan viittausyyppisiksi, eikä viittaustyyppisiä muuttujia alkeistyyppisiksi. Viittaustyyppisten muuttujien castaamisen palataan vielä myöhemmin tällä kurssilla <em>periytymisen</em> ja <em>rajapintojen</em> yhteydessä.</p>
+    
+	
+	
+	    <h3>Cast ja alkeistyypit</h3>
+    
+    <p>Tyypin muuttaminen tapahtuu automaattisesti kun siirrytään pienemmistä arvotyypeistä (esim. <code>char</code> ja <code>int</code>) isompiin arvotyyppeihin (esim. <code>long</code> ja <code>double</code>). Esimerkiksi seuraavat kutsut eivät tarvitse erillistä huomautusta tyypin muunnoksesta. </p>
+
+<pre class="sh_java">
+char merkki = 'a';
+int kokonaisluku = merkki; // saa arvon 97
+long isoKokonaisluku = kokonaisluku; // saa arvon 97
+double liukuluku = isoKokonaisluku; // saa arvon 97.0
+</pre>
+   
+   <p>Kun siirrytään isommista arvotyypeistä pienempiin tarvitaan määriteltyä tyyppimuunnosta. Tyyppimuunnos määritellään antamalla toivottu tyyppi suluissa sijoitusoperaatiossa, esimerkiksi <code>int arvo = (int) 5.5;</code>. Tutkitaan liukuluvun ja kokonaisluvun välistä tyyppimuunnosta.</p>
+   
+<pre class="sh_java">
+double liukuluku = 2.46;
+int kokonaisluku = (int) liukuluku; // muuttuja kokonaisluku saa arvokseen 2
+int toinenluku = 3;
+
+liukuluku = (liukuluku / toinenluku); // liukuluku saa arvokseen 0.82
+toinenluku = (int) liukuluku; // toinenluku saa arvokseen 0
+</pre>
+    
+    <p>Olemme aiemmin oppineet kertomaan kokonaisluvun <code>1.0</code>:lla jos haluamme siitä liukuluvun. Sama operaatio voidaan toteuttaa <em>castaamalla</em> kokonaisluku liukulukutyyppiseksi.</p>
+
+<pre class="sh_java">
+int luku1 = 5;
+int luku2 = 3;
+
+double liukuluku = ((double) luku1 / luku2); // liukuluku saa arvokseen 1.6666666666666667
+</pre>
+
+    <p>Koska alkeistyyppisten muuttujien arvoalue on erilainen, on isommasta arvoalueesta pienempään siirtymisessä myös haittapuolensa. Pienemmän arvoalueen alkeistyypit eivät saa koko arvoa tyyppimuunnoksessa, jos suuremman arvon arvo menee yli pienemmän arvoalueen. Isommasta lokerosta pienempään siirtyminen tarkoittaa siis sitä että kaikki ei mahdu pienempään lokeroon. Seuraavassa esimerkissä muunnamme hyvin ison liukuluvun kokonaisluvuksi ja takaisin. </p>
+
+<pre class="sh_java">
+double maksimiLiukuluku = Double.MAX_VALUE; // noin 1.7976931348623157 * 10 ^ 308
+int maksimiKokonaisluku = (int) maksimiLiukuluku; // saa arvokseen 2147483647
+maksimiLiukuluku = (double) maksimiKokonaisluku; // saa arvokseen 2.147483647 * 10 ^ 9
+</pre>
+
+    <p>Esimerkistä huomataan että liukuluku kadottaa ison osan arvostaan kokonaislukuun muutettaessa.</p>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<h2>Periytyminen</h2>
+
+<pre>
+Elävä - Ihminen - Luennoitsija</p>
+      - Lammas
+
+Ei elävä - Kivi - Graniitti
+
+
+Juna - Metro
+     - M200Juna 
+</pre>
+	
+	<p>Näytetään myös vähän Javan omaa object - hierarkiaa (lopuksi?)</p>
+	
+	  <p>extends, myös abstrakti luokka, tässä mukaan myös protected - näkyvyys. (Tämän jälkeen tunnetaan siis kaikki kolme, public, private ja protected)</p>
+	  
+	  
+	  <h2>Rajapinnat</h2>
+	  
+	  <p>Ei olla kiinnostuneita olioista, vaan siitä mitä ne tekee</p>
+	  
+	  <p>Metodille passaaminen</p>
+	  
+	  <p>Toteutuksen vaihto</p>
+	  
+	  
+	  <h2>Pakkaukset -- IDE:n avulla, 5 min</h2>
+	  
+	  <p>Pakkausnäkyvyys myös, eli jos ei määrettä, muuttuja näkyy samassa pakkauksessa oleville luokille</p>
+	  
+	  
+	  <h2>Poikkeukset - (Poikkeustenkäsittely)</h2>
+	  
+	  <p>Aluksi kaikki koodi ison try { koodi } catch (Exception e)  sop("hups!") {} - lohkon sisään</p>
+	  
+	  <p>Pulmana, mikä poikkeus?</p>
+	  
+	  <p>Jaa pienempiin lohkoihin, aina ei edes tarvita poikkeuksenkäsittelyä</p>
+	  
+	  
+	  <h2>Tiedostojen lukeminen</h2>
+	  
+	  <p>Kalevalan lukeminen, tiedosto omalla työpöydällä (hae paikasta x)</p>
+	  
+	  <p>Sanojen yhteismäärä</p>
+	  
+	  <p>Arvosanajakauma (tuloslista kurjesta)</p>
+	  
+	  <p>subtitleistä kuurojen tekstit veke</p>
+	  
+	  <p>Highscore -> Lue pelin paras tulos, Highscore luokka</p>
+	  
+	  <p>Yksittäisten sanojen määrä (Map (String -> Integer))</p>
+	  
+	  <p>bonus: dokkarin klassifiointi sanojen määrän avulla -- lue dokumentteja kansiosta 1 ja 2 ja laske niille sanojen määrät -- lue kolmas dokumentti ja päättele sen sanojen määristä kumpaan kansioon dokumentti kuuluu</p>
+	  
+	      
+	  <h2>Käyttöliittymät</h2>
+	  
+	  <p>Event-driven toiminnallisuus, ihan ekana vaan kuitenkin yksinkertainen ikkunan näyttö</p>
+	  
+	  <p>Joka viikko 1 tehtävä, lähtien viikosta 3?</p>
+	  
+	  <p>HelloWorld Ikkuna</p>
+	  
+	  <p>Ikkunassa HelloWorld-nappi, joka kasvattaa napin tilaa</p>
+	  
+	  <p>Ikkunassa Tekstikenttä, johon voi kirjoittaa</p>
+	  
+	  <p>Ikkunassa Tekstikenttä, johon voi lukea tiedoston ja kirjoittaa -> lopuksi tallennus</p>
+	  
+	  <p>KPS? :D</p>
+	  
+<h3>Poikkeukset</h3>
+    
+    <p>Erinäköiset toiminnot voivat aiheuttaa poikkeuksia ohjelmaa suorittaessa. Olemme nähneet jo poikkeuksen <code>NullPointerException</code>, joka johtuu yleensä oliometodien kutsumisesta sellaiselle oliolle, jonka arvo on null. Taulukon indeksointi siten, että viitataan olemattomaan kohtaan on yksi tällainen esimerkki. Tutustumme poikkeuksiin paremmin ensi viikolla, tällä viikolla heitämme (<em>throws</em>) aina poikkeuksen sellaisen tapahtuessa.</p>
+    
+<pre class="sh_java">
+public static void main(String[] komentoriviParametrit) throws Exception {
+File tiedosto = new File("tiedostojotaeiole");
+Scanner lukija = lukija = new Scanner(tiedosto);
+lukija.nextLine();
+</pre>
+
+    <p>Yllä olevassa esimerkissä yritämme avata olematonta tiedostoa, jolloin saamme tulosteen <code>Virhe! Ei onnistu!</code>.</p>
+  
+  
+  
+    
+    <h3>Tiedostoon kirjoittaminen</h3>
+    
+    <p>Tiedostoon kirjoittamiseen löytyy myös valmiit työkalut. Luokka <code>FileWriter</code> saa konstruktorin parametrikseen tiedoston, johon tekstiä kirjoitetaan. Sillä on myös metodi <code>write()</code>, jolle annetaan parametrina <code>String</code>-olio. Myös <code>FileWriter</code> ja sen <code>write()</code>-metodi voi aiheuttaa poikkeuksen, joten niihin pitää varautua.</p>
+    
+    <p>Tehdään esimerkki, jossa kirjoitetaan <code>tiedosto.txt</code>-nimiseen tiedostoon merkkijono <code>Hei Maailma!</code>. Lopuksi tiedosto suljetaan.</p>
+    
+<pre class="sh_java">
+File tiedosto = new File("tiedosto.txt");
+try {
+  FileWriter kirjoittaja = new FileWriter(tiedosto);
+  kirjoittaja.write("Hei Maailma!");
+  kirjoittaja.close();
+} catch (Exception e) {
+  System.out.println("Tiedostoon kirjoittaminen ei onnistunut!");
+}
+</pre>
+
+    <p>Esimerkki luo tiedoston <code>tiedosto.txt</code> jos sitä ei ole olemassa, ja kirjoittaa sinne tekstiä. Useampia rivejä voi kirjoittaa samalla tavalla.</p>    
+
+<pre class="sh_java">
+File tiedosto = new File("tiedosto.txt");
+try {
+  FileWriter kirjoittaja = new FileWriter(tiedosto);
+  kirjoittaja.write("Poikkeukset ovat tilanteita, joihin pitää varautua.\n");
+  kirjoittaja.write("Poikkeukset käsitellään try { } catch () { } - lohkorakenteella,\n");
+  kirjoittaja.write("jossa try { } - lohkon sisällä on ohjelmakoodi joka halutaan suorittaa.\n");
+  kirjoittaja.write("catch() - osio kertoo poikkeuksen mihin varaudutaan, ja siihen liittyvässä\n");
+  kirjoittaja.write("lohkossa on lähdekoodi, joka suoritetaan poikkeustilanteessa.\n");
+  kirjoittaja.close();
+} catch (Exception e) {
+  System.out.println("Tiedostoon kirjoittaminen ei onnistunut!");
+}
+</pre>
+    <p>Yllä oleva ohjelma tulostaa tiedostoon <code>tiedosto.txt</code> seuraavanlaisen tulosteen.</p>
+    
+<pre>
+Poikkeukset ovat tilanteita, joihin pitää varautua.
+Poikkeukset käsitellään try { } catch () { } - lohkorakenteella,
+jossa try { } - lohkon sisällä on ohjelmakoodi joka halutaan suorittaa.
+catch() - osio kertoo poikkeuksen mihin varaudutaan, ja siihen liittyvässä
+lohkossa on lähdekoodi, joka suoritetaan poikkeustilanteessa.
+</pre>  
+    
+	</body>
+
+</html>

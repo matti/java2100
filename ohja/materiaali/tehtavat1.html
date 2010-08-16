@@ -1,0 +1,970 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fi" lang="fi">
+	<head>
+		<link rel="stylesheet" href="stylesheets/common.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="javascripts/common.js"></script>
+		
+		<link rel="stylesheet" href="stylesheets/shjs/sh_style.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/shjs/sh_main.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_java.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_ruby.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_scala.min.js"></script>
+		
+		<link rel="stylesheet" href="stylesheets/exercises.css" type="text/css" media="screen, print" />		
+		<script type="text/javascript" src="javascripts/exercises.js"></script>		
+	</head>
+
+	<body>
+		<h1>Tehtävät viikolle 1</h1>
+				
+		<p>Pakolliset tehtävät on merkitty harmalla taustavärillä. Punaisella taustavärillä merkatut ovat kontrollitehtäviä, jotka näytetään ohjaajalle harjoitustilaisuudessa!</p>
+		
+		<ul>
+			<li>Pakollisia tehtäviä on: <span id="required_exercises_count">-1</span> kpl</li>
+			<li>Lisätehtäviä on: <span id="additional_exercises_count">-1</span> kpl</li>
+			<li>Bonustehtäviä on: <span id="bonus_exercises_count">-1</span> kpl</li>
+		</ul>
+		
+		
+		<p><strong>HUOM:</strong> nimeä tiedostot otsikossa olevan sanan mukaan</p>
+    
+    <h2>Lämmittelyä</h2>
+    <p>Tee koko tehtävä saman projektin sisään.</p>
+    <h3>Nollasta sataan (NollastaSataan.java)</h3>
+    <p>Tee ohjelma joka tulostaa seuraavan tulosteen.</p>
+<pre>
+0  100
+1  99
+2  98
+3  97
+...
+99  1
+100  0
+</pre>
+
+
+    <h3>Fizz</h3>
+    <p>Muuta edellistä ohjelmaa siten, että se tulostaa jokaiselle kolmella jaolliselle luvulle merkkijonon Fizz.  Käänteistä numerointia ei tarvitse enää toteuttaa.</p>
+<pre>
+Fizz
+1
+2
+Fizz
+4
+...
+98
+Fizz
+100
+</pre>
+
+    <h3>Buzz</h3>
+    <p>Muuta edellistä ohjelmaa siten, että se tulostaa jokaiselle viidellä jaolliselle luvulle merkkijonon Buzz</p>
+<pre>
+Fizz
+Buzz
+1
+2
+Fizz
+4
+Buzz
+Fizz
+...
+14
+Fizz
+Buzz
+16
+...
+98
+Fizz
+Buzz
+</pre>
+
+    <h3>FizzBuzz</h3>
+    <p>Muuta edellistä ohjelmaa siten, että se tulostaa jokaiselle kolmella JA viidellä jaolliselle luvulle merkkijonon FizzBuzz</p>
+<pre>
+FizzBuzz
+1
+2
+Fizz
+4
+Buzz
+Fizz
+...
+14
+FizzBuzz
+16
+...
+98
+Fizz
+Buzz
+</pre>
+    
+		<h2>Opiskelija</h2>
+    <p>Tee koko tehtävä saman projektin sisään.</p>
+    <h3 class="req">Luokan täydennys</h3>
+    <p>Alla on määritelty konstruktori ja metodit luokalle <em>Opiskelija</em>. Täydennä luokan toteutus annettujen vinkkien avulla. Opiskelija-luokan attribuuttien pitää olla luokan sisäisiä, eli tyyppiä <em>private</em>!</p>
+
+<pre class="sh_java">
+public class Opiskelija {
+  // opiskelijalla on attribuutteina etunimi ja sukunimi
+
+  // Opiskelija-luokan konstruktori asettaa olion etunimeksi ja sukunimeksi annetut parametrit,
+  public Opiskelija(String etunimi, String sukunimi) {
+  }
+  
+  // palauttaa etunimen
+  public String annaEtunimi() {
+  }
+  
+  // palauttaa sukunimen
+  public String annaSukunimi() {
+  }
+    
+  // palauttaa opiskelijan nimen 
+  public String toString() {
+  } 
+}
+</pre>
+    <p>Testaa luokan toimintaa alla olevan ohjelmapätkän avulla.</p>
+<pre class="sh_java">
+Opiskelija mattiP = new Opiskelija("Matti", "P");
+Opiskelija mattiV = new Opiskelija("Matti", "V");
+
+System.out.println(mattiP);
+System.out.println();
+System.out.println(mattiV);
+</pre>
+    <p>Tulostuksen tulee olla seuraavanlainen:</p>
+<pre>
+Matti P
+
+Matti V
+</pre>    
+
+    <h3 class="req">Opiskelijanumero</h3>
+    
+    <p>Lisää luokalle <em>Opiskelija</em> metodi <code>annaOpiskelijanumero()</code>. Lisää luokkaan myös attribuutti opiskelijanumerolle. Toteuta opiskelijanumero siten, että uutta opiskelijaa luotaessa luodaan aina uusi opiskelijanumero. Aloita opiskelijanumeroiden numerointi miljoonasta. (Vihje: Käytä luokan sisäistä static-tyyppistä muuttujaa pitämään kirjaa viimeksi annetusta opiskelijanumerosta!). Muuta myös metodia <code>toString()</code> siten, että se tulostaa myös opiskelijanumeron.</p>
+    
+    <p>Testaa luokan toimintaa alla olevan ohjelmapätkän avulla.</p>
+
+<pre class="sh_java">
+Opiskelija mattiP = new Opiskelija("Matti", "P");
+Opiskelija mattiV = new Opiskelija("Matti", "V");
+
+System.out.println(mattiP);
+System.out.println();
+System.out.println(mattiV);
+</pre>
+    <p>Tulostuksen tulee olla seuraavanlainen:</p>
+<pre>
+Matti P (1000000)
+
+Matti V (1000001)
+</pre>      
+
+    <h3 class="req">Aseta Koepisteet</h3>
+    <p>Lisää luokalle <em>Opiskelija</em> metodi <code>asetaKoepisteet(int)</code>. Lisää luokkaan myös attribuutti, johon pisteet asetetaan. Koepisteet voivat saada arvon vain väliltä 0 ja 30. Muuta myös luokan toString()-metodia siten, että koepisteet tulostetaan opiskelija-oliota tulostettaessa.</p>
+<pre class="sh_java">
+Opiskelija mattiP = new Opiskelija("Matti", "P");
+mattiP.asetaKoepisteet(25);
+Opiskelija mattiV = new Opiskelija("Matti", "V");
+mattiV.asetaKoepisteet(10);
+
+System.out.println(mattiP);
+System.out.println();
+System.out.println(mattiV);
+</pre>
+    <p>Tulostuksen tulee olla seuraavanlainen:</p>
+<pre>
+Matti P (1000000)
+Koepisteet: 25
+
+Matti V (1000001)
+Koepisteet: 10
+</pre>
+
+
+    <h3 class="req">Aseta Harjoituspisteet</h3>
+    <p>Lisää luokalle <em>Opiskelija</em> metodi <code>asetaHarjoituspisteet(int)</code>. Lisää luokkaan myös attribuutti, johon pisteet asetetaan. Harjoituspisteet voivat saada arvon vain väliltä 0 ja 30. Muuta myös luokan toString() - metodia siten, että myös harjoituspisteet tulostetaan opiskelija-oliota tulostettaessa.</p>
+    <p>Testaa luokan toimintaa alla olevan ohjelmapätkän avulla.</p>
+<pre class="sh_java">
+Opiskelija mattiP = new Opiskelija("Matti", "P");
+mattiP.asetaKoepisteet(25);
+mattiP.asetaHarjoituspisteet(25);
+Opiskelija mattiV = new Opiskelija("Matti", "V");
+mattiV.asetaKoepisteet(10);
+mattiV.asetaHarjoituspisteet(29);
+
+System.out.println(mattiP);
+System.out.println();
+System.out.println(mattiV);
+</pre>
+    <p>Tulostuksen tulee olla seuraavanlainen:</p>
+<pre>
+Matti P (1000000)
+Koepisteet: 25
+Harjoituspisteet: 25
+
+Matti V (1000001)
+Koepisteet: 10
+Harjoituspisteet: 29
+</pre>    
+
+    <h3 class="req">Arvosanan antaminen</h3>
+    <p>Lisää luokalle metodi <code>annaArvosana</code>, joka palauttaa kyseiseen opiskelijaan liittyvän arvosanan. Muuta myös toString() - metodia siten, että se tulostaa myös arvosanan. Arvosana määräytyy seuraavan taulukon mukaan.</p>
+    <pre>
+        Kokonaispisteet   Arvosana
+        51-60             5
+        46-50             4
+        41-45             3
+        36-40             2
+        31-35             1
+          -30             0
+    </pre>
+    <p>Huomaa myös kurssilla oleva koeleikkuri, eli kokeesta pitää saada vähintään 15 pistettä päästäkseen läpi.</p>
+<pre class="sh_java">
+Opiskelija mattiP = new Opiskelija("Matti", "P");
+mattiP.asetaKoepisteet(25);
+mattiP.asetaHarjoituspisteet(25);
+Opiskelija mattiV = new Opiskelija("Matti", "V");
+mattiV.asetaKoepisteet(10);
+mattiV.asetaHarjoituspisteet(29);
+
+System.out.println(mattiP);
+System.out.println();
+System.out.println(mattiV);
+</pre>
+    <p>Tulostuksen tulee olla seuraavanlainen:</p>
+<pre>
+Matti P (1000000)
+Koepisteet: 25
+Harjoituspisteet: 25
+Arvosana: 4
+
+Matti V (1000001)
+Koepisteet: 10
+Harjoituspisteet: 29
+Arvosana: 0
+</pre>
+
+
+    <h3 class="req">Arvosanan vertailu</h3>
+    <p>Lisää luokalle metodi <code>vertaaArvosanaa(Opiskelija opiskelija)</code>, joka vertaa this-opiskelijan arvosanaa parametrina annetun opiskelijan arvosanaan. Metodi palauttaa luvun -1, jos this-opiskelijan arvosana on suurempi, nollan jos sama, ja luvun 1 jos tämän opiskelijan arvosana on pienempi. </p>
+<pre class="sh_java">
+Opiskelija mattiP = new Opiskelija("Matti", "P");
+mattiP.asetaKoepisteet(25);
+mattiP.asetaHarjoituspisteet(25);
+Opiskelija mattiV = new Opiskelija("Matti", "V");
+mattiV.asetaKoepisteet(10);
+mattiV.asetaHarjoituspisteet(29);
+Opiskelija mattiL = new Opiskelija("Matti", "L");
+mattiL.asetaKoepisteet(16);
+mattiL.asetaHarjoituspisteet(29);
+
+
+System.out.println(mattiP);
+System.out.println();
+System.out.println(mattiV);
+System.out.println();
+System.out.println(mattiP.vertaaArvosanaa(mattiV));
+</pre>
+    <p>Tulostuksen tulee olla seuraavanlainen:</p>
+<pre>
+Matti P (1000000)
+Koepisteet: 25
+Harjoituspisteet: 25
+Arvosana: 4
+
+Matti V (1000001)
+Koepisteet: 10
+Harjoituspisteet: 29
+Arvosana: 0
+
+-1
+</pre>
+    
+    <h3 class="req">Sukunimen vertailu</h3>
+    <p>Lisää luokalle metodi <code>vertaaSukunimea(Opiskelija opiskelija)</code>, joka vertaa this-opiskelijan sukunimeä parametrina annetun opiskelijan sukunimeen. Käytä <em>String</em>-luokassa valmiina olevaa <code>compareTo()</code>-metodia vertailun toteuttamiseen. Metodi palauttaa kokonaisluvun, joka kertoo järjestyksen.</p>
+        
+    <h3 class="req">Etunimen vertailu</h3>
+    <p>Lisää luokalle metodi <code>vertaaEtunimea(Opiskelija opiskelija)</code>, joka vertaa this-opiskelijan etunimeä parametrina annetun opiskelijan etunimeen. Käytä taas <em>String</em>-luokassa valmiina olevaa <code>compareTo()</code>-metodia vertailun toteuttamiseen. Metodi palauttaa kokonaisluvun, joka kertoo järjestyksen.</p>
+    
+    <h3 class="req">Vertailu toiseen opiskelijaan</h3>
+    <p>Luo luokalle metodi <code>compareTo(Opiskelija opiskelija)</code>, joka palauttaa negatiivisen arvon (esim. -1), jos this-opiskelija edeltää parametrina annettua opiskelijaa, positiivisen arvon (esim. +1) päinvastaisessa tapauksessa. Jos opiskelijat ovat kaikilta tiedoiltaan samat, metodi palauttaa arvon 0. Käytä järjestysperusteina 1. kokonaispistemäärää (laskevassa järjestyksessä), 2. sukunimeä, 3. etunimeä. Toteuta nimien järjestys aakkosjärjestyksessä, jonka String-luokan <code>compareTo</code>-metodi määrittelee.</p>
+    <p>Testaa vertailuoperaatiotasi seuraavan ohjelmapätkän avulla</p>
+<pre class="sh_java">
+Opiskelija mattiP = new Opiskelija("Matti", "P");
+mattiP.asetaKoepisteet(25);
+mattiP.asetaHarjoituspisteet(25);
+Opiskelija mattiV = new Opiskelija("Matti", "V");
+mattiV.asetaKoepisteet(10);
+mattiV.asetaHarjoituspisteet(29);
+Opiskelija mattiL = new Opiskelija("Matti", "L");
+mattiL.asetaKoepisteet(16);
+mattiL.asetaHarjoituspisteet(29);
+
+
+Opiskelija mattiVViiteKopio = mattiV;
+
+System.out.println(mattiP);
+System.out.println();
+System.out.println(mattiV);
+
+if(mattiP.compareTo(mattiV) &gt; -1) {
+  System.out.println("Vertailuoperaatiosi taitaa toimia väärin..");
+}
+
+if(mattiV.compareTo(mattiP) &lt; 1) {
+  System.out.println("Vertailuoperaatiosi taitaa toimia väärin..");
+}
+
+if(mattiV.compareTo(mattiVViiteKopio) != 0) {
+  System.out.println("Vertailuoperaatiosi taitaa toimia väärin..");
+}
+
+if(mattiV.compareTo(mattiL) &lt; 1) {
+  System.out.println("Vertailuoperaatiosi taitaa toimia väärin..");
+}
+</pre>
+    <p>Tulostuksen tulee olla seuraavanlainen:</p>
+<pre>
+Matti P (1000000)
+Koepisteet: 25
+Harjoituspisteet: 25
+Arvosana: 4
+
+Matti V (1000001)
+Koepisteet: 10
+Harjoituspisteet: 29
+Arvosana: 0
+</pre>
+
+    <h2>Taulukot ja toistot</h2>
+    <p>Tee koko tehtävä saman projektin sisään.</p>
+    <p>Laaditaan luokkametodeja, eli staattisia metodeja, taulukkojen käsittelyyn. Taulukot ovat tässä tehtävässä aina kokonaislukutaulukkoja.</p>
+    <h3 class="req">Taulukon tulostaminen</h3>
+    <p>Laadi metodi <code>tulostaTaulukko(int[] taulukko)</code>, joka saa parametrikseen <em>yksiulotteisen</em> taulukon.</p>
+    <p>Testaa metodia seuraavalla ohjelmanpätkällä</p>
+<pre class="sh_java">
+int[] taul = {0, -5, 2};  
+tulostaTaulukko(taul);
+</pre>
+    <p>Tulostuksen tulee olla seuraavanlainen:</p>
+<pre>
+0 -5 2
+</pre>
+
+    <h3 class="req show">Sisäkkäisen taulukon tulostaminen</h3>
+    <p>Kuormita edellisen tehtävän metodi siten että osaa tulostaa <em>kaksiulotteisen</em>  taulukon, eli on muotoa <code>tulostaTaulukko(int[][] taulukko)</code>, joka saa parametrikseentaulukon. Voit käyttää edellisessä tehtävässä luotua metodia tässäkin tehtävässä.</p>
+    <p>Testaa metodia seuraavalla ohjelmanpätkällä</p>
+<pre class="sh_java">
+int[][] taul = {
+    {0, -5, 2},
+    {},
+    {7, 18, -2},
+    {1, 2, 3, 4}
+};
+    
+tulostaTaulukko(taul);
+</pre>
+    <p>Tulostuksen tulee olla seuraavanlainen:</p>
+<pre>
+0 -5 2 
+
+7 18 -2 
+1 2 3 4
+</pre>
+
+    <h3 class="req">Suurin luku</h3>
+    <p>Laadi metodi <code>taulukonSuurin(int[][] taulukko)</code>, joka palauttaa taulukon suurimman luvun. Jos taulukossa ei ole yhtään lukua, palautetaan luku 0.</p>
+<pre class="sh_java">
+int[][] taul = {
+    {0, -5, 2},
+    {},
+    {7, 18, -2},
+    {1, 2, 3, 4}
+};
+
+System.out.println("Suurin: " + taulukonSuurin(taul));
+</pre>
+    <p>Tulostuksen tulee olla seuraavanlainen:</p>
+<pre>
+Suurin: 18
+</pre>
+
+    <h3 class="req">Pienin luku</h3>
+    <p>Laadi metodi <code>taulukonPienin(int[][] taulukko)</code>, joka palauttaa taulukon pienimmän luvun. Jos taulukossa ei ole yhtään lukua, palautetaan luku 0.</p>
+<pre class="sh_java">
+int[][] taul = {
+    {0, -5, 2},
+    {},
+    {7, 18, -2},
+    {1, 2, 3, 4}
+};
+
+System.out.println("Pienin: " + taulukonPienin(taul));
+</pre>
+    <p>Tulostuksen tulee olla seuraavanlainen:</p>
+<pre>
+Pienin: -5
+</pre>
+
+    
+
+    <h3 class="req">Hae</h3>
+    <p>Laadi metodi <code>hae(int[][] taulukko, int arvo)</code>, joka hakee taulukosta parametrina annettua lukua. Metodi palauttaa <em>true</em> jos arvo löytyy taulukosta, muuten <em>false</em>.</p>
+<pre class="sh_java">
+int[][] taul = {
+    {0, -5, 2},
+    {},
+    {7, 18, -2},
+    {1, 2, 3, 4}
+};
+
+int luku = -5;
+if(hae(taul, luku)) {
+  System.out.println(luku + " löytyi!");
+}
+
+luku = 42;
+if(hae(taul, luku)) {
+  System.out.println(luku + " löytyi!");
+}
+</pre>
+    <p>Tulostuksen tulee olla seuraavanlainen:</p>
+<pre>
+-5 löytyi!
+</pre>
+
+  <h3>Indeksien erotus</h3>
+<p>Laadi metodi joka asettaa jokaisen alkion arvoksi indeksien erotuksen. (Esimerkiksi alkio, jonka indeksit ovat [4][2] saa arvokseen 4-2, eli 2)</p>
+<pre class="sh_java">
+int[][] taul = {
+    {0, -5, 2},
+    {},
+    {7, 18, -2},
+    {1, 2, 3, 4}
+};
+    
+tulostaTaulukko(taul);
+System.out.println("-------");
+indeksienErotus(taul);
+tulostaTaulukko(taul);
+</pre>
+    <p>Tulostuksen tulee olla seuraavanlainen:</p>
+<pre>
+0 -5 2 
+
+7 18 -2 
+1 2 3 4 
+-------
+0 -1 -2 
+
+2 1 0 
+3 2 1 0 
+</pre>
+    
+    <h2>Olutmuistiot</h2>
+    <p>Matit ovat suuria oluiden ystäviä. He pitävät kirjaa juomistaan olutmerkeistä, ja vertailevat myös juomien merkkiensä määrää. Toteutetaan Olutmuistio.</p>
+    <h3 class="req">Olutmuistio</h3>
+    <p>Olutmuistiossa lukee omistajan nimi. Toteuta Luokka olutmuistio, jolla on omistajan nimen ottava konstruktori ja seuraavat metodit</p>
+    <ul>
+      <li><code>kenenMuistio()</code> - palauttaa olutmuistion omistajan nimen</li>
+      <li><code>toString()</code> - luo muistiosta merkkijonoesityksen</li>
+    </ul>
+    <p>Testaa olutmuistiota seuraavan ohjelmapätkän avulla</p>
+<pre class="sh_java">
+Olutmuistio muistio = new Olutmuistio("Matti L");
+System.out.println(muistio);
+</pre>
+    <p>Tulostuksen tulee olla seuraavanlainen:</p>
+<pre>
+Olutmuistion omistaja: Matti L
+</pre>
+
+    <h3 class="req">Oluiden lisääminen</h3>
+    <p>Lisää Olutmuistio-luokalle metodi <code>lisaaOlut(String olutmerkki)</code>, joka lisää muistioon olutmerkin <em>jos</em> sitä ei ole jo listassa. Lisää luokalle myös <em>ArrayList&lt;String&gt;</em>-tyyppinen attribuutti nimeltä olutlista, jossa pidetään kirjaa oluista. Varmista että luot tyhjän listan luokan konstruktorissa! Muuta myös <code>toString()</code>-metodia siten, että se tulostaa juodut oluet. Merkki "\t" lisää tulostukseen sisennyksen.</p>
+    <p>Testaa olutmuistiota seuraavan ohjelmapätkän avulla</p>
+<pre class="sh_java"> 
+Olutmuistio muistio = new Olutmuistio("Matti L");
+muistio.lisaaOlut("Ballast Point: Panzer Imperial Pils");
+muistio.lisaaOlut("Ballast Point: Panzer Imperial Pils");
+muistio.lisaaOlut("Stone Brewery: Arrogant Bastard ALE");
+muistio.lisaaOlut("Ballast Point: Panzer Imperial Pils");
+muistio.lisaaOlut("Souther Tier: Gemini");
+muistio.lisaaOlut("Ballast Point: Panzer Imperial Pils");
+muistio.lisaaOlut("Ballast Point: Panzer Imperial Pils");
+System.out.println(muistio);
+</pre>
+    <p>Tulostuksen tulee olla seuraavanlainen:</p>
+<pre>
+Olutmuistion omistaja: Matti L
+Juodut oluet
+  Stone Brewery: Arrogant Bastard ALE
+  Ballast Point: Panzer Imperial Pils
+  Souther Tier: Gemini
+</pre>
+
+    <h3>Oluiden määrä</h3>
+    <p>Lisää Olutmuistio-luokalle metodi <code>juodutOluet()</code>, joka palauttaa juotujen oluiden lukumäärän. Muuta luokan <code>toString()</code> - metodia siten, että se tulostaa myös juotujen oluiden lukumäärän.</p>
+    <p>Testaa olutmuistiota seuraavan ohjelmapätkän avulla</p>
+<pre class="sh_java">
+Olutmuistio muistio = new Olutmuistio("Matti L");
+muistio.lisaaOlut("Ballast Point: Panzer Imperial Pils");
+muistio.lisaaOlut("Ballast Point: Panzer Imperial Pils");
+muistio.lisaaOlut("Stone Brewery: Arrogant Bastard ALE");
+muistio.lisaaOlut("Ballast Point: Panzer Imperial Pils");
+muistio.lisaaOlut("Souther Tier: Gemini");
+muistio.lisaaOlut("Ballast Point: Panzer Imperial Pils");
+muistio.lisaaOlut("Ballast Point: Panzer Imperial Pils");
+System.out.println(muistio);
+</pre>
+    <p>Tulostuksen tulee olla seuraavanlainen:</p>
+<pre>
+Olutmuistion omistaja: Matti L
+Juodut oluet
+  Stone Brewery: Arrogant Bastard Ale
+  Ballast Point: Panzer Imperial Pils
+  Souther Tier: Gemini
+Yhteensä 3 kpl
+</pre>
+
+    <h3>Uusien olutmuistioiden luominen</h3>
+    <p>Luo pääohjelma <em>Kirjausohjelma</em>, jossa luodaan syötetyille nimille lista olutmuistioita. Olutmuistioiden luominen lopetetaan kun annetaan tyhjä nimi. Kun muistioiden luominen lopetetaan, olutmuistioiden omistajat tulostetaan. Käytä <code>ArrayList</code>-listaa olutmuistioiden tallentamiseen!</p>
+
+<p>Tulostuksen tulee olla seuraavanlainen</p>
+<pre>
+Lisätään muistioita
+Anna muistion omistaja: Matti P
+
+Anna muistion omistaja: Matti V
+
+Anna muistion omistaja: Matti L
+
+Anna muistion omistaja: 
+
+
+Muistiot: 
+Matti P
+Matti V
+Matti L
+
+</pre>
+
+    <h3>Olutmuistion valinta</h3>
+    <p>Lisää Kirjausohjelmaan mahdollisuus muistion valintaan.  Muuta olutmuistioiden tulostusta siten, että tulostat myös muistion indeksin ArrayList-tyyppisessä listassa. Kun muistion on valittu, tulosta sen nimi. Lopeta muistion valitseminen käyttäjä syöttää arvon -1. Voit käyttää muistion lukemiseen esimerkiksi seuraavaa koodinpätkää <code>int muistionIndeksi = Integer.parseInt(lukija.nextLine());</code></p>
+<p>Tulostuksen tulee olla seuraavanlainen</p>
+<pre>
+Lisätään muistioita
+Anna muistion omistaja: Matti P
+
+Anna muistion omistaja: Matti V
+
+Anna muistion omistaja: Matti L
+
+Anna muistion omistaja: 
+
+
+Muistiot: 
+0 - Matti P
+1 - Matti V
+2 - Matti L
+
+Valitse muistio, -1 lopettaa: 1
+Olutmuistio Matti V valittu
+
+Valitse muistio, -1 lopettaa: 0
+Olutmuistio Matti P valittu
+
+Valitse muistio, -1 lopettaa: -1
+</pre>
+    
+    
+    <h3>Olutmuistioiden täyttäminen</h3>
+    <p>Lisää Kirjausohjelmaan toiminto jossa listan valinnan jälkeen syötetään juodun oluen nimi. Kun oluen nimi on syötetty, se lisätään valittuun olutmuistioon. Jos käytät muistion valintaan koodipätkää <code>int muistionIndeksi = Integer.parseInt(lukija.nextLine());</code>, et törmää ongelmiin oluen nimen syöttämisessä. Kun oluiden syöttäminen lopetetaan, tulostetaan tämän hetkinen listatilanne.</p>
+<p>Tulostuksen tulee olla seuraavanlainen</p>
+<pre> 
+Valitse muistio johon olut kirjataan, tai syötä -1 lopettaaksesi: 
+2
+Mikä olut: Stone Brewery: Arrogant Bastard Ale
+
+Muistiot: 
+0 - Matti P
+1 - Matti V
+2 - Matti L
+Valitse muistio johon olut kirjataan, tai syötä -1 lopettaaksesi: 
+2
+Mikä olut: Ballast Point: Panzer Imperial Pils
+
+Muistiot: 
+0 - Matti P
+1 - Matti V
+2 - Matti L
+Valitse muistio johon olut kirjataan, tai syötä -1 lopettaaksesi: 
+-1
+
+Tulostetaan muistiot:
+Olutmuistion omistaja: Matti P
+Oluita yhteensa 0 kpl
+
+Olutmuistion omistaja: Matti V
+Oluita yhteensa 0 kpl
+
+Olutmuistion omistaja: Matti L
+Oluita yhteensa 2 kpl
+  Stone Brewery: Arrogant Bastard Ale
+  Ballast Point: Panzer Imperial Pils
+</pre>      
+   
+		<h2>Kurssikirjaukset</h2>
+    <p>Toteutetaan ohjelma kurssin hallintaan. Voit käyttää ensimmäisessä tehtävässä toteutettua <em>Opiskelija</em>-luokkaa tässä tehtävässä.</p>
+
+    <h3 class="req">Kurssi</h3>
+    <p>Kurssilla on nimi ja sille kuuluu ei-rajattu määrä opiskelijoita. Toteuta luokka <em>Kurssi</em>, jolla on konstruktori <code>Kurssi(String nimi)</code>, sekä metodit <code>lisaaOpiskelija(Opiskelija o)</code> ja <code>annaOpiskelijat()</code>. Metodi <code>annaOpiskelijat()</code> palauttaa <em>ArrayList</em>-tyyppisen listan. Toteuta myös toString() - metodi, joka palauttaa kurssin nimen sekä listan osallistujista (käytä <code>annaOpiskelijat()</code>-metodia opiskelijoiden hakemiseen <code>toString()</code>-metodissa!). Merkki "\t" lisää sisennyksen tulostettuun tekstiin.</p>
+    <p>Testaa kurssin toteutusta seuraavan ohjelmapätkän avulla.</p>
+<pre class="sh_java">
+Kurssi java2100 = new Kurssi("Java 2100");
+java2100.lisaaOpiskelija(new Opiskelija("Matti", "P"));
+java2100.lisaaOpiskelija(new Opiskelija("Matti", "L"));
+java2100.lisaaOpiskelija(new Opiskelija("Matti", "V"));
+System.out.println(java2100);
+</pre>
+  <p>Tulostuksen tulee olla seuraavanlainen:</p>
+<pre>
+Kurssi Java 2100
+Opiskelijoita 3
+  Matti P
+  Matti L
+  Matti V
+</pre>       
+
+    <h3 class="req">Kurssille kirjautuminen</h3>
+    <p>Luo pääohjelma <em>Kirjaaminen</em>, jossa listalle lisätään uusia opiskelijoita. Tyhjä syöte etunimen tai sukunimen kohdalla nopettaa kirjaamisen. Tulosta lopuksi kirjatut opiskelijat. Voit käyttää kurssin nimenä "Java 2100":aa.</p>
+    <p>Tulostuksen tulee olla seuraavanlainen:</p>
+<pre>
+Uusi opiskelija:
+Etunimi: Matti
+Sukunimi: P
+
+Uusi opiskelija:
+Etunimi: Matti
+Sukunimi: L
+
+Uusi opiskelija:
+Etunimi: Matti
+Sukunimi: V
+
+Uusi opiskelija:
+Etunimi: 
+
+Kurssi Java 2100
+Opiskelijoita 3
+  Matti P
+  Matti L
+  Matti V
+</pre>       
+
+    <h3 class="req">Tulosten kirjaus</h3>
+    <p>Kun opiskelijat on kirjattu, kirjataan jokaiselle tulokset. Jos kirjatut pisteet jakauman 0-30 ulkopuolella, pyydetään arvosanaa uudestaan. Käytä <em>Opiskelija</em>-luokan <code>asetaKoepisteet</code> ja <code>asetaHarjoituspisteet</code> - metodeja pisteiden asettamiseen.</p>
+    <p>Tulostuksen tulee olla seuraavanlainen:</p>
+    <pre>
+Uusi opiskelija:
+Etunimi: Matti
+Sukunimi: P
+
+Uusi opiskelija:
+Etunimi: Matti
+Sukunimi: L
+
+Uusi opiskelija:
+Etunimi: Matti
+Sukunimi: V
+
+Uusi opiskelija:
+Etunimi: 
+
+Kurssi Java 2100
+Opiskelijoita 3
+  Matti P
+  Matti L
+  Matti V
+  
+Kirjataan tulokset:
+Opiskelija Matti P koepisteet: 12
+Opiskelija Matti P harjoituspisteet: 18
+
+Opiskelija Matti L koepisteet: 15
+Opiskelija Matti L harjoituspisteet: 42
+Opiskelija Matti L harjoituspisteet: 31
+Opiskelija Matti L harjoituspisteet: 15
+
+Opiskelija Matti L koepisteet: 18
+Opiskelija Matti L harjoituspisteet: 16
+</pre>
+    
+    <h3 class="req">Kurssin arvostelu</h3>
+    <p>Kun tulokset on kirjattu halutaan tehdä vielä kurssin arvostelu. Käytä ohjelmoinnin perusteiden viikolla 3 toteutettua Arvosanajakauman tulostusta kirjattujen arvosanojen tulostamiseen. Arvosanojen tulostamiseen löytyy myös esimerkkivastaus, jonka pohjalta voit työstää tehtävää http://www.cs.helsinki.fi/group/java/k10/ohpe/esimerkkivastaukset/viikko3/6_2_Arvosanajakauma2/Arvosanajakauma.java</p>
+    <p>Tulostuksen tulee olla seuraavanlainen:</p>
+<pre>
+Uusi opiskelija:
+Etunimi: Matti
+Sukunimi: P
+
+Uusi opiskelija:
+Etunimi: Matti
+Sukunimi: L
+
+Uusi opiskelija:
+Etunimi: Matti
+Sukunimi: V
+
+Uusi opiskelija:
+Etunimi: 
+
+Kurssi Java 2100
+Opiskelijoita 3
+  Matti P
+  Matti L
+  Matti V
+  
+Kirjataan tulokset:
+Opiskelija Matti P koepisteet: 12
+Opiskelija Matti P harjoituspisteet: 18
+
+Opiskelija Matti L koepisteet: 15
+Opiskelija Matti L harjoituspisteet: 42
+Opiskelija Matti L harjoituspisteet: 31
+Opiskelija Matti L harjoituspisteet: 16
+
+Opiskelija Matti V koepisteet: 21
+Opiskelija Matti V harjoituspisteet: 25
+
+Kurssin Java 2100 arvosanajakauma
+
+5: 
+4: * 
+3: 
+2: 
+1: *
+0: *
+
+Hyväksyttyjä 66% osallistujista
+</pre>
+    <h2>Sokkelo</h2>
+    <p>Useat ongelmat, muunmuassa reitinhaku, voidaan ajatella sokkeloina ja niistä pois pääsemisenä. Toteutetaan pieni sokkelo-ohjelma. </p>
+    
+    <h3 class="bonus">Sokkelon tulostaminen</h3>
+    <p>Toteuta metodi joka tulostaa sisäkkäisen taulukon sokkelona. Tulosta kakkonen "O":na, ykkönen "X":nä, nolla tyhjänä (" "), ja -1 "M":nä. Kannattaa tehdä erillinen metodi joka palauttaa merkin annetulle luvulle! Testaa seuraavalla ohjelmanpätkällä</p>
+<pre class="sh_java">
+int[][] taulukko = 
+{
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 2, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
+    {1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1},
+    {1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1},
+    {1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, -1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}       
+};
+tulostaSokkelo(sokkelo);
+</pre>
+  <p>Tulostuksen tulee olla seuraavanlainen:</p>
+<pre>
+XXXXXXXXXXXXX
+XO  X X     X
+X X   X XXX X
+X XXX     X X
+X X X XXX   X
+X X   X X X X
+X   X     X M
+XXXXXXXXXXXXX
+</pre>
+  <h3 class="bonus">Sokkelo</h3>
+  <p>Luo luokka <em>Sokkelo</em>, joka saa parametrina sisäkkäisen kokonaislukutaulukon. Luokalla <em>Sokkelo</em> on myös metodi <code>toString()</code>, joka tulostaa sokkelon.</p>
+  <p>Testaa Sokkelo-luokan toteutusta seuraavalla koodinpätkällä</p>
+<pre class="sh_java">
+int[][] taulukko = 
+{
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 2, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
+    {1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1},
+    {1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1},
+    {1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, -1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}       
+};
+Sokkelo s = new Sokkelo(taulukko);
+System.out.println(s);
+</pre>
+  <p>Tulostuksen tulee olla seuraavanlainen:</p>
+<pre>
+XXXXXXXXXXXXX
+XO  X X     X
+X X   X XXX X
+X XXX     X X
+X X X XXX   X
+X X   X X X X
+X   X     X M
+XXXXXXXXXXXXX
+</pre>
+
+  <h3 class="bonus">Pelaaja</h3>
+  <p>Kokonaislukutaulukon numero 2 kuvaa pelaajan sijaintia. Luo luokka <em>Pelaaja</em>, joka sisältää pelaajan x- ja y-koordinaatit eli sijainnin sokkelossa. Lisää luokalle myös <code>toString()</code>-metodi, joka tulostaa pelaajan sijainnin. Lisää Pelaaja Sokkelo-luokan attribuutiksi, ja muuta Sokkelo-luokan konstruktoria siten, että sitä kutsuttaessa käydään läpi annettu taulukko, ja luodaan pelaaja siihen indeksiin, mistä numero 2 löytyy.</p>
+  <p>Lisää sokkelon toString() metodiin myös pelaajan tulostus.</p>
+<pre class="sh_java">
+int[][] taulukko = 
+{
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 2, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
+    {1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1},
+    {1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1},
+    {1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1},
+    {1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1},
+    {1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, -1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}       
+};
+Sokkelo s = new Sokkelo(taulukko);
+System.out.println(s);
+</pre>
+  <p>Tulostuksen tulee olla seuraavanlainen:</p>
+<pre>
+XXXXXXXXXXXXX
+XO  X X     X
+X X   X XXX X
+X XXX     X X
+X X X XXX   X
+X X   X X X X
+X   X     X M
+XXXXXXXXXXXXX
+Pelaaja sijainnissa (1, 1)
+</pre>
+  
+  <h3 class="bonus">Liikkuminen</h3>
+  <p>Lisää ohjelmaan toiminto, jolla pyydetään liikkumissuuntaa pelaajalle. Liikkumissuunnat ovat "a" (alas), "y" (ylös"), "v" (vasemmalle) ja "o" (oikealle). Jos pelaaja ei pysty liikkumaan haluttuun suuntaan, tulosta virheviesti. Muutoin, siirrä pelaajaa haluttuun suuntaan. Ohjelman voi lopettaa tyhjällä syötteellä.</p>
+  <p>Pelattaessa yllä annetulla taulukolla tulostuksen tulee olla seuraavanlainen:</p>
+  <p>Tulostuksen tulee olla seuraavanlainen:</p>
+<pre>
+XXXXXXXXXXXXX
+XO  X X     X
+X X   X XXX X
+X XXX     X X
+X X X XXX   X
+X X   X X X X
+X   X     X M
+XXXXXXXXXXXXX
+Pelaaja sijainnissa (1, 1)
+
+Anna liikkumissuunta: o
+XXXXXXXXXXXXX
+X O X X     X
+X X   X XXX X
+X XXX     X X
+X X X XXX   X
+X X   X X X X
+X   X     X M
+XXXXXXXXXXXXX
+Pelaaja sijainnissa (2, 1)
+
+Anna liikkumissuunta: y
+Ei voi liikkua!
+Anna liikkumissuunta: o
+XXXXXXXXXXXXX
+X  OX X     X
+X X   X XXX X
+X XXX     X X
+X X X XXX   X
+X X   X X X X
+X   X     X M
+XXXXXXXXXXXXX
+Pelaaja sijainnissa (3, 1)
+
+Anna liikkumissuunta: 
+</pre>
+
+  <h3 class="bonus">Maali!</h3>
+  <p>Numero -1 kuvaa maalia minne pelaajan on tarkoitus päästä. Muuta peliä siten, että kun pelaaja on maalissa peli loppuu.</p>
+  <p>Tulostuksen tulee olla seuraavanlainen:</p>
+<pre>
+XXXXXXXXXXXXX
+XO  X X     X
+X X   X XXX X
+X XXX     X X
+X X X XXX   X
+X X   X X X X
+X   X     X M
+XXXXXXXXXXXXX
+Pelaaja sijainnissa (1, 1)
+
+Anna liikkumissuunta: o
+XXXXXXXXXXXXX
+X O X X     X
+X X   X XXX X
+X XXX     X X
+X X X XXX   X
+X X   X X X X
+X   X     X M
+XXXXXXXXXXXXX
+Pelaaja sijainnissa (2, 1)
+
+Anna liikkumissuunta: y
+Ei voi liikkua!
+Anna liikkumissuunta: o
+XXXXXXXXXXXXX
+X  OX X     X
+X X   X XXX X
+X XXX     X X
+X X X XXX   X
+X X   X X X X
+X   X     X M
+XXXXXXXXXXXXX
+Pelaaja sijainnissa (3, 1)
+
+Anna liikkumissuunta: a
+XXXXXXXXXXXXX
+X   X X     X
+X XO  X XXX X
+X XXX     X X
+X X X XXX   X
+X X   X X X X
+X   X     X M
+XXXXXXXXXXXXX
+Pelaaja sijainnissa (3, 2)
+Anna liikkumissuunta: o
+
+.......
+
+Anna liikkumissuunta: a
+XXXXXXXXXXXXX
+X   X X     X
+X X   X XXX X
+X XXX     X X
+X X X XXX   X
+X X   X X X X
+X   X     XOM
+XXXXXXXXXXXXX
+Pelaaja sijainnissa (11, 6)
+
+Anna liikkumissuunta: o
+
+-- MAALI! --
+
+
+</pre>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-13136847-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>	
+	</body>
+</html>

@@ -1,0 +1,895 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fi" lang="fi">
+	<head>
+		<link rel="stylesheet" href="stylesheets/common.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="javascripts/common.js"></script>
+		
+		<link rel="stylesheet" href="stylesheets/shjs/sh_style.css" type="text/css" media="screen, print" />
+		<script type="text/javascript" src="javascripts/shjs/sh_main.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_java.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_ruby.min.js"></script>
+		<script type="text/javascript" src="javascripts/shjs/sh_scala.min.js"></script>
+		
+		<link rel="stylesheet" href="stylesheets/exercises.css" type="text/css" media="screen, print" />		
+		<script type="text/javascript" src="javascripts/exercises.js"></script>		
+	</head>
+
+	<body>
+		<h1>Tehtävät viikolle 2</h1>
+				
+		<p>Pakolliset tehtävät on merkitty harmalla taustavärillä. Punaisella taustavärillä merkatut ovat kontrollitehtäviä, jotka näytetään ohjaajalle harjoitustilaisuudessa!</p>
+		
+		<ul>
+			<li>Pakollisia tehtäviä on: <span id="required_exercises_count">-1</span> kpl</li>
+			<li>Lisätehtäviä on: <span id="additional_exercises_count">-1</span> kpl</li>
+			<li>Bonustehtäviä on: <span id="bonus_exercises_count">-1</span> kpl</li>
+		</ul>
+		
+		
+		<p><strong>HUOM:</strong> nimeä tiedostot otsikossa olevan sanan mukaan</p>
+    
+	
+	<h2>JarjestettyKahvikassa</h2>
+	
+	<h3 class="req">Kahvikassa</h3>
+
+	<p>Toteuta luokka <code>Kahvikassa</code>, joka toteuttaa rajapinnan <code>Laskuri</code>.</p>
+
+<pre class="sh_java">
+public interface Laskuri {
+	public void kasvataArvoa();
+	public void vahennaArvoa();
+	public int annaArvo();	
+}
+</pre>
+
+	<p>Toteuta luokalle konstruktori, joka ottaa parametrikseen kahvikassan omistajan nimen. Lisää luokalle myös <code>toString()</code>-metodi, joka tulostaa omistajan nimen ja juotujen kahvien määrän. Kahvikassan <code>toString()</code>-metodin tulee tulostaa esimerkiksi seuraavaa omistajalle "Matti L."</p>
+
+<pre>
+Matti L. on juonut 0 kahvia
+</pre>
+
+  <h3 class="req">Comparable</h3>
+  
+  <p>Lisää luokalle <code>Kahvikassa</code> toinen rajapinta <code>Comparable</code>, joka ottaa tyyppiparametrikseen rajapinnan <code>Laskuri</code>, ja toteuta sen vaatima metodi <code>compareTo(Laskuri laskuri)</code>. Toteuta järjestys juotujen kahvien lukumäärän perusteella, siten, että eniten juoneet tulevat viimeisenä.</p>
+
+	<h3 class="req">Kahvikassan järjestys</h3>
+
+	<p>Toteuta pääohjelma siten, että kahvikassat tallennetaan <code>ArrayList</code>-olioon. Koska <code>kahvikassat</code> on lista, ja sen alkiot toteuttavat <code>Comparable</code>-rajapinnan, voidaan se järjestää helposti käyttämällä Javan valmista Collections-luokkakirjastoa.</p>
+  
+  <p>Täydennä alla olevaa pääohjelmaa vinkkien perusteella.</p>
+
+<pre class="sh_java">
+public class JarjestettyKahvikassa {
+  
+  public static void main(String[] args) {
+    // luo kahvikassat-olio
+    
+    Kahvikassa mattiV = new Kahvikassa("Matti V.");
+    Kahvikassa mattiL = new Kahvikassa("Matti L.");
+        
+    kahvikassat.add(mattiV);
+    kahvikassat.add(mattiL);
+        
+    mattiV.kasvataArvoa();
+    mattiV.kasvataArvoa();
+    System.out.println(kahvikassat);
+    
+    System.out.println("Järjestetään!");
+    // järjestä kahvikassat
+    
+    System.out.println(kahvikassat);
+    
+    mattiL.kasvataArvoa();
+    mattiL.kasvataArvoa();
+    mattiL.kasvataArvoa();
+    mattiL.kasvataArvoa();
+    System.out.println(kahvikassat);
+    
+    System.out.println("Järjestetään!");    
+    // järjestä kahvikassat
+    
+    System.out.println(kahvikassat);
+  }
+}
+</pre>
+
+	<p>Tulostuksen pitää näyttää seuraavalta (huomioi järjestys!)</p>
+	
+<pre>
+[Matti V. on juonut 2 kahvia, Matti L. on juonut 0 kahvia]
+Järjestetään!
+[Matti L. on juonut 0 kahvia, Matti V. on juonut 2 kahvia]
+[Matti L. on juonut 4 kahvia, Matti V. on juonut 2 kahvia]
+Järjestetään!
+[Matti V. on juonut 2 kahvia, Matti L. on juonut 4 kahvia]
+</pre>
+
+
+  <h2>Opiskelijat</h2>
+	
+	<h3 class="req">Opiskelijat pistejärjestyksessä</h3>
+	
+	<p>Ensimmäisen viikon tehtävissä toteutettiin opiskelijoiden vertailu toiseen opiskelijaan metodilla <code>compareTo(Opiskelija opiskelija)</code>. Lisää luokalle <em>Opiskelija</em> luennolla nähty Javan valmis rajapinta <em>Comparable</em> siten, että sille asetetaan tyyppiparametriksi luokka Opiskelija. Tämän jälkeen kokeile toteutusta seuraavalla ohjelmapätkällä.</p>
+  
+<pre class="sh_java">
+ArrayList&lt;Opiskelija&gt; opiskelijat = new ArrayList();
+Opiskelija mattiP = new Opiskelija("Matti", "P");
+mattiP.asetaKoepisteet(25);
+mattiP.asetaHarjoituspisteet(25);
+opiskelijat.add(mattiP);
+Opiskelija mattiV = new Opiskelija("Matti", "V");
+mattiV.asetaKoepisteet(10);
+mattiV.asetaHarjoituspisteet(29);
+opiskelijat.add(mattiV);
+Opiskelija mattiL = new Opiskelija("Matti", "L");
+mattiL.asetaKoepisteet(16);
+mattiL.asetaHarjoituspisteet(29);
+opiskelijat.add(mattiL);
+
+System.out.println("Opiskelijat alkuperäisessä järjestyksessä:");
+for(Opiskelija opiskelija: opiskelijat) {
+  System.out.println(opiskelija.annaSukunimi() + ", " + opiskelija.annaEtunimi());
+}
+      
+Collections.sort(opiskelijat);
+System.out.println();
+System.out.println("Opiskelijat järjestettynä:");
+for(int i = 0; i &lt; opiskelijat.size(); i++) {
+	Opiskelija op = opiskelijat.get(i);
+  System.out.println((i+1) + ": " + op.annaSukunimi() + ", " + op.annaEtunimi());
+}
+</pre>
+
+  <p>Tulostuksen tulee olla seuraavanlainen:</p>
+  
+<pre>
+Opiskelijat alkuperäisessä järjestyksessä:
+P, Matti
+V, Matti
+L, Matti
+
+Opiskelijat järjestettynä:
+1: P, Matti
+2: L, Matti
+3: V, Matti
+</pre>
+
+  <h3>Opiskelijat käänteisessä järjestyksessä</h3>
+  
+  <p>Lisää edellisen tehtävään opiskelijoiden tulostaminen käänteisessä järjestyksessä. Tulostuksen tulee olla seuraavanlainen.</p>
+
+<pre>
+Opiskelijat alkuperäisessä järjestyksessä:
+P, Matti
+V, Matti
+L, Matti
+
+Opiskelijat järjestettynä:
+1: P, Matti
+2: L, Matti
+3: V, Matti
+
+Opiskelijat käänteisessä järjestyksessä:
+3: V, Matti
+2: L, Matti
+1: P, Matti
+</pre>
+
+
+  <h2>Arrays ja Collections</h2>
+  
+  <p>Java tarjoaa Collections-luokan kaltaisen luokkakirjaston myös taulukoille. Luokkakirjasto <em><a href="http://java.sun.com/javase/6/docs/api/java/util/Arrays.html">Arrays</a></em> tarjoaa järjestämis- ja hakufunktioita taulukoile. Tässä tehtävässä toteutetaan hakeminen käyttäen kumpaakin. Voit tehdä koko tehtävän saman pääohjelman sisään.</p>
+
+  <h3>Luominen</h3>
+  
+  <p>Kysy käyttäjältä taulukon kokoa, ja luo sen kokoinen <code>double[]</code> - taulukko. Luo myös ArrayList-olio, jonka tyyppiparametrina on Double.</p>
+  
+  <h3>Taulukon ja listan täyttäminen</h3>
+  
+  <p>Lisää taulukkoon ja ArrayList-olioon taulukon koon verran <em>samoja</em> satunnaisia liukulukuja. Saat satunnaiset liukuluvut luokkakirjaston Math tarjoamalla metodilla <code>random()</code>.</p>
+  
+  <h3>Yksi alkio lisää</h3>
+  
+  <p>Lisää taulukkoon ja ArrayList-olioon vielä yksi liukuluku, <code>0.5</code>. Huomaa että joudut luomaan uuden double[]-taulukon, jonka koko on yhtä suurempi kuin alkuperäinen, ja kopioimaan alkuperäisen taulukon sisällön uuteen taulukkoon, ennen kuin saat lisättyä uuden luvun. Kannattanee käyttää Arrays-luokkakirjaston tarjoamaa <code>copyOf()</code>-metodia tähän.</p>
+  
+  <h3>Järjestä taulukko ja ArrayList-olio ja testaa järjestystä</h3>
+  
+  <p>Järjestä double[]-taulukko Arrays-luokan tarjoamalla järjestysmetodilla. Järjestä ArrayList-olio Collections-luokan tarjoamalla järjestysmetodilla. Huomaa että Double-luokka toteuttaa valmiiksi Comparable-rajapinnan!</p>
+  
+  <p>Testaa järjestystä käymällä taulukko ja ArrayList-olio läpi yksi alkio kerrallaan. Jos taulukon indeksissä <em>i</em> olevan alkion ja ArrayList-olion indeksissä <em>i</em> olevien arvojen erotus ei ole 0, tulosta virheviesti. Tulosta lopuksi merkkijono "Valmis!" Ohjelman ei pitäisi tulostaa yhtäkään virheviestiä.</p>
+  
+
+    <h2>Metro</h2>
+
+	<h3 class="req">Vaunupari</h3>
+	
+	<p>Yksi metrojuna muodostuu vaunupareista. Esimerkiksi <a href="http://www.seisake.net/kuva.php?id=1501&kat=metro&kat2=m100&s=0">tässä kuvassa</a> metrojuna muodostuu kolmesta vaunuparista, joista vaunupari 119-120 on mainosteippailtu.</p>
+	
+	<p>Tee luokka vaunupari, joka ottaa konstruktorissaan vaunujen numerot (kaksi kokonaislukua)</p>
+	
+
+	<p>Testausohjelman runko kaikkiin seuraaviin metrotehtäviin.</p>
+	
+
+<pre class="sh_java">
+public class Main {
+
+	private static int virheita = 0;
+
+	public static void main(String[] args) {
+
+		// Vaunuparien luonti tähän
+
+		System.out.println(m101_m102);
+
+		// Testit tähän (seuraavassa tehtävässä)
+
+		if (virheita > 0)
+			System.out.println("Virheitä: " + virheita);
+		else
+			System.out.println("Tehtävä valmis!");
+	}
+
+	public static void virhe(String viesti) {
+		virheita++;
+		System.out.println("Virhe toteutuksessa: " + viesti);
+	}
+}
+</pre>
+
+	<p>Testiohjelman tulostuksen tulee olla seuraava:</p>
+	
+<pre>
+Vaunupari 101-102
+Tehtävä valmis!
+</pre>
+
+
+
+	<h3 class="req">Raideleveys ja istumapaikkojen määrä</h3>
+
+	<p>Jokaisessa vaunuparissa on 130 istumapaikkaa (65 / vaunu). Raideleveys on 1524mm.</p>
+	
+	<p>Muuta vaunuparin toteutusta siten, että vaunupari toteuttaa rajapinnan <code>Metrokalusto</code></p>
+	
+<pre class="sh_java">
+public interface Metrokalusto {
+
+    public int annaRaideleveys();
+    public int annaIstumapaikkojenLkm();
+
+}	
+</pre>
+
+	<p>Testit pääohjelmaan:</p>
+	
+<pre class="sh_java">
+if (m101_m102.annaRaideleveys() != 1524)
+    virhe("Vaunuparin raideleveys ei ole oikein");
+
+if (m101_m102.annaIstumapaikkojenLkm() != 130)
+    virhe("Vaunuparissa pitää olla 130 istumapaikkaa");
+</pre>
+
+
+
+	<h3 class="req">Kytkentä</h3>
+	
+	<p>Vaunupareja voi kytkeä toisiinsa: <a href="http://www.youtube.com/watch?v=5nw7Dj76cxU&feature=related">video vaunuparien kytkemisestä</a>.</p>
+
+	<p>Toteuta rajapinta <code>Kytkettava</code>, jossa on kaksi metodia: <code>public boolean kytke(Kytkettava kytkettava)</code> ja <code>public boolean irrota(Kytkettava kytkettava)</code></p>
+	
+	<p>Testit</p>
+	
+<pre class="sh_java">		
+if (m101_m102.kytke(m101_m102))
+    virhe("Vaunuparia ei voi kytkeä itseensä");
+
+if (!m101_m102.kytke(m103_m104))
+    virhe("Vaunupari ei kytkeydy");
+
+if (m101_m102.kytke(m103_m104))
+    virhe("Vaunupari on jo kytketty, ei voi enää kytkeä");
+
+if (m101_m102.irrota(m105_m106))
+    virhe("Vaunuparia ei ole kytketty tähän vaunupariin");
+
+if (!m101_m102.irrota(m103_m104))
+    virhe("Vaunupari ei irroitu");
+
+if (m101_m102.irrota(m103_m104))
+    virhe("Vaunupari on jo irroitettu");
+</pre>
+
+
+
+	<h3 class="req">M100</h3>
+	
+	<p>Toteuta luokka <code>M100</code>, joka ottaa konstruktorissaan parametrinään <code>ArrayList</code>-listan vaunupareja.</p>
+	
+<pre class="sh_java">
+M100 aamuJuna = new M100(aamunVaunut);  // kolme vaunuparia
+M100 iltaJuna = new M100(illanVaunut);  // kaksi vaunuparia
+
+System.out.println(aamuJuna);
+System.out.println();
+System.out.println(iltaJuna);
+</pre>
+	
+	<p>Tulosteen pitää näyttää seuraavalta:</p>
+	
+<pre>
+Metrojuna: 3 vaunuparia. 
+ Vaunuparit: Vaunupari 105-106 Vaunupari 103-104 Vaunupari 101-102 
+
+Metrojuna: 2 vaunuparia.
+ Vaunuparit: Vaunupari 105-106 Vaunupari 103-104
+</pre>
+
+
+	<h3 class="req">M100 metrokalusto</h3>
+	
+	<p>Myös luokka M100 toteuttaa rajapinnan <code>Metrokalusto</code>.</p>
+
+	<p>Toteuta raideleveys siten, että olio palauttaa ensimmäisen vaunuparin raideleveyden ja istumapaikkojen lukumäärä on kokoonpanon vaunujen istumapaikkojen yhteenlaskettu määrä.</p>
+	
+	<p>Testit</p>
+	
+<pre class="sh_java">
+if (aamuJuna.annaRaideleveys() != 1524)
+    virhe("Junan raideleveys ei ole oikein");
+
+if (aamuJuna.annaIstumapaikkojenLkm() != 390)
+    virhe("Täysipitkässä junassa on pitää olla 390 istumapaikkaa");
+
+if (iltaJuna.annaIstumapaikkojenLkm() != 260)
+    virhe("2/3 junassa on pitää olla 260 istumapaikkaa");
+</pre>
+
+
+
+	<h3 class="req">Deeveri</h3>
+	
+	<p>Toteuta seuraava tilanne: <a href="http://www.seisake.net/satamarata3/muukuva.php?ref=historia.php&img=hrtv_60.jpg">Dv12 dieselveturi 2717 vetää perässään vaunuparia</a>.</p>
+
+	<p>Toteuta siis luokka <code>Dv12</code> joka toteuttaa rajapinnan <code>Kytkettava</code></p>
+	
+<pre class="sh_java">
+Dv12 deeveri_2717 = new Dv12(2717);
+System.out.println(deeveri_2717);
+System.out.println();
+
+if (!deeveri_2717.kytke(m103_m104))
+    virhe("Vaunupari ei kytkeydy");
+
+System.out.println(deeveri_2717);
+
+if (deeveri_2717.kytke(m103_m104))
+    virhe("Vaunupari on jo kytketty, ei voi enää kytkeä");
+
+if (deeveri_2717.irrota(m105_m106))
+    virhe("Vaunuparia ei ole kytketty tähän deeveriin");
+
+if (!deeveri_2717.irrota(m103_m104))
+    virhe("Vaunupari ei irroitu");
+
+if (deeveri_2717.irrota(m103_m104))
+    virhe("Vaunupari on jo irroitettu");
+</pre>
+
+
+	<p>Ylläolevan testiohjelman tulostus on seuraava:</p>
+	
+<pre>
+Dv12 2717
+
+Dv12 2717
+ kytketty: Vaunupari 103-104
+</pre>
+
+
+
+	<h3>Deeveri 3x</h3>
+	
+	<p>Toteuta seuraava tilanne: <a href="http://vaunut.org/kuva/61664">Kolme deeveriä kytketty toisiinsa</a>.</p>
+	
+<pre class="sh_java">
+if (!deeveri_2555.kytke(deeveri_2730))
+    virhe("Dv12 2555 ei kytkeydy Dv12 2730");
+
+if (!deeveri_2714.kytke(deeveri_2555))
+    virhe("Dv12 2714 ei kytkeydy Dv12 2555");
+
+System.out.println(deeveri_2730);
+System.out.println(deeveri_2555);
+System.out.println(deeveri_2714);
+</pre>
+
+	<p>Tulostuksen pitää olla seuraava:</p>
+	
+<pre>
+Dv12 2730
+Dv12 2555
+ kytketty: Dv12 2730
+Dv12 2714
+ kytketty: Dv12 2555
+ kytketty: Dv12 2730	
+</pre>
+	
+	
+	
+    <h2>Mäkihyppy</h2>
+	
+	<h3>Mäkihyppääjä ja kilpailun alku</h3>	
+	
+	<p>Toteutetaan ensimmäinen versio mäkihyppääjää kuvaavasta luokasta.</p>
+	
+<p>Hyppääjällä on nimi sekä tieto ensimmäisen ja toisen hypyn pituudesta. Tässä vaiheessa hyppyihin ei vielä liity tyylipisteitä. Voit olettaa, että hyppyjen pituuksien tyyppi on int.</p>
+	
+<p>Kilpailu kuvataan myös omana luokkanaan. Kilpailulla on nimi ja kilpailuun liittyy joukko hyppääjiä. Kilpailu talettaa hyppääjäoliot ArrayList:iin. Hyppääjät luodaan
+Kilpailun konstruktorin suorituksen yhteydessä. Voit joko kysyä hyppääjien nimet käyttäjältä, vai "kovakoodata" ohjelmaan joukon hyppääjiä:</p>
+
+<pre class="sh_java">	
+  hyppaajat.add(new Makihyppaaja("Nykänen"));
+  hyppaajat.add(new Makihyppaaja("Ahonen"));
+  hyppaajat.add(new Makihyppaaja("Olli"));
+  hyppaajat.add(new Makihyppaaja("Amman"));
+</pre>
+	
+    <h3>Ensimmäinen hyppykierros</h3>
+	
+<p>Pääohjelma luo kilpailuolion ja kutsuu sen metodia <code>kayKilpailu()</code>. Ruvetaan toteuttamaan metodia ja tehdään hyppääjäluokkaan tarvittavat lisäykset.</p>
+	
+<p>Kilpailun aluksi hyppääjät laitetaan satunnaiseen hyppyjärjestykseen. Luokasta <code>Collections</code> löytyy tähän valmis metodi, etsi metodi <a href="http://java.sun.com/j2se/1.5.0/docs/api/">Java API:sta</a>. Hyppyjärjestys tulostetaan näytölle:</p>
+	
+<pre>	
+Garmisch-Partenkirchen 2010 
+1. kierroksen hyppyjärjestys: 
+ Amman
+ Ahonen
+ Olli
+ Nykänen
+</pre>	
+
+<p>Toteuta hyppääjille metodi <code>public int hyppaa(int kierros)</code>, joka arpoo annetun kierroksen hypylle pituuden. Hypyn pituuden tulee olla 60-120 metriä. Ohjeet kokonaisluvun arpomiseen löytyvät tämän viikon luentomateriaalista. Metodi palauttaa hypyn pituuden, jotta kutsuja voi tulostaa sen.</p>
+	
+<p>Kilpailu-olion <code>kayKilpailu()</code>-metodi laittaa jokaisen hyppääjän hyppäämään ensimmäisen kierroksen hyppynsä. Hyppyjen tiedot myös tulostetaan:</p>
+	
+<pre>	
+ensimmäinen kierros:
+ Amman 1. kierroksella 68 metriä
+ Ahonen 1. kierroksella 88 metriä
+ Olli 1. kierroksella 92 metriä
+ Nykänen 1. kierroksella 72 metriä
+</pre>
+
+<h3>Hyppääjien vertailu</h3>
+	
+<p>Jotta tuloslista eli ArrayList:issa olevat hyppääjäliot voidaan järjestää, on hyppääjien toteutettava rajapinta <code>Comparable<Makihyppaaja></code>. Mäkihyppääjien vertailu perustuu hyppyjen pituuteen. </p>
+
+<p>Ensimmäisen kierroksen jälkeinen järjestys tulostetaan: </p>
+
+<pre>
+ensimmäisen kierroksen tulokset:
+1. Olli ensimmäinen hyppy: 92 metriä
+2. Ahonen ensimmäinen hyppy: 88 metriä
+3. Nykänen ensimmäinen hyppy: 72 metriä
+4. Amman ensimmäinen hyppy: 68 metriä
+</pre> 	
+	
+<p>Huom: vaikka <code>kayKilpailu()</code> on toistaiseksi ainoa luokan Kilpailu julkinen metodi, älä laita kaikka toiminnalisuutta suoraan metodin sisään vaan määrittele luokalle sopivia apumetodeja, jotka huolehtivat esim. yhden hyppykierroksen hyppäämisestä.</p>	
+	
+<h3>Toinen kierros ja lopputulokset</h3>
+	
+<p>Toinen kierros hypätään ensimmäisen kierrosten tuloksen mukaisessa käänteisessä järjestyksessä:</p>
+<pre>
+toinen kierros:
+ Amman 2. kierroksella 78 metriä
+ Nykänen 2. kierroksella 86 metriä
+ Ahonen 2. kierroksella 58 metriä
+ Olli 2. kierroksella 70 metriä
+</pre>
+
+<p>Lopulta tulostetaan tuloslista, jonka järjestys perustuu hyppyjen yhteenlaskettuun pituuteen.</p>
+
+<pre>
+Garmisch-Partenkirchen 2010 lopputulokset:
+1. Olli ensimmäinen hyppy: 92 metriä,toinen hyppy: 70 metriä
+2. Nykänen ensimmäinen hyppy: 72 metriä,toinen hyppy: 86 metriä
+3. Ahonen ensimmäinen hyppy: 88 metriä,toinen hyppy: 58 metriä
+4. Amman ensimmäinen hyppy: 68 metriä,toinen hyppy: 78 metriä
+</pre>
+	
+<h3>Hyppyolio ja tyylipisteet</h3>
+
+<p>Muutetaan hyppääjää siten, että hyppääjä ei suoraan talleta hyppyjen pituuksia, vaan hypin tiedot tallettaa luokan <code>Hyppy</code> olio. Hypyllä on pituuden lisäksi tyylipisteet. Tyylipisteet talletetaan 5:n kokoiseen taulukkoon. Voit olettaa, että tyylipisteet ovat todellisuudesta poiketen kokonaislukuja. Hypyn pituudelle ja tyylipisteille arvotaan arvot hypyn konstruktorissa.</p>
+	
+<h3>Kokonaispisteiden laskeminen</h3>
+	
+<p>Hyppääjien vertailu perustuu tyylipisteiden ja hypyn pituuden perusteella laskettavaan kokonaispistemäärään. Muuta ohjelmaasi siten, että se laskee hyppääjien pisteet 
+<a href="http://en.wikipedia.org/wiki/Ski_jumping#Scoring"> wikipediassa</a> esitetyn mukaan. Oleta, että mäen K-piste on 90</p> 
+
+<p>Hyppyjen yhteydessä tulostataan pituuden lisäksi tyylipisteet:</p>
+
+<pre>	
+ensimmäinen kierros:
+ Nykänen 1. kierroksella 91 metriä
+  tyylipisteet   tyylipisteet 11 18 13 16 12
+ Ahonen 1. kierroksella 96 metriä
+  tyylipisteet   tyylipisteet 15 14 18 18 17
+ Olli 1. kierroksella 62 metriä
+  tyylipisteet   tyylipisteet 17 19 20 13 16
+ Amman 1. kierroksella 52 metriä
+  tyylipisteet   tyylipisteet 15 20 11 11 19
+</pre>
+
+<p>Järjestäminen siis tapahtuu pisteiden perusteella. Tuloslistoissa ilmoitetaan myös hyppyjen pituudet:</p>
+
+<pre>	
+Garmisch-Partenkirchen 2010 lopputulokset:
+1. Ahonen pisteitä 222 ensimmäinen hyppy: 96 metriä, toinen hyppy: 74 metriä
+2. Nykänen pisteitä 213 ensimmäinen hyppy: 91 metriä, toinen hyppy: 71 metriä
+3. Olli pisteitä 202 ensimmäinen hyppy: 62 metriä, toinen hyppy: 81 metriä
+4. Amman pisteitä 170 ensimmäinen hyppy: 52 metriä, toinen hyppy: 68 metriä
+</pre>
+
+
+  <h2>Sokkelolle jatkoa</h2>
+  
+  <p>Tämä tehtäväsarja jatkaa viime viikolla tehtyä Sokkelo-sarjaa.</p>
+  
+  <h3 class="bonus">Pisteet</h3>
+  
+  <p>Lisää pelaajalle attribuutti pisteet, joka saa alkuarvokseen 1000. Muuta pelaajan toteutusta myös siten, että jokainen liikkuminen vähentää pisteitä yhdellä.</p>
+  
+  <p>Muuta pelaajan toString()-metodin toteutusta siten, että se tulostaa sijainnin lisäksi myös pisteet pelaajan pisteet. Sokkelo-ohjelman tulostuksen tulee olla seuraavanlainen muutoksen jälkeen:</p>
+
+<pre>
+XXXXXXXXXXXXX
+XO  X X     X
+X X   X XXX X
+X XXX     X X
+X X X XXX   X
+X X   X X X X
+X   X     X M
+XXXXXXXXXXXXX
+Pelaaja sijainnissa (1, 1), pisteet 1000
+
+Anna liikkumissuunta: o
+XXXXXXXXXXXXX
+X O X X     X
+X X   X XXX X
+X XXX     X X
+X X X XXX   X
+X X   X X X X
+X   X     X M
+XXXXXXXXXXXXX
+Pelaaja sijainnissa (2, 1), pisteet 999
+
+Anna liikkumissuunta: y
+Ei voi liikkua!
+Anna liikkumissuunta: o
+XXXXXXXXXXXXX
+X  OX X     X
+X X   X XXX X
+X XXX     X X
+X X X XXX   X
+X X   X X X X
+X   X     X M
+XXXXXXXXXXXXX
+Pelaaja sijainnissa (3, 1), pisteet 998
+
+Anna liikkumissuunta: 
+</pre>
+
+  <h3 class="bonus">Aarre</h3>
+  
+  <p>Lisätään sokkeloon aarteita. Aarre merkitään sokkeloa esittävässä taulukossa arvolla 3, ja piirretyssä sokkelossa merkillä 'A'. Luo luokka Aarre jolla on sijainti, eli x ja y-koordinaatit, ja lisää aarteiden huomioonottaminen Sokkelo-luokkaan. Aarteet kannattanee tallettaa ArrayList-tyyppiseen olioon.</p>
+  
+  <p>Aarteita voi olla sokkelossa useampia kuin yksi, esimerkiksi seuraavassa sokkelossa on kaksi aarretta.</p>
+
+<pre class="sh_java">
+int[][] taulukko = {
+	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+	{1, 2, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1},
+	{1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1},
+	{1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1},
+	{1, 0, 1, 3, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1},
+	{1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1},
+	{1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, -1},
+	{1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1},
+	{1, 0, 1, 0, 0, 0, 1, 0, 1, 3, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
+	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+};
+</pre>
+
+  <p>Sokkelo-ohjelman ajaminen yllä olevalla taulukolla tuottaa seuraavanlaisen tulosteen:</p>
+
+<pre>
+XXXXXXXXXXXXXXXXXXXXX
+XO  X X     X X X  XX
+X X   X XXX X    X  X
+X XXX     X X XX  X X
+X XAX XXX        XX X
+X X   X X X XXX   X X
+X   X   X X   X X X M
+X X X X     X X X   X
+X X   X XAX     X X X
+XXXXXXXXXXXXXXXXXXXXX
+Pelaaja sijainnissa (1, 1), pisteet 1000
+Anna liikkumissuunta: 
+</pre>
+
+  <h3 class="bonus">Sijaitseva</h3>
+  
+  <p>Rajapinta sijaitseva määrittellään seuraavasti:</p>
+<pre class="sh_java">
+public interface Sijaitseva {
+  public int annaX();
+  public int annaY();
+  public char annaMerkki();
+  public boolean onkoSijainnissa(int x, int y);
+}
+</pre>
+
+  <p>Muuta luokkien Aarre ja Pelaaja toteutusta siten, että ne toteuttavat rajapinnan Sijaitseva. Muuta myös sokkelon tulostamista siten, että Sijaitseva-rajapinnan toteuttavat oliot tulostetaan sokkeloon niiden <code>annaMerkki()</code>-metodin palauttaman merkin avulla.</p>  
+  
+  <h3 class="bonus">Aarteiden kerääminen</h3>
+  
+  <p>Kun pelaaja liikkuu aarteen päälle, eli kun pelaajan ja aarteen sijainti on sama, pelaaja saa 100 pistettä ja aarre poistetaan kartalta. Toteuta aarteen kerääminen. Ohjelman tulostuksen tulee olla seuraavanlainen:</p>
+
+<pre>
+XXXXXXXXXXXXXXXXXXXXX
+XO  X X     X X X  XX
+X X   X XXX X    X  X
+X XXX     X X XX  X X
+X XAX XXX        XX X
+X X   X X X XXX   X X
+X   X   X X   X X X M
+X X X X     X X X   X
+X X   X XAX     X X X
+XXXXXXXXXXXXXXXXXXXXX
+Pelaaja sijainnissa (1, 1), pisteet 1000
+
+Anna liikkumissuunta: a
+XXXXXXXXXXXXXXXXXXXXX
+X   X X     X X X  XX
+XOX   X XXX X    X  X
+X XXX     X X XX  X X
+X XAX XXX        XX X
+X X   X X X XXX   X X
+X   X   X X   X X X M
+X X X X     X X X   X
+X X   X XAX     X X X
+XXXXXXXXXXXXXXXXXXXXX
+Pelaaja sijainnissa (1, 2), pisteet 999
+
+Anna liikkumissuunta: a
+
+...
+
+XXXXXXXXXXXXXXXXXXXXX
+X   X X     X X X  XX
+X X   X XXX X    X  X
+X XXX     X X XX  X X
+X XAX XXX        XX X
+X XO  X X X XXX   X X
+X   X   X X   X X X M
+X X X X     X X X   X
+X X   X XAX     X X X
+XXXXXXXXXXXXXXXXXXXXX
+Pelaaja sijainnissa (3, 5), pisteet 992
+
+Anna liikkumissuunta: y
+XXXXXXXXXXXXXXXXXXXXX
+X   X X     X X X  XX
+X X   X XXX X    X  X
+X XXX     X X XX  X X
+X XOX XXX        XX X
+X X   X X X XXX   X X
+X   X   X X   X X X M
+X X X X     X X X   X
+X X   X XAX     X X X
+XXXXXXXXXXXXXXXXXXXXX
+Pelaaja sijainnissa (3, 4), pisteet 1091
+
+Anna liikkumissuunta: a
+XXXXXXXXXXXXXXXXXXXXX
+X   X X     X X X  XX
+X X   X XXX X    X  X
+X XXX     X X XX  X X
+X X X XXX        XX X
+X XO  X X X XXX   X X
+X   X   X X   X X X M
+X X X X     X X X   X
+X X   X XAX     X X X
+XXXXXXXXXXXXXXXXXXXXX
+Pelaaja sijainnissa (3, 5), pisteet 1090
+
+...
+</pre>
+
+  <p>ArrayList-luokassa on metodin <code>remove()</code>, jolla voidaan poistaa tietty alkio listalta. Huomaa kuitenkin että jos alkio poistetaan kesken listan läpikäynnin siten, että listan läpikäyntiä jatketaan, päädytään todennäköisesti indeksiongelmiin. Aarteen löytyessä kannattakin <em>tämän hetkisellä osaamisellamme</em> ottaa viite siitä ylös, ja poistaa se toiston jälkeen.</p>
+
+  <h3 class="bonus">Mörkö!</h3>
+  
+  <p>Mikään sokkelo ei olisi tarpeeksi haasteellinen ilman mörköä.</p>
+  
+  <p>Merkitään mörkö sokkeloon numerolla 99, ja kirjaimella 'W'. Toteuta Morko-luokka siten, että se toteuttaa rajapinnan Sijaitseva. Lisää mörölle myös metodi <code>liiku()</code>, joka liikuttaa mörköä satunnaiseen suuntaan siten, ettei se voi kävellä seinien läpi. Kutsu mörön metodia <code>liiku()</code> aina pelaajan liikkumisen jälkeen. Liikuta mörköä vain jos se ei ole samassa ruudussa pelaajan kanssa.</p>
+  
+  <p>Voit luoda Morko-olion Sokkelo-luokan konstruktorissa, ja antaa sille viitteen luotavaan Sokkelo-olioon esimerkiksi seuraavasti.</p>
+
+<pre class="sh_java">
+if (this.sokkelo[rivi][alkio] == 99) {
+  this.morko = new Morko(this, alkio, rivi);
+  this.sokkelo[rivi][alkio] = 0; // oletetaan että alkio on tyhjä muuten, mörön tulostus tapahtuu erikseen
+}
+</pre>
+  
+  <p>Kokeile mörön toteutusta seuraavalla sokkelolla.</p>
+
+<pre class="sh_java">
+int[][] taulukko = {
+  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+  {1, 2, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1},
+  {1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1},
+  {1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1},
+  {1, 0, 1, 3, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1},
+  {1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1},
+  {1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, -1},
+  {1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1},
+  {1, 0, 1, 0, 0, 99, 1, 0, 1, 3, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
+  {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+};
+</pre>
+
+  <p>Pelin tulostus voi olla esimerkiksi seuraavanlainen.</p>
+
+<pre>
+XXXXXXXXXXXXXXXXXXXXX
+XO  X X     X X X  XX
+X X   X XXX X    X  X
+X XXX     X X XX  X X
+X XAX XXX        XX X
+X X   X X X XXX   X X
+X   X   X X   X X X M
+X X X X     X X X   X
+X X  WX XAX     X X X
+XXXXXXXXXXXXXXXXXXXXX
+Pelaaja sijainnissa (1, 1), pisteet 1000
+
+Anna liikkumissuunta: a
+XXXXXXXXXXXXXXXXXXXXX
+X   X X     X X X  XX
+XOX   X XXX X    X  X
+X XXX     X X XX  X X
+X XAX XXX        XX X
+X X   X X X XXX   X X
+X   X   X X   X X X M
+X X XWX     X X X   X
+X X   X XAX     X X X
+XXXXXXXXXXXXXXXXXXXXX
+Pelaaja sijainnissa (1, 2), pisteet 999
+</pre>
+
+  <h3 class="bonus">Pelaajan syöminen</h3>
+  
+  <p>Annetaan mörölle mahdollisuus pelaajan syömiseen.</p>
+	
+  <p>Jos mörkö ja pelaaja ovat samassa ruudussa, pelaaja menettää 500 pistettä ja peli päättyy. Pelin päättyessä syödyksi tulemiseen tulostetaan teksti "-- NOM NOM NOM --".</p>
+
+  <p>Pelin tulostus voisi olla esimerkiksi seuraavanlainen</p>
+
+<pre>
+XXXXXXXXXXXXXXXXXXXXX
+XO  X X     X X X  XX
+X X   X XXX X    X  X
+X XXX     X X XX  X X
+X XAX XXX        XX X
+X X   X X X XXX   X X
+X   X   X X   X X X M
+X X X X     X X X   X
+X X  WX XAX     X X X
+XXXXXXXXXXXXXXXXXXXXX
+Pelaaja sijainnissa (1, 1), pisteet 1000
+
+Anna liikkumissuunta: a
+XXXXXXXXXXXXXXXXXXXXX
+X   X X     X X X  XX
+XOX   X XXX X    X  X
+X XXX     X X XX  X X
+X XAX XXX        XX X
+X X   X X X XXX   X X
+X   X   X X   X X X M
+X X XWX     X X X   X
+X X   X XAX     X X X
+XXXXXXXXXXXXXXXXXXXXX
+Pelaaja sijainnissa (1, 2), pisteet 999
+
+Anna liikkumissuunta: a
+XXXXXXXXXXXXXXXXXXXXX
+X   X X     X X X  XX
+X X   X XXX X    X  X
+XOXXX     X X XX  X X
+X XAX XXX        XX X
+X X   X X X XXX   X X
+X   X   X X   X X X M
+X X X X     X X X   X
+X X  WX XAX     X X X
+XXXXXXXXXXXXXXXXXXXXX
+Pelaaja sijainnissa (1, 3), pisteet 998
+
+... 
+
+Anna liikkumissuunta: a
+XXXXXXXXXXXXXXXXXXXXX
+X   X X     X X X  XX
+X X   X XXX X    X  X
+X XXX     X X XX  X X
+X XAX XXX        XX X
+X X   X X X XXX   X X
+X   X   X X   X X X M
+X XOX X     X X X   X
+X X  WX XAX     X X X
+XXXXXXXXXXXXXXXXXXXXX
+Pelaaja sijainnissa (3, 7), pisteet 992
+
+Anna liikkumissuunta: a
+XXXXXXXXXXXXXXXXXXXXX
+X   X X     X X X  XX
+X X   X XXX X    X  X
+X XXX     X X XX  X X
+X XAX XXX        XX X
+X X   X X X XXX   X X
+X   X   X X   X X X M
+X X XWX     X X X   X
+X XO  X XAX     X X X
+XXXXXXXXXXXXXXXXXXXXX
+Pelaaja sijainnissa (3, 8), pisteet 991
+
+Anna liikkumissuunta: o
+XXXXXXXXXXXXXXXXXXXXX
+X   X X     X X X  XX
+X X   X XXX X    X  X
+X XXX     X X XX  X X
+X XAX XXX        XX X
+X X   X X X XXX   X X
+X   X   X X   X X X M
+X X X X     X X X   X
+X X OWX XAX     X X X
+XXXXXXXXXXXXXXXXXXXXX
+Pelaaja sijainnissa (4, 8), pisteet 990
+
+Anna liikkumissuunta: o
+XXXXXXXXXXXXXXXXXXXXX
+X   X X     X X X  XX
+X X   X XXX X    X  X
+X XXX     X X XX  X X
+X XAX XXX        XX X
+X X   X X X XXX   X X
+X   X   X X   X X X M
+X X X X     X X X   X
+X X  WX XAX     X X X
+XXXXXXXXXXXXXXXXXXXXX
+Pelaaja sijainnissa (5, 8), pisteet 489
+
+-- NOM NOM NOM --
+</pre>
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-13136847-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>	
+	</body>
+</html>
